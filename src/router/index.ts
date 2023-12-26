@@ -2,20 +2,12 @@ import {
     createRouter,
     createWebHistory
 } from "vue-router";
-import MainLayout from "../layouts/MainLayout.vue";
-import MyMatrices from "../views/MyMatrices.vue";
+import Home from "../views/Home/Home.vue";
 
 const routes = [
     {
         path: '/',
-        component: MainLayout,
-
-        children: [
-            {
-                path: '',
-                component: MyMatrices,
-            }
-        ],
+        component: Home,
     },
     // {
     //     name: 'NotFound',

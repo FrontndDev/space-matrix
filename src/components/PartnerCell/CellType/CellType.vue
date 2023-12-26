@@ -1,0 +1,71 @@
+<template>
+  <div class="cell-type" :class="props.cellType">
+    <img :src="getIconPath" :alt="props.cellType">
+  </div>
+</template>
+
+<script setup lang="ts">
+import CumulativeIcon from '../../../assets/svg/cumulative.svg';
+import ProfitableIcon from '../../../assets/svg/profitable.svg';
+import InfinityIcon from '../../../assets/svg/infinity.svg';
+import BoosterIcon from '../../../assets/svg/booster.svg';
+
+import {
+  computed,
+  Ref
+} from "vue";
+
+const props = defineProps({
+  cellType: {
+    type: String,
+    default: 'cumulative'
+  }
+});
+
+const getIconPath: Ref<string> = computed(() => {
+  switch (props.cellType) {
+    case 'cumulative':
+      return CumulativeIcon;
+    case 'profitable':
+      return ProfitableIcon;
+    case 'infinity':
+      return InfinityIcon;
+    case 'booster':
+      return BoosterIcon;
+    default:
+      return CumulativeIcon;
+  }
+});
+</script>
+
+<style scoped lang="scss">
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/mixins";
+
+.cell-type {
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid $border-base;
+  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &.cumulative {
+    background: $bg-blue;
+  }
+
+  &.profitable {
+    background: $bg-green;
+  }
+
+  &.infinity {
+    background: $bg-orange;
+  }
+
+  &.booster {
+    background: $bg-violet;
+  }
+}
+</style>
