@@ -1,11 +1,11 @@
 <template>
   <div class="partner-cell">
-    <div class="partner-cell__avatar">
+    <div class="partner-cell__avatar" :class="props.type">
       <img src="../../assets/images/Avatar.png" alt="Avatar">
 
       <Reward/>
     </div>
-    <div class="partner-cell__name">Анна Николаева</div>
+    <div class="partner-cell__name partner-cell__name_mt-8">Анна Николаева</div>
     <div class="partner-cell__id">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.34949 6.69832C3.02686 7.02095 2.83721 7.56687 2.83721 8.50233V10.8465C2.83721 11.782 3.02686 12.3279 3.34949 12.6505C3.67211 12.9731 4.21803 13.1628 5.15349 13.1628H7.49767C8.43313 13.1628 8.97905 12.9731 9.30168 12.6505C9.6243 12.3279 9.81395 11.782 9.81395 10.8465V8.50233C9.81395 7.56687 9.6243 7.02095 9.30168 6.69832C8.97905 6.3757 8.43313 6.18605 7.49767 6.18605H5.15349C4.21803 6.18605 3.67211 6.3757 3.34949 6.69832ZM2.75749 6.10633C3.31394 5.54988 4.13546 5.34884 5.15349 5.34884H7.49767C8.51571 5.34884 9.33723 5.54988 9.89367 6.10633C10.4501 6.66278 10.6512 7.48429 10.6512 8.50233V10.8465C10.6512 11.8645 10.4501 12.6861 9.89367 13.2425C9.33723 13.799 8.51571 14 7.49767 14H5.15349C4.13546 14 3.31394 13.799 2.75749 13.2425C2.20104 12.6861 2 11.8645 2 10.8465V8.50233C2 7.48429 2.20104 6.66278 2.75749 6.10633Z" fill="#7B879D"/>
@@ -14,14 +14,29 @@
       12512354
     </div>
 
-    <CellType/>
+    <PartnerType :type="props.cellType"/>
+
+    <CellType
+        :cell-type="props.type"
+        v-if="props.showCellType"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import CellType from "./CellType/CellType.vue";
+import CellType from "../UI/CellType/CellType.vue";
 
 const props = defineProps({
+  type: {
+    type: String,
+    default: 'boost'
+    //cumulative, profitable, boost, infinity
+  },
+  cellType: {
+    type: String,
+    default: 'cumulative'
+    //cumulative, boost
+  },
   showCellType: {
     type: Boolean,
     default: true,
@@ -32,7 +47,8 @@ const props = defineProps({
   },
 });
 
-import Reward from "./Reward/Reward.vue";
+import Reward from "../UI/Reward/Reward.vue";
+import PartnerType from "./PartnerType/PartnerType.vue";
 </script>
 
 <style scoped lang="scss">
@@ -40,26 +56,51 @@ import Reward from "./Reward/Reward.vue";
 @import "../../assets/scss/mixins";
 
 .partner-cell {
+  @include flexbox(column, center, center);
+  row-gap: 8px;
   width: 192px;
   padding: 16px;
   position: relative;
 
   &__avatar {
-    padding: 4px;
-    border: 2px solid $border-blue;
+    padding: 2px;
+    border: 2px solid;
     border-radius: 32px;
     position: relative;
 
     & > img {
       border-radius: 28px;
     }
+
+    &.cumulative,
+    &.boost {
+      border-color: $border-blue;
+    }
+
+    &.profitable {
+      border-color: $border-green;
+    }
+
+    //&.boost {
+    //  border-color: $border-violet;
+    //}
+
+    &.infinity {
+      border-color: $border-orange;
+    }
   }
 
   &__name {
     @include get-font(14px, 500, 20px, $text-base);
+
+    &_mt-8 {
+      margin-top: 8px;
+    }
   }
 
   &__id {
+    @include flex-center;
+    column-gap: 4px;
     @include get-font(12px, 500, 16px, $text-base-light);
   }
 }
