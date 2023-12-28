@@ -24,35 +24,5 @@ const props = defineProps({
 </script>
 
 <style scoped lang="scss">
-@import "../../../assets/scss/variables";
-@import "../../../assets/scss/mixins";
-
-.partner-type {
-  @include flex-center;
-  column-gap: 16px;
-
-  &__circle {
-    width: 12px;
-    height: 12px;
-    border-radius: 8px;
-    border: 1px solid $bg-blue;
-  }
-
-  &.cumulative {
-
-  }
-
-  &.profitable {
-
-  }
-
-  &.boost {
-    column-gap: 4px;
-    @include get-font(12px, 500, 16px, $text-violet);
-  }
-
-  &.infinity {
-
-  }
-}
+@import "partnerType";
 </style>

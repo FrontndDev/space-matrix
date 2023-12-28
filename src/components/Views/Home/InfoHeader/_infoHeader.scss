@@ -1,0 +1,15 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+
+.header {
+  @include flexbox(row, space-between, center);
+  padding: 16px;
+  width: 100%;
+  border-radius: 16px 16px 0 0;
+  background: $bg-base;
+
+  &__selects {
+    @include flex-center;
+    column-gap: 16px;
+  }
+}

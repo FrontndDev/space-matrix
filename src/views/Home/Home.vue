@@ -2,20 +2,30 @@
   <div class="home">
     <div class="container">
       <div class="home__content">
-        <Matrices/>
-        <Info/>
+        <div class="home__matrices">
+          <MatrixHeader style="grid-area: header;"/>
+          <Savings style="grid-area: savings;"/>
+          <Endless style="grid-area: endless;"/>
+          <CopyLink style="grid-area: copy-link;"/>
+        </div>
+        <div class="home__info">
+          <InfoHeader/>
+          <PartnerCells/>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Matrices from "../../components/Views/Home/Matrices/Matrices.vue";
-import Info from "../../components/Views/Home/Info/Info.vue";
+import Endless from "../../components/Views/Home/Endless/Endless.vue";
+import CopyLink from "../../components/Views/Home/CopyLink/CopyLink.vue";
+import MatrixHeader from "../../components/Views/Home/MatrixHeader/MatrixHeader.vue";
+import Savings from "../../components/Views/Home/Savings/Savings.vue";
+import InfoHeader from "../../components/Views/Home/InfoHeader/InfoHeader.vue";
+import PartnerCells from "../../components/Views/Home/PartnerCells/PartnerCells.vue";
 </script>
 
 <style scoped lang="scss">
-.home {
-  padding: 24px 0;
-}
+@import "home";
 </style>

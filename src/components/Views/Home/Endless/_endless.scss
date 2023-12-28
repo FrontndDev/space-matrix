@@ -1,0 +1,18 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+
+.endless {
+  padding: 16px;
+  background: $bg-base;
+  text-align: center;
+
+  &__menu {
+    @include flexbox(row, center, flex-start);
+    column-gap: 40px;
+    margin: 0 auto;
+
+    &_mt-16 {
+      margin-top: 16px;
+    }
+  }
+}

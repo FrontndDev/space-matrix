@@ -1,0 +1,17 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/mixins';
+
+.tabs {
+  @include flexbox(row, flex-start, center);
+
+  &.big {
+    column-gap: 8px;
+    padding: 4px;
+    border-radius: 16px;
+    background: $bg-base-secondary;
+  }
+
+  &.little {
+    column-gap: 16px;
+  }
+}

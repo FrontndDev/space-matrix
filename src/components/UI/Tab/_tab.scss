@@ -1,0 +1,56 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/mixins';
+
+.tab {
+  text-align: center;
+  transition: .25s all ease;
+  cursor: pointer;
+
+  &.big {
+    padding: 12px 16px;
+    width: 152px;
+    border-radius: 12px;
+    @include get-font(16px, 500, 24px, $text-base-secondary);
+
+    &:hover,
+    &.active {
+      color: $text-base;
+    }
+
+    &.active {
+      background: $bg-base;
+      transition: .25s all ease;
+    }
+
+    &.indicator {
+      position: relative;
+
+      &:before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: $bg-green;
+        position: absolute;
+        top: 7px;
+        right: 10px;
+      }
+    }
+  }
+
+  &.little {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: $bg-base-light;
+    @include get-font(14px, 500, 20px, $text-base-secondary);
+
+    &:hover {
+      background: $bg-base-bright;
+    }
+
+    &.active {
+      background: $bg-base-deep;
+      color: $text-base-on-color;
+    }
+  }
+}

@@ -24,55 +24,5 @@ const props = defineProps({
 </script>
 
 <style scoped lang="scss">
-@import "../../assets/scss/variables";
-@import "../../assets/scss/mixins";
-
-.d-button {
-  display: block;
-  padding: 8px 16px;
-  width: 122px;
-  border-radius: 16px;
-  border: 1px solid $border-base-dark;
-  cursor: pointer;
-
-  &__name {
-    @include get-font(22px, 700, 36px, $text-base-secondary);
-    text-align: center;
-  }
-
-  &__price {
-    @include flex-center;
-    column-gap: 4px;
-    @include get-font(12px, 500, 16px, $text-base-light);
-
-    & path {
-      fill: $text-base-light;
-    }
-  }
-
-  &.active {
-    border: none;
-    background: $bg-base-dark-secondary;
-
-    & .d-button__name {
-      color: $text-base-on-color;
-    }
-  }
-
-  &.disabled {
-    border: 1px solid $border-base-contrast;
-    cursor: not-allowed;
-
-    & .d-button {
-      &__name,
-      &__price {
-        color: $text-base-disable;
-      }
-
-      &__price path {
-        fill: $text-base-disable;
-      }
-    }
-  }
-}
+@import "dButton";
 </style>

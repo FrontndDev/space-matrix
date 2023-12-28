@@ -1,0 +1,20 @@
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/mixins";
+
+.reward {
+  @include flexbox(row, flex-start, center);
+  column-gap: 6px;
+  margin: 0 auto;
+  padding: 2px 8px 2px 2px;
+  width: fit-content;
+  border-radius: 16px;
+  background: $bg-transparency-black;
+  backdrop-filter: blur(8px);
+
+  @include get-font(12px, 500);
+
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+}

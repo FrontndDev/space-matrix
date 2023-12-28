@@ -1,0 +1,25 @@
+@import '../../assets/scss/mixins';
+
+
+.home {
+  padding: 24px 0;
+
+  &__content {
+    @include flexbox(column);
+    row-gap: 24px;
+  }
+
+  &__matrices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 160px auto 48px;
+    grid-template-areas: "header header" "savings endless" "copy-link copy-link";
+    grid-gap: 4px;
+  }
+
+  &__info {
+    @include flexbox(column);
+    row-gap: 4px;
+    width: 100%;
+  }
+}

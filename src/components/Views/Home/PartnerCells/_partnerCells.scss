@@ -1,0 +1,14 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+
+.partners-cells {
+  padding: 16px;
+  width: 100%;
+  border-radius: 0 0 16px;
+  background: $bg-base;
+
+  &__header {
+    @include flexbox(row, flex-start, center);
+    column-gap: 16px;
+  }
+}

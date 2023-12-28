@@ -1,0 +1,16 @@
+@import "../../../../assets/scss/variables";
+
+.matrix-header {
+  padding: 16px;
+  border-radius: 16px 16px 0 0;
+  background: $bg-base;
+
+  &__buttons {
+    display: flex;
+    column-gap: 8px;
+
+    &_mt-16 {
+      margin-top: 16px;
+    }
+  }
+}
