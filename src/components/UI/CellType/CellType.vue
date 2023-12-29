@@ -1,5 +1,5 @@
 <template>
-  <div class="cell-type" :class="props.cellType">
+  <div class="cell-type" :class="[props.cellType, props.size]">
     <img :src="getIconPath" :alt="props.cellType">
   </div>
 </template>
@@ -19,6 +19,10 @@ const props = defineProps({
   cellType: {
     type: String,
     default: 'cumulative'
+  },
+  size: {
+    type: String,
+    default: ''
   }
 });
 
@@ -64,6 +68,15 @@ const getIconPath: Ref<string> = computed(() => {
 
   &.infinity {
     background: $bg-orange;
+  }
+
+  &.cumulative-disable {
+    background: #BFCCD9;
+  }
+
+  &.small {
+    top: 12px;
+    right: 12px;
   }
 
   //&.boost {

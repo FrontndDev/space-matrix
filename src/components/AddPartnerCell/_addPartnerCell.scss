@@ -15,6 +15,7 @@
     height: 160px;
     border-radius: 28px;
     cursor: pointer;
+    position: relative;
 
     &.cumulative,
     &.boost {
@@ -22,6 +23,19 @@
 
       & path {
         fill: $bg-blue-dark;
+      }
+    }
+
+    &.cumulative-disable {
+      background: $bg-base-light;
+      cursor: auto;
+
+      & path {
+        fill: #7B879D;
+      }
+
+      & .reward {
+        display: none;
       }
     }
 
@@ -39,6 +53,10 @@
       & path {
         fill: $bg-orange;
       }
+
+      & .reward {
+        display: none;
+      }
     }
   }
 
@@ -54,5 +72,9 @@
     @include flex-center;
     column-gap: 4px;
     @include get-font(12px, 500, 16px, $text-base-light);
+  }
+
+  &.cumulative-disable .add-partner-cell__title {
+    color: $text-base-secondary;
   }
 }

@@ -19,7 +19,6 @@
 
   &__info {
     @include flexbox(column);
-    row-gap: 4px;
     width: 100%;
   }
 }

@@ -2,14 +2,11 @@
 @import "../../../assets/scss/mixins";
 
 .reward {
-  @include flexbox(row, flex-start, center);
-  column-gap: 6px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
   margin: 0 auto;
-  padding: 2px 8px 2px 2px;
   width: fit-content;
-  border-radius: 16px;
-  background: $bg-transparency-black;
-  backdrop-filter: blur(8px);
 
   @include get-font(12px, 500);
 
@@ -17,4 +14,38 @@
   bottom: 8px;
   left: 0;
   right: 0;
+
+  &__value,
+  &__car {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 2px 6px;
+    background: $bg-transparency-black;
+    backdrop-filter: blur(8px);
+  }
+
+  &__value {
+    border-radius: 16px 0 0 16px;
+  }
+
+  &__car {
+    border-radius: 0 16px 16px 0;
+  }
+
+  &.include-car {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.include-car div:first-child {
+   border-radius: 16px;
+    padding: 2px 8px 2px 2px;
+  }
+
+  &.include-car div:last-child {
+    display: none;
+  }
 }

@@ -1,0 +1,33 @@
+.modal-header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 16px;
+  height: 64px;
+}
+.modal-header__back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1A86E5;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 142%;
+}
+.modal-header__back > svg {
+  width: 16px;
+  height: 16px;
+}
+.modal-header__title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 160%;
+  text-align: center;
+}
+.modal-header__close {
+  width: 16px;
+  height: 16px;
+  align-self: start;
+  justify-self: end;
+}
+
+/*# sourceMappingURL=ModalHeader.css.map */

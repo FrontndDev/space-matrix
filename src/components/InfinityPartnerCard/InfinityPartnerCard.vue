@@ -3,7 +3,13 @@
     <div class="infinity-partner-card__partners">
       <div class="infinity-partner-card__partners-count">{{ partnersCount }}</div>
       <div class="infinity-partner-card__partners-title">Партнеров</div>
-      <div class="infinity-partner-card__partners-link" v-if="partnersCount">Просмотр</div>
+      <div
+          class="infinity-partner-card__partners-link"
+          v-if="partnersCount"
+          @click="$emit('open-modal')"
+      >
+        Просмотр
+      </div>
     </div>
     <div class="infinity-partner-card__awards">
       <div class="infinity-partner-card__awards-title">Награды</div>

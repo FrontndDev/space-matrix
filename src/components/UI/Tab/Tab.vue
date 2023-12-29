@@ -4,7 +4,7 @@
       :class="[{ active: active, indicator: props.tab.indicator }, props.type]"
       @click="emit('tab', props.tab)"
   >
-    {{ props.tab.name }}
+    {{ props.tab.name }} {{ props.tab.value }}
   </div>
 </template>
 

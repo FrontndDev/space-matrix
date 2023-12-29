@@ -7,6 +7,7 @@
   width: 100%;
   border-radius: 16px 16px 0 0;
   background: $bg-base;
+  border-bottom: 4px solid #EFF2F5;
 
   &__selects {
     @include flex-center;

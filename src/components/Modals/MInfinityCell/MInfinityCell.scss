@@ -1,0 +1,18 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/mixins';
+
+.modal-infinity-cell {
+  width: 720px;
+  height: 624px;
+  background: $bg-base;
+  border-radius: 16px;
+
+  &__container {
+    height: 560px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px 24px;
+    padding: 16px;
+  }
+}

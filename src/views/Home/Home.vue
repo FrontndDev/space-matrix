@@ -5,15 +5,19 @@
         <div class="home__matrices">
           <MatrixHeader style="grid-area: header;"/>
           <Savings style="grid-area: savings;"/>
-          <Endless style="grid-area: endless;"/>
+          <Endless @open-modal="toggleModal = true" style="grid-area: endless;"/>
           <CopyLink style="grid-area: copy-link;"/>
         </div>
         <div class="home__info">
           <InfoHeader/>
           <PartnerCells/>
+          <Pagination />
         </div>
       </div>
     </div>
+    <Modal
+        :toggleModal="toggleModal"
+    />
   </div>
 </template>
 
@@ -24,6 +28,10 @@ import MatrixHeader from "../../components/Views/Home/MatrixHeader/MatrixHeader.
 import Savings from "../../components/Views/Home/Savings/Savings.vue";
 import InfoHeader from "../../components/Views/Home/InfoHeader/InfoHeader.vue";
 import PartnerCells from "../../components/Views/Home/PartnerCells/PartnerCells.vue";
+import Pagination from "../../components/Pagination/Pagination.vue";
+import Modal from "../../components/Modals/Modal/Modal.vue";
+
+let toggleModal:boolean = false
 </script>
 
 <style scoped lang="scss">

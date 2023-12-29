@@ -4,7 +4,9 @@
 
     <div class="endless__menu endless__menu_mt-16">
       <AddPartnerCell type="infinity"/>
-      <InfinityPartnerCard/>
+      <InfinityPartnerCard
+          @open-modal="$emit('open-modal')"
+      />
     </div>
   </div>
 </template>

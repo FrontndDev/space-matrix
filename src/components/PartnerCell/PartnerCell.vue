@@ -1,9 +1,14 @@
 <template>
-  <div class="partner-cell">
+  <div class="partner-cell" :class="props.size">
     <div class="partner-cell__avatar" :class="props.type">
       <img src="../../assets/images/Avatar.png" alt="Avatar">
 
-      <Reward/>
+      <Reward
+          v-if="props.size !== 'small'"
+      />
+      <LevelMatrix
+          v-else
+      />
     </div>
     <div class="partner-cell__name partner-cell__name_mt-8">Анна Николаева</div>
     <div class="partner-cell__id">
@@ -17,6 +22,7 @@
     <PartnerType :type="props.cellType"/>
 
     <CellType
+        :size="props.size"
         :cell-type="props.type"
         v-if="props.showCellType"
     />
@@ -25,6 +31,7 @@
 
 <script setup lang="ts">
 import CellType from "../UI/CellType/CellType.vue";
+
 
 const props = defineProps({
   type: {
@@ -36,6 +43,10 @@ const props = defineProps({
     type: String,
     default: 'cumulative'
     //cumulative, boost
+  },
+  size: {
+    type: String,
+    default: '',
   },
   showCellType: {
     type: Boolean,
@@ -49,6 +60,7 @@ const props = defineProps({
 
 import Reward from "../UI/Reward/Reward.vue";
 import PartnerType from "./PartnerType/PartnerType.vue";
+import LevelMatrix from "../UI/LevelMatrix/LevelMatrix.vue";
 </script>
 
 <style scoped lang="scss">
