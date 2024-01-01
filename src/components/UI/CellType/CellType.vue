@@ -77,6 +77,14 @@ const getIconPath: Ref<string> = computed(() => {
   &.small {
     top: 12px;
     right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+
+    & > img {
+      width: 16px;
+      height: auto;
+    }
   }
 
   //&.boost {

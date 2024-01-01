@@ -4,11 +4,12 @@
 
     <div class="matrix-header__buttons matrix-header__buttons_mt-16">
       <DButton
-          v-for="(i, idx) in 9"
-          :key="i"
+          v-for="(button, idx) in dButton"
+          :key="button"
           :idx="idx"
           :price="(idx + 1) * 10"
-          :class="{ active: !idx, disabled: idx && idx > 3 }"
+          :class="button.class"
+          :isTime="button.class"
       />
     </div>
   </div>
@@ -16,6 +17,18 @@
 
 <script setup lang="ts">
 import DButton from "../../../UI/DButton/DButton.vue";
+
+const dButton = [
+  { class: 'active', id: 0 },
+  { class: '', id: 1 },
+  { class: '', id: 2 },
+  { class: '', id: 3 },
+  { class: 'time', id: 4 },
+  { class: 'disabled', id: 5 },
+  { class: 'disabled', id: 6 },
+  { class: 'disabled', id: 7 },
+  { class: 'disabled', id: 8 },
+]
 </script>
 
 <style scoped lang="scss">

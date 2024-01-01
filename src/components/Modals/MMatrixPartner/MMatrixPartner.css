@@ -1,0 +1,49 @@
+.modal-matrix-partner {
+  width: 720px;
+  background: #FFFFFF;
+  border-radius: 16px;
+}
+.modal-matrix-partner__container {
+  height: 575px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.modal-matrix-partner__cell {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #EFF2F5;
+}
+.modal-matrix-partner__block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid #EFF2F5;
+}
+.modal-matrix-partner__savings {
+  padding: 16px;
+  text-align: center;
+  border-right: 1px solid #EFF2F5;
+}
+.modal-matrix-partner__endless {
+  padding: 16px;
+  background: #FFFFFF;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.savings__partners {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  column-gap: 20px;
+  margin: 0 auto;
+}
+.savings__partners_mt-16 {
+  margin-top: 16px;
+}
+
+/*# sourceMappingURL=MMatrixPartner.css.map */

@@ -1,17 +1,17 @@
 <template>
-  <div class="infinity-partner-card">
+  <div class="infinity-partner-card" :class="'m-matrix-partner'">
     <div class="infinity-partner-card__partners">
       <div class="infinity-partner-card__partners-count">{{ partnersCount }}</div>
       <div class="infinity-partner-card__partners-title">Партнеров</div>
       <div
           class="infinity-partner-card__partners-link"
           v-if="partnersCount"
-          @click="$emit('open-modal')"
+          @click="$emit('open-m-infinity-cell')"
       >
         Просмотр
       </div>
     </div>
-    <div class="infinity-partner-card__awards">
+    <div v-if="props.modal !== 'm-matrix-partner'" class="infinity-partner-card__awards">
       <div class="infinity-partner-card__awards-title">Награды</div>
       <div class="infinity-partner-card__awards-bonuses infinity-partner-card__awards-bonuses_mt-8">
         <BonusItem type="ton" :values="[1000]"/>
@@ -27,6 +27,13 @@ import BonusItem from "./BonusItem/BonusItem.vue";
 import { ref } from "vue";
 
 const partnersCount = ref(15);
+
+const props = defineProps({
+  modal: {
+    type: String,
+    default: ''
+  }
+})
 </script>
 
 <style scoped lang="scss">

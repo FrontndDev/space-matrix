@@ -1,0 +1,16 @@
+.modal-add-partner {
+  background: #fff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.modal-add-partner__container {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 40px;
+  padding: 38px 16px 62px;
+}
+
+/*# sourceMappingURL=MAddPartner.css.map */

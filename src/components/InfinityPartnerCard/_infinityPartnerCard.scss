@@ -14,6 +14,22 @@
     border-radius: 16px;
   }
 
+  &.m-matrix-partner {
+    height: 100%;
+    width: 160px;
+  }
+
+  &.m-matrix-partner .infinity-partner-card__partners {
+    padding: 12px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    width: 100%;
+  }
+
   &__partners {
     padding: 18px 12px;
 

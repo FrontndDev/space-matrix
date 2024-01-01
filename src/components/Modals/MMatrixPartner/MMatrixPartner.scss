@@ -1,0 +1,53 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/mixins';
+
+.modal-matrix-partner {
+    width: 720px;
+    background: $bg-base;
+    border-radius: 16px;
+
+
+    &__container {
+        height: 575px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__cell {
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid #EFF2F5;
+    }
+
+    &__block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-bottom: 1px solid #EFF2F5;
+    }
+
+    &__savings {
+        padding: 16px;
+        text-align: center;
+        border-right: 1px solid #EFF2F5;
+    }
+
+    &__endless {
+        padding: 16px;
+        background: $bg-base;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.savings__partners {
+    @include flexbox(row, center, flex-start);
+    column-gap: 20px;
+    margin: 0 auto;
+
+    &_mt-16 {
+        margin-top: 16px;
+    }
+}

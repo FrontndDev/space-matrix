@@ -1,14 +1,9 @@
 <template>
   <div class="partner-cell" :class="props.size">
     <div class="partner-cell__avatar" :class="props.type">
-      <img src="../../assets/images/Avatar.png" alt="Avatar">
-
-      <Reward
-          v-if="props.size !== 'small'"
-      />
-      <LevelMatrix
-          v-else
-      />
+      <img @click="$emit('open-m-matrix-partner')" src="../../assets/images/Avatar.png" alt="Avatar">
+      <Reward v-if="props.size !== 'small'"/>
+      <LevelMatrix v-else/>
     </div>
     <div class="partner-cell__name partner-cell__name_mt-8">Анна Николаева</div>
     <div class="partner-cell__id">
@@ -31,13 +26,15 @@
 
 <script setup lang="ts">
 import CellType from "../UI/CellType/CellType.vue";
-
+import Reward from "../UI/Reward/Reward.vue";
+import PartnerType from "./PartnerType/PartnerType.vue";
+import LevelMatrix from "../UI/LevelMatrix/LevelMatrix.vue";
 
 const props = defineProps({
   type: {
     type: String,
     default: 'boost'
-    //cumulative, profitable, boost, infinity
+    //cumulative, profitable, boost, infinity, cumulative-disable
   },
   cellType: {
     type: String,
@@ -57,10 +54,6 @@ const props = defineProps({
     default: false,
   },
 });
-
-import Reward from "../UI/Reward/Reward.vue";
-import PartnerType from "./PartnerType/PartnerType.vue";
-import LevelMatrix from "../UI/LevelMatrix/LevelMatrix.vue";
 </script>
 
 <style scoped lang="scss">

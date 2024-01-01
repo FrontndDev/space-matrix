@@ -59,7 +59,7 @@
   }
 
   &.small {
-    width: 152px;
+    width: 144px;
 
     .partner-cell__avatar {
       border-radius: 16px;
@@ -68,5 +68,9 @@
         border-radius: 14px;
       }
     }
+  }
+
+  &.small .partner-cell__name {
+    font-size: 12px;
   }
 }

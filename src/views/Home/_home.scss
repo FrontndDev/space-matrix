@@ -10,15 +10,22 @@
   }
 
   &__matrices {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 160px auto 48px;
-    grid-template-areas: "header header" "savings endless" "copy-link copy-link";
-    grid-gap: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   &__info {
     @include flexbox(column);
     width: 100%;
   }
+}
+
+.border-right {
+  border-right: 4px solid #F5F7F8;
 }

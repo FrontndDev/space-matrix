@@ -24,6 +24,14 @@
     }
   }
 
+  &__time {
+    @include get-font(12px, 500, 16px, $text-base-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
   &.active {
     border: none;
     background: $bg-base-dark-secondary;
@@ -47,5 +55,22 @@
         fill: $text-base-disable;
       }
     }
+  }
+
+  &.time {
+    border: 1px solid #FF3A30;
+    animation: time 2s linear infinite;
+  }
+}
+
+@keyframes time {
+  50% {
+    background: #fff;
+  }
+  51% {
+    background: #FFF1F0;
+  }
+  100% {
+    background: #FFF1F0;
   }
 }

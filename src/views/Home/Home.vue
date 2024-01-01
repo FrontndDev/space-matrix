@@ -4,8 +4,21 @@
       <div class="home__content">
         <div class="home__matrices">
           <MatrixHeader style="grid-area: header;"/>
-          <Savings style="grid-area: savings;"/>
-          <Endless @open-modal="toggleModal = true" style="grid-area: endless;"/>
+
+          <div class="home__matrices__inner">
+            <Savings
+                class="border-right"
+                @open-m-matrix-partner="openMMatrixPartner"
+                @open-m-add-partner="openMAddPartner"
+            />
+            <Endless
+                @open-m-infinity-cell="openMInfinityCell"
+            />
+          </div>
+
+          <NotActivatedMatrix v-if="false" />
+          <TimeActivatedMatrix v-if="false"  />
+
           <CopyLink style="grid-area: copy-link;"/>
         </div>
         <div class="home__info">
@@ -16,7 +29,12 @@
       </div>
     </div>
     <Modal
+        @open-m-infinity-cell="openMInfinityCell"
+        @open-m-matrix-partner="openMMatrixPartner"
+        @open-m-add-partner="openMAddPartner"
+        @close-modal="toggleModal = false"
         :toggleModal="toggleModal"
+        :openModal="openModal"
     />
   </div>
 </template>
@@ -30,8 +48,32 @@ import InfoHeader from "../../components/Views/Home/InfoHeader/InfoHeader.vue";
 import PartnerCells from "../../components/Views/Home/PartnerCells/PartnerCells.vue";
 import Pagination from "../../components/Pagination/Pagination.vue";
 import Modal from "../../components/Modals/Modal/Modal.vue";
+import AddPartnerCell from "../../components/AddPartnerCell/AddPartnerCell.vue";
+import NotActivatedMatrix from "../../components/NotActivatedMatrix/NotActivatedMatrix.vue";
 
-let toggleModal:boolean = false
+import { ref } from "vue";
+import TimeActivatedMatrix from "../../components/TimeActivatedMatrix/TimeActivatedMatrix.vue";
+
+
+const toggleModal = ref(false);
+const openModal = ref(0)
+
+const openMInfinityCell = () => {
+  toggleModal.value = true
+  openModal.value = 1
+}
+
+const openMMatrixPartner = () => {
+  toggleModal.value = true
+  openModal.value = 2
+}
+
+const openMAddPartner = () => {
+  toggleModal.value = true
+  openModal.value = 3
+}
+
+
 </script>
 
 <style scoped lang="scss">

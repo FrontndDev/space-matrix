@@ -1,0 +1,54 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.buy-boost-cell {
+  @include flexbox(column, center, center);
+  row-gap: 8px;
+  width: 192px;
+  padding: 16px;
+  position: relative;
+
+  &__plus {
+    @include flex-center;
+    padding: 4px;
+    width: 160px;
+    height: 160px;
+    border-radius: 28px;
+    cursor: pointer;
+    position: relative;
+    background: #F5EDF7;
+
+    & > svg {
+      width: 65px;
+      height: auto;
+
+      & > path {
+        fill: #A33FBC;
+      }
+    }
+  }
+
+  &__title {
+    @include get-font (14px, 500, 130%);
+    color: #0B0C0E;
+    margin-top: 8px;
+
+    & > span {
+      color: #A33FBC;
+    }
+  }
+
+  &__ton {
+    @include get-font (12px, 500, 130%);
+    color: #7B879D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    & > svg {
+      width: 17px;
+      height: auto;
+    }
+  }
+}

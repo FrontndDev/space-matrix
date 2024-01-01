@@ -1,0 +1,58 @@
+.buy-boost-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  row-gap: 8px;
+  width: 192px;
+  padding: 16px;
+  position: relative;
+}
+.buy-boost-cell__plus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  width: 160px;
+  height: 160px;
+  border-radius: 28px;
+  cursor: pointer;
+  position: relative;
+  background: #F5EDF7;
+}
+.buy-boost-cell__plus > svg {
+  width: 65px;
+  height: auto;
+}
+.buy-boost-cell__plus > svg > path {
+  fill: #A33FBC;
+}
+.buy-boost-cell__title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 130%;
+  color: #FFFFFF;
+  color: #0B0C0E;
+  margin-top: 8px;
+}
+.buy-boost-cell__title > span {
+  color: #A33FBC;
+}
+.buy-boost-cell__ton {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 130%;
+  color: #FFFFFF;
+  color: #7B879D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.buy-boost-cell__ton > svg {
+  width: 17px;
+  height: auto;
+}
+
+/*# sourceMappingURL=BuyBoostCell.css.map */

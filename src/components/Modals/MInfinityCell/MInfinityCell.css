@@ -1,11 +1,10 @@
 .modal-infinity-cell {
   width: 720px;
-  height: 624px;
   background: #FFFFFF;
   border-radius: 16px;
 }
 .modal-infinity-cell__container {
-  height: 560px;
+  height: 575px;
   overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
