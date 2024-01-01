@@ -1,5 +1,8 @@
 <template>
-  <div class="small-cell">
+  <div
+      class="small-cell"
+      :class="props.type"
+  >
     <div class="small-cell__avatar">
       <img src="../../assets/images/Avatar.png" alt="">
       <LevelMatrix />
@@ -13,21 +16,34 @@
         </svg>
         <span>12512354</span>
       </div>
-      <PartnerType :type="props.cellType"/>
+      <PartnerType :type="props.cellType" />
     </div>
+    <SmallCellType
+        :cellType="props.type"
+        :state="props.state"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import PartnerType from "../PartnerCell/PartnerType/PartnerType.vue";
 import LevelMatrix from "../UI/LevelMatrix/LevelMatrix.vue";
+import SmallCellType from "../UI/SmallCellType/SmallCellType.vue";
 
 const props = defineProps({
   cellType: {
     type: String,
     default: 'cumulative'
-    //cumulative, boost
   },
+  type: {
+    type: String,
+    default: 'partners'
+    // partners, boost,
+  },
+  state: {
+    type: String,
+    default: 'exhibited'
+  }
 })
 </script>
 

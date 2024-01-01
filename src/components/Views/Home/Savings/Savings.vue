@@ -9,7 +9,7 @@
       />
       <AddPartnerCell
           @open-m-add-partner="$emit('open-m-add-partner')"
-          type="cumulative-disable"/>
+          type="cumulative"/>
 
     </div>
   </div>

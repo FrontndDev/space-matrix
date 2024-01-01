@@ -34,7 +34,7 @@ const props = defineProps({
   type: {
     type: String,
     default: 'boost'
-    //cumulative, profitable, boost, infinity, cumulative-disable
+    //cumulative, profitable, boost, infinity
   },
   cellType: {
     type: String,

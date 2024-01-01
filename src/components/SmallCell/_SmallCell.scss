@@ -1,4 +1,5 @@
 .small-cell {
+  position: relative;
   padding: 12px;
   display: flex;
   flex-direction: column;
@@ -36,6 +37,10 @@
     font-size: 12px;
     font-weight: 500;
     line-height: 130%;
+  }
+
+  &.partners {
+
   }
 }
 

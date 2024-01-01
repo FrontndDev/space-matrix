@@ -26,13 +26,21 @@
       }
     }
 
-    &.cumulative-disable {
+    &.disable {
       background: $bg-base-light;
       cursor: auto;
 
       & path {
         fill: #7B879D;
       }
+
+      & .reward {
+        display: none;
+      }
+    }
+
+    &.loading {
+      background: #EFF2F5;
 
       & .reward {
         display: none;
@@ -58,6 +66,23 @@
         display: none;
       }
     }
+
+    &__loader {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
   }
 
   &__title {
@@ -74,8 +99,14 @@
     @include get-font(12px, 500, 16px, $text-base-light);
   }
 
-  &.cumulative-disable .add-partner-cell__title {
+  &.disable .add-partner-cell__title {
     color: $text-base-secondary;
+  }
+
+  &.loading {
+    .cell-type {
+      display: none;
+    }
   }
 
   &.small {

@@ -70,7 +70,7 @@ const getIconPath: Ref<string> = computed(() => {
     background: $bg-orange;
   }
 
-  &.cumulative-disable {
+  &.disable {
     background: #BFCCD9;
   }
 

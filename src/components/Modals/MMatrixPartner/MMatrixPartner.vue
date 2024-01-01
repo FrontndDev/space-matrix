@@ -25,7 +25,7 @@
             />
             <AddPartnerCell
                 @open-m-add-partner="$emit('open-m-add-partner')"
-                type="cumulative"
+                type="infinity"
                 size="small"
             />
           </div>

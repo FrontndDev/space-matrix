@@ -23,7 +23,8 @@
         </div>
         <div class="home__info">
           <InfoHeader/>
-          <PartnerCells/>
+          <PartnerCells v-if="false"/>
+          <ChainsCells />
           <Pagination />
         </div>
       </div>
@@ -53,6 +54,7 @@ import NotActivatedMatrix from "../../components/NotActivatedMatrix/NotActivated
 
 import { ref } from "vue";
 import TimeActivatedMatrix from "../../components/TimeActivatedMatrix/TimeActivatedMatrix.vue";
+import ChainsCells from "../../components/Views/Home/ChainsCells/ChainsCells.vue";
 
 
 const toggleModal = ref(false);
