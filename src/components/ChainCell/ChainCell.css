@@ -1,0 +1,62 @@
+.chain-cell {
+  position: relative;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.chain-cell__avatar {
+  position: relative;
+  border-radius: 16px;
+  background: lightgray 50%/cover no-repeat;
+  cursor: pointer;
+}
+.chain-cell__avatar > img {
+  border-radius: 16px;
+}
+.chain-cell__info {
+  display: flex;
+  flex-direction: column;
+}
+.chain-cell__level {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.chain-cell__level svg {
+  width: 16px;
+  height: 16px;
+  transform: rotate(180deg);
+}
+.chain-cell__level span:first-child {
+  color: #7B879D;
+}
+.chain-cell__level span:last-child {
+  color: #576175;
+}
+.chain-cell__cost {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  color: #29A352;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 155%;
+}
+.chain-cell__cost svg {
+  width: 20px;
+  height: auto;
+}
+.chain-cell.teleport .chain-cell__avatar {
+  border: 2px solid #F19C18;
+}
+.chain-cell.teleport .chain-cell__avatar img {
+  border: 2px solid #fff;
+}
+
+/*# sourceMappingURL=ChainCell.css.map */

@@ -10,6 +10,20 @@
     height: 12px;
     border-radius: 8px;
     border: 1px solid $bg-blue;
+
+    &.fill-blue {
+      background: $bg-blue;
+    }
+
+    &.fill-orange {
+      background: $bg-orange;
+      border: 1px solid $bg-orange;
+    }
+
+    &.fill-green {
+      background: $bg-green;
+      border: 1px solid $bg-green;
+    }
   }
 
   &.boost {

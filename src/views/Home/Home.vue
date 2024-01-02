@@ -22,20 +22,31 @@
           <CopyLink style="grid-area: copy-link;"/>
         </div>
         <div class="home__info">
-          <InfoHeader/>
-          <PartnerCells v-if="false"/>
-          <ChainsCells />
-          <Pagination />
+          <InfoHeader
+              @open-cells="openCells"
+              :infoHeader="isCells"
+          />
+          <PartnerCells v-if="isCells === 1" />
+          <BoostersCells v-else-if="isCells === 2" />
+          <ChainsCells
+              v-else-if="isCells === 3"
+              @open-general-chains="openChains"
+          />
         </div>
       </div>
     </div>
-    <Modal
+    <ModalsPartners
         @open-m-infinity-cell="openMInfinityCell"
         @open-m-matrix-partner="openMMatrixPartner"
         @open-m-add-partner="openMAddPartner"
-        @close-modal="toggleModal = false"
-        :toggleModal="toggleModal"
-        :openModal="openModal"
+        @close-modal="toggleModalPartners = false"
+        :toggleModalPartners="toggleModalPartners"
+        :openModalPartners="openModalPartners"
+    />
+    <ModalChains
+        :toggleModalChains="toggleModalChains"
+        :openModalChains="openModalChains"
+        @close-modal="toggleModalChains = false"
     />
   </div>
 </template>
@@ -47,34 +58,47 @@ import MatrixHeader from "../../components/Views/Home/MatrixHeader/MatrixHeader.
 import Savings from "../../components/Views/Home/Savings/Savings.vue";
 import InfoHeader from "../../components/Views/Home/InfoHeader/InfoHeader.vue";
 import PartnerCells from "../../components/Views/Home/PartnerCells/PartnerCells.vue";
-import Pagination from "../../components/Pagination/Pagination.vue";
-import Modal from "../../components/Modals/Modal/Modal.vue";
-import AddPartnerCell from "../../components/AddPartnerCell/AddPartnerCell.vue";
+import ModalsPartners from "../../components/Modals/ModalsPartners/ModalsPartners.vue";
+
 import NotActivatedMatrix from "../../components/NotActivatedMatrix/NotActivatedMatrix.vue";
 
 import { ref } from "vue";
 import TimeActivatedMatrix from "../../components/TimeActivatedMatrix/TimeActivatedMatrix.vue";
 import ChainsCells from "../../components/Views/Home/ChainsCells/ChainsCells.vue";
+import BoostersCells from "../../components/Views/Home/BoostersCells/BoostersCells.vue";
+import ModalChains from "../../components/Modals/ModalsChains/ModalChains.vue";
 
+const isCells = ref(1)
 
-const toggleModal = ref(false);
-const openModal = ref(0)
+const toggleModalPartners = ref(false);
+const openModalPartners = ref(0)
+
+const toggleModalChains = ref(false)
+const openModalChains = ref(0)
 
 const openMInfinityCell = () => {
-  toggleModal.value = true
-  openModal.value = 1
+  toggleModalPartners.value = true
+  openModalPartners.value = 1
 }
 
 const openMMatrixPartner = () => {
-  toggleModal.value = true
-  openModal.value = 2
+  toggleModalPartners.value = true
+  openModalPartners.value = 2
 }
 
 const openMAddPartner = () => {
-  toggleModal.value = true
-  openModal.value = 3
+  toggleModalPartners.value = true
+  openModalPartners.value = 3
+}
+const openCells = id => {
+  isCells.value = id
 }
 
+const openChains = () => {
+  toggleModalChains.value = true
+  openModalChains.value = 1
+  console.log(openModalChains.value)
+}
 
 </script>
 

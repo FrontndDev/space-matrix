@@ -15,8 +15,8 @@
 
 <script setup lang="ts">
 
-import ModalHeader from "../../ModalHeader/ModalHeader.vue";
-import PartnerCell from "../../PartnerCell/PartnerCell.vue";
+import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
+import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
 
 </script>
 

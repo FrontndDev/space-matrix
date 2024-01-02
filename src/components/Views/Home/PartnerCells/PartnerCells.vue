@@ -15,6 +15,11 @@
       />
     </div>
   </div>
+  <EmptyCells
+      v-if="smallCells.length === 0"
+      :cellsType="'partners'"
+  />
+  <Pagination v-if="smallCells.length !== 0" />
 </template>
 
 <script setup lang="ts">
@@ -22,6 +27,8 @@ import Tabs from "../../../UI/Tabs/Tabs.vue";
 import { ref, reactive } from "vue";
 import Search from "../../../UI/Search/Search.vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
+import Pagination from "../../../Pagination/Pagination.vue";
+import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 
 const tabs = reactive([
   {
@@ -43,11 +50,23 @@ const tabs = reactive([
 
 const smallCells = ref([
   { type: 'partners', state: 'exhibited', id: 0 },
-  { type: 'boost', state: 'exhibited', id: 1},
-  { type: 'boost', state: 'waiting', id: 2 },
+  { type: 'partners', state: 'exhibited', id: 1 },
+  { type: 'partners', state: 'waiting', id: 2 },
   { type: 'partners', state: 'exhibited', id: 3 },
   { type: 'partners', state: 'exhibited', id: 4 },
   { type: 'partners', state: 'exhibited', id: 5 },
+  { type: 'partners', state: 'exhibited', id: 6 },
+  { type: 'partners', state: 'exhibited', id: 7 },
+  { type: 'partners', state: 'waiting', id: 8 },
+  { type: 'partners', state: 'exhibited', id: 9 },
+  { type: 'partners', state: 'exhibited', id: 10 },
+  { type: 'partners', state: 'exhibited', id: 11 },
+  { type: 'partners', state: 'exhibited', id: 12 },
+  { type: 'partners', state: 'exhibited', id: 13},
+  { type: 'partners', state: 'waiting', id: 14 },
+  { type: 'partners', state: 'exhibited', id: 15 },
+  { type: 'partners', state: 'exhibited', id: 16 },
+  { type: 'partners', state: 'exhibited', id: 17 },
 ])
 </script>
 

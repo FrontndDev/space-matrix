@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 
-import MInfinityCell from "../Modals/MInfinityCell/MInfinityCell.vue";
+import MInfinityCell from "../Modals/ModalsPartners/MInfinityCell/MInfinityCell.vue";
 
 const props = defineProps({
   modalHeader: {

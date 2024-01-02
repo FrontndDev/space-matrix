@@ -1,5 +1,5 @@
 <template>
-  <div class="infinity-partner-card" :class="'m-matrix-partner'">
+  <div class="infinity-partner-card" :class="props.modal">
     <div class="infinity-partner-card__partners">
       <div class="infinity-partner-card__partners-count">{{ partnersCount }}</div>
       <div class="infinity-partner-card__partners-title">Партнеров</div>

@@ -7,6 +7,7 @@
         :active="item.id === tab.id"
         :type="props.type"
         @tab="selectedTab => tab = selectedTab"
+        @click="$emit('open-cells', item.id)"
     />
   </div>
 </template>
@@ -16,7 +17,7 @@ import Tab from "../Tab/Tab.vue";
 import {
   onBeforeMount,
   Ref,
-  ref
+  ref,
 } from "vue";
 
 const props = defineProps({

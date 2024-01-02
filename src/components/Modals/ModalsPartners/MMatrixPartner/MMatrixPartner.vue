@@ -46,11 +46,11 @@
 
 <script setup lang="ts">
 
-import ModalHeader from "../../ModalHeader/ModalHeader.vue";
-import PartnerCell from "../../PartnerCell/PartnerCell.vue";
-import CopyLink from "../../Views/Home/CopyLink/CopyLink.vue";
-import AddPartnerCell from "../../AddPartnerCell/AddPartnerCell.vue";
-import InfinityPartnerCard from "../../InfinityPartnerCard/InfinityPartnerCard.vue";
+import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
+import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
+import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
+import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
+import InfinityPartnerCard from "../../../InfinityPartnerCard/InfinityPartnerCard.vue";
 
 </script>
 

@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import ModalHeader from "../../ModalHeader/ModalHeader.vue";
-import BuyBoostCell from "../../BuyBoostCell/BuyBoostCell.vue";
-import AddPartnerCell from "../../AddPartnerCell/AddPartnerCell.vue";
+import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
+import BuyBoostCell from "../../../BuyBoostCell/BuyBoostCell.vue";
+import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
 </script>
 
 <style scoped>
