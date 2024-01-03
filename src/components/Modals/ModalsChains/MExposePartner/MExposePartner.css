@@ -1,0 +1,56 @@
+.expose-partner {
+  background: #fff;
+  border-radius: 16px;
+  width: 720px;
+}
+.expose-partner__content {
+  border-bottom: 1px solid #EFF2F5;
+  display: flex;
+  flex-direction: column;
+}
+.expose-partner__container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.expose-partner__cell {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.expose-partner__block {
+  width: 144px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.expose-partner__info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.expose-partner__info__title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 150%;
+}
+.expose-partner__choice {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.expose-partner__tabs {
+  width: fit-content;
+}
+
+/*# sourceMappingURL=MExposePartner.css.map */

@@ -3,8 +3,8 @@
 
     <button
         class="modal-header__back"
-        @click="$emit('open-m-matrix-partner')"
-        v-if="'MInfinityCell' == props.modalHeader"
+        @click="openHeader"
+        v-if="'back' == props.modalHeader"
     >
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3535 2.36642C10.5487 2.56168 10.5487 2.87826 10.3535 3.07352L6.0068 7.42019C5.68873 7.73826 5.68873 8.26168 6.0068 8.57975L10.3535 12.9264C10.5487 13.1217 10.5487 13.4383 10.3535 13.6335C10.1582 13.8288 9.84163 13.8288 9.64636 13.6335L5.2997 9.28686C4.5911 8.57826 4.5911 7.42168 5.2997 6.71308L9.64636 2.36642C9.84163 2.17116 10.1582 2.17116 10.3535 2.36642Z" fill="#1A86E5"/>
@@ -15,7 +15,7 @@
 
     <button
         class="modal-header__back"
-        @click="$emit('')"
+        @click="$emit('open-m-matrix-partner')"
         v-else-if="'MMatrixPartner' == props.modalHeader"
     >
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,8 +43,7 @@
 </template>
 
 <script setup lang="ts">
-
-import MInfinityCell from "../Modals/ModalsPartners/MInfinityCell/MInfinityCell.vue";
+import { defineEmits } from 'vue'
 
 const props = defineProps({
   modalHeader: {
@@ -52,6 +51,20 @@ const props = defineProps({
     default: ''
   }
 })
+
+const emit = defineEmits<{
+  (e: 'open-m-matrix-partner'): void
+  (e: 'open-general-chains'): void
+  (e: 'open-m-replace-partner'): void
+  (e: 'open-change-partner'): void
+}>()
+
+const openHeader = () => {
+  emit('open-m-matrix-partner')
+  emit('open-general-chains')
+  emit('open-m-replace-partner')
+  emit('open-change-partner')
+}
 
 </script>
 

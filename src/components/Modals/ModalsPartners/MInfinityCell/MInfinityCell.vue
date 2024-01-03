@@ -3,7 +3,7 @@
     <ModalHeader
         @close-modal="$emit('close-modal')"
         @open-m-matrix-partner="$emit('open-m-matrix-partner')"
-        :modalHeader="'MInfinityCell'"
+        :modalHeader="'back'"
     >
       Бесконечная ячейка
     </ModalHeader>

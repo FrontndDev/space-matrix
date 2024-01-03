@@ -30,7 +30,7 @@
           <BoostersCells v-else-if="isCells === 2" />
           <ChainsCells
               v-else-if="isCells === 3"
-              @open-general-chains="openChains"
+              @open-general-chains="openGeneralChains"
           />
         </div>
       </div>
@@ -47,6 +47,10 @@
         :toggleModalChains="toggleModalChains"
         :openModalChains="openModalChains"
         @close-modal="toggleModalChains = false"
+        @open-general-chains="openGeneralChains"
+        @open-m-replace-partner="openReplacePartner"
+        @open-change-partner="openChangePartner"
+        @open-expose-partner="openExposePartner"
     />
   </div>
 </template>
@@ -94,10 +98,24 @@ const openCells = id => {
   isCells.value = id
 }
 
-const openChains = () => {
+const openGeneralChains = () => {
   toggleModalChains.value = true
   openModalChains.value = 1
-  console.log(openModalChains.value)
+}
+
+const openReplacePartner = () => {
+  toggleModalChains.value = true
+  openModalChains.value = 2
+}
+
+const openChangePartner = () => {
+  toggleModalChains.value = true
+  openModalChains.value = 3
+}
+
+const openExposePartner = () => {
+  toggleModalChains.value = true
+  openModalChains.value = 4
 }
 
 </script>

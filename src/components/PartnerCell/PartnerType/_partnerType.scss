@@ -30,4 +30,9 @@
     column-gap: 4px;
     @include get-font(12px, 500, 16px, $text-violet);
   }
+
+  &.chains-boost {
+    column-gap: 4px;
+    @include get-font(12px, 500, 16px, $text-violet);
+  }
 }

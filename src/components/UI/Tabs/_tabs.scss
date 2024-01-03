@@ -4,12 +4,16 @@
 .tabs {
   @include flexbox(row, flex-start, center);
 
-  &.big {
+
+  &.big,
+  &.expose-modal {
     column-gap: 8px;
     padding: 4px;
     border-radius: 16px;
     background: $bg-base-secondary;
   }
+
+
 
   &.little {
     column-gap: 16px;

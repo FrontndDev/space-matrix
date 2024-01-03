@@ -1,5 +1,5 @@
 <template>
-  <div class="level-matrix">
+  <div v-if="props.level" class="level-matrix">
     <div>
       D1
     </div>
@@ -11,6 +11,13 @@
 </template>
 
 <script setup lang="ts">
+
+const props = defineProps({
+  level: {
+    type: Boolean,
+    default: true
+  }
+})
 
 </script>
 

@@ -13,6 +13,14 @@
     & > img {
       border-radius: 16px;
     }
+
+    &.chains-boost {
+      border: 2px solid #B043FF;
+
+      & > img {
+        border: 2px solid #fff;
+      }
+    }
   }
 
   &__info {
@@ -39,8 +47,13 @@
     line-height: 130%;
   }
 
-  &.partners {
+  &.boost .partner-type, {
+    display: none;
+  }
 
+  &.chains-partner .partner-type,
+  &.chains-partner .cell-type {
+    display: none;
   }
 }
 
