@@ -1,13 +1,13 @@
 import axios, { AxiosError } from 'axios'
 
-const BASE_URL = import.meta.env.VUE_APP_API_URL ?? 'https://dev.halk.ai' // позже будет в .env
+const BASE_URL = import.meta.env.VITE_VUE_APP_API_URL ?? 'https://dev.halk.ai' // позже будет в .env
 
 function setGlobalConfig(token: string | null) {
     const defaultSettings = {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "x-auth": import.meta.env.VUE_APP_X_AUTH,
-        "X-SPACE-ID": import.meta.env.VUE_APP_X_SPACE_ID,
+        "x-auth": import.meta.env.VITE_VUE_APP_X_AUTH,
+        "X-SPACE-ID": import.meta.env.VITE_VUE_APP_X_SPACE_ID,
         // "VerificationToken": import.meta.env.VUE_APP_VEREFICATION_TOKEN
     };
 

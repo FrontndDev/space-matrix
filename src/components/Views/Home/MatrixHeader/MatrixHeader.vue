@@ -37,6 +37,7 @@ const store = useStore();
 
 onBeforeMount(() => {
   store.dispatch('getListOfTypes')
+  console.log('setGlobalConfig', API.setGlobalConfig('token test'))
 })
 </script>
 
