@@ -19,7 +19,6 @@
 import DButton from "../../../UI/DButton/DButton.vue";
 import { useStore } from "vuex";
 import { onBeforeMount } from "vue";
-import * as API from '../../../../api/index.ts'
 
 const dButton = [
   { class: 'active', id: 0 },
