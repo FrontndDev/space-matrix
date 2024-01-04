@@ -5,7 +5,7 @@
     <div class="matrix-header__buttons matrix-header__buttons_mt-16">
       <DButton
           v-for="(button, idx) in dButton"
-          :key="button"
+          :key="button.id"
           :idx="idx"
           :price="(idx + 1) * 10"
           :class="button.class"

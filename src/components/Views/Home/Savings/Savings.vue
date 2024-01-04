@@ -20,10 +20,6 @@
 import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
 import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
 
-const props = defineProps({
-
-})
-
 </script>
 
 <style scoped lang="scss">

@@ -1,0 +1,90 @@
+<template>
+  <div class="expose-bonus">
+    <div class="expose-bonus__icon">
+      <img :src="getIconPath" :alt="props.type">
+    </div>
+    <div v-if="props.type === 'auto'" class="expose-bonus__car">
+      LINE BONUS
+    </div>
+    <div v-else-if="props.type === 'boost'" class="expose-bonus__boost">
+      <span v-for="item in boost">{{ item.name }}</span>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import {computed, Ref} from "vue";
+import BoostIcon from "../../../../../assets/svg/bonuses/boost.svg";
+import AutoIcon from "../../../../../assets/svg/bonuses/auto.svg";
+
+const props = defineProps({
+  type: {
+    type: String,
+    default: 'ton'
+    // boost, auto
+  }
+});
+
+const getIconPath: Ref<string> = computed(() => {
+  switch (props.type) {
+    case 'boost':
+      return BoostIcon;
+    case 'auto':
+      return AutoIcon;
+    default:
+      return AutoIcon;
+  }
+});
+
+const boost = [
+  { name: 'D1', id: 0 },
+  { name: 'D2', id: 1 },
+  { name: 'D3', id: 2 },
+  { name: 'D4', id: 3 },
+  { name: 'D5', id: 4 },
+  { name: 'D6', id: 5 },
+]
+</script>
+
+<style scoped lang="scss">
+.expose-bonus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  background: #F5F7F8;
+  border-radius: 16px;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 120%;
+  padding: 8px 10px;
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  &__car {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__boost {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & span {
+      padding: 0 4px;
+    }
+
+    & span:not(:last-child) {
+      border-right: 1px solid #E0E5EB;
+
+    }
+  }
+}
+</style>

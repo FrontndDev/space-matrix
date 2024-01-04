@@ -31,7 +31,7 @@
       <slot />
     </h3>
     <button
-        @click="$emit('close-modal')"
+        @click="closeModal"
         class="modal-header__close"
     >
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,18 +52,23 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits<{
-  (e: 'open-m-matrix-partner'): void
-  (e: 'open-general-chains'): void
-  (e: 'open-m-replace-partner'): void
-  (e: 'open-change-partner'): void
-}>()
+const emit = defineEmits([
+  'open-m-matrix-partner',
+  'open-general-chains',
+  'open-m-replace-partner',
+  'open-change-partner',
+  'close-modal',
+])
 
 const openHeader = () => {
   emit('open-m-matrix-partner')
   emit('open-general-chains')
   emit('open-m-replace-partner')
   emit('open-change-partner')
+}
+
+const closeModal = () => {
+  emit('close-modal')
 }
 
 </script>

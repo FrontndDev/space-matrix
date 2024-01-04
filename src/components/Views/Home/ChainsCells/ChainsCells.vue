@@ -10,8 +10,13 @@
       <ChainCell
           v-for="cell in cells"
           :key="cell.id"
-          :cell="cell"
+          :type="cell.type"
+          :cost="cell.cost"
+          :reward="cell.reward"
+          :lvlOne="cell.lvlOne"
+          :lvlTwo="cell.lvlTwo"
           @open-general-chains="$emit('open-general-chains')"
+          @open-m-teleport="$emit('open-m-teleport')"
       />
     </div>
   </div>

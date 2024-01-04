@@ -56,6 +56,7 @@ const cells = ref([
   { type: 'chains-boost' , id: 1},
   { type: 'chains-boost' , id: 2},
   { type: 'chains-boost' , id: 3},
+  { type: 'chains-boost' , id: 4},
 ])
 </script>
 

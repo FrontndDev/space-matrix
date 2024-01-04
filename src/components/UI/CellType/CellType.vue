@@ -35,8 +35,8 @@ const getIconPath: Ref<string> = computed(() => {
       return ProfitableIcon;
     case 'infinity':
       return InfinityIcon;
-    // case 'booster':
-    //   return BoosterIcon;
+    case 'booster':
+      return BoosterIcon;
     default:
       return CumulativeIcon;
   }

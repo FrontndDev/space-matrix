@@ -21,6 +21,14 @@
         border: 2px solid #fff;
       }
     }
+
+    &.teleport {
+      border: 2px solid #F19C18;
+
+      & > img {
+        border: 2px solid #fff;
+      }
+    }
   }
 
   &__info {
@@ -53,6 +61,10 @@
 
   &.chains-partner .partner-type,
   &.chains-partner .cell-type {
+    display: none;
+  }
+
+  &.teleport .partner-type {
     display: none;
   }
 }

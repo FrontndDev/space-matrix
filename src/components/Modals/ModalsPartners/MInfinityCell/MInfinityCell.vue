@@ -8,7 +8,10 @@
       Бесконечная ячейка
     </ModalHeader>
     <div class="modal-infinity-cell__container">
-      <PartnerCell v-for="item in 10" type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
     </div>
   </div>
 </template>

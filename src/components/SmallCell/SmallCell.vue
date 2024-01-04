@@ -44,7 +44,7 @@ const props = defineProps({
   type: {
     type: String,
     default: 'partners'
-    // partners, boost, chains-boost, chain-partner
+    // partners, boost, chains-boost, chain-partner, teleport
   },
   state: {
     type: String,

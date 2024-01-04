@@ -7,7 +7,7 @@
         :active="item.id === tab.id"
         :type="props.type"
         @tab="selectedTab => tab = selectedTab"
-        @click="$emit('open-cells', item.id)"
+        @click="clickTab(item.id)"
     />
   </div>
 </template>
@@ -34,6 +34,12 @@ const props = defineProps({
 let tab: Ref<any> = ref(null);
 
 onBeforeMount(() => tab.value = props.tabs[0])
+
+const emit = defineEmits(['open-cells', 'toggle-expose-tabs'])
+const clickTab = (id: number) => {
+  emit('open-cells', id)
+  emit('toggle-expose-tabs', id)
+}
 </script>
 
 <style scoped lang="scss">

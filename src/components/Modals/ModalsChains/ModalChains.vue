@@ -24,6 +24,10 @@
             @close-modal="$emit('close-modal')"
             @open-change-partner="$emit('open-change-partner')"
         />
+        <MTeleport
+            v-if="props.openModalChains === 5"
+            @close-modal="$emit('close-modal')"
+        />
       </div>
       <div @click="$emit('close-modal')" class="modal__overlay"></div>
     </div>
@@ -35,6 +39,7 @@ import MGeneralChains from "./MGeneralChains/MGeneralChains.vue";
 import MReplacePartner from "./MReplacePartner/MReplacePartner.vue";
 import MChangePartner from "./MChangePartner/MChangePartner.vue";
 import MExposePartner from "./MExposePartner/MExposePartner.vue";
+import MTeleport from "./MTeleport/MTeleport.vue";
 
 const props = defineProps({
   toggleModalChains: {

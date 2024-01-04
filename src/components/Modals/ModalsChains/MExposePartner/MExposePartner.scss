@@ -46,6 +46,11 @@
       font-weight: 700;
       line-height: 150%;
     }
+
+    & button {
+      width: 50%;
+      margin: 0 0 24px;
+    }
   }
 
   &__choice {
@@ -58,5 +63,60 @@
 
   &__tabs {
     width: fit-content;
+  }
+
+  &__reward {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  &__ton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #29A352;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 150%;
+
+    & svg {
+      width: 32px;
+      height: auto;
+    }
+  }
+
+  &__bonus {
+    width: 360px;
+    display: flex;
+    gap: 8px;
+  }
+
+  &__wait-list {
+    width: 360px;
+    display: flex;
+    gap: 8px;
+    padding: 16px 20px 16px 12px;
+    align-items: start;
+    border-radius: 16px;
+    background: #F5F7F8;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+    color: #576175;
+
+    & svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    & p {
+      width: 100%;
+    }
   }
 }

@@ -31,6 +31,7 @@
           <ChainsCells
               v-else-if="isCells === 3"
               @open-general-chains="openGeneralChains"
+              @open-m-teleport="openModalTeleport"
           />
         </div>
       </div>
@@ -94,7 +95,7 @@ const openMAddPartner = () => {
   toggleModalPartners.value = true
   openModalPartners.value = 3
 }
-const openCells = id => {
+const openCells = (id: number) => {
   isCells.value = id
 }
 
@@ -116,6 +117,11 @@ const openChangePartner = () => {
 const openExposePartner = () => {
   toggleModalChains.value = true
   openModalChains.value = 4
+}
+
+const openModalTeleport = () => {
+  toggleModalChains.value = true
+  openModalChains.value = 5
 }
 
 </script>

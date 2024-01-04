@@ -9,7 +9,10 @@
             class="general-chains__overflow"
             :class="{'less-four': cells.length < 4}"
         >
-          <div v-for="cell in cells" class="general-chains__block">
+          <div class="general-chains__block">
+            <SmallCell />
+            <SmallCell />
+            <SmallCell />
             <SmallCell />
           </div>
         </div>
