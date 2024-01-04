@@ -17,6 +17,9 @@
 
 <script setup lang="ts">
 import DButton from "../../../UI/DButton/DButton.vue";
+import { useStore } from "vuex";
+import { onBeforeMount } from "vue";
+import * as API from '../../../../api/index.ts'
 
 const dButton = [
   { class: 'active', id: 0 },
@@ -29,6 +32,12 @@ const dButton = [
   { class: 'disabled', id: 7 },
   { class: 'disabled', id: 8 },
 ]
+
+const store = useStore();
+
+onBeforeMount(() => {
+  store.dispatch('getListOfTypes')
+})
 </script>
 
 <style scoped lang="scss">
