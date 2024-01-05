@@ -38,7 +38,7 @@ const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
 const selectedType: Ref<Type> = computed(() => store.state.selectedType)
 
 const selectDButton = (type: Type) => {
-  store.commit('SET_VIEW_LAST_OWN', null)
+  if (selectedType.value.type !== type.type) store.commit('SET_VIEW_LAST_OWN', null)
   store.commit('SET_SELECTED_TYPE', type)
   store.dispatch('getViewLastOwn', type.type)
 }
