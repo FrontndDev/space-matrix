@@ -51,3 +51,35 @@
     }
   }
 }
+
+@media (max-width: 992px) {
+  .change-partner {
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+
+    &__container {
+
+      & button {
+        width: calc(100% - 32px);
+        margin: 16px;
+      }
+    }
+
+    &__overflow {
+      width: 100%;
+      padding: 24px;
+      height: calc(90vh - 166px);
+      gap: 16px 24px;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      justify-items: center;
+      margin-bottom: 0;
+
+      &.less-four {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 24px 8px;
+      }
+    }
+  }
+}

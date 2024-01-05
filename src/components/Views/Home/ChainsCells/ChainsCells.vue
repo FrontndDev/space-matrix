@@ -3,8 +3,8 @@
     <div class="chains-cells__header">
       <Tabs type="little"
             :tabs="tabs"
+            :cells="true"
       />
-      <Search />
     </div>
     <div class="chains-cells__container">
       <ChainCell
@@ -30,7 +30,6 @@
 <script setup lang="ts">
 import Tabs from "../../../UI/Tabs/Tabs.vue";
 import {ref, reactive} from "vue";
-import Search from "../../../UI/Search/Search.vue";
 import ChainCell from "../../../ChainCell/ChainCell.vue";
 import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";

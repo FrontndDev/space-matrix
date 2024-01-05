@@ -24,7 +24,7 @@ const props = defineProps({
   type: {
     type: String,
     default: ''
-    //chains-boost
+    //chains-boost,
   }
 });
 </script>

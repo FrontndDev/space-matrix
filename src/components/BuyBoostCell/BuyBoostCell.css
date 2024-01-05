@@ -55,4 +55,26 @@
   height: auto;
 }
 
+@media (max-width: 992px) {
+  .buy-boost-cell {
+    width: 144px;
+    padding: 12px;
+  }
+  .buy-boost-cell__plus {
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+  }
+  .buy-boost-cell__plus > svg {
+    width: 40px;
+  }
+  .buy-boost-cell__title {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 130%;
+    color: #FFFFFF;
+    color: #0B0C0E;
+  }
+}
+
 /*# sourceMappingURL=BuyBoostCell.css.map */

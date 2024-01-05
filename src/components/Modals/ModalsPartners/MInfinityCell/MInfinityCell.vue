@@ -12,6 +12,14 @@
       <PartnerCell type="infinity" size="small"/>
       <PartnerCell type="infinity" size="small"/>
       <PartnerCell type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
+      <PartnerCell type="infinity" size="small"/>
     </div>
   </div>
 </template>

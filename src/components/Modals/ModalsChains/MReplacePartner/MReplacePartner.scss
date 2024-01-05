@@ -97,3 +97,48 @@
     }
   }
 }
+
+@media (max-width: 992px) {
+  .replace-partner {
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+
+    &__container {
+
+
+      & > button {
+        width: calc(100% - 32px);
+        margin: 16px;
+      }
+
+      &--line {
+        height: 2px;
+        background: #fff;
+        bottom: 76px;
+      }
+    }
+
+    &__overflow {
+      position: relative;
+      height: calc(90vh - 164px);
+      grid-template-columns: repeat(2, 1fr);
+      overflow-y: auto;
+      overflow-x: hidden;
+      width: 100%;
+
+      &.four {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      &.less-three {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & .replace-partner__cell {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
