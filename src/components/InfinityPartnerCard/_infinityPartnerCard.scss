@@ -33,12 +33,22 @@
   &__partners {
     padding: 18px 12px;
 
+    &-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     &-count {
       @include get-font(28px, 700, 44px, $text-base-secondary);
     }
 
     &-title {
       @include get-font(14px, 500, 24px, $text-base-secondary);
+    }
+
+    &-svg {
+      display: none;
     }
 
     &-link {
@@ -60,6 +70,72 @@
 
       &_mt-8 {
         margin-top: 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .infinity-partner-card {
+    @include flexbox(column);
+    padding: 12px;
+
+    &__partners,
+    &__awards {
+      width: 120px;
+    }
+
+    &.m-matrix-partner {
+      width: 144px;
+    }
+
+    &.m-matrix-partner .infinity-partner-card__partners {
+      padding: 12px;
+      margin-top: 16px;
+    }
+
+    &__partners {
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &-block {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+      }
+
+      &-count {
+        @include get-font(18px, 700, 155%, $text-base-secondary);
+      }
+
+      &-title {
+        display: none;
+      }
+
+      &-svg {
+        display: block;
+        width: 16px;
+        height: auto;
+      }
+    }
+
+    &__awards {
+      padding: 8px 8px 12px;
+
+      &-bonuses {
+        @include flexbox(column, center, center, wrap);
+        gap: 4px;
+
+        & .bonus-item {
+          width: 100%;
+        }
+
+          &_mt-8 {
+          margin-top: 4px;
+        }
       }
     }
   }

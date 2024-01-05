@@ -11,8 +11,26 @@
         >
           <div class="general-chains__block">
             <SmallCell />
+          </div>
+          <div class="general-chains__block">
             <SmallCell />
+          </div>
+          <div class="general-chains__block">
             <SmallCell />
+          </div>
+          <div class="general-chains__block">
+            <SmallCell />
+          </div>
+          <div class="general-chains__block">
+            <SmallCell />
+          </div>
+          <div class="general-chains__block">
+            <SmallCell />
+          </div>
+          <div class="general-chains__block">
+            <SmallCell />
+          </div>
+          <div class="general-chains__block">
             <SmallCell />
           </div>
         </div>

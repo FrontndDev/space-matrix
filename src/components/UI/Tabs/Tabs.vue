@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs" :class="props.type">
+  <div class="tabs" :class="[{ 'cells': props.cells }, props.type]">
     <Tab
         v-for="item in props.tabs"
         :key="item.id"
@@ -8,6 +8,9 @@
         :type="props.type"
         @tab="selectedTab => tab = selectedTab"
         @click="clickTab(item.id)"
+    />
+    <Search
+        v-if="cells"
     />
   </div>
 </template>
@@ -19,6 +22,7 @@ import {
   Ref,
   ref,
 } from "vue";
+import Search from "../Search/Search.vue";
 
 const props = defineProps({
   type: {
@@ -29,6 +33,10 @@ const props = defineProps({
     type: Array as any,
     required: true,
   },
+  cells: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 let tab: Ref<any> = ref(null);

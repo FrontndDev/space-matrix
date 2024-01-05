@@ -1,10 +1,11 @@
 <template>
   <div class="partners-cells">
     <div class="partners-cells__header">
-      <Tabs type="little"
-            :tabs="tabs"
+      <Tabs
+          type="little"
+          :tabs="tabs"
+          :cells="true"
       />
-      <Search/>
     </div>
     <div class="partners-cells__container">
       <SmallCell
@@ -25,7 +26,6 @@
 <script setup lang="ts">
 import Tabs from "../../../UI/Tabs/Tabs.vue";
 import { ref, reactive } from "vue";
-import Search from "../../../UI/Search/Search.vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";

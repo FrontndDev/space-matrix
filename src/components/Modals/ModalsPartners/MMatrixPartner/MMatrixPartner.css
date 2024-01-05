@@ -4,10 +4,11 @@
   border-radius: 16px;
 }
 .modal-matrix-partner__container {
-  height: 575px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
+  height: 575px;
+  overflow-y: auto;
+  border-bottom: 1px solid #EFF2F5;
 }
 .modal-matrix-partner__cell {
   display: flex;
@@ -44,6 +45,44 @@
 }
 .savings__partners_mt-16 {
   margin-top: 16px;
+}
+
+@media (max-width: 992px) {
+  .modal-matrix-partner {
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+  }
+  .modal-matrix-partner__container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow-y: auto;
+  }
+  .modal-matrix-partner__container .copy-link {
+    border-top: 1px solid #EFF2F5;
+  }
+  .modal-matrix-partner__overflow {
+    max-height: calc(90vh - 89px);
+    overflow-x: auto;
+  }
+  .modal-matrix-partner__savings {
+    padding: 8px 16px;
+  }
+  .modal-matrix-partner__endless {
+    padding: 8px 16px;
+  }
+}
+@media (max-width: 700px) {
+  .modal-matrix-partner__block {
+    grid-template-columns: 1fr;
+  }
+  .modal-matrix-partner__savings {
+    border-bottom: 1px solid #EFF2F5;
+    padding: 8px 16px;
+  }
+  .modal-matrix-partner__endless {
+    padding: 8px 16px;
+  }
 }
 
 /*# sourceMappingURL=MMatrixPartner.css.map */

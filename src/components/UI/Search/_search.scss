@@ -17,3 +17,17 @@
     }
   }
 }
+
+.search-mobile {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .search-desktop {
+    display: none;
+  }
+
+  .search-mobile {
+    display: block;
+  }
+}

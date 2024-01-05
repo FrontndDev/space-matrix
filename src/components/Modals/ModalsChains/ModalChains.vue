@@ -1,6 +1,6 @@
 <template>
   <transition name="modal" class="modal">
-    <div v-if="toggleModalChains" class="modal__container">
+    <div v-if="props.toggleModalChains" class="modal__container">
       <div class="modal__content">
         <MGeneralChains
             v-if="props.openModalChains === 1"

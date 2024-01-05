@@ -42,4 +42,16 @@
   transform: rotate(180deg);
 }
 
+@media (max-width: 992px) {
+  .modal-teleport {
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+    gap: 12px;
+    padding: 0 8px 8px;
+  }
+  .modal-teleport__head {
+    padding: 12px;
+  }
+}
+
 /*# sourceMappingURL=MTeleport.css.map */

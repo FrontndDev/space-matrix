@@ -14,3 +14,36 @@
     }
   }
 }
+
+@media (max-width: 992px) {
+
+  .matrix-header {
+    border-radius: 0;
+    background: $bg-base;
+
+    &__buttons {
+
+
+      &_mt-16 {
+        margin-top: 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+
+  .matrix-header {
+    border-radius: 0;
+    background: $bg-base;
+
+    &__buttons {
+      width: 100%;
+      overflow: scroll;
+
+      &_mt-16 {
+        margin-top: 8px;
+      }
+    }
+  }
+}

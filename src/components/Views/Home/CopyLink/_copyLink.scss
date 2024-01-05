@@ -8,3 +8,10 @@
   border-radius: 0 0 16px 16px;
   background: $bg-base;
 }
+
+@media (max-width: 992px) {
+  .copy-link {
+    padding: 12px;
+    border-radius: 0;
+  }
+}

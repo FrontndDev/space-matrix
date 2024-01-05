@@ -91,4 +91,25 @@ const getIconPath: Ref<string> = computed(() => {
   //  background: $bg-violet;
   //}
 }
+
+@media (max-width: 992px) {
+  .cell-type {
+    @include flex-center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    top: 6px;
+    right: 6px;
+
+    & img {
+      width: 16px;
+      height: auto;
+    }
+
+    &.small {
+      top: 6px;
+      right: 6px;
+    }
+  }
+}
 </style>

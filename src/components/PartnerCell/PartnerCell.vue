@@ -14,7 +14,10 @@
       12512354
     </div>
 
-    <PartnerType :type="props.cellType"/>
+    <PartnerType
+        :cellType="props.cellType"
+        :type="props.type"
+    />
 
     <CellType
         :size="props.size"

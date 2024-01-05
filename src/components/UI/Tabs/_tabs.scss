@@ -4,7 +4,6 @@
 .tabs {
   @include flexbox(row, flex-start, center);
 
-
   &.big,
   &.expose-modal {
     column-gap: 8px;
@@ -13,9 +12,31 @@
     background: $bg-base-secondary;
   }
 
-
-
   &.little {
     column-gap: 16px;
+  }
+}
+
+@media (max-width: 992px) {
+  .tabs {
+    width: 100%;
+
+    &.big,
+    &.expose-modal {
+      column-gap: 8px;
+      padding: 4px;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    &.little {
+      column-gap: 16px;
+    }
+
+    &.cells {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
   }
 }

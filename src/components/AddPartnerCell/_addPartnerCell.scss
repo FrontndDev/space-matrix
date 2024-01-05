@@ -87,6 +87,7 @@
 
   &__title {
     @include get-font(14px, 500, 130%, $text-base);
+    text-align: center;
 
     &_mt-8 {
       margin-top: 8px;
@@ -97,6 +98,7 @@
     @include flex-center;
     column-gap: 4px;
     @include get-font(12px, 500, 16px, $text-base-light);
+    text-align: center;
   }
 
   &.disable .add-partner-cell__title {
@@ -134,5 +136,32 @@
 
   &.small .add-partner-cell__title {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 992px) {
+  .add-partner-cell {
+    width: 144px;
+    padding: 12px;
+
+    &__plus {
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
+
+      & > svg {
+        width: 40px;
+        height: auto;
+      }
+
+      &__loader {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    &__title {
+      @include get-font(12px, 500, 130%, $text-base);
+    }
   }
 }

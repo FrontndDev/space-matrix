@@ -8,11 +8,11 @@
       <div class="pagination__tab active">1</div>
       <div class="pagination__tab">2</div>
       <div class="pagination__tab">3</div>
-      <div class="pagination__tab">4</div>
-      <div class="pagination__tab">5</div>
+      <div class="pagination__tab pagination__tab--mobile">4</div>
+      <div class="pagination__tab pagination__tab--mobile">5</div>
       <div class="pagination__tab">...</div>
-      <div class="pagination__tab">16</div>
-      <div class="pagination__tab">17</div>
+      <div class="pagination__tab pagination__tab--mobile">16</div>
+      <div class="pagination__tab pagination__tab--mobile">17</div>
       <div class="pagination__tab">18</div>
       <div class="pagination__tab">19</div>
       <div class="pagination__tab">20</div>

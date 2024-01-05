@@ -4,7 +4,7 @@
 .d-button {
   display: block;
   padding: 8px 16px;
-  width: 122px;
+  width: 100%;
   border-radius: 16px;
   border: 1px solid $border-base-dark;
   cursor: pointer;
@@ -72,5 +72,42 @@
   }
   100% {
     background: #FFF1F0;
+  }
+}
+
+@media (max-width: 992px) {
+  .d-button {
+    padding: 8px 8px;
+    border-radius: 12px;
+
+    &__name {
+      @include get-font(16px, 700, 150%, $text-base-secondary);
+    }
+
+    &__price {
+      column-gap: 2px;
+      @include get-font(10px, 500, 120%, $text-base-light);
+
+      & > svg {
+        width: 12px;
+        height: auto;
+      }
+    }
+
+    &__time {
+      @include get-font(10px, 500, 120%, $text-base-light);
+      gap: 2px;
+
+      & > svg {
+        width: 12px;
+        height: auto;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .d-button {
+    min-width: 56px;
   }
 }

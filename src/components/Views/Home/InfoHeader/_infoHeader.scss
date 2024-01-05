@@ -14,3 +14,15 @@
     column-gap: 16px;
   }
 }
+
+@media (max-width: 992px) {
+  .header {
+    @include flexbox(column, space-between, center);
+    border-radius: 0;
+    gap: 16px;
+
+    &__selects {
+      width: 100%;
+    }
+  }
+}

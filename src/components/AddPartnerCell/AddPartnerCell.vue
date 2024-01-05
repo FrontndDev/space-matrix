@@ -13,13 +13,13 @@
     </div>
 
 
-    <div v-if="props.type == 'disable'" class="add-partner-cell__title add-partner-cell__title_mt-8">Выставить партнера</div>
+    <div v-if="props.type == 'disable'" class="add-partner-cell__title add-partner-cell__title_mt-8">Недоступно</div>
     <div v-else-if="props.type == 'loading'" class="add-partner-cell__title add-partner-cell__title_mt-8">Ожидайте</div>
-    <div v-else class="add-partner-cell__title add-partner-cell__title_mt-8">Недоступно</div>
+    <div v-else class="add-partner-cell__title add-partner-cell__title_mt-8">Выставить партнера</div>
 
-    <div v-if="props.type == 'disable'" class="add-partner-cell__subtitle">Доступно (1)</div>
+    <div v-if="props.type == 'disable'" class="add-partner-cell__subtitle">Заполните левую ячейку</div>
     <div v-else-if="props.type == 'loading'" class="add-partner-cell__subtitle">Идет загрузка...</div>
-    <div v-else class="add-partner-cell__subtitle">Заполните левую ячейку</div>
+    <div v-else class="add-partner-cell__subtitle">Доступно (1)</div>
 
     <CellType
         :size="props.size"

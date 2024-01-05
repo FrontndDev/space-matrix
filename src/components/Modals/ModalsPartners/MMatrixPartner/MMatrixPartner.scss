@@ -8,10 +8,15 @@
 
 
     &__container {
-        height: 575px;
-        overflow-y: auto;
         display: flex;
         flex-direction: column;
+        height: 575px;
+        overflow-y: auto;
+        border-bottom: 1px solid #EFF2F5;
+    }
+
+    &__overflow {
+
     }
 
     &__cell {
@@ -49,5 +54,54 @@
 
     &_mt-16 {
         margin-top: 16px;
+    }
+}
+
+@media (max-width: 992px) {
+    .modal-matrix-partner {
+        width: 100%;
+        border-radius: 16px 16px 0 0;
+
+        &__container {
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            overflow-y: auto;
+
+            & .copy-link {
+                border-top: 1px solid #EFF2F5;
+            }
+        }
+
+        &__overflow {
+            max-height: calc(90vh - 89px);
+            overflow-x: auto;
+        }
+
+        &__savings {
+            padding: 8px 16px;
+        }
+
+        &__endless {
+            padding: 8px 16px;
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .modal-matrix-partner {
+
+        &__block {
+            grid-template-columns: 1fr;
+        }
+
+        &__savings {
+            border-bottom: 1px solid #EFF2F5;
+            padding: 8px 16px;
+        }
+
+        &__endless {
+            padding: 8px 16px;
+        }
     }
 }
