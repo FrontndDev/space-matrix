@@ -14,6 +14,16 @@ function setGlobalConfig(token: string | null) {
     return token ? { ...defaultSettings, "Authorization": 'Bearer ' + token } : defaultSettings
 }
 
+export function setDataToLS(key: string, data: any) {
+    localStorage.setItem(key, JSON.stringify(data))
+}
+
+export function getDataFromLS(key: string) {
+    const data: string | null = localStorage.getItem(key)
+
+    return data && data !== 'undefined' ? JSON.parse(data) : null
+}
+
 export async function getListOfTypes(category: string) {
     return getAsync(`/api/matrix/list-of-types/${category}`)
 }
