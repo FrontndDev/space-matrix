@@ -39,8 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits } from 'vue'
-
 const props = defineProps({
   modalHeader: {
     type: String,
