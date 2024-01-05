@@ -1,5 +1,5 @@
 <template>
-  <div class="d-button">
+  <div class="d-button" @click="emit('click', props.type)">
     <div class="d-button__name">{{ props.type.title }}</div>
     <div
         v-if="props.isTime == 'time'"
@@ -24,12 +24,12 @@
 </template>
 
 <script setup lang="ts">
-import ListOfTypes from "../../../interfaces/store.interface.ts";
+import { Type } from "../../../interfaces/store.interface.ts";
 import { PropType } from "vue";
 
 const props = defineProps({
   type: {
-    type: Object as PropType<ListOfTypes>,
+    type: Object as PropType<Type>,
     required: true,
   },
   opened: {
@@ -41,6 +41,8 @@ const props = defineProps({
     default: ''
   }
 })
+
+const emit = defineEmits(['click'])
 </script>
 
 <style scoped lang="scss">

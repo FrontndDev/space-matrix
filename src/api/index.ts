@@ -28,6 +28,10 @@ export async function getListOfTypes(category: string) {
     return getAsync(`/api/matrix/list-of-types/${category}`)
 }
 
+export async function getViewLastOwn(matrixTypeOrId: string | number) {
+    return getAsync(`/api/matrix/${matrixTypeOrId}`)
+}
+
 export async function putAsync(url: string, data: never[], checkError = true) {
     try {
         let response = await axios.put(BASE_URL + url, data, { headers: setGlobalConfig(localStorage.getItem('token')) })
@@ -82,9 +86,6 @@ export async function getAsync(url: string, token = localStorage.getItem('token'
             // localStorage.removeItem('token')
             // localStorage.removeItem('profile-user')
         }
-        // if (error?.response?.status === 400) {
-            // store.commit('setShowUpdateTheApplicationModal', true)
-        // }
         console.error(error)
     }
 }

@@ -12,9 +12,25 @@
 </template>
 
 <script setup lang="ts">
-
 import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
 import InfinityPartnerCard from "../../../InfinityPartnerCard/InfinityPartnerCard.vue";
+import { useStore } from "vuex";
+import {
+  computed,
+  onBeforeMount,
+  Ref
+} from "vue";
+import {
+  Ceils
+} from "../../../../interfaces/store.interface.ts";
+
+const store = useStore()
+
+const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn.ceilsCollection['1'])
+
+onBeforeMount(() => {
+
+})
 </script>
 
 <style scoped lang="scss">

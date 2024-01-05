@@ -8,6 +8,7 @@
           :key="type.title"
           :type="type"
           :opened="listOfTypes.opened"
+          @click="selectDButton"
       />
 <!--      :price="(idx + 1) * 10"-->
 <!--      :class="button.class"-->
@@ -23,10 +24,16 @@ import {
   computed,
   onBeforeMount,
 } from "vue";
+import { Type } from "../../../../interfaces/store.interface.ts";
 
 const store = useStore();
 
 const listOfTypes = computed(() => store.state.listOfTypes)
+
+const selectDButton = (type: Type) => {
+  console.log('type', type)
+  store.dispatch('getViewLastOwn', type.type)
+}
 
 onBeforeMount(() => {
   store.dispatch('getListOfTypes')

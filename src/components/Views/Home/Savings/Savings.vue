@@ -4,13 +4,13 @@
 
     <div class="savings__partners savings__partners_mt-16">
       <PartnerCell
-          @open-m-matrix-partner="$emit('open-m-matrix-partner')"
           type="cumulative"
+          @open-m-matrix-partner="emit('open-m-matrix-partner')"
       />
       <AddPartnerCell
-          @open-m-add-partner="$emit('open-m-add-partner')"
-          type="cumulative"/>
-
+          type="cumulative"
+          @open-m-add-partner="emit('open-m-add-partner')"
+      />
     </div>
   </div>
 </template>
@@ -19,7 +19,11 @@
 
 import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
 import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
+import { useStore } from "vuex";
 
+const emit = defineEmits(['open-m-matrix-partner', 'open-m-add-partner'])
+
+const store = useStore()
 </script>
 
 <style scoped lang="scss">
