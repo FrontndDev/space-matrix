@@ -38,16 +38,16 @@ export interface Matrix {
 
 export interface MatrixConfig {
     currency: string;
-    price: number;
     category: string;
+    showLegend: boolean;
+    infinityPos: number;
     type: string;
     title: string;
+    price: number;
+    activationPrice: number;
     required: boolean;
     depth: number;
     pow: number;
-    allowBoosters: boolean;
-    showLegend: boolean;
-    infinityPos: number | null;
 }
 
 export interface FillReward {
@@ -58,6 +58,7 @@ export interface FillReward {
 export interface Ceil {
     depth: number;
     pos: number;
+    matrix?: Matrix;
     allowBuyClone: boolean;
     allowBuyBoost: boolean;
     fillRevard: FillReward[];
@@ -75,7 +76,9 @@ export interface Ceils {
 }
 
 export interface ViewLastOwn {
-    matrix: Matrix;
+    ctaText: string;
+    in_queue: boolean;
+    matrix: Matrix | null;
     matrixConfig: MatrixConfig;
-    ceilsCollection: CeilsCollection;
+    ceilsCollection?: CeilsCollection;
 }

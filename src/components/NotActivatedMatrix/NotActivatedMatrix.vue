@@ -8,16 +8,26 @@
     <div class="not-activated-matrix__text">
       <h3>Вы еще не активировали эту матрицу</h3>
       <div class="text__column">
-        Заполните накопительные ячейки в предыдущей матрице, или активируйте её
-        <span>со скидкой 50%</span>
+        {{ props.viewLastOwn?.ctaText }}
+<!--        Заполните накопительные ячейки в предыдущей матрице, или активируйте её-->
+<!--        <span>со скидкой 50%</span>-->
       </div>
     </div>
-    <ActivateButton />
+    <ActivateButton :price="props.viewLastOwn?.matrixConfig.activationPrice ?? 0"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import ActivateButton from "../UI/ActivateButton/ActivateButton.vue";
+import { ViewLastOwn } from "../../interfaces/store.interface.ts";
+import { PropType } from "vue";
+
+const props = defineProps({
+  viewLastOwn: {
+    type: Object as PropType<ViewLastOwn | null>,
+    required: true,
+  }
+})
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 @import '../../assets/scss/mixins';
-
+@import '../../assets/scss/variables';
 
 .home {
   padding: 24px 0;
@@ -25,6 +25,12 @@
   &__info {
     @include flexbox(column);
     width: 100%;
+  }
+
+  &__preloader {
+    @include flex-center;
+    height: 348px;
+    background: $bg-base;
   }
 }
 

@@ -5,44 +5,52 @@
         <div class="home__matrices">
           <MatrixHeader style="grid-area: header;"/>
 
-          <div class="home__matrices__inner">
-            <Savings
-                class="border-right"
-                @open-m-matrix-partner="openModalPartner(2)"
-                @open-m-add-partner="openModalPartner(3)"
-            />
-            <Endless
-                @open-m-infinity-cell="openModalPartner(1)"
-            />
-          </div>
+          <template v-if="store.state.viewLastOwn">
+            <div class="home__matrices__inner" v-if="!store.state.viewLastOwn?.ctaText">
+              <Savings
+                  class="border-right"
+                  @open-m-matrix-partner="openModalPartner(2)"
+                  @open-m-add-partner="openModalPartner(3)"
+              />
+              <Endless
+                  @open-m-infinity-cell="openModalPartner(1)"
+              />
+            </div>
 
-          <NotActivatedMatrix v-if="false" />
-          <TimeActivatedMatrix v-if="false"  />
+            <NotActivatedMatrix
+                :view-last-own="store.state.viewLastOwn"
+                v-if="store.state.viewLastOwn?.ctaText"
+            />
+            <TimeActivatedMatrix v-if="false"/>
+          </template>
+          <div class="home__preloader" v-if="!store.state.viewLastOwn">
+            <Preloader/>
+          </div>
 
           <CopyLink style="grid-area: copy-link;"/>
         </div>
         <div class="home__info">
           <InfoHeader
-              @open-cells="openCells"
               :infoHeader="isCells"
+              @open-cells="openCells"
           />
           <PartnerCells v-if="isCells === 1" />
           <BoostersCells v-else-if="isCells === 2" />
           <ChainsCells
-              v-else-if="isCells === 3"
               @open-general-chains="openModalChain(1)"
               @open-m-teleport="openModalTeleport"
+              v-else-if="isCells === 3"
           />
         </div>
       </div>
     </div>
     <ModalsPartners
+        :toggleModalPartners="toggleModalPartners"
+        :openModalPartners="openModalPartners"
         @open-m-infinity-cell="openModalPartner(1)"
         @open-m-matrix-partner="openModalPartner(2)"
         @open-m-add-partner="openModalPartner(3)"
         @close-modal="toggleModalPartners = false"
-        :toggleModalPartners="toggleModalPartners"
-        :openModalPartners="openModalPartners"
     />
     <ModalChains
         :toggleModalChains="toggleModalChains"
@@ -78,6 +86,8 @@ import ChainsCells from "../../components/Views/Home/ChainsCells/ChainsCells.vue
 import BoostersCells from "../../components/Views/Home/BoostersCells/BoostersCells.vue";
 import ModalChains from "../../components/Modals/ModalsChains/ModalChains.vue";
 import ModalNotification from "../../components/Modals/ModalNotification/ModalNotification.vue";
+import { useStore } from "vuex";
+import Preloader from "../../components/UI/Preloader/Preloader.vue";
 
 const isCells = ref(1)
 
@@ -89,12 +99,14 @@ const openModalChains = ref(0)
 
 const toggleModalNotification = ref(false)
 
-const openModalPartner = num => {
+const store = useStore()
+
+const openModalPartner = (num: number) => {
   toggleModalPartners.value = true
   openModalPartners.value = num
 }
 
-const openModalChain = num => {
+const openModalChain = (num: number) => {
   toggleModalChains.value = true
   openModalChains.value = num
 }

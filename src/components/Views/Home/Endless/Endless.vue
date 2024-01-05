@@ -3,9 +3,12 @@
     <h3>Бесконечные</h3>
 
     <div class="endless__menu endless__menu_mt-16">
-      <AddPartnerCell type="infinity"/>
+      <AddPartnerCell
+          type="infinity"
+      />
+<!--      v-if="!ceils['3']?.matrix"-->
       <InfinityPartnerCard
-          @open-m-infinity-cell="$emit('open-m-infinity-cell')"
+          @open-m-infinity-cell="emit('open-m-infinity-cell')"
       />
     </div>
   </div>
@@ -17,20 +20,15 @@ import InfinityPartnerCard from "../../../InfinityPartnerCard/InfinityPartnerCar
 import { useStore } from "vuex";
 import {
   computed,
-  onBeforeMount,
   Ref
 } from "vue";
-import {
-  Ceils
-} from "../../../../interfaces/store.interface.ts";
+import { Ceils } from "../../../../interfaces/store.interface.ts";
+
+const emit = defineEmits(['open-m-infinity-cell'])
 
 const store = useStore()
 
-const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn.ceilsCollection['1'])
-
-onBeforeMount(() => {
-
-})
+const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection['1'])
 </script>
 
 <style scoped lang="scss">
