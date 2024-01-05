@@ -14,8 +14,129 @@ import {
 export default createStore({
     state: {
         listOfTypes: {
-            types: [],
-            opened: [],
+            "types": [
+                {
+                    "currency": "TON",
+                    "price": 10,
+                    "category": "dream-ton",
+                    "type": "dream-ton_1",
+                    "title": "D1",
+                    "required": false,
+                    "depth": 1,
+                    "pow": 3,
+                    "allowBoosters": true,
+                    "showLegend": true,
+                    "infinityPos": 3
+                },
+                {
+                    "currency": "TON",
+                    "price": 20,
+                    "category": "dream-ton",
+                    "type": "dream-ton_2",
+                    "title": "D2",
+                    "required": false,
+                    "depth": 1,
+                    "pow": 3,
+                    "allowBoosters": true,
+                    "showLegend": true,
+                    "infinityPos": 3
+                },
+                {
+                    "currency": "TON",
+                    "price": 40,
+                    "category": "dream-ton",
+                    "type": "dream-ton_3",
+                    "title": "D3",
+                    "required": false,
+                    "depth": 1,
+                    "pow": 3,
+                    "allowBoosters": true,
+                    "showLegend": true,
+                    "infinityPos": 3
+                },
+                {
+                    "currency": "TON",
+                    "price": 80,
+                    "category": "dream-ton",
+                    "type": "dream-ton_4",
+                    "title": "D4",
+                    "required": false,
+                    "depth": 1,
+                    "pow": 3,
+                    "allowBoosters": true,
+                    "showLegend": true,
+                    "infinityPos": 3
+                },
+                {
+                    "currency": "TON",
+                    "price": 160,
+                    "category": "dream-ton",
+                    "type": "dream-ton_5",
+                    "title": "D5",
+                    "required": false,
+                    "depth": 1,
+                    "pow": 3,
+                    "allowBoosters": true,
+                    "showLegend": true,
+                    "infinityPos": 3
+                },
+                {
+                    "currency": "TON",
+                    "price": 320,
+                    "category": "dream-ton",
+                    "type": "dream-ton_6",
+                    "title": "D6",
+                    "required": false,
+                    "depth": 1,
+                    "pow": 3,
+                    "allowBoosters": true,
+                    "showLegend": true,
+                    "infinityPos": 3
+                },
+                {
+                    "currency": "TON",
+                    "price": 490,
+                    "category": "dream-ton",
+                    "type": "dream-ton_7",
+                    "title": "D7",
+                    "required": false,
+                    "depth": 1,
+                    "pow": 3,
+                    "allowBoosters": true,
+                    "showLegend": true,
+                    "infinityPos": 3
+                },
+                {
+                    "currency": "TON",
+                    "price": 880,
+                    "category": "dream-ton",
+                    "type": "dream-ton_8",
+                    "title": "D8",
+                    "required": false,
+                    "depth": 1,
+                    "pow": 3,
+                    "allowBoosters": true,
+                    "showLegend": true,
+                    "infinityPos": 3
+                },
+                {
+                    "currency": "TON",
+                    "price": 1760,
+                    "category": "dream-ton",
+                    "type": "dream-ton_9",
+                    "title": "D9",
+                    "required": false,
+                    "depth": 1,
+                    "pow": 1,
+                    "allowBoosters": true,
+                    "showLegend": true,
+                    "infinityPos": 1
+                }
+            ],
+            "opened": [
+                "dream-ton_1",
+                "dream-ton_9"
+            ]
         } as ListOfTypes,
         viewLastOwn: {
             "matrix": {
