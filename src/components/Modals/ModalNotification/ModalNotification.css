@@ -79,7 +79,7 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 150%;
-  color: #FFFFFF;
+  color: inherit;
   text-align: center;
 }
 .modal-notification__btn {
@@ -87,7 +87,7 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 140%;
-  color: #FFFFFF;
+  color: inherit;
 }
 
 /*# sourceMappingURL=ModalNotification.css.map */

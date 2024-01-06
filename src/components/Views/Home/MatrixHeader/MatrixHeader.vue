@@ -20,13 +20,10 @@
 
 <script setup lang="ts">
 import DButton from "../../../UI/DButton/DButton.vue";
-import {
-  mapActions,
-  mapMutations,
-} from "vuex";
+
 import {
   computed,
-  onBeforeMount,
+  onBeforeMount, onMounted,
   Ref,
   watch,
 } from "vue";
@@ -34,12 +31,12 @@ import {
   ListOfTypes,
   Type
 } from "../../../../interfaces/store.interface.ts";
-
-const actions = mapActions(['getListOfTypes', 'getViewLastOwn', 'getExpectationList'])
-const mutations = mapMutations(['SET_SELECTED_TYPE', 'SET_VIEW_LAST_OWN'])
+import {useStore} from "vuex";
 
 const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
 const selectedType: Ref<Type> = computed(() => store.state.selectedType)
+
+const store = useStore()
 
 // const getData = (listOfType, type: any) => {
 //   store.commit('SET_SELECTED_TYPE', listOfType)
@@ -49,26 +46,25 @@ const selectedType: Ref<Type> = computed(() => store.state.selectedType)
 
 const selectDButton = (type: Type) => {
   if (selectedType.value.type !== type.type) {
-    mutations.SET_VIEW_LAST_OWN({})
+    store.commit('SET_VIEW_LAST_OWN', {})
   }
-  mutations.SET_SELECTED_TYPE('SET_SELECTED_TYPE', type)
+  store.commit('SET_SELECTED_TYPE', type)
 
-  actions.getViewLastOwn('getViewLastOwn', type.type)
-  actions.getViewLastOwn(type.type)
+  store.dispatch('getViewLastOwn', type.type)
 
-  actions.getExpectationList(type.type)
+  store.dispatch('getExpectationList', type.type)
   // getData(type, type.type)
 }
 
 watch(() => listOfTypes.value.types?.length, () => {
   // getData()
-  mutations.SET_SELECTED_TYPE('SET_SELECTED_TYPE', listOfTypes.value.types[0])
-  actions.getViewLastOwn(selectedType.value.type)
-  actions.getExpectationList(selectedType.value.type)
+  store.commit('SET_SELECTED_TYPE', listOfTypes.value.types[0])
+  store.dispatch('getViewLastOwn', selectedType.value.type)
+  store.dispatch('getExpectationList', selectedType.value.type)
 })
 
-onBeforeMount(() => {
-  actions.getListOfTypes()
+onMounted(() => {
+  store.dispatch('getListOfTypes')
 })
 </script>
 

@@ -16,6 +16,7 @@
   flex-wrap: nowrap;
   gap: 40px;
   padding: 38px 16px 62px;
+  width: 100%;
 }
 
 @media (max-width: 992px) {

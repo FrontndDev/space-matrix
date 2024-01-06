@@ -13,7 +13,7 @@ import {
     getListOfTypes,
     getViewLastOwn,
 } from "../api";
-import { state } from "vue-tsc/out/shared";
+
 
 export default createStore({
     state: {

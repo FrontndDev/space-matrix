@@ -84,7 +84,7 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 130%;
-  color: #FFFFFF;
+  color: inherit;
 }
 .replace-partner__change-partner > button {
   color: #1A86E5;

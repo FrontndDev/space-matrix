@@ -32,7 +32,7 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 150%;
-  color: #FFFFFF;
+  color: inherit;
 }
 .chain-cell__level svg {
   width: 16px;
