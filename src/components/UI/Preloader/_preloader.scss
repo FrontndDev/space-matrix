@@ -4,6 +4,7 @@
 .preloader {
   @include flexbox(column, center, center);
   row-gap: 8px;
+  width: 100%;
   text-align: center;
 
   &__icon {

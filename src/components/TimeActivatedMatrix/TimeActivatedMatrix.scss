@@ -16,7 +16,7 @@
     @include get-font(14px, 500, 142%);
 
     & > h3 {
-      @include get-font(20px, 500, 160%);
+      @include get-font(20px, 500, 160%, $text-base);
     }
   }
 
