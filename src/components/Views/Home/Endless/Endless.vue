@@ -6,7 +6,6 @@
       <AddPartnerCell
           type="infinity"
       />
-<!--      v-if="!ceils['3']?.matrix"-->
       <InfinityPartnerCard
           :ceil="thirdCeil"
           @open-m-infinity-cell="emit('open-m-infinity-cell')"
