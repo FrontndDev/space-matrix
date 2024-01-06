@@ -19,6 +19,7 @@
             <NotActivatedMatrix
                 :view-last-own="store.state.viewLastOwn"
                 v-if="store.state.viewLastOwn?.ctaText"
+                @open-payment-form="toggleModalPaymentForm = true"
             />
             <TimeActivatedMatrix v-if="false"/>
           </template>
@@ -65,6 +66,10 @@
         :statusNotification="'failure'"
         @close-modal="toggleModalNotification = false"
     />
+    <ModalPaymentForm
+        :toggleModalPaymentForm="toggleModalPaymentForm"
+        @close-modal="toggleModalPaymentForm = false"
+    />
   </div>
 </template>
 
@@ -90,6 +95,7 @@ import ModalChains from "../../components/Modals/ModalsChains/ModalChains.vue";
 import ModalNotification from "../../components/Modals/ModalNotification/ModalNotification.vue";
 import { useStore } from "vuex";
 import Preloader from "../../components/UI/Preloader/Preloader.vue";
+import ModalPaymentForm from "../../components/Modals/ModalPaymentForm/ModalPaymentForm.vue";
 
 const isCells = ref(1)
 
@@ -100,6 +106,8 @@ const toggleModalChains = ref(false)
 const openModalChains = ref(0)
 
 const toggleModalNotification = ref(false)
+
+const toggleModalPaymentForm = ref(false)
 
 const store = useStore()
 

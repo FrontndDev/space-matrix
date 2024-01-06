@@ -10,7 +10,7 @@ import {
 } from "../interfaces/store.interface.ts";
 import {
     getExpectationList,
-    getListOfTypes,
+    getListOfTypes, getPaymentForm,
     getViewLastOwn,
 } from "../api";
 
@@ -21,7 +21,7 @@ export default createStore({
         listOfTypes: {} as ListOfTypes,
         viewLastOwn: {} as ViewLastOwn,
         expectationList: [],
-        number: 2,
+        paymentForm: {},
     },
     actions: {
         getListOfTypes({ commit }: ActionContext<any, any>, category = 'dream-ton') {
@@ -34,6 +34,12 @@ export default createStore({
             getExpectationList(matrixType).then(response => {
                 console.log('expectation list', response)
                 commit('SET_EXPECTATION_LIST', response.data)
+            })
+        },
+        getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
+            getPaymentForm(matrixType).then(response => {
+                console.log(response)
+                commit('SET_PAYMENT_FORM', response.data.html)
             })
         }
     },
@@ -49,11 +55,12 @@ export default createStore({
         },
         SET_EXPECTATION_LIST(state: any, list) {
             state.expectationList = list
+        },
+        SET_PAYMENT_FORM(state: any, form) {
+            state.paymentForm = form
         }
     },
     getters: {
-        getDoubleNumber(state) {
-            return state.number * 2
-        }
+
     }
 });

@@ -13,14 +13,21 @@
 <!--        <span>со скидкой 50%</span>-->
       </div>
     </div>
-    <ActivateButton :price="props.viewLastOwn?.matrixConfig.activationPrice ?? 0"/>
+    <ActivateButton
+        @click="openPaymentForm"
+        :price="props.viewLastOwn?.matrixConfig.activationPrice ?? 0"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import ActivateButton from "../UI/ActivateButton/ActivateButton.vue";
-import { ViewLastOwn } from "../../interfaces/store.interface.ts";
-import { PropType } from "vue";
+import {Type, ViewLastOwn} from "../../interfaces/store.interface.ts";
+import {computed, PropType, Ref} from "vue";
+import { useStore } from "vuex";
+
+const store = useStore()
+
+const selectedType: Ref<Type> = computed(() => store.state.selectedType)
 
 const props = defineProps({
   viewLastOwn: {
@@ -28,6 +35,14 @@ const props = defineProps({
     required: true,
   }
 })
+
+const emit = defineEmits([''])
+const openPaymentForm = () => {
+  store.dispatch('getPaymentForm', selectedType.value.type)
+  emit('open-payment-form')
+}
+
+
 </script>
 
 <style scoped>
