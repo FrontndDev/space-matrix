@@ -82,3 +82,7 @@ export interface ViewLastOwn {
     matrixConfig: MatrixConfig;
     ceilsCollection?: CeilsCollection;
 }
+
+export interface ExpectationList {
+
+}

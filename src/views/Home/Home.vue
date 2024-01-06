@@ -5,7 +5,7 @@
         <div class="home__matrices">
           <MatrixHeader style="grid-area: header;"/>
 
-          <template v-if="store.state.viewLastOwn">
+          <template v-if="Object.keys(store.state.viewLastOwn).length">
             <div class="home__matrices__inner" v-if="!store.state.viewLastOwn?.ctaText">
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
@@ -22,7 +22,7 @@
             />
             <TimeActivatedMatrix v-if="false"/>
           </template>
-          <div class="home__preloader" v-if="!store.state.viewLastOwn">
+          <div class="home__preloader" v-if="!Object.keys(store.state.viewLastOwn).length">
             <Preloader/>
           </div>
 
@@ -79,7 +79,10 @@ import ModalsPartners from "../../components/Modals/ModalsPartners/ModalsPartner
 
 import NotActivatedMatrix from "../../components/NotActivatedMatrix/NotActivatedMatrix.vue";
 
-import { ref } from "vue";
+import {
+  onMounted,
+  ref
+} from "vue";
 import TimeActivatedMatrix from "../../components/TimeActivatedMatrix/TimeActivatedMatrix.vue";
 import ChainsCells from "../../components/Views/Home/ChainsCells/ChainsCells.vue";
 import BoostersCells from "../../components/Views/Home/BoostersCells/BoostersCells.vue";
@@ -118,7 +121,6 @@ const openModalTeleport = () => {
   toggleModalChains.value = true
   openModalChains.value = 5
 }
-
 </script>
 
 <style scoped lang="scss">

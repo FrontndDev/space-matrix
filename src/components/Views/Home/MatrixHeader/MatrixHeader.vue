@@ -20,7 +20,10 @@
 
 <script setup lang="ts">
 import DButton from "../../../UI/DButton/DButton.vue";
-import { useStore } from "vuex";
+import {
+  mapActions,
+  mapMutations,
+} from "vuex";
 import {
   computed,
   onBeforeMount,
@@ -32,24 +35,40 @@ import {
   Type
 } from "../../../../interfaces/store.interface.ts";
 
-const store = useStore();
+const actions = mapActions(['getListOfTypes', 'getViewLastOwn', 'getExpectationList'])
+const mutations = mapMutations(['SET_SELECTED_TYPE', 'SET_VIEW_LAST_OWN'])
 
 const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
 const selectedType: Ref<Type> = computed(() => store.state.selectedType)
 
+// const getData = (listOfType, type: any) => {
+//   store.commit('SET_SELECTED_TYPE', listOfType)
+//   store.dispatch('getViewLastOwn', type)
+//   store.dispatch('getExpectationList', type)
+// }
+
 const selectDButton = (type: Type) => {
-  if (selectedType.value.type !== type.type) store.commit('SET_VIEW_LAST_OWN', null)
-  store.commit('SET_SELECTED_TYPE', type)
-  store.dispatch('getViewLastOwn', type.type)
+  if (selectedType.value.type !== type.type) {
+    mutations.SET_VIEW_LAST_OWN({})
+  }
+  mutations.SET_SELECTED_TYPE('SET_SELECTED_TYPE', type)
+
+  actions.getViewLastOwn('getViewLastOwn', type.type)
+  actions.getViewLastOwn(type.type)
+
+  actions.getExpectationList(type.type)
+  // getData(type, type.type)
 }
 
 watch(() => listOfTypes.value.types?.length, () => {
-  store.commit('SET_SELECTED_TYPE', listOfTypes.value.types[0])
-  store.dispatch('getViewLastOwn', selectedType.value.type)
+  // getData()
+  mutations.SET_SELECTED_TYPE('SET_SELECTED_TYPE', listOfTypes.value.types[0])
+  actions.getViewLastOwn(selectedType.value.type)
+  actions.getExpectationList(selectedType.value.type)
 })
 
 onBeforeMount(() => {
-  store.dispatch('getListOfTypes')
+  actions.getListOfTypes()
 })
 </script>
 

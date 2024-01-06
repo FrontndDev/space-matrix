@@ -1,5 +1,6 @@
 import {
     ActionContext,
+    Commit,
     createStore
 } from "vuex";
 import {
@@ -8,15 +9,19 @@ import {
     ViewLastOwn
 } from "../interfaces/store.interface.ts";
 import {
+    getExpectationList,
     getListOfTypes,
     getViewLastOwn,
 } from "../api";
+import { state } from "vue-tsc/out/shared";
 
 export default createStore({
     state: {
-        selectedType: null as Type | null,
+        selectedType: {} as Type,
         listOfTypes: {} as ListOfTypes,
-        viewLastOwn: null as ViewLastOwn | null
+        viewLastOwn: {} as ViewLastOwn,
+        expectationList: [],
+        number: 2,
     },
     actions: {
         getListOfTypes({ commit }: ActionContext<any, any>, category = 'dream-ton') {
@@ -25,16 +30,30 @@ export default createStore({
         getViewLastOwn({ commit }: ActionContext<any, any>, matrixTypeOrId: string | number) {
             getViewLastOwn(matrixTypeOrId).then(response => commit('SET_VIEW_LAST_OWN', response.data))
         },
+        getExpectationList({ commit }: { commit: Commit }, matrixType: string) {
+            getExpectationList(matrixType).then(response => {
+                console.log('expectation list', response)
+                commit('SET_EXPECTATION_LIST', response.data)
+            })
+        }
     },
     mutations: {
         SET_LIST_OF_TYPES(state: any, list: ListOfTypes) {
             state.listOfTypes = list
         },
-        SET_VIEW_LAST_OWN(state: any, data: ViewLastOwn | null) {
+        SET_VIEW_LAST_OWN(state: any, data: ViewLastOwn) {
             state.viewLastOwn = data
         },
         SET_SELECTED_TYPE(state: any, type: Type | undefined) {
             state.selectedType = type
+        },
+        SET_EXPECTATION_LIST(state: any, list) {
+            state.expectationList = list
         }
     },
+    getters: {
+        getDoubleNumber(state) {
+            return state.number * 2
+        }
+    }
 });
