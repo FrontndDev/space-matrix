@@ -25,5 +25,9 @@ export async function getExpectationList(matrixType: string) {
     return getAsync(`/api/matrix/get-raw-partners/${matrixType}`)
 }
 
+export async function getPaymentForm(matrixType: string) {
+    return getAsync(`/api/matrix/payment-form/${matrixType}`)
+}
+
 ///////////////////////////////
 

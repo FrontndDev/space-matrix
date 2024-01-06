@@ -49,9 +49,7 @@ const selectDButton = (type: Type) => {
     store.commit('SET_VIEW_LAST_OWN', {})
   }
   store.commit('SET_SELECTED_TYPE', type)
-
   store.dispatch('getViewLastOwn', type.type)
-
   store.dispatch('getExpectationList', type.type)
   // getData(type, type.type)
 }
