@@ -1,23 +1,24 @@
 .cells__empty {
-  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 16px;
   padding: 16px;
   width: 100%;
   height: 340px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
   border-radius: 0 0 16px 16px;
+  background: #FFFFFF;
 }
 .cells__empty__img {
-  background: #F5F7F8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 64px;
   height: 64px;
   border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #F5F7F8;
 }
 .cells__empty__img svg {
   width: 32px;

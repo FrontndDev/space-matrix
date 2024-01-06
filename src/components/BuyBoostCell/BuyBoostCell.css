@@ -29,26 +29,24 @@
   fill: #A33FBC;
 }
 .buy-boost-cell__title {
+  margin-top: 8px;
   font-size: 14px;
   font-weight: 500;
   line-height: 130%;
-  color: #FFFFFF;
   color: #0B0C0E;
-  margin-top: 8px;
 }
 .buy-boost-cell__title > span {
   color: #A33FBC;
 }
 .buy-boost-cell__ton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
   font-size: 12px;
   font-weight: 500;
   line-height: 130%;
-  color: #FFFFFF;
   color: #7B879D;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
 }
 .buy-boost-cell__ton > svg {
   width: 17px;
@@ -57,8 +55,8 @@
 
 @media (max-width: 992px) {
   .buy-boost-cell {
-    width: 144px;
     padding: 12px;
+    width: 144px;
   }
   .buy-boost-cell__plus {
     width: 120px;

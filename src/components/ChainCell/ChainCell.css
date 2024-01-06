@@ -1,14 +1,17 @@
 .chain-cell {
-  position: relative;
-  padding: 12px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   gap: 4px;
+  padding: 12px;
+  position: relative;
 }
 .chain-cell__avatar {
-  position: relative;
   border-radius: 16px;
   background: lightgray 50%/cover no-repeat;
+  position: relative;
   cursor: pointer;
 }
 .chain-cell__avatar > img {
@@ -17,15 +20,19 @@
 .chain-cell__info {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
 }
 .chain-cell__level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   font-size: 16px;
   font-weight: 700;
   line-height: 150%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+  color: #FFFFFF;
 }
 .chain-cell__level svg {
   width: 16px;
@@ -43,10 +50,10 @@
   justify-content: center;
   align-items: center;
   gap: 4px;
-  color: #29A352;
   font-size: 18px;
   font-weight: 500;
   line-height: 155%;
+  color: #29A352;
 }
 .chain-cell__cost svg {
   width: 20px;
@@ -56,7 +63,7 @@
   border: 2px solid #F19C18;
 }
 .chain-cell.teleport .chain-cell__avatar img {
-  border: 2px solid #fff;
+  border: 2px solid #FFFFFF;
 }
 
 /*# sourceMappingURL=ChainCell.css.map */

@@ -6,13 +6,19 @@
 .modal-matrix-partner__container {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   height: 575px;
   overflow-y: auto;
   border-bottom: 1px solid #EFF2F5;
 }
 .modal-matrix-partner__cell {
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   border-bottom: 1px solid #EFF2F5;
 }
 .modal-matrix-partner__block {
@@ -26,12 +32,14 @@
   border-right: 1px solid #EFF2F5;
 }
 .modal-matrix-partner__endless {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
   padding: 16px;
   background: #FFFFFF;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .savings__partners {
@@ -55,6 +63,9 @@
   .modal-matrix-partner__container {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
     height: auto;
     overflow-y: auto;
   }

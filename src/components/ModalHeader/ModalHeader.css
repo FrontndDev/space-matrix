@@ -6,29 +6,33 @@
 }
 .modal-header__back {
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 8px;
-  color: #1A86E5;
   font-size: 14px;
   font-weight: 500;
   line-height: 142%;
+  color: #1A86E5;
 }
 .modal-header__back > svg {
   width: 16px;
   height: 16px;
 }
 .modal-header__title {
+  white-space: nowrap;
   font-size: 20px;
   font-weight: 700;
   line-height: 160%;
+  color: #FFFFFF;
   text-align: center;
-  white-space: nowrap;
 }
 .modal-header__close {
-  width: 16px;
-  height: 16px;
   align-self: start;
   justify-self: end;
+  width: 16px;
+  height: 16px;
 }
 
 @media (max-width: 992px) {
