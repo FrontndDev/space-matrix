@@ -8,6 +8,7 @@
       />
 <!--      v-if="!ceils['3']?.matrix"-->
       <InfinityPartnerCard
+          :ceil="thirdCeil"
           @open-m-infinity-cell="emit('open-m-infinity-cell')"
       />
     </div>
@@ -22,14 +23,18 @@ import {
   computed,
   Ref
 } from "vue";
-import { Ceils } from "../../../../interfaces/store.interface.ts";
+import {
+  Ceil,
+  Ceils
+} from "../../../../interfaces/store.interface.ts";
 
 const emit = defineEmits(['open-m-infinity-cell'])
 
 const store = useStore()
 
 const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection['1'])
-const thirdCeil: Ref = computed(() => ceils.value?.['3'])
+const thirdCeil: Ref<Ceil> = computed(() => ceils.value?.['3'])
+
 </script>
 
 <style scoped lang="scss">

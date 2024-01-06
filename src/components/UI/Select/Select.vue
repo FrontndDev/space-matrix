@@ -26,17 +26,18 @@
 <script setup lang="ts">
 import {
   onBeforeMount,
+  PropType,
   Ref,
   ref
 } from "vue";
 
 const props = defineProps({
   items: {
-    type: Array as any,
+    type: Array as PropType<any>,
     required: true
   },
   defaultValue: {
-    type: Object as any,
+    type: Object as PropType<any>,
   }
 });
 

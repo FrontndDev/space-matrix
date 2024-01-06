@@ -52,7 +52,7 @@ export interface MatrixConfig {
 
 export interface FillReward {
     event: string;
-    value: { type?: string; count?: number; } | string;
+    value: { type?: string; count?: number; } & string;
 }
 
 export interface Ceil {
@@ -84,5 +84,6 @@ export interface ViewLastOwn {
 }
 
 export interface ExpectationList {
-
+    fio: string;
+    photo: string;
 }

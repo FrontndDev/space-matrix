@@ -19,7 +19,8 @@
   }
 
   &__info {
-    @include flexbox(column);
+    @include flexbox(column, flex-start, center);
+    width: 100%;
   }
 
   &__level {

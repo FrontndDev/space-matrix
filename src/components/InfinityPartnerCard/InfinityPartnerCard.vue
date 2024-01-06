@@ -24,7 +24,7 @@
       <div class="infinity-partner-card__awards-bonuses infinity-partner-card__awards-bonuses_mt-8">
         <BonusItem type="ton" :values="[1000]"/>
         <BonusItem type="auto" :values="['LBb']"/>
-        <BonusItem type="boost" :values="['D1', 'D2', 'D3', 'D4', 'D5']"/>
+        <BonusItem type="boost" :values="fillRevard.boost"/>
       </div>
     </div>
   </div>
@@ -32,14 +32,42 @@
 
 <script setup lang="ts">
 import BonusItem from "./BonusItem/BonusItem.vue";
-import { ref } from "vue";
+import {
+  computed,
+  ComputedRef,
+  PropType,
+  ref
+} from "vue";
+import {
+  Ceil,
+  FillReward,
+  Type
+} from "../../interfaces/store.interface.ts";
+import { useStore } from "vuex";
 
 const partnersCount = ref(15);
 
 const props = defineProps({
+  ceil: {
+    type: Object as PropType<Ceil>,
+    required: true,
+  },
   modal: {
     type: String,
     default: ''
+  }
+})
+
+const store = useStore()
+
+const types: ComputedRef<Type[]> = computed(() => store.state.listOfTypes.types)
+
+const fillRevard = computed(() => {
+  const getFilteredRewards = (event: string) => props.ceil?.fillRevard.filter(reward => reward.event === event)
+
+  return {
+    'boost': getFilteredRewards('boost').map(reward => types.value.find(type => type.type === reward.value?.type)?.title),
+    'freeze': getFilteredRewards('freeze'),
   }
 })
 </script>

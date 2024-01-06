@@ -24,7 +24,7 @@ import { PropType } from "vue";
 
 const props = defineProps({
   viewLastOwn: {
-    type: Object as PropType<ViewLastOwn | null>,
+    type: Object as PropType<ViewLastOwn>,
     required: true,
   }
 })

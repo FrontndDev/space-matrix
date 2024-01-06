@@ -80,7 +80,6 @@ import ModalsPartners from "../../components/Modals/ModalsPartners/ModalsPartner
 import NotActivatedMatrix from "../../components/NotActivatedMatrix/NotActivatedMatrix.vue";
 
 import {
-  onMounted,
   ref
 } from "vue";
 import TimeActivatedMatrix from "../../components/TimeActivatedMatrix/TimeActivatedMatrix.vue";

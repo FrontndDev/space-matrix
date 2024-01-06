@@ -21,7 +21,6 @@ export default createStore({
         listOfTypes: {} as ListOfTypes,
         viewLastOwn: {} as ViewLastOwn,
         expectationList: [],
-        number: 2,
     },
     actions: {
         getListOfTypes({ commit }: ActionContext<any, any>, category = 'dream-ton') {
@@ -51,9 +50,4 @@ export default createStore({
             state.expectationList = list
         }
     },
-    getters: {
-        getDoubleNumber(state) {
-            return state.number * 2
-        }
-    }
 });
