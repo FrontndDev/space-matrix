@@ -1,3 +1,6 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
 .modal-header {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -5,13 +8,9 @@
   height: 64px;
 
   &__back {
-    display: flex;
-    align-items: center;
+    @include flexbox(row, flex-start, center);
     gap: 8px;
-    color: #1A86E5;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 142%;
+    @include get-font(14px, 500, 142%, $text-link);
 
     & > svg {
       width: 16px;
@@ -20,24 +19,21 @@
   }
 
   &__title {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 160%;
-    text-align: center;
     white-space: nowrap;
+    @include get-font(20px, 700, 160%);
+    text-align: center;
   }
 
   &__close {
-    width: 16px;
-    height: 16px;
     align-self: start;
     justify-self: end;
+    width: 16px;
+    height: 16px;
   }
 }
 
 @media (max-width: 992px) {
   .modal-header {
-
     padding: 16px 16px 8px;
     height: 48px;
 

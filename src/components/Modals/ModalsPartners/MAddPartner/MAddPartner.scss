@@ -1,14 +1,14 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+
 .modal-add-partner {
-  background: #fff;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
+  @include flexbox(column);
   gap: 16px;
+  border-radius: 16px;
+  background: $bg-base;
 
   &__container {
-    display: flex;
-    align-items: start;
-    justify-content: center;
+    @include flexbox(row, center, flex-start);
     gap: 40px;
     padding: 38px 16px 62px;
   }
@@ -16,8 +16,8 @@
 
 @media (max-width: 992px) {
   .modal-add-partner {
-    border-radius: 16px 16px 0 0;
     width: 100%;
+    border-radius: 16px 16px 0 0;
 
     &__container {
       gap: 24px;

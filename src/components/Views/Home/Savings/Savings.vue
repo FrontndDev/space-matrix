@@ -6,22 +6,22 @@
       <PartnerCell
           type="cumulative"
           @open-m-matrix-partner="emit('open-m-matrix-partner')"
-          v-if="ceils?.['1']?.matrix"
+          v-if="firstCeil?.matrix"
       />
       <AddPartnerCell
           type="cumulative"
           @open-m-add-partner="emit('open-m-add-partner')"
-          v-if="!ceils?.['1']?.matrix"
+          v-if="!firstCeil?.matrix"
       />
       <PartnerCell
           type="cumulative"
           @open-m-matrix-partner="emit('open-m-matrix-partner')"
-          v-if="ceils?.['2']?.matrix"
+          v-if="secondCeil?.matrix"
       />
       <AddPartnerCell
-          :type="!ceils?.['1']?.matrix ? 'disable' : 'cumulative'"
+          :type="!firstCeil?.matrix ? 'disable' : 'cumulative'"
           @open-m-add-partner="emit('open-m-add-partner')"
-          v-if="!ceils?.['2']?.matrix"
+          v-if="!secondCeil?.matrix"
       />
     </div>
   </div>
@@ -43,6 +43,9 @@ const emit = defineEmits(['open-m-matrix-partner', 'open-m-add-partner'])
 const store = useStore()
 
 const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection?.['1'])
+
+const firstCeil: Ref = computed(() => ceils.value?.['1'])
+const secondCeil: Ref = computed(() => ceils.value?.['2'])
 </script>
 
 <style scoped lang="scss">

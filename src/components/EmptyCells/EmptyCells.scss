@@ -2,25 +2,20 @@
 @import '../../assets/scss/mixins';
 
 .cells__empty {
-  background: $bg-base;
+  @include flexbox(column, center, center);
+  gap: 16px;
   padding: 16px;
   width: 100%;
   height: 340px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
   border-radius: 0 0 16px 16px;
+  background: $bg-base;
 
   &__img {
-    background: #F5F7F8;
+    @include flex-center;
     width: 64px;
     height: 64px;
     border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: $bg-base-secondary;
 
     & svg {
       width: 32px;
@@ -29,9 +24,6 @@
   }
 
   & span {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 140%;
-    color: #576175;
+    @include get-font(14px, 500, 140%, $text-base-secondary);
   }
 }

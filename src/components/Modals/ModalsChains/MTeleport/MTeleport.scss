@@ -1,18 +1,18 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+
 .modal-teleport {
-  width: 480px;
-  background: #fff;
-  border-radius: 16px;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flexbox(column, flex-start, center);
   gap: 16px;
+  padding: 8px;
+  width: 480px;
+  background: $bg-base;
+  border-radius: 16px;
 
   &__head {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
+    @include flexbox(column);
     gap: 4px;
+    padding: 16px;
   }
 
   & > button {
@@ -21,22 +21,15 @@
 
 
   &__text {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 140%;
-    color: #576175;
+    @include get-font(14px, 500, 140%);
+    color: $text-base-secondary;
     text-align: center;
   }
 
   &__btn {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 140%;
-    color: #1A86E5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center;
     gap: 8px;
+    @include get-font(14px, 500, 140%, $text-link);
   }
 
   &__block {
@@ -51,10 +44,10 @@
 
 @media (max-width: 992px) {
   .modal-teleport {
-    width: 100%;
-    border-radius: 16px 16px 0 0;
     gap: 12px;
     padding: 0 8px 8px;
+    width: 100%;
+    border-radius: 16px 16px 0 0;
 
     &__head {
       padding: 12px;

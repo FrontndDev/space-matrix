@@ -21,6 +21,6 @@ const props = defineProps({
 
 </script>
 
-<style scoped>
-@import "_LevelMatrix.scss";
+<style scoped lang="scss">
+@import "levelMatrix";
 </style>

@@ -47,44 +47,5 @@ const boost = [
 </script>
 
 <style scoped lang="scss">
-.expose-bonus {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  width: 100%;
-  background: #F5F7F8;
-  border-radius: 16px;
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 120%;
-  padding: 8px 10px;
-
-  &__icon {
-    width: 16px;
-    height: 16px;
-  }
-  
-  &__car {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  &__boost {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    & span {
-      padding: 0 4px;
-    }
-
-    & span:not(:last-child) {
-      border-right: 1px solid #E0E5EB;
-
-    }
-  }
-}
+@import "exposeBonusItem";
 </style>

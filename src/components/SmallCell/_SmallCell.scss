@@ -1,58 +1,52 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
 .small-cell {
-  position: relative;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
+  @include flexbox(column);
   gap: 12px;
+  padding: 12px;
+  position: relative;
 
   &__avatar {
-    position: relative;
     border-radius: 16px;
     background: lightgray 50% / cover no-repeat;
+    position: relative;
 
     & > img {
       border-radius: 16px;
     }
 
     &.chains-boost {
-      border: 2px solid #B043FF;
+      border: 2px solid $border-violet;
 
       & > img {
-        border: 2px solid #fff;
+        border: 2px solid $border-base;
       }
     }
 
     &.teleport {
-      border: 2px solid #F19C18;
+      border: 2px solid $border-orange;
 
       & > img {
-        border: 2px solid #fff;
+        border: 2px solid $border-base;
       }
     }
   }
 
   &__info {
-    display: flex;
-    flex-direction: column;
+    @include flexbox(column);
     gap: 8px;
   }
 
   &__name {
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 130%;
+    @include get-font(12px, 500, 130%);
     text-align: center;
   }
 
   &__id {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center;
     gap: 4px;
-    color: #7B879D;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 130%;
+    @include get-font(12px, 500, 130%, $text-base-light);
   }
 
   &.boost .partner-type, {

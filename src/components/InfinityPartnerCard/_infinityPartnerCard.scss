@@ -20,13 +20,10 @@
   }
 
   &.m-matrix-partner .infinity-partner-card__partners {
+    @include flexbox(column, center, center);
+    margin-top: 16px;
     padding: 12px;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 16px;
     width: 100%;
   }
 
@@ -34,9 +31,7 @@
     padding: 18px 12px;
 
     &-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      @include flexbox(column, flex-start, center);
     }
 
     &-count {
@@ -95,15 +90,11 @@
     }
 
     &__partners {
+      @include flexbox(column, flex-start, center);
       padding: 12px 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
 
       &-block {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+        @include flexbox(row, flex-start, center);
         gap: 8px;
       }
 

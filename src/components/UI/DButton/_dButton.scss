@@ -26,11 +26,9 @@
   }
 
   &__time {
-    @include get-font(12px, 500, 16px, $text-base-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center;
     gap: 4px;
+    @include get-font(12px, 500, 16px, $text-base-light);
   }
 
   &.active {
@@ -58,20 +56,20 @@
   }
 
   &.time {
-    border: 1px solid #FF3A30;
+    border: 1px solid $border-red;
     animation: time 2s linear infinite;
   }
 }
 
 @keyframes time {
   50% {
-    background: #fff;
+    background: $bg-base;
   }
   51% {
-    background: #FFF1F0;
+    background: $bg-red-light;
   }
   100% {
-    background: #FFF1F0;
+    background: $bg-red-light;
   }
 }
 

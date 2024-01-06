@@ -1,53 +1,50 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+
 .change-partner {
-  background: #fff;
-  border-radius: 16px;
   width: 720px;
+  border-radius: 16px;
+  background: $bg-base;
 
   &__content {
-    border-bottom: 1px solid #EFF2F5;
-    display: flex;
-    flex-direction: column;
+    @include flexbox(column);
+    border-bottom: 1px solid $border-base-light;
   }
 
   &__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    @include flexbox(column, space-between, center);
 
     & button {
-      width: 50%;
       margin: 24px 0;
+      width: 50%;
     }
   }
 
   &__overflow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
     height: 364px;
     box-sizing: border-box;
-    display: grid;
-    gap: 24px;
-    grid-template-columns: repeat(4, 1fr);
     overflow-y: auto;
     overflow-x: hidden;
-    margin-bottom: 24px;
 
     &.less-four {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include flex-center;
       padding: 24px 8px;
     }
   }
 
   &__block {
-    border: 1px solid #E0E5EB;
-    height: fit-content;
-    border-radius: 16px;
     width: 144px;
+    height: fit-content;
+    border: 1px solid $border-base-bright;
+    border-radius: 16px;
 
     &.active {
-      border: 1px solid #B043FF;
-      background: #F5F7F8;
+      border: 1px solid $border-violet;
+      background: $bg-base-secondary;
     }
   }
 }
@@ -58,7 +55,6 @@
     width: 100%;
 
     &__container {
-
       & button {
         width: calc(100% - 32px);
         margin: 16px;
@@ -66,18 +62,16 @@
     }
 
     &__overflow {
-      width: 100%;
-      padding: 24px;
-      height: calc(90vh - 166px);
-      gap: 16px 24px;
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
       justify-items: center;
+      gap: 16px 24px;
       margin-bottom: 0;
+      padding: 24px;
+      width: 100%;
+      height: calc(90vh - 166px);
 
       &.less-four {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flex-center;
         padding: 24px 8px;
       }
     }

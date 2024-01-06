@@ -30,23 +30,5 @@ const props = defineProps({
 </script>
 
 <style scoped lang="scss">
-.chain-type-button {
-  color: #1A86E5;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 130%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-
-  & svg {
-    width: 16px;
-    height: auto;
-  }
-}
-
-.arrow-rotate {
-  transform: rotate(180deg);
-}
+@import "chainTypeButton";
 </style>

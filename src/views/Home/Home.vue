@@ -8,7 +8,6 @@
           <template v-if="store.state.viewLastOwn">
             <div class="home__matrices__inner" v-if="!store.state.viewLastOwn?.ctaText">
               <Savings
-                  class="border-right"
                   @open-m-matrix-partner="openModalPartner(2)"
                   @open-m-add-partner="openModalPartner(3)"
               />

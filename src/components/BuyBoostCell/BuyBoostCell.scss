@@ -16,35 +16,31 @@
     border-radius: 28px;
     cursor: pointer;
     position: relative;
-    background: #F5EDF7;
+    background: $bg-violet-light;
 
     & > svg {
       width: 65px;
       height: auto;
 
       & > path {
-        fill: #A33FBC;
+        fill: $text-violet;
       }
     }
   }
 
   &__title {
-    @include get-font (14px, 500, 130%);
-    color: #0B0C0E;
     margin-top: 8px;
+    @include get-font(14px, 500, 130%, $text-base);
 
     & > span {
-      color: #A33FBC;
+      color: $text-violet;
     }
   }
 
   &__ton {
-    @include get-font (12px, 500, 130%);
-    color: #7B879D;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center;
     gap: 4px;
+    @include get-font (12px, 500, 130%, $text-base-light);
 
     & > svg {
       width: 17px;
@@ -55,8 +51,8 @@
 
 @media (max-width: 992px) {
   .buy-boost-cell {
-    width: 144px;
     padding: 12px;
+    width: 144px;
 
     &__plus {
       width: 120px;
@@ -70,7 +66,7 @@
 
     &__title {
       @include get-font (12px, 500, 130%);
-      color: #0B0C0E;
+      color: $text-base;
     }
   }
 }
