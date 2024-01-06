@@ -34,12 +34,13 @@
   }
 
   &__info {
-    @include flexbox(column);
+    @include flexbox(column, center, center);
     gap: 8px;
+    width: 100%;
   }
 
   &__name {
-    @include get-font(12px, 500, 130%);
+    @include get-font(12px, 500, 130%, $text-base);
     text-align: center;
   }
 

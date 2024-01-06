@@ -11,6 +11,7 @@
     @include flexbox(row, center, flex-start);
     gap: 40px;
     padding: 38px 16px 62px;
+    width: 100%;
   }
 }
 

@@ -42,12 +42,11 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    color: $text-base-secondary;
+    @include get-font(12px, 500, 16px, $text-base-secondary);
     cursor: pointer;
 
-
     &.active {
-      background: $bg-violet;
+      background: $bg-violet-light;
       color: $text-primary-default;
     }
   }
