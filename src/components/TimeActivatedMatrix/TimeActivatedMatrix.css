@@ -1,65 +1,77 @@
 .time-activated-matrix {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 16px;
   width: 100%;
   height: 348px;
   padding: 16px;
-  background: #fff;
   border-radius: 0 0 16px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
+  background: #FFFFFF;
 }
 .time-activated-matrix__text {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
   line-height: 142%;
+  color: #FFFFFF;
 }
 .time-activated-matrix__text > h3 {
   font-size: 20px;
   font-weight: 500;
   line-height: 160%;
+  color: #FFFFFF;
 }
 .time-activated-matrix__timer {
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 12px;
 }
 .time-activated-matrix__timer__number {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 80px;
   height: 80px;
   padding: 12px;
+  border-radius: 16px;
   background: #FFF1F0;
-  color: #FF3A30;
   font-size: 32px;
   font-weight: 700;
   line-height: 150%;
-  border-radius: 16px;
+  color: #FF3A30;
 }
 .time-activated-matrix__timer__dots {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
 }
 .time-activated-matrix__timer__dots div {
   width: 4px;
   height: 4px;
-  background: #191B2A;
   border-radius: 50%;
+  background: #191B2A;
 }
 
 .text__column {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: nowrap;
 }
 .text__column a {
   font-size: 14px;

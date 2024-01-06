@@ -1,22 +1,27 @@
 .modal-add-partner {
-  background: #fff;
-  border-radius: 16px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   gap: 16px;
+  border-radius: 16px;
+  background: #FFFFFF;
 }
 .modal-add-partner__container {
   display: flex;
-  align-items: start;
+  flex-direction: row;
   justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   gap: 40px;
   padding: 38px 16px 62px;
 }
 
 @media (max-width: 992px) {
   .modal-add-partner {
-    border-radius: 16px 16px 0 0;
     width: 100%;
+    border-radius: 16px 16px 0 0;
   }
   .modal-add-partner__container {
     gap: 24px;
