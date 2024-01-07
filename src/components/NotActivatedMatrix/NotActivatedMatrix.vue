@@ -36,7 +36,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits([''])
+const emit = defineEmits(['open-payment-form'])
 const openPaymentForm = () => {
   store.dispatch('getPaymentForm', selectedType.value.type)
   emit('open-payment-form')
@@ -46,5 +46,5 @@ const openPaymentForm = () => {
 </script>
 
 <style scoped>
-@import "NotActivatedMatrix.scss";
+@import "_notActivatedMatrix.scss";
 </style>

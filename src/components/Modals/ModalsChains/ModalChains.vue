@@ -54,5 +54,5 @@ const props = defineProps({
 </script>
 
 <style scoped>
-@import "ModalChains.scss";
+@import "_modalChains.scss";
 </style>

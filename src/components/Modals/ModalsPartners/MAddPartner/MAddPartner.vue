@@ -17,5 +17,5 @@ import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
 </script>
 
 <style scoped>
-@import "MAddPartner.scss";
+@import "_mAddPartner.scss";
 </style>

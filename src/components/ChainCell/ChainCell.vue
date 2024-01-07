@@ -66,5 +66,5 @@ const props = defineProps({
 </script>
 
 <style scoped lang="scss">
-@import "ChainCell";
+@import "chainCell";
 </style>

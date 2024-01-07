@@ -62,5 +62,5 @@ const cells = ref([
 </script>
 
 <style scoped>
-@import "MGeneralChains.scss";
+@import "_mGeneralChains.scss";
 </style>

@@ -70,5 +70,5 @@ const smallCells = ref([
 </script>
 
 <style scoped lang="scss">
-@import "BoostersCells";
+@import "boostersCells";
 </style>

@@ -23,5 +23,5 @@
 </script>
 
 <style scoped>
-@import "BuyBoostCell.scss";
+@import "_buyBoostCell.scss";
 </style>

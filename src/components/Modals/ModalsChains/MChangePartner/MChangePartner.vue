@@ -44,5 +44,5 @@ const cells = ref([
 </script>
 
 <style scoped>
-@import "MChangePartner.scss";
+@import "_mChangePartner.scss";
 </style>

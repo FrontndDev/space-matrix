@@ -90,5 +90,5 @@ const toggleExposeTabs = (id: number) => {
 </script>
 
 <style scoped>
-@import "MExposePartner.scss";
+@import "_mExposePartner.scss";
 </style>

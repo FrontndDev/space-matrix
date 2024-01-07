@@ -29,5 +29,5 @@
 </script>
 
 <style scoped>
-@import "_Pagination.scss";
+@import "_pagination.scss";
 </style>

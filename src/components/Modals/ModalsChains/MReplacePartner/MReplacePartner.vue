@@ -61,7 +61,7 @@ const cells = ref([
 </script>
 
 <style scoped>
-@import "MReplacePartner.scss";
+@import "_mReplacePartner.scss";
 
 .rotate-img {
   transform: rotate(180deg);

@@ -30,5 +30,5 @@ import ActivateButton from "../UI/ActivateButton/ActivateButton.vue";
 </script>
 
 <style scoped>
-@import "TimeActivatedMatrix.scss";
+@import "_timeActivatedMatrix.scss";
 </style>

@@ -43,5 +43,5 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "ModalsPartners";
+@import "modalsPartners";
 </style>

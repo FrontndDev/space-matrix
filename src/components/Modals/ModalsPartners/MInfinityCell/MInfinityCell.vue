@@ -32,5 +32,5 @@ import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
 </script>
 
 <style scoped>
-@import "MInfinityCell.scss";
+@import "_mInfinityCell.scss";
 </style>

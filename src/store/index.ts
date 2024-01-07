@@ -32,13 +32,11 @@ export default createStore({
         },
         getExpectationList({ commit }: { commit: Commit }, matrixType: string) {
             getExpectationList(matrixType).then(response => {
-                console.log('expectation list', response)
                 commit('SET_EXPECTATION_LIST', response.data)
             })
         },
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
             getPaymentForm(matrixType).then(response => {
-                console.log(response)
                 commit('SET_PAYMENT_FORM', response.data.html)
             })
         }

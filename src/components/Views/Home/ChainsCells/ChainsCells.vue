@@ -76,5 +76,5 @@ const cells = ref([
 </script>
 
 <style scoped>
-@import "ChainsCells.scss";
+@import "_chainsCells.scss";
 </style>

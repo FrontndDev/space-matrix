@@ -45,5 +45,5 @@ const getIconPath: Ref<string> = computed(() => {
 </script>
 
 <style scoped>
-@import "EmptyCells.scss";
+@import "_emptyCells.scss";
 </style>

@@ -53,5 +53,5 @@ const getIconPath: Ref<string> = computed(() => {
 </script>
 
 <style scoped>
-@import "ModalNotification.scss";
+@import "_modalNotification.scss";
 </style>

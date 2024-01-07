@@ -57,5 +57,5 @@ import InfinityPartnerCard from "../../../InfinityPartnerCard/InfinityPartnerCar
 </script>
 
 <style scoped>
-@import "MMatrixPartner.scss";
+@import "_mMatrixPartner.scss";
 </style>

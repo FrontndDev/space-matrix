@@ -36,5 +36,5 @@ import SmallCell from "../../../SmallCell/SmallCell.vue";
 </script>
 
 <style scoped>
-@import "MTeleport.scss";
+@import "_mTeleport.scss";
 </style>

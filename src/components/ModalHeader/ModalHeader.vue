@@ -68,5 +68,5 @@ const closeModal = () => {
 </script>
 
 <style scoped>
-@import "ModalHeader.scss";
+@import "_modalHeader.scss";
 </style>
