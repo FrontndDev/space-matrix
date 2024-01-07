@@ -14,8 +14,9 @@
       </div>
     </div>
     <ActivateButton
+        :price="props.viewLastOwn?.matrixConfig.activationPrice ?? 0"
         @click="openPaymentForm"
-        :price="props.viewLastOwn?.matrixConfig.activationPrice ?? 0"/>
+    />
   </div>
 </template>
 

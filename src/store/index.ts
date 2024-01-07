@@ -40,6 +40,13 @@ export default createStore({
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
             API.getPaymentForm(matrixType).then(response => {
                 commit('SET_PAYMENT_FORM', response.data.html)
+                console.log('response.data.html', response.data.html)
+                console.log('MY_OVERLAY', MY_OVERLAY)
+                MY_OVERLAY.active(response.data.html, () => {
+                  console.log('callback1')
+                }, () => {
+                  console.log('callback2')
+                })
             })
         },
     },

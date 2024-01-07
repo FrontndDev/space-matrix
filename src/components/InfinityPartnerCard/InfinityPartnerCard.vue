@@ -23,8 +23,8 @@
       <div class="infinity-partner-card__awards-title">Награды</div>
       <div class="infinity-partner-card__awards-bonuses infinity-partner-card__awards-bonuses_mt-8">
         <BonusItem type="ton" :values="[1000]"/>
-        <BonusItem type="auto" :values="['LBb']"/>
-        <BonusItem type="boost" :values="fillReward.boost"/>
+        <BonusItem type="auto" :values="['LB']"/>
+        <BonusItem type="boost" :values="fillReward.boost" v-if="fillReward.boost.length"/>
       </div>
     </div>
   </div>
