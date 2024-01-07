@@ -29,8 +29,8 @@ import Tabs from "../../../UI/Tabs/Tabs.vue";
 import {
   reactive,
   computed,
-  Ref,
-  ComputedRef
+  ComputedRef,
+  watch
 } from "vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 import Pagination from "../../../Pagination/Pagination.vue";
@@ -43,22 +43,22 @@ const store = useStore()
 const tabs = reactive([
   {
     id: 1,
-    name: 'Все',
-    value: 152
-  },
-  {
-    id: 2,
     name: 'Выставленные',
     value: 100
   },
   {
-    id: 3,
+    id: 2,
     name: 'В ожидании',
     value: 52
   }
 ]);
 
 const partners: ComputedRef<ExpectationList[]> = computed(() => Object.values(store.state.expectationList))
+
+watch(() => store.state.selectedType, () => {
+  store.dispatch('partners/getPartners', { matrixFilterUserId: 2969585, matrixFilterPageId: 1 })
+})
+
 
 // const smallCells = ref([
 //   { type: 'partners', state: 'exhibited', id: 0 },

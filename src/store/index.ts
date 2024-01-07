@@ -3,43 +3,45 @@ import {
     Commit,
     createStore
 } from "vuex";
+
 import {
     ListOfTypes,
     Type,
     ViewLastOwn
 } from "../interfaces/store.interface.ts";
-import {
-    getExpectationList,
-    getListOfTypes, getPaymentForm,
-    getViewLastOwn,
-} from "../api";
 
+import * as API from '../api/index.ts'
+
+import partners from "./modules/partners.ts";
 
 export default createStore({
+    modules: {
+        partners
+    },
     state: {
         selectedType: {} as Type,
         listOfTypes: {} as ListOfTypes,
         viewLastOwn: {} as ViewLastOwn,
         expectationList: [],
-        paymentForm: {},
+        paymentForm: {}
     },
     actions: {
         getListOfTypes({ commit }: ActionContext<any, any>, category = 'dream-ton') {
-            getListOfTypes(category).then(response => commit('SET_LIST_OF_TYPES', response.data))
+            API.getListOfTypes(category).then(response => commit('SET_LIST_OF_TYPES', response.data))
         },
         getViewLastOwn({ commit }: ActionContext<any, any>, matrixTypeOrId: string | number) {
-            getViewLastOwn(matrixTypeOrId).then(response => commit('SET_VIEW_LAST_OWN', response.data))
+            API.getViewLastOwn(matrixTypeOrId).then(response => commit('SET_VIEW_LAST_OWN', response.data))
         },
         getExpectationList({ commit }: { commit: Commit }, matrixType: string) {
-            getExpectationList(matrixType).then(response => {
+            API.getExpectationList(matrixType).then(response => {
                 commit('SET_EXPECTATION_LIST', response.data)
             })
         },
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
-            getPaymentForm(matrixType).then(response => {
+            API.getPaymentForm(matrixType).then(response => {
                 commit('SET_PAYMENT_FORM', response.data.html)
             })
-        }
+        },
     },
     mutations: {
         SET_LIST_OF_TYPES(state: any, list: ListOfTypes) {
@@ -56,7 +58,7 @@ export default createStore({
         },
         SET_PAYMENT_FORM(state: any, form) {
             state.paymentForm = form
-        }
+        },
     },
     getters: {
 

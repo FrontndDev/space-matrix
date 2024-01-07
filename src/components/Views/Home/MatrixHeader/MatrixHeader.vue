@@ -23,7 +23,7 @@ import DButton from "../../../UI/DButton/DButton.vue";
 
 import {
   computed,
-  onBeforeMount, onMounted,
+  onMounted,
   Ref,
   watch,
 } from "vue";

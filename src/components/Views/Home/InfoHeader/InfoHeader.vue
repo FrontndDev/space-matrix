@@ -5,7 +5,7 @@
         @open-cells="id => $emit('open-cells', id)"
     />
     <div v-if="props.infoHeader === 1" class="header__selects">
-      <Select :items="selectItemsPartners"/>
+      <Select :items="selectItemsPartners" v-if="pagePartnerID !== 2"/>
       <Select :items="selectItemsPartners"/>
     </div>
     <div v-if="props.infoHeader === 2" class="header__selects">
@@ -24,9 +24,10 @@
 
 <script setup lang="ts">
 import Tabs from "../../../UI/Tabs/Tabs.vue";
-import { reactive } from "vue";
+import {computed, reactive} from "vue";
 import Select from "../../../UI/Select/Select.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
+import {useStore} from "vuex";
 
 const props = defineProps({
   infoHeader: {
@@ -34,6 +35,10 @@ const props = defineProps({
     default: 1
   }
 })
+
+const store = useStore()
+
+const pagePartnerID = computed(() => store.state.partners.pagePartnerID)
 
 const tabs = reactive([
   {
@@ -55,20 +60,44 @@ const tabs = reactive([
 
 const selectItemsPartners = reactive([
   {
+    id: 0,
+    name: 'Вся структура',
+  },
+  {
     id: 1,
-    name: 'Мои партнеры',
+    name: '1 линия'
   },
   {
     id: 2,
-    name: 'Значение 1'
+    name: '2 линия'
   },
   {
     id: 3,
-    name: 'Значение 2'
+    name: '3 линия'
   },
   {
     id: 4,
-    name: 'Значение 3'
+    name: '4 линия'
+  },
+  {
+    id: 5,
+    name: '5 линия'
+  },
+  {
+    id: 6,
+    name: '6 линия'
+  },
+  {
+    id: 7,
+    name: '7 линия'
+  },
+  {
+    id: 8,
+    name: '8 линия'
+  },
+  {
+    id: 9,
+    name: '9 линия'
   },
 ]);
 

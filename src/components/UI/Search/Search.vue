@@ -9,13 +9,12 @@
       </svg>
     </div>
 
-    <InputSearch search-desktop @hide-input="showInput = false" v-if="showInput"/>
-    <InputSearch class="search-mobile"/>
+<!--    <InputSearch search-desktop @hide-input="showInput = false" v-if="showInput"/>-->
+<!--    <InputSearch class="search-mobile"/>-->
   </div>
 </template>
 
 <script setup lang="ts">
-import InputSearch from "../InputSearch/InputSearch.vue";
 import { ref } from "vue";
 
 const showInput = ref(false);

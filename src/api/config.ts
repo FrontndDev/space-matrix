@@ -34,7 +34,7 @@ export async function putAsync(url: string, data: never[], checkError = true) {
     return undefined
 }
 
-export async function postAsync(url: string, data = [], checkError = true) {
+export async function postAsync(url: string, data = {}, checkError = true) {
     try {
         let response = await axios.post(BASE_URL + url, data, { headers: setGlobalConfig(localStorage.getItem('token')) })
         // console.log(response)

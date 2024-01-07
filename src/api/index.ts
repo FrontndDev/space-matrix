@@ -1,4 +1,4 @@
-import { getAsync } from "./config.ts";
+import { getAsync, postAsync } from "./config.ts";
 
 
 export function setDataToLS(key: string, data: any) {
@@ -23,6 +23,10 @@ export async function getViewLastOwn(matrixTypeOrId: string | number) {
 
 export async function getExpectationList(matrixType: string) {
     return getAsync(`/api/matrix/get-raw-partners/${matrixType}`)
+}
+
+export async function filterOfActivatedMatrix(matrixType: string, matrixFilterUserId: number, matrixFilterPageId: number){
+    return postAsync(`/api/matrix/get-clones/${matrixType}/${matrixFilterUserId}/${matrixFilterPageId}`,  {filter: {level: 1}})
 }
 
 export async function getPaymentForm(matrixType: string) {

@@ -9,9 +9,9 @@
         @tab="selectedTab => tab = selectedTab"
         @click="clickTab(item.id)"
     />
-    <Search
-        v-if="cells"
-    />
+<!--    <Search-->
+<!--        v-if="cells"-->
+<!--    />-->
   </div>
 </template>
 
@@ -22,7 +22,7 @@ import {
   Ref,
   ref,
 } from "vue";
-import Search from "../Search/Search.vue";
+import {useStore} from "vuex";
 
 const props = defineProps({
   type: {
@@ -41,12 +41,15 @@ const props = defineProps({
 
 let tab: Ref<any> = ref(null);
 
+const store = useStore()
+
 onBeforeMount(() => tab.value = props.tabs[0])
 
 const emit = defineEmits(['open-cells', 'toggle-expose-tabs'])
 const clickTab = (id: number) => {
   emit('open-cells', id)
   emit('toggle-expose-tabs', id)
+  store.commit('partners/CHANGE_PAGE_PARTNER', id)
 }
 </script>
 
