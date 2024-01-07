@@ -22,7 +22,6 @@ export default createStore({
         selectedType: {} as Type,
         listOfTypes: {} as ListOfTypes,
         viewLastOwn: {} as ViewLastOwn,
-        expectationList: [],
         paymentForm: {}
     },
     actions: {
@@ -31,11 +30,6 @@ export default createStore({
         },
         getViewLastOwn({ commit }: ActionContext<any, any>, matrixTypeOrId: string | number) {
             API.getViewLastOwn(matrixTypeOrId).then(response => commit('SET_VIEW_LAST_OWN', response.data))
-        },
-        getExpectationList({ commit }: { commit: Commit }, matrixType: string) {
-            API.getExpectationList(matrixType).then(response => {
-                commit('SET_EXPECTATION_LIST', response.data)
-            })
         },
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
             API.getPaymentForm(matrixType).then(response => {
@@ -59,9 +53,6 @@ export default createStore({
         },
         SET_SELECTED_TYPE(state: any, type: Type | undefined) {
             state.selectedType = type
-        },
-        SET_EXPECTATION_LIST(state: any, list) {
-            state.expectationList = list
         },
         SET_PAYMENT_FORM(state: any, form) {
             state.paymentForm = form

@@ -9,7 +9,7 @@
     </div>
     <div class="partners-cells__container">
       <SmallCell
-          v-for="(cell, idx) in partners"
+          v-for="(cell, idx) in partners?.list"
           :key="idx"
           :cell="cell"
       />
@@ -21,6 +21,7 @@
       :cellsType="'partners'"
       v-if="partners.length === 0"
   />
+
   <Pagination v-if="partners.length !== 0" />
 </template>
 
@@ -36,7 +37,7 @@ import SmallCell from "../../../SmallCell/SmallCell.vue";
 import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 import { useStore } from "vuex";
-import { ExpectationList } from "../../../../interfaces/store.interface.ts";
+import { IPartners } from "../../../../interfaces/partners.interface.ts";
 
 const store = useStore()
 
@@ -53,10 +54,29 @@ const tabs = reactive([
   }
 ]);
 
-const partners: ComputedRef<ExpectationList[]> = computed(() => Object.values(store.state.expectationList))
+const partners: ComputedRef<IPartners> = computed(() => store.state.partners.exposedPartners)
 
 watch(() => store.state.selectedType, () => {
-  store.dispatch('partners/getPartners', { matrixFilterUserId: 2969585, matrixFilterPageId: 1 })
+  store.dispatch('partners/getExposedPartners',
+      {
+        matrixFilterUserId: 2969585,
+        matrixFilterPageId: 1,
+      }
+  )
+
+  store.dispatch('partners/getPendingPartners',
+      {
+        matrixFilterUserId: 2969585,
+        matrixFilterPageId: 1,
+      }
+  )
+
+  store.dispatch('partners/getPendingBoosters',
+      {
+        matrixFilterUserId: 2969585,
+        matrixFilterPageId: 1,
+      }
+  )
 })
 
 

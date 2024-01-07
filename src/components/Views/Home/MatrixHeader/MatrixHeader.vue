@@ -50,15 +50,12 @@ const selectDButton = (type: Type) => {
   }
   store.commit('SET_SELECTED_TYPE', type)
   store.dispatch('getViewLastOwn', type.type)
-  store.dispatch('getExpectationList', type.type)
-  // getData(type, type.type)
 }
 
 watch(() => listOfTypes.value.types?.length, () => {
   // getData()
   store.commit('SET_SELECTED_TYPE', listOfTypes.value.types[0])
   store.dispatch('getViewLastOwn', selectedType.value.type)
-  store.dispatch('getExpectationList', selectedType.value.type)
 })
 
 onMounted(() => {

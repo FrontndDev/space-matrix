@@ -32,16 +32,11 @@ import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 const tabs = reactive([
   {
     id: 1,
-    name: 'Все',
-    value: 162
-  },
-  {
-    id: 2,
     name: 'Выставленные',
     value: 110
   },
   {
-    id: 3,
+    id: 2,
     name: 'В ожидании',
     value: 52
   }

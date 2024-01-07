@@ -36,12 +36,12 @@
 import PartnerType from "../PartnerCell/PartnerType/PartnerType.vue";
 import LevelMatrix from "../UI/LevelMatrix/LevelMatrix.vue";
 import SmallCellType from "../UI/SmallCellType/SmallCellType.vue";
-import { ExpectationList } from "../../interfaces/store.interface.ts";
 import { PropType } from "vue";
+import { IPartnersList } from "../../interfaces/partners.interface.ts";
 
 const props = defineProps({
   cell: {
-    type: Object as PropType<ExpectationList>,
+    type: Object as PropType<IPartnersList>,
     required: true,
   },
   cellType: {
