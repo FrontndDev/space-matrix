@@ -28,7 +28,14 @@ export default createStore({
     },
     actions: {
         getListOfTypes({ commit }: ActionContext<any, any>, category = 'dream-ton') {
-            API.getListOfTypes(category).then(response => commit('SET_LIST_OF_TYPES', response.data))
+            const key = `/api/matrix/list-of-types/${category}`
+            const data = API.getDataFromLS(key)
+            if (data) commit('SET_LIST_OF_TYPES', data)
+
+            API.getListOfTypes(category).then(response => {
+                commit('SET_LIST_OF_TYPES', response.data)
+                API.setDataToLS(key, response.data)
+            })
         },
         getViewLastOwn({ commit }: ActionContext<any, any>, matrixTypeOrId: string | number) {
             API.getViewLastOwn(matrixTypeOrId).then(response => commit('SET_VIEW_LAST_OWN', response.data))
