@@ -26,7 +26,7 @@
   </div>
   <EmptyCells
       :cellsType="'partners'"
-      v-if="partnersExposed.count === 0"
+      v-if="partnersExposed.list?.length === 0 && pagePartnerID === 1 || partnersPending.list?.length === 0 && pagePartnerID === 2"
   />
 
   <Pagination v-if="partnersExposed.count !== 0" />

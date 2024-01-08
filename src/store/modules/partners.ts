@@ -15,13 +15,13 @@ export default {
   actions: {
     getExposedPartners(
       { commit, rootState }: { commit: Commit; rootState: any },
-      { matrixFilterUserId, matrixFilterPageId }: IGetPendingBoostersParams
+      { matrixFilterUserId, matrixFilterPageId, filter }: IGetPendingBoostersParams,
     ) {
       API.filterOfActivatedMatrix({
         matrixType: rootState.selectedType.type,
         matrixFilterUserId,
         matrixFilterPageId,
-        filter: { level: 0 }
+        filter: { level: filter }
       }
     ).then(response => {
         console.log(response.data)
