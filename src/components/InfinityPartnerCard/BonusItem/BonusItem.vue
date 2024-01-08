@@ -55,11 +55,11 @@ const getWidth: Ref<string> = computed(() => {
 
 const getIconPath: Ref<string> = computed(() => {
   switch (props.type) {
-    case 'ton':
+    case 'cashout':
       return TonIcon;
     case 'boost':
       return BoostIcon;
-    case 'auto':
+    case 'custom':
       return AutoIcon;
     default:
       return TonIcon;

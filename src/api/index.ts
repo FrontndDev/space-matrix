@@ -25,12 +25,16 @@ export async function getPaymentForm(matrixType: string) {
   return getAsync(`/api/matrix/payment-form/${matrixType}`)
 }
 
+export async function getListOfInfinity(parentId: number) {
+  return getAsync(`/api/matrix/list-of-infinity/${parentId}`)
+}
+
+
 // POST
 
 export async function filterOfActivatedMatrix({ matrixType, matrixFilterUserId, matrixFilterPageId, filter }) {
   return postAsync(`/api/matrix/get-clones/${matrixType}/${matrixFilterUserId}/${matrixFilterPageId}`, { filter })
 }
-
 
 
 

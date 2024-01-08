@@ -22,8 +22,8 @@
     <div v-if="props.modal !== 'm-matrix-partner'" class="infinity-partner-card__awards">
       <div class="infinity-partner-card__awards-title">Награды</div>
       <div class="infinity-partner-card__awards-bonuses infinity-partner-card__awards-bonuses_mt-8">
-        <BonusItem type="ton" :values="[1000]"/>
-        <BonusItem type="auto" :values="['LB']"/>
+        <BonusItem type="cashout" :values="[1000]"/>
+        <BonusItem type="custom" :values="['LB']"/>
         <BonusItem type="boost" :values="fillReward.boost" v-if="fillReward.boost.length"/>
       </div>
     </div>
@@ -67,7 +67,8 @@ const fillReward = computed(() => {
   return {
     'boost': getFilteredRewards('boost')
         .map(reward => types.value.find(type => type.type === reward.value?.type)?.title) as string[],
-    'freeze': getFilteredRewards('freeze'),
+    'cashout': getFilteredRewards('cashout').map(reward => reward.value.amount),
+    'custom': getFilteredRewards('custom').map(reward => reward.value.amount)
   }
 })
 </script>
