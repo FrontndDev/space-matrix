@@ -63,12 +63,13 @@ const types: ComputedRef<Type[]> = computed(() => store.state.listOfTypes.types)
 
 const fillReward = computed(() => {
   const getFilteredRewards = (event: string) => props.ceil?.fillRevard.filter(reward => reward.event === event)
+  const getReward = (event: string) => props.ceil?.fillRevard.find(reward => reward.event === event)
 
   return {
     'boost': getFilteredRewards('boost')
         .map(reward => types.value.find(type => type.type === reward.value?.type)?.title) as string[],
-    'cashout': getFilteredRewards('cashout').map(reward => reward.value.amount),
-    'custom': getFilteredRewards('custom').map(reward => reward.value.amount)
+    'cashout': getReward('cashout')?.value.amount,
+    'custom': getReward('custom')?.value.amount
   }
 })
 </script>

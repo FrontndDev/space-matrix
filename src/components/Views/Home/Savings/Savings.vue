@@ -3,6 +3,7 @@
     <h3>Накопительные</h3>
 
     <div class="savings__partners savings__partners_mt-16">
+      <!--   FIRST CEIL    -->
       <PartnerCell
           type="cumulative"
           @open-m-matrix-partner="emit('open-m-matrix-partner')"
@@ -10,9 +11,12 @@
       />
       <AddPartnerCell
           type="cumulative"
+          :ceil="firstCeil"
           @open-m-add-partner="emit('open-m-add-partner')"
           v-if="!firstCeil?.matrix"
       />
+
+      <!--   SECOND CEIL    -->
       <PartnerCell
           type="cumulative"
           @open-m-matrix-partner="emit('open-m-matrix-partner')"
@@ -20,6 +24,7 @@
       />
       <AddPartnerCell
           :type="!firstCeil?.matrix ? 'disable' : 'cumulative'"
+          :ceil="secondCeil"
           @open-m-add-partner="emit('open-m-add-partner')"
           v-if="!secondCeil?.matrix"
       />

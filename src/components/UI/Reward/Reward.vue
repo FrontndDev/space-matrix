@@ -1,13 +1,13 @@
 <template>
-  <div class="reward" :class="props.includeCar">
-    <div class="reward__value">
+  <div class="reward" :class="{ 'include-car': !props.custom }">
+    <div class="reward__value" v-if="props.freeze">
       <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
         <path d="M8.04776 12.9728C7.91075 12.894 7.7911 12.7763 7.70597 12.6197L3.51746 4.91596C3.18871 4.31129 3.62495 3.57406 4.31149 3.57406H8.04776V12.9728Z" fill="white"/>
         <path d="M13.4825 4.91596L9.29403 12.6197C9.20889 12.7763 9.08925 12.894 8.95223 12.9728V3.57406H12.6885C13.3751 3.57406 13.8113 4.31129 13.4825 4.91596Z" fill="white"/>
       </svg>
-      170
+      {{ props.freeze }}
     </div>
-    <div class="reward__car">
+    <div class="reward__car" v-if="props.custom">
       10
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="#ffffff">
         <path d="M3.41185 8.49252L2.42813 7.39332C2.4076 7.37028 2.38136 7.35305 2.35206 7.34337C2.32276 7.33369 2.29142 7.3319 2.26121 7.33818C2.19972 7.35093 2.14969 7.39522 2.12952 7.45483L1.8787 8.20077C1.86847 8.23115 1.86673 8.26375 1.87366 8.29505C1.88059 8.32635 1.89593 8.35517 1.91802 8.37839L2.4875 8.9791C2.51128 9.00416 2.54191 9.02167 2.57557 9.02945C2.60923 9.03724 2.64444 9.03496 2.67681 9.02289L3.34189 8.77544C3.36881 8.76542 3.39288 8.74899 3.412 8.72756C3.43112 8.70612 3.44473 8.68035 3.45162 8.65246C3.45852 8.62458 3.4585 8.59544 3.45157 8.56756C3.44464 8.53969 3.431 8.51393 3.41185 8.49252Z" fill="#ffffff"/>
@@ -20,10 +20,17 @@
 </template>
 
 <script setup lang="ts">
+
+import { PropType } from "vue";
+
 const props = defineProps({
-  includeCar: {
-    type: String,
-    default: ''
+  freeze: {
+    type: Number,
+    required: true,
+  },
+  custom: {
+    type: Object as PropType<any>,
+    required: true,
   }
 })
 </script>

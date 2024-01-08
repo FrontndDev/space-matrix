@@ -5,6 +5,7 @@
     <div class="endless__menu endless__menu_mt-16">
       <AddPartnerCell
           type="infinity"
+          :ceil="thirdCeil"
       />
       <InfinityPartnerCard
           :ceil="thirdCeil"

@@ -7,7 +7,8 @@ export default {
       exposedPartners: [],
       pendingPartners: [],
       pagePartnerID: 1,
-      pendingBoosters: []
+      pendingBoosters: [],
+      infinityPartners: [],
     }
   },
   actions: {
@@ -50,6 +51,12 @@ export default {
         commit('SET_PENDING_BOOSTERS', response.data)
       })
     },
+    getInfinityPartners({ commit }: any, parentId) {
+      API.getListOfInfinity(parentId).then(response => {
+        console.log('getInfinityPartners', response.data)
+        commit('SET_INFINITY_PARTNERS', response.data)
+      })
+    }
   },
   mutations: {
     SET_EXPOSED_PARTNERS(state: any, exposedPartners) {
@@ -63,6 +70,9 @@ export default {
     },
     CHANGE_PAGE_PARTNER(state: any, id: number) {
       state.pagePartnerID = id
+    },
+    SET_INFINITY_PARTNERS(state: any, infinityPartners) {
+      state.infinityPartners = infinityPartners
     }
   },
   getters: {
