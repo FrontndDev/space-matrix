@@ -28,6 +28,7 @@ import AutoIcon from '../../../assets/svg/bonuses/auto.svg';
 
 import {
   computed,
+  PropType,
   Ref
 } from "vue";
 
@@ -38,7 +39,7 @@ const props = defineProps({
     //ton, boost, auto
   },
   values: {
-    type: Array<string | number>,
+    type: Array as PropType<(string | number)[]>,
     required: true,
   }
 });

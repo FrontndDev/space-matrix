@@ -23,7 +23,7 @@
 
     <div v-if="props.type == 'disable'" class="add-partner-cell__subtitle">Заполните левую ячейку</div>
     <div v-else-if="props.type == 'loading'" class="add-partner-cell__subtitle">Идет загрузка...</div>
-    <div v-else class="add-partner-cell__subtitle">Доступно (1)</div>
+    <div v-else class="add-partner-cell__subtitle">Доступно ({{ partnersCount }})</div>
 
     <CellType
         :size="props.size"
@@ -38,9 +38,11 @@ import Reward from "../UI/Reward/Reward.vue";
 import CellType from "../UI/CellType/CellType.vue";
 import {
   computed,
+  ComputedRef,
   PropType
 } from "vue";
 import { Ceil } from "../../interfaces/store.interface.ts";
+import { useStore } from "vuex";
 
 const props = defineProps({
   ceil: {
@@ -64,6 +66,8 @@ const props = defineProps({
 
 const emit = defineEmits(['open-m-add-partner'])
 
+const store = useStore()
+
 const openMAddPartner = () => {
   if (props.type === 'disable') return
   emit('open-m-add-partner')
@@ -77,6 +81,8 @@ const fillReward = computed(() => {
     'freeze': getFilteredRewards('freeze')?.value.amount
   }
 })
+
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 </script>
 
 <style scoped lang="scss">

@@ -65,7 +65,7 @@ export default {
     CHANGE_PAGE_PARTNER(state: any, id: number) {
       state.pagePartnerID = id
     },
-    SET_INFINITY_PARTNERS(state: any, infinityPartners) {
+    SET_INFINITY_PARTNERS(state: any, infinityPartners: any) {
       state.infinityPartners = infinityPartners
     }
   },

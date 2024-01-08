@@ -17,7 +17,7 @@
           <div v-for="cell in cells" class="replace-partner__cell">
             <div class="replace-partner__block">
               <div class="replace-partner__level">D1</div>
-              <SmallCell :type="cell.type" />
+              <SmallCell :type="cell.type" :cell="firstCeil"/>
               <div class="replace-partner__change-partner">
                 <button
                     @click="$emit('open-change-partner')"
@@ -49,7 +49,13 @@ import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
-import {ref} from "vue";
+import {
+  computed,
+  Ref,
+  ref
+} from "vue";
+import { useStore } from "vuex";
+import { Ceils } from "../../../../interfaces/store.interface.ts";
 
 const cells = ref([
   { type: 'chains-partner' , id: 0},
@@ -58,6 +64,12 @@ const cells = ref([
   { type: 'chains-boost' , id: 3},
   { type: 'chains-boost' , id: 4},
 ])
+
+const store = useStore()
+
+const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection?.['1'])
+
+const firstCeil: Ref = computed(() => ceils.value?.['1'])
 </script>
 
 <style scoped>

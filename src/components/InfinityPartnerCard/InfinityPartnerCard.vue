@@ -22,8 +22,8 @@
     <div v-if="props.modal !== 'm-matrix-partner'" class="infinity-partner-card__awards">
       <div class="infinity-partner-card__awards-title">Награды</div>
       <div class="infinity-partner-card__awards-bonuses infinity-partner-card__awards-bonuses_mt-8">
-        <BonusItem type="cashout" :values="fillReward.cashout" v-if="fillReward.cashout"/>
-        <BonusItem type="custom" :values="fillReward.custom" v-if="fillReward.custom"/>
+        <BonusItem type="cashout" :values="fillReward.cashout" v-if="fillReward.cashout.length"/>
+        <BonusItem type="custom" :values="fillReward.custom" v-if="fillReward.custom.length"/>
         <BonusItem type="boost" :values="fillReward.boost" v-if="fillReward.boost.length"/>
       </div>
     </div>
@@ -63,13 +63,12 @@ const types: ComputedRef<Type[]> = computed(() => store.state.listOfTypes.types)
 
 const fillReward = computed(() => {
   const getFilteredRewards = (event: string) => props.ceil?.fillRevard.filter(reward => reward.event === event)
-  const getReward = (event: string) => props.ceil?.fillRevard.find(reward => reward.event === event)
 
   return {
     'boost': getFilteredRewards('boost')
         .map(reward => types.value.find(type => type.type === reward.value?.type)?.title) as string[],
-    'cashout': getReward('cashout')?.value.amount,
-    'custom': getReward('custom')?.value.amount
+    'cashout': getFilteredRewards('cashout').map(reward => reward.value.amount) as number[],
+    'custom': getFilteredRewards('custom').map(reward => reward.value.amount) as number[],
   }
 })
 </script>

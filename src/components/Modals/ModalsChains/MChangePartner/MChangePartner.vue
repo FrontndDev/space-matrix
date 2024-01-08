@@ -14,7 +14,7 @@
             :class="{'less-four': cells.length < 4}"
         >
           <div v-for="cell in cells" class="change-partner__block">
-            <SmallCell :type="cell.type" />
+            <SmallCell :type="cell.type" :cell="firstCeil"/>
           </div>
         </div>
         <ChainsButton
@@ -33,7 +33,13 @@ import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
-import {ref} from "vue";
+import {
+  computed,
+  Ref,
+  ref
+} from "vue";
+import { useStore } from "vuex";
+import { Ceils } from "../../../../interfaces/store.interface.ts";
 
 const cells = ref([
   { type: 'chains-partner' , id: 0},
@@ -41,6 +47,12 @@ const cells = ref([
   { type: 'chains-boost' , id: 2},
   { type: 'chains-boost' , id: 3},
 ])
+
+const store = useStore()
+
+const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection?.['1'])
+
+const firstCeil: Ref = computed(() => ceils.value?.['1'])
 </script>
 
 <style scoped>

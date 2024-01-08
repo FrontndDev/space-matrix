@@ -9,6 +9,7 @@
     <div class="boosters-cells__container">
       <SmallCell
           v-for="(cell, idx) in boostersPending?.list"
+          :cell="cell"
           :key="idx"
       />
     </div>

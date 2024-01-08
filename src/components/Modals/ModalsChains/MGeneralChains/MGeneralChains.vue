@@ -50,7 +50,7 @@
 <script setup lang="ts">
 import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
-import SmallCell from "../../../SmallCell/SmallCell.vue";
+// import SmallCell from "../../../SmallCell/SmallCell.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
 import {ref} from "vue";
 

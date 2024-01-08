@@ -16,7 +16,7 @@
       </button>
     </div>
     <div class="modal-teleport__block">
-      <SmallCell type="teleport" />
+      <SmallCell type="teleport" :cell="firstCeil"/>
     </div>
     <ChainsButton>
       <span>Телепортировать</span>
@@ -29,10 +29,21 @@
 </template>
 
 <script setup lang="ts">
-
 import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
+import { useStore } from "vuex";
+import {
+  computed,
+  Ref
+} from "vue";
+import { Ceils } from "../../../../interfaces/store.interface.ts";
+
+const store = useStore()
+
+const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection?.['1'])
+
+const firstCeil: Ref = computed(() => ceils.value?.['1'])
 </script>
 
 <style scoped>
