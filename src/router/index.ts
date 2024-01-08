@@ -4,16 +4,23 @@ import {
 } from "vue-router";
 import Home from "../views/Home/Home.vue";
 
+const baseUrl = import.meta.env.VITE_VUE_APP_BASE_ROUTER_URL
+
 const routes = [
     {
-        path: '/:type?',
-        component: Home,
+        path: baseUrl,
+        children: [
+            {
+                path: '/:type?',
+                component: Home,
+            },
+            // {
+            //     name: 'NotFound',
+            //     path: ':pathMatch(.*)*',
+            //     component: NotFound
+            // },
+        ]
     },
-    // {
-    //     name: 'NotFound',
-    //     path: ':pathMatch(.*)*',
-    //     component: NotFound
-    // },
 ]
 
 const router = createRouter({

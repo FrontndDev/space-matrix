@@ -40,13 +40,7 @@ const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
 const selectedType: Ref<Type> = computed(() => store.state.selectedType)
 
 const store = useStore()
-const route = useRoute();
-
-// const getData = (listOfType, type: any) => {
-//   store.commit('SET_SELECTED_TYPE', listOfType)
-//   store.dispatch('getViewLastOwn', type)
-//   store.dispatch('getExpectationList', type)
-// }
+const route = useRoute()
 
 const selectType = (type: Type) => {
   store.commit('SET_SELECTED_TYPE', type)
