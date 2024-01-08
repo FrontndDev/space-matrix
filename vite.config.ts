@@ -14,5 +14,8 @@ export default defineConfig({
             defaultImport: 'url'
         })
     ],
+    build: {
+        manifest: true
+    },
     base: process.env.VITE_VUE_APP_BASE_ROUTER_URL
 })
