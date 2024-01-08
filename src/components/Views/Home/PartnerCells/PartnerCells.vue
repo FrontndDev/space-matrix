@@ -11,13 +11,11 @@
       <SmallCell
           v-for="(cell, idx) in partnersExposed?.list"
           :key="idx"
-          :cell="cell"
           v-if="pagePartnerID === 1"
       />
       <SmallCell
           v-for="(cell, idx) in partnersPending?.list"
           :key="idx"
-          :cell="cell"
           v-if="pagePartnerID === 2"
       />
 <!--      :type="cell.type"-->

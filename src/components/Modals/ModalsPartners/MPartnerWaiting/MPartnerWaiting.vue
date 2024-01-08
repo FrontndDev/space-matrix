@@ -8,19 +8,19 @@
         :class="{'less-four': cells.length < 4 }"
     >
       <div class="modal-partner-waiting__block active">
-        <SmallCell cell=""/>
+        <SmallCell />
       </div>
       <div class="modal-partner-waiting__block">
-        <SmallCell cell=""/>
+        <SmallCell />
       </div>
       <div class="modal-partner-waiting__block">
-        <SmallCell cell=""/>
+        <SmallCell />
       </div>
       <div class="modal-partner-waiting__block">
-        <SmallCell cell=""/>
+        <SmallCell />
       </div>
       <div class="modal-partner-waiting__block">
-        <SmallCell cell=""/>
+        <SmallCell />
       </div>
     </div>
     <div class="modal-partner-waiting__buttons">
