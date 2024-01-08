@@ -4,7 +4,7 @@ import {
 } from "vue-router";
 import Home from "../views/Home/Home.vue";
 
-const baseUrl = import.meta.env.VITE_VUE_APP_BASE_ROUTER_URL
+const baseUrl: string = '/app/matrix'
 
 const routes = [
     {
