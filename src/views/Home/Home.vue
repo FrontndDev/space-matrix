@@ -6,7 +6,7 @@
           <MatrixHeader style="grid-area: header;"/>
 
           <template v-if="Object.keys(store.state.viewLastOwn).length">
-            <div class="home__matrices__inner" v-if="!store.state.viewLastOwn?.ctaText">
+            <div class="home__matrices-inner" v-if="!store.state.viewLastOwn?.ctaText">
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
                   @open-m-add-partner="openModalPartner(3)"
@@ -24,7 +24,7 @@
             <TimeActivatedMatrix v-if="false"/>
           </template>
           <div class="home__preloader" v-if="!Object.keys(store.state.viewLastOwn).length">
-            <Preloader/>
+            <Preloader :with-text="true"/>
           </div>
 
           <CopyLink style="grid-area: copy-link;"/>

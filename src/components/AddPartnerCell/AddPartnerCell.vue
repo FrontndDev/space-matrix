@@ -13,9 +13,9 @@
       <Reward
           :freeze="fillReward.freeze"
           :custom="fillReward.custom"
+          v-if="!['disable', 'infinity', 'loading'].includes(props.type)"
       />
     </div>
-
 
     <div v-if="props.type == 'disable'" class="add-partner-cell__title add-partner-cell__title_mt-8">Недоступно</div>
     <div v-else-if="props.type == 'loading'" class="add-partner-cell__title add-partner-cell__title_mt-8">Ожидайте</div>

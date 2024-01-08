@@ -6,6 +6,7 @@
       <!--   FIRST CEIL    -->
       <PartnerCell
           type="cumulative"
+          :ceil="firstCeil"
           @open-m-matrix-partner="emit('open-m-matrix-partner')"
           v-if="firstCeil?.matrix"
       />
@@ -19,6 +20,7 @@
       <!--   SECOND CEIL    -->
       <PartnerCell
           type="cumulative"
+          :ceil="secondCeil"
           @open-m-matrix-partner="emit('open-m-matrix-partner')"
           v-if="secondCeil?.matrix"
       />

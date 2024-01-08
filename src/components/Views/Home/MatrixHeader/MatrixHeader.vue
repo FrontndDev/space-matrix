@@ -3,6 +3,7 @@
     <h1>Мои матрицы</h1>
 
     <div class="matrix-header__buttons matrix-header__buttons_mt-16">
+      <Preloader v-if="!listOfTypes.types?.length"/>
       <DButton
           :class="{ active: selectedType?.type === type.type }"
           v-for="type in listOfTypes.types"
@@ -32,6 +33,7 @@ import {
   Type
 } from "../../../../interfaces/store.interface.ts";
 import {useStore} from "vuex";
+import Preloader from "../../../UI/Preloader/Preloader.vue";
 
 const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
 const selectedType: Ref<Type> = computed(() => store.state.selectedType)

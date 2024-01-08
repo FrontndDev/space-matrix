@@ -22,8 +22,8 @@
     <div v-if="props.modal !== 'm-matrix-partner'" class="infinity-partner-card__awards">
       <div class="infinity-partner-card__awards-title">Награды</div>
       <div class="infinity-partner-card__awards-bonuses infinity-partner-card__awards-bonuses_mt-8">
-        <BonusItem type="cashout" :values="[1000]"/>
-        <BonusItem type="custom" :values="['LB']"/>
+        <BonusItem type="cashout" :values="fillReward.cashout" v-if="fillReward.cashout"/>
+        <BonusItem type="custom" :values="fillReward.custom" v-if="fillReward.custom"/>
         <BonusItem type="boost" :values="fillReward.boost" v-if="fillReward.boost.length"/>
       </div>
     </div>
