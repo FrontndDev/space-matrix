@@ -10,7 +10,6 @@
       <SmallCell
           v-for="(cell, idx) in boostersPending?.list"
           :key="idx"
-          :cell="cell"
       />
     </div>
   </div>

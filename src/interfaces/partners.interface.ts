@@ -31,4 +31,5 @@ export interface IPartners {
 export interface IGetPendingBoostersParams {
   matrixFilterUserId: number;
   matrixFilterPageId: number;
+  filter: number;
 }

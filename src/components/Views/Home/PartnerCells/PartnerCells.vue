@@ -11,13 +11,11 @@
       <SmallCell
           v-for="(cell, idx) in partnersExposed?.list"
           :key="idx"
-          :cell="cell"
           v-if="pagePartnerID === 1"
       />
       <SmallCell
           v-for="(cell, idx) in partnersPending?.list"
           :key="idx"
-          :cell="cell"
           v-if="pagePartnerID === 2"
       />
 <!--      :type="cell.type"-->
@@ -26,7 +24,7 @@
   </div>
   <EmptyCells
       :cellsType="'partners'"
-      v-if="partnersExposed.count === 0"
+      v-if="partnersExposed.list?.length === 0 && pagePartnerID === 1 || partnersPending.list?.length === 0 && pagePartnerID === 2"
   />
 
   <Pagination v-if="partnersExposed.count !== 0" />
