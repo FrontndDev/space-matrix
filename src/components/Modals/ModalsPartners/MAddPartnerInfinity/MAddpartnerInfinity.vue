@@ -6,7 +6,7 @@
     <div class="modal-add-partner__container">
       <BuyBoostCell />
       <AddPartnerCell
-          type="cumulative"
+          type="profitable"
           @click="$emit('open-partner-waiting')"
       />
     </div>
@@ -21,5 +21,5 @@ import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
 </script>
 
 <style scoped>
-@import "_mAddPartner.scss";
+@import "_mAddPartnerInfinity.scss";
 </style>

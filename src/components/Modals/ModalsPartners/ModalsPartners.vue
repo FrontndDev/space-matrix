@@ -19,10 +19,15 @@
             @open-partner-waiting="$emit('open-partner-waiting')"
             v-else-if="props.openModalPartners === 3"
         />
+        <MAddpartnerInfinity
+            @close-modal="$emit('close-modal')"
+            @open-partner-waiting="$emit('open-partner-waiting')"
+            v-else-if="props.openModalPartners === 4"
+        />
         <MPartnerWaiting
             @close-modal="$emit('close-modal')"
             @open-m-add-partner="$emit('open-m-add-partner')"
-            v-else-if="props.openModalPartners === 4"
+            v-else-if="props.openModalPartners === 5"
         />
       </div>
       <div @click="$emit('close-modal')" class="modal__overlay"></div>
@@ -35,6 +40,7 @@ import MInfinityCell from "./MInfinityCell/MInfinityCell.vue";
 import MMatrixPartner from "./MMatrixPartner/MMatrixPartner.vue";
 import MAddPartner from "./MAddPartner/MAddPartner.vue";
 import MPartnerWaiting from "./MPartnerWaiting/MPartnerWaiting.vue";
+import MAddpartnerInfinity from "./MAddPartnerInfinity/MAddpartnerInfinity.vue";
 
 
 const props = defineProps({
@@ -45,7 +51,7 @@ const props = defineProps({
   openModalPartners: {
     type: Number,
     default: 0
-  }
+  },
 })
 </script>
 

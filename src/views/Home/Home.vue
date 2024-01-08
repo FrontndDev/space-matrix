@@ -13,6 +13,7 @@
               />
               <Endless
                   @open-m-infinity-cell="openModalPartner(1)"
+                  @open-m-add-partner="openModalPartner(4)"
               />
             </div>
 
@@ -50,7 +51,7 @@
         @open-m-infinity-cell="openModalPartner(1)"
         @open-m-matrix-partner="openModalPartner(2)"
         @open-m-add-partner="openModalPartner(3)"
-        @open-partner-waiting="openModalPartner(4)"
+        @open-partner-waiting="openModalPartner(5)"
         @close-modal="closeModal"
     />
     <ModalChains

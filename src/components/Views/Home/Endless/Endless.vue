@@ -6,6 +6,7 @@
       <AddPartnerCell
           type="infinity"
           :ceil="thirdCeil"
+          @open-m-add-partner="$emit('open-m-add-partner')"
       />
       <InfinityPartnerCard
           :ceil="thirdCeil"
@@ -28,7 +29,7 @@ import {
   Ceils
 } from "../../../../interfaces/store.interface.ts";
 
-const emit = defineEmits(['open-m-infinity-cell'])
+const emit = defineEmits(['open-m-infinity-cell', 'open-m-add-partner'])
 
 const store = useStore()
 
