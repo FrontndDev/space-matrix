@@ -11,7 +11,7 @@ const routes = [
         path: baseUrl,
         children: [
             {
-                path: '/:type?',
+                path: ':type?',
                 component: Home,
             },
             // {
