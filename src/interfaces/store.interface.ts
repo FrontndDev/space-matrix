@@ -56,6 +56,7 @@ export interface FillReward {
         type?: string;
         count?: number;
         amount?: number;
+        title?: number;
     } & string;
 }
 

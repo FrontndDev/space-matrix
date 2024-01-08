@@ -1,7 +1,7 @@
 <template>
   <div class="partner-cell" :class="props.size">
     <div class="partner-cell__avatar" :class="props.type">
-      <img @click="$emit('open-m-matrix-partner')" src="../../assets/images/Avatar.png" alt="Avatar">
+      <img src="../../assets/images/Avatar.png" alt="Avatar" @click="$emit('open-m-matrix-partner')">
       <Reward
           :freeze="fillReward.freeze"
           :custom="fillReward.custom"

@@ -25,11 +25,11 @@ import { PropType } from "vue";
 
 const props = defineProps({
   freeze: {
-    type: Number,
+    type: Object as PropType<number | undefined>,
     required: true,
   },
   custom: {
-    type: Object as PropType<any>,
+    type: Object as PropType<number | undefined>,
     required: true,
   }
 })

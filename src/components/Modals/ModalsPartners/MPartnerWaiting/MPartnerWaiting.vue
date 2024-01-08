@@ -5,12 +5,12 @@
     </ModalHeader>
     <div
         class="modal-partner-waiting__container"
-        :class="{'less-four': cells?.length < 4 }"
+        :class="{'less-four': cells.length < 4 }"
     >
       <div
           class="modal-partner-waiting__block"
           v-for="cell in cells"
-          :key="cell?.id"
+          :key="cell.id"
       >
 <!--        active-->
         <SmallCell :cell="cell"/>
