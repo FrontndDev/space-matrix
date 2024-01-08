@@ -25,7 +25,7 @@ export interface IPartnersList {
 
 export interface IPartners {
   count: number;
-  list: IPartnersList;
+  list: IPartnersList[];
 }
 
 export interface IGetPendingBoostersParams {

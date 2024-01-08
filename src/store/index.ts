@@ -46,9 +46,9 @@ export default createStore({
                 console.log('response.data.html', response.data.html)
                 console.log('MY_OVERLAY', MY_OVERLAY)
                 MY_OVERLAY.active(response.data.html, () => {
-                  console.log('callback1')
+                    console.log('callback1')
                 }, () => {
-                  console.log('callback2')
+                    console.log('callback2')
                 })
             })
         },
@@ -67,7 +67,5 @@ export default createStore({
             state.paymentForm = form
         },
     },
-    getters: {
-
-    }
+    getters: {}
 });

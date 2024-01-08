@@ -11,7 +11,7 @@
       <div class="expose-partner__container">
         <div class="expose-partner__cell">
           <div class="expose-partner__block">
-            <SmallCell type="chains-partner" />
+            <SmallCell type="chains-partner" :cell="{}"/>
           </div>
         </div>
         <div class="expose-partner__info">
@@ -19,13 +19,13 @@
           <div class="expose-partner__choice">
             <div class="expose-partner__tabs">
               <Tabs
-                   :tabs="tabs"
                    type="expose-modal"
+                   :tabs="tabs"
                    @toggle-expose-tabs="toggleExposeTabs"
               />
             </div>
 
-            <div v-if="isExposeTabs === 1" class="expose-partner__reward">
+            <div class="expose-partner__reward" v-if="isExposeTabs === 1">
               <div class="expose-partner__ton">
                 +1000
                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">

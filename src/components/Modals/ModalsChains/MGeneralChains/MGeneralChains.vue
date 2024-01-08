@@ -9,30 +9,30 @@
             class="general-chains__overflow"
             :class="{'less-four': cells.length < 4}"
         >
-          <div class="general-chains__block">
-            <SmallCell />
-          </div>
-          <div class="general-chains__block">
-            <SmallCell />
-          </div>
-          <div class="general-chains__block">
-            <SmallCell />
-          </div>
-          <div class="general-chains__block">
-            <SmallCell />
-          </div>
-          <div class="general-chains__block">
-            <SmallCell />
-          </div>
-          <div class="general-chains__block">
-            <SmallCell />
-          </div>
-          <div class="general-chains__block">
-            <SmallCell />
-          </div>
-          <div class="general-chains__block">
-            <SmallCell />
-          </div>
+<!--          <div class="general-chains__block">-->
+<!--            <SmallCell />-->
+<!--          </div>-->
+<!--          <div class="general-chains__block">-->
+<!--            <SmallCell />-->
+<!--          </div>-->
+<!--          <div class="general-chains__block">-->
+<!--            <SmallCell />-->
+<!--          </div>-->
+<!--          <div class="general-chains__block">-->
+<!--            <SmallCell />-->
+<!--          </div>-->
+<!--          <div class="general-chains__block">-->
+<!--            <SmallCell />-->
+<!--          </div>-->
+<!--          <div class="general-chains__block">-->
+<!--            <SmallCell />-->
+<!--          </div>-->
+<!--          <div class="general-chains__block">-->
+<!--            <SmallCell />-->
+<!--          </div>-->
+<!--          <div class="general-chains__block">-->
+<!--            <SmallCell />-->
+<!--          </div>-->
         </div>
         <ChainsButton @click="$emit('open-m-replace-partner')">
           <span>Активировать цепочку</span>

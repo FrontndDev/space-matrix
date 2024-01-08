@@ -5,22 +5,15 @@
     </ModalHeader>
     <div
         class="modal-partner-waiting__container"
-        :class="{'less-four': cells.length < 4 }"
+        :class="{'less-four': cells?.length < 4 }"
     >
-      <div class="modal-partner-waiting__block active">
-        <SmallCell cell=""/>
-      </div>
-      <div class="modal-partner-waiting__block">
-        <SmallCell cell=""/>
-      </div>
-      <div class="modal-partner-waiting__block">
-        <SmallCell cell=""/>
-      </div>
-      <div class="modal-partner-waiting__block">
-        <SmallCell cell=""/>
-      </div>
-      <div class="modal-partner-waiting__block">
-        <SmallCell cell=""/>
+      <div
+          class="modal-partner-waiting__block"
+          v-for="cell in cells"
+          :key="cell?.id"
+      >
+<!--        active-->
+        <SmallCell :cell="cell"/>
       </div>
     </div>
     <div class="modal-partner-waiting__buttons">
@@ -37,14 +30,27 @@ import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
 import CancelButton from "../../../UI/CancelButton/CancelButton.vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
+import { useStore } from "vuex";
+import {
+  computed,
+  ComputedRef,
+  onMounted,
+} from "vue";
+import {
+  IPartnersList
+} from "../../../../interfaces/partners.interface.ts";
 
-const cells = [
-  { id: 0 },
-  { id: 1 },
-  { id: 2 },
-  { id: 3 },
-]
+const store = useStore()
+const cells: ComputedRef<IPartnersList[]> = computed(() => store.state.partners.partnersPending.list)
 
+onMounted(() => {
+  store.dispatch('partners/getPendingPartners',
+      {
+        matrixFilterUserId: 2969585,
+        matrixFilterPageId: 1,
+      }
+  )
+})
 </script>
 
 <style scoped>

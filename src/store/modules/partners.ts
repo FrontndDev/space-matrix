@@ -1,14 +1,17 @@
 import * as API from '../../api/index'
-import { IGetPendingBoostersParams } from "../../interfaces/partners.interface.ts";
+import {
+  IGetPendingBoostersParams,
+  IPartners
+} from "../../interfaces/partners.interface.ts";
 import { Commit } from "vuex";
 
 export default {
   namespaced: true,
   state() {
     return {
-      partnersExposed: [],
-      partnersPending: [],
-      pagePartnerID: 1,
+      partnersExposed: {} as IPartners,
+      partnersPending: {} as IPartners,
+      pagePartnerID: 1 as number,
       infinityPartners: [],
     }
   },
@@ -45,7 +48,7 @@ export default {
       })
     },
 
-    getInfinityPartners({ commit }: any, parentId) {
+    getInfinityPartners({ commit }: any, parentId: number) {
       API.getListOfInfinity(parentId).then(response => {
         console.log('getInfinityPartners', response.data)
         commit('SET_INFINITY_PARTNERS', response.data)

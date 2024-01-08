@@ -52,7 +52,11 @@ export interface MatrixConfig {
 
 export interface FillReward {
     event: string;
-    value: { type?: string; count?: number; } & string;
+    value: {
+        type?: string;
+        count?: number;
+        amount?: number;
+    } & string;
 }
 
 export interface Ceil {
