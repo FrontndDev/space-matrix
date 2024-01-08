@@ -27,7 +27,7 @@
             <Preloader :with-text="true"/>
           </div>
 
-          <CopyLink style="grid-area: copy-link;"/>
+          <CopyLink style="grid-area: copy-link;" @click="copyLink"/>
         </div>
         <div class="home__info">
           <InfoHeader
@@ -95,6 +95,7 @@ import ModalNotification from "../../components/Modals/ModalNotification/ModalNo
 import { useStore } from "vuex";
 import Preloader from "../../components/UI/Preloader/Preloader.vue";
 import ModalPaymentForm from "../../components/Modals/ModalPaymentForm/ModalPaymentForm.vue";
+import { useRoute } from "vue-router";
 
 const isCells = ref(1)
 
@@ -109,6 +110,7 @@ const toggleModalNotification = ref(false)
 const toggleModalPaymentForm = ref(false)
 
 const store = useStore()
+const route = useRoute();
 
 const openModalPartner = (num: number) => {
   toggleModalPartners.value = true
@@ -127,6 +129,11 @@ const openCells = (id: number) => {
 const openModalTeleport = () => {
   toggleModalChains.value = true
   openModalChains.value = 5
+}
+
+const copyLink = () => {
+  const link = window.location.origin + route.path + (store.state.selectedType?.title ?? '')
+  navigator.clipboard.writeText(link)
 }
 </script>
 

@@ -34,11 +34,13 @@ import {
 } from "../../../../interfaces/store.interface.ts";
 import {useStore} from "vuex";
 import Preloader from "../../../UI/Preloader/Preloader.vue";
+import { useRoute } from "vue-router";
 
 const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
 const selectedType: Ref<Type> = computed(() => store.state.selectedType)
 
 const store = useStore()
+const route = useRoute();
 
 // const getData = (listOfType, type: any) => {
 //   store.commit('SET_SELECTED_TYPE', listOfType)
@@ -46,18 +48,21 @@ const store = useStore()
 //   store.dispatch('getExpectationList', type)
 // }
 
-const selectDButton = (type: Type) => {
-  if (selectedType.value.type !== type.type) {
-    store.commit('SET_VIEW_LAST_OWN', {})
-  }
+const selectType = (type: Type) => {
   store.commit('SET_SELECTED_TYPE', type)
   store.dispatch('getViewLastOwn', type.type)
 }
 
+const selectDButton = (type: Type) => {
+  if (selectedType.value.type !== type.type) {
+    store.commit('SET_VIEW_LAST_OWN', {})
+  }
+  selectType(type)
+}
+
 watch(() => listOfTypes.value.types?.length, () => {
-  // getData()
-  store.commit('SET_SELECTED_TYPE', listOfTypes.value.types[0])
-  store.dispatch('getViewLastOwn', selectedType.value.type)
+  const type = listOfTypes.value.types.find(type => type.title === route.params.type) ?? listOfTypes.value.types[0]
+  selectType(type)
 })
 
 onMounted(() => {
