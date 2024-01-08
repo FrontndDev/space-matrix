@@ -45,7 +45,11 @@ const store = useStore()
 const pagePartnerID = computed(() => store.state.partners.pagePartnerID)
 
 const changeLineOfPartners = (id: number) => {
-  console.log(id)
+  store.dispatch('partners/getExposedPartners', {
+    matrixFilterUserId: 2969585,
+    matrixFilterPageId: 1,
+    filter: id
+  })
 }
 
 const tabs = reactive([
