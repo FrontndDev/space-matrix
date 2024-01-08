@@ -45,21 +45,6 @@ export default {
       })
     },
 
-    getPendingBoosters(
-      { commit, rootState }: { commit: Commit; rootState: any },
-      { matrixFilterUserId, matrixFilterPageId }: IGetPendingBoostersParams
-    ) {
-      API.filterOfActivatedMatrix({
-          matrixType: rootState.selectedType.type,
-          matrixFilterUserId,
-          matrixFilterPageId,
-          filter: { pending: 1, is_booster: true }
-        }
-      ).then(response => {
-        console.log(response.data)
-        commit('SET_PENDING_BOOSTERS', response.data)
-      })
-    },
     getInfinityPartners({ commit }: any, parentId) {
       API.getListOfInfinity(parentId).then(response => {
         console.log('getInfinityPartners', response.data)
@@ -73,9 +58,6 @@ export default {
     },
     SET_PENDING_PARTNERS(state: any, partnersPending: Object) {
       state.partnersPending = partnersPending
-    },
-    SET_PENDING_BOOSTERS(state: any, boostersPending: Object) {
-      state.boostersPending = boostersPending
     },
     CHANGE_PAGE_PARTNER(state: any, id: number) {
       state.pagePartnerID = id
