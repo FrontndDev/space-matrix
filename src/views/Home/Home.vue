@@ -13,6 +13,7 @@
               />
               <Endless
                   @open-m-infinity-cell="openModalPartner(1)"
+                  @open-m-add-partner="openModalPartner(4)"
               />
             </div>
 
@@ -50,12 +51,13 @@
         @open-m-infinity-cell="openModalPartner(1)"
         @open-m-matrix-partner="openModalPartner(2)"
         @open-m-add-partner="openModalPartner(3)"
-        @close-modal="toggleModalPartners = false"
+        @open-partner-waiting="openModalPartner(5)"
+        @close-modal="closeModal"
     />
     <ModalChains
         :toggleModalChains="toggleModalChains"
         :openModalChains="openModalChains"
-        @close-modal="toggleModalChains = false"
+        @close-modal="closeModal"
         @open-general-chains="openModalChain(1)"
         @open-m-replace-partner="openModalChain(2)"
         @open-change-partner="openModalChain(3)"
@@ -64,11 +66,11 @@
     <ModalNotification
         :toggleModalNotification="toggleModalNotification"
         :statusNotification="'failure'"
-        @close-modal="toggleModalNotification = false"
+        @close-modal="closeModal"
     />
     <ModalPaymentForm
         :toggleModalPaymentForm="toggleModalPaymentForm"
-        @close-modal="toggleModalPaymentForm = false"
+        @close-modal="closeModal"
     />
   </div>
 </template>
@@ -115,11 +117,13 @@ const route = useRoute();
 const openModalPartner = (num: number) => {
   toggleModalPartners.value = true
   openModalPartners.value = num
+  document.body.style.overflow = 'hidden'
 }
 
 const openModalChain = (num: number) => {
   toggleModalChains.value = true
   openModalChains.value = num
+  document.body.style.overflow = 'hidden'
 }
 
 const openCells = (id: number) => {
@@ -129,6 +133,15 @@ const openCells = (id: number) => {
 const openModalTeleport = () => {
   toggleModalChains.value = true
   openModalChains.value = 5
+  document.body.style.overflow = 'hidden'
+}
+
+const closeModal = () => {
+  toggleModalPartners.value = false
+  toggleModalChains.value = false
+  toggleModalNotification.value = false
+  toggleModalPaymentForm.value = false
+  document.body.style.overflow = 'auto'
 }
 
 const copyLink = () => {

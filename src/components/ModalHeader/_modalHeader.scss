@@ -6,6 +6,7 @@
   grid-template-columns: repeat(3, 1fr);
   padding: 16px;
   height: 64px;
+  width: 100%;
 
   &__back {
     @include flexbox(row, flex-start, center);
