@@ -27,7 +27,7 @@ export async function getPaymentForm(matrixType: string) {
 
 // POST
 
-export async function filterOfActivatedMatrix({ matrixType, matrixFilterUserId, matrixFilterPageId, filter }) {
+export async function filterOfActivatedMatrix({ matrixType, matrixFilterUserId, matrixFilterPageId, filter }: any) {
   return postAsync(`/api/matrix/get-clones/${matrixType}/${matrixFilterUserId}/${matrixFilterPageId}`, { filter })
 }
 

@@ -13,10 +13,12 @@ import {
 import * as API from '../api/index.ts'
 
 import partners from "./modules/partners.ts";
+import boosters from "./modules/boosters.ts";
 
 export default createStore({
     modules: {
-        partners
+        partners,
+        boosters
     },
     state: {
         selectedType: {} as Type,

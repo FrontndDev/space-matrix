@@ -5,11 +5,15 @@
         @open-cells="id => $emit('open-cells', id)"
     />
     <div v-if="props.infoHeader === 1" class="header__selects">
-      <Select :items="selectItemsPartners" v-show="pagePartnerID !== 2"/>
+      <Select
+          :items="selectItemsPartners"
+          v-show="pagePartnerID !== 2"
+          @select="changeLineOfPartners"
+      />
       <Select :items="selectItemsPartners"/>
     </div>
     <div v-if="props.infoHeader === 2" class="header__selects">
-      <Select :items="selectItemsBoost"/>
+      <Select :items="selectItemsBoost" v-show="pagePartnerID !== 4"/>
       <Select :items="selectItemsBoost"/>
     </div>
     <ChainsButton v-if="props.infoHeader === 3">
@@ -39,6 +43,10 @@ const props = defineProps({
 const store = useStore()
 
 const pagePartnerID = computed(() => store.state.partners.pagePartnerID)
+
+const changeLineOfPartners = (id: number) => {
+  console.log(id)
+}
 
 const tabs = reactive([
   {

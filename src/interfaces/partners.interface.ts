@@ -27,3 +27,8 @@ export interface IPartners {
   count: number;
   list: IPartnersList;
 }
+
+export interface IGetPendingBoostersParams {
+  matrixFilterUserId: number;
+  matrixFilterPageId: number;
+}

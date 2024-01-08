@@ -49,7 +49,7 @@ const showDropdown = ref(false);
 
 const selectItem = (item: any) => {
   selectedItem.value = item;
-  emit('select');
+  emit('select', item.id);
   showDropdown.value = false
 }
 

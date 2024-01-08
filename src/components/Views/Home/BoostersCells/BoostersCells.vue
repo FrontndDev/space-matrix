@@ -8,60 +8,50 @@
     </div>
     <div class="boosters-cells__container">
       <SmallCell
-          v-for="cell in smallCells"
-          :key="cell.id"
-          :type="cell.type"
-          :state="cell.state"
+          v-for="(cell, idx) in boostersPending?.list"
+          :key="idx"
+          :cell="cell"
       />
     </div>
   </div>
   <EmptyCells
-      v-if="smallCells.length === 0"
+      v-if="boostersPending.count === 0"
       :cellsType="'boosters'"
   />
-  <Pagination v-if="smallCells.length !== 0" />
+  <Pagination v-if="boostersPending.count !== 0" />
 </template>
 
 <script setup lang="ts">
-import Tabs from "../../../UI/Tabs/Tabs.vue";
-import { ref, reactive } from "vue";
+import {
+  computed,
+  ComputedRef,
+  reactive
+} from "vue";
+
 import SmallCell from "../../../SmallCell/SmallCell.vue";
+import Tabs from "../../../UI/Tabs/Tabs.vue";
 import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
+import { useStore } from "vuex";
+import { IPartners } from "../../../../interfaces/partners.interface.ts";
+
+const store = useStore()
+const boostersPending: ComputedRef<IPartners> = computed(() => store.state.boosters.boostersPending)
 
 const tabs = reactive([
   {
-    id: 1,
+    id: 3,
     name: 'Выставленные',
     value: 110
   },
   {
-    id: 2,
+    id: 4,
     name: 'В ожидании',
-    value: 52
+    value: computed(() => boostersPending.value.count)
   }
 ]);
 
-const smallCells = ref([
-  { type: 'boost', state: 'exhibited', id: 0 },
-  { type: 'boost', state: 'exhibited', id: 1 },
-  { type: 'boost', state: 'waiting', id: 2 },
-  { type: 'boost', state: 'waiting', id: 3 },
-  { type: 'boost', state: 'waiting', id: 4 },
-  { type: 'boost', state: 'waiting', id: 5 },
-  { type: 'boost', state: 'exhibited', id: 6 },
-  { type: 'boost', state: 'exhibited', id: 7 },
-  { type: 'boost', state: 'waiting', id: 8 },
-  { type: 'boost', state: 'waiting', id: 9 },
-  { type: 'boost', state: 'waiting', id: 10 },
-  { type: 'boost', state: 'waiting', id: 11 },
-  { type: 'boost', state: 'exhibited', id: 12 },
-  { type: 'boost', state: 'exhibited', id: 13},
-  { type: 'boost', state: 'waiting', id: 14 },
-  { type: 'boost', state: 'waiting', id: 15 },
-  { type: 'boost', state: 'waiting', id: 16 },
-  { type: 'boost', state: 'waiting', id: 17 },
-])
+
 </script>
 
 <style scoped lang="scss">

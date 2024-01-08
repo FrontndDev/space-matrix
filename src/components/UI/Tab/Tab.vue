@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+
 const props = defineProps(<any>{
   type: {
     type: String,
@@ -24,6 +25,7 @@ const props = defineProps(<any>{
 });
 
 const emit = defineEmits(['tab']);
+
 </script>
 
 <style scoped lang="scss">

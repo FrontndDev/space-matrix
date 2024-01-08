@@ -9,9 +9,16 @@
     </div>
     <div class="partners-cells__container">
       <SmallCell
-          v-for="(cell, idx) in partners?.list"
+          v-for="(cell, idx) in partnersExposed?.list"
           :key="idx"
           :cell="cell"
+          v-if="pagePartnerID === 1"
+      />
+      <SmallCell
+          v-for="(cell, idx) in partnersPending?.list"
+          :key="idx"
+          :cell="cell"
+          v-if="pagePartnerID === 2"
       />
 <!--      :type="cell.type"-->
 <!--      :state="cell.state"-->
@@ -19,10 +26,10 @@
   </div>
   <EmptyCells
       :cellsType="'partners'"
-      v-if="partners.length === 0"
+      v-if="partnersExposed.count === 0"
   />
 
-  <Pagination v-if="partners.length !== 0" />
+  <Pagination v-if="partnersExposed.count !== 0" />
 </template>
 
 <script setup lang="ts">
@@ -41,20 +48,23 @@ import { IPartners } from "../../../../interfaces/partners.interface.ts";
 
 const store = useStore()
 
+const partnersExposed: ComputedRef<IPartners> = computed(() => store.state.partners.partnersExposed)
+const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.partnersPending)
+
+const pagePartnerID: ComputedRef<number> = computed(() => store.state.partners.pagePartnerID)
+
 const tabs = reactive([
   {
     id: 1,
     name: 'Выставленные',
-    value: 100
+    value: computed(() => partnersExposed.value.count)
   },
   {
     id: 2,
     name: 'В ожидании',
-    value: 52
+    value: computed(() => partnersPending.value.count)
   }
 ]);
-
-const partners: ComputedRef<IPartners> = computed(() => store.state.partners.exposedPartners)
 
 watch(() => store.state.selectedType, () => {
   store.dispatch('partners/getExposedPartners',
@@ -71,7 +81,7 @@ watch(() => store.state.selectedType, () => {
       }
   )
 
-  store.dispatch('partners/getPendingBoosters',
+  store.dispatch('boosters/getPendingBoosters',
       {
         matrixFilterUserId: 2969585,
         matrixFilterPageId: 1,

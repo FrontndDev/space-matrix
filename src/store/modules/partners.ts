@@ -1,22 +1,25 @@
 import * as API from '../../api/index'
+import { IGetPendingBoostersParams } from "../../interfaces/partners.interface.ts";
+import { Commit } from "vuex";
 
 export default {
   namespaced: true,
   state() {
     return {
-      exposedPartners: [],
-      pendingPartners: [],
+      partnersExposed: [],
+      partnersPending: [],
       pagePartnerID: 1,
-      pendingBoosters: []
     }
   },
   actions: {
-    getExposedPartners({ commit, rootState }: any, data) {
-      const { matrixFilterUserId, matrixFilterPageId } = { ...data }
+    getExposedPartners(
+      { commit, rootState }: { commit: Commit; rootState: any },
+      { matrixFilterUserId, matrixFilterPageId }: IGetPendingBoostersParams
+    ) {
       API.filterOfActivatedMatrix({
         matrixType: rootState.selectedType.type,
-        matrixFilterUserId: data.matrixFilterUserId,
-        matrixFilterPageId: data.matrixFilterPageId,
+        matrixFilterUserId,
+        matrixFilterPageId,
         filter: { level: 0 }
       }
     ).then(response => {
@@ -24,12 +27,15 @@ export default {
         commit('SET_EXPOSED_PARTNERS', response.data)
       })
     },
-    getPendingPartners({ commit, rootState }: any, data) {
-      const { matrixFilterUserId, matrixFilterPageId } = { ...data }
+
+    getPendingPartners(
+      { commit, rootState }: { commit: Commit; rootState: any },
+      { matrixFilterUserId, matrixFilterPageId }: IGetPendingBoostersParams
+    ) {
       API.filterOfActivatedMatrix({
           matrixType: rootState.selectedType.type,
-          matrixFilterUserId: data.matrixFilterUserId,
-          matrixFilterPageId: data.matrixFilterPageId,
+          matrixFilterUserId,
+          matrixFilterPageId,
           filter: { pending: 1 }
         }
       ).then(response => {
@@ -37,12 +43,15 @@ export default {
         commit('SET_PENDING_PARTNERS', response.data)
       })
     },
-    getPendingBoosters({ commit, rootState }: any, data) {
-      const { matrixFilterUserId, matrixFilterPageId } = { ...data }
+
+    getPendingBoosters(
+      { commit, rootState }: { commit: Commit; rootState: any },
+      { matrixFilterUserId, matrixFilterPageId }: IGetPendingBoostersParams
+    ) {
       API.filterOfActivatedMatrix({
           matrixType: rootState.selectedType.type,
-          matrixFilterUserId: data.matrixFilterUserId,
-          matrixFilterPageId: data.matrixFilterPageId,
+          matrixFilterUserId,
+          matrixFilterPageId,
           filter: { pending: 1, is_booster: true }
         }
       ).then(response => {
@@ -52,20 +61,18 @@ export default {
     },
   },
   mutations: {
-    SET_EXPOSED_PARTNERS(state: any, exposedPartners) {
-      state.exposedPartners = exposedPartners
+    SET_EXPOSED_PARTNERS(state: any, partnersExposed: Object) {
+      state.partnersExposed = partnersExposed
     },
-    SET_PENDING_PARTNERS(state: any, pendingPartners) {
-      state.pendingPartners = pendingPartners
+    SET_PENDING_PARTNERS(state: any, partnersPending: Object) {
+      state.partnersPending = partnersPending
     },
-    SET_PENDING_BOOSTERS(state: any, pendingBoosters) {
-      state.pendingBoosters = pendingBoosters
+    SET_PENDING_BOOSTERS(state: any, boostersPending: Object) {
+      state.boostersPending = boostersPending
     },
     CHANGE_PAGE_PARTNER(state: any, id: number) {
       state.pagePartnerID = id
     }
   },
-  getters: {
-
-  }
+  getters: {}
 }
