@@ -5,7 +5,10 @@
     </ModalHeader>
     <div class="modal-add-partner__container">
       <BuyBoostCell />
-      <AddPartnerCell type="cumulative" />
+      <AddPartnerCell
+          type="cumulative"
+          @click="$emit('open-partner-waiting')"
+      />
     </div>
   </div>
 </template>

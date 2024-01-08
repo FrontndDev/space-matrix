@@ -7,8 +7,8 @@
         class="small-cell__avatar"
         :class="props.type"
     >
-      <img alt="avatar" :src="props.cell.owner?.photo">
-<!--      ../../assets/images/Avatar.png-->
+<!--      <img alt="avatar" :src="props.cell.owner?.photo">-->
+      <img src="../../assets/images/Avatar.png" alt="">
       <LevelMatrix :level="props.level" />
     </div>
     <div class="small-cell__info">
