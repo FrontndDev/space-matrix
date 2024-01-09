@@ -24,7 +24,7 @@ export default createStore({
         selectedType: {} as Type,
         listOfTypes: {} as ListOfTypes,
         viewLastOwn: {} as ViewLastOwn,
-        paymentForm: null
+        paymentForm: null as string | null
     },
     actions: {
         getListOfTypes({ commit }: ActionContext<any, any>, category = 'dream-ton') {
