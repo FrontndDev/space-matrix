@@ -24,7 +24,7 @@ export default createStore({
         selectedType: {} as Type,
         listOfTypes: {} as ListOfTypes,
         viewLastOwn: {} as ViewLastOwn,
-        paymentForm: {}
+        paymentForm: null as string | null
     },
     actions: {
         getListOfTypes({ commit }: ActionContext<any, any>, category = 'dream-ton') {
@@ -44,15 +44,15 @@ export default createStore({
             })
         },
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
+            commit('SET_PAYMENT_FORM', null)
             API.getPaymentForm(matrixType).then(response => {
                 commit('SET_PAYMENT_FORM', response.data.html)
-                console.log('response.data.html', response.data.html)
                 // @ts-ignore
-                MY_OVERLAY.active(response.data.html, () => {
-                    console.log('callback1')
-                }, () => {
-                    console.log('callback2')
-                })
+                // MY_OVERLAY.active(response.data.html, () => {
+                //     console.log('callback1')
+                // }, () => {
+                //     console.log('callback2')
+                // })
             })
         },
     },

@@ -63,7 +63,7 @@ export interface FillReward {
 export interface Ceil {
     depth: number;
     pos: number;
-    matrix?: Matrix;
+    matrix?: Matrix | null;
     allowBuyClone: boolean;
     allowBuyBoost: boolean;
     fillRevard: FillReward[];

@@ -11,6 +11,7 @@
                   @open-m-matrix-partner="openModalPartner(2)"
                   @open-m-add-partner="openModalPartner(3)"
                   @set-position-for-partner="setPositionForPartner"
+                  @select-partner="selectPartner"
               />
               <Endless
                   @open-m-infinity-cell="openModalPartner(1)"
@@ -103,10 +104,13 @@ import Preloader from "../../components/UI/Preloader/Preloader.vue";
 import ModalPaymentForm from "../../components/Modals/ModalPaymentForm/ModalPaymentForm.vue";
 import { useRoute } from "vue-router";
 import { IPosition } from "../../interfaces/partners.interface.ts";
+import {
+  Ceil,
+} from "../../interfaces/store.interface.ts";
 
 const isCells = ref(1)
 
-const toggleModalPartners = ref(false);
+const toggleModalPartners = ref(false)
 const openModalPartners = ref(0)
 
 const toggleModalChains = ref(false)
@@ -120,8 +124,18 @@ const store = useStore()
 const route = useRoute()
 
 const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
+const selectedPartner: Ref<Ceil> = ref({
+  depth: 0,
+  pos: 0,
+  matrix: null,
+  allowBuyClone: false,
+  allowBuyBoost: false,
+  fillRevard: [],
+  isInfinity: false,
+})
 
 provide('partnerPos', partnerPos)
+provide('selectedPartner', selectedPartner)
 
 const openModalPartner = (num: number) => {
   toggleModalPartners.value = true
@@ -155,6 +169,10 @@ const closeModal = () => {
 
 const setPositionForPartner = (pos: IPosition) => {
   partnerPos.value = pos
+}
+
+const selectPartner = (ceil: Ceil) => {
+  selectedPartner.value = ceil
 }
 
 const copyLink = () => {
