@@ -1,6 +1,5 @@
 import * as API from '../../api/index'
 import {
-  IExposePartner,
   IExposePartnerParams,
   IGetPendingBoostersParams,
   IPartners
@@ -53,7 +52,7 @@ export default {
     getInfinityPartners({ commit }: any, parentId: number) {
       API.getListOfInfinity(parentId).then(response => {
         console.log('getInfinityPartners', response.data)
-        commit('SET_INFINITY_PARTNERS', response.data)
+        commit('SET_INFINITY_PARTNERS', response.data.list)
       })
     },
     exposePartner({ commit }: any, data: IExposePartnerParams) {

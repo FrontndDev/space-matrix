@@ -7,8 +7,8 @@
       BOOST
     </template>
     <template v-else>
-      <div class="partner-type__circle fill-blue " />
-      <div class="partner-type__circle " />
+      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus['1'] }"/>
+      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus['2'] }"/>
 <!--      классы => ( fill-green, fill-orange, fill-blue )  -->
     </template>
   </div>
@@ -16,6 +16,10 @@
 
 <script setup lang="ts">
 const props = defineProps({
+  binstatus: {
+    type: Object,
+    required: true,
+  },
   cellType: {
     type: String,
     default: 'cumulative'

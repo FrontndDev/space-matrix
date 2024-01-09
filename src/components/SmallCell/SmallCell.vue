@@ -21,6 +21,7 @@
         <span>{{ props.cell?.owner?.id }}</span>
       </div>
       <PartnerType
+          :binstatus="cell.binstatus[1]"
           :cellType="props.cellType"
           :type="props.type"
       />

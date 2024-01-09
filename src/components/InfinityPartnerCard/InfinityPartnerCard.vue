@@ -2,7 +2,7 @@
   <div class="infinity-partner-card" :class="props.modal">
     <div class="infinity-partner-card__partners">
       <div class="infinity-partner-card__partners-block">
-        <div class="infinity-partner-card__partners-count">{{ partnersCount }}</div>
+        <div class="infinity-partner-card__partners-count">{{ infinityPartners.length }}</div>
         <div class="infinity-partner-card__partners-title">Партнеров</div>
         <svg class="infinity-partner-card__partners-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9995 9.30737C14.1271 9.30737 12.6261 10.8177 12.6261 12.6807C12.6261 14.4791 14.031 15.9454 15.811 16.0386C15.9336 16.0286 16.0644 16.0277 16.1914 16.0384C17.9638 15.9437 19.3612 14.4831 19.3728 12.6779C19.3713 10.8181 17.8596 9.30737 15.9995 9.30737ZM10.6261 12.6807C10.6261 9.71708 13.0185 7.30737 15.9995 7.30737C18.9651 7.30737 21.3728 9.71509 21.3728 12.6807V12.6864C21.3565 15.5775 19.0824 17.9416 16.1935 18.0401C16.1349 18.0421 16.0762 18.039 16.0181 18.0307C16.0238 18.0315 16.0249 18.0314 16.0212 18.0312C16.0178 18.0309 16.012 18.0307 16.0045 18.0307C15.9881 18.0307 15.973 18.0318 15.9635 18.033C15.9111 18.0395 15.8582 18.0419 15.8054 18.0401C12.9216 17.9418 10.6261 15.5813 10.6261 12.6807Z" fill="#7B879D"/>
@@ -60,6 +60,7 @@ const props = defineProps({
 
 const store = useStore()
 
+const infinityPartners: ComputedRef = computed(() => store.state.partners.infinityPartners)
 const types: ComputedRef<Type[]> = computed(() => store.state.listOfTypes.types)
 
 const fillReward = computed(() => {
@@ -74,7 +75,7 @@ const fillReward = computed(() => {
 })
 
 onMounted(() => {
-  // store.dispatch('partners/getInfinityPartners')
+  store.dispatch('partners/getInfinityPartners', store.state.viewLastOwn.matrix?.id)
 })
 </script>
 

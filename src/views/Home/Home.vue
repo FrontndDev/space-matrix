@@ -15,13 +15,14 @@
               <Endless
                   @open-m-infinity-cell="openModalPartner(1)"
                   @open-m-add-partner="openModalPartner(4)"
+                  @set-position-for-partner="setPositionForPartner"
               />
             </div>
 
             <NotActivatedMatrix
                 :view-last-own="store.state.viewLastOwn"
-                v-if="store.state.viewLastOwn?.ctaText"
                 @open-payment-form="toggleModalPaymentForm = true"
+                v-if="store.state.viewLastOwn?.ctaText"
             />
             <TimeActivatedMatrix v-if="false"/>
           </template>

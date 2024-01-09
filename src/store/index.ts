@@ -38,7 +38,10 @@ export default createStore({
             })
         },
         getViewLastOwn({ commit }: ActionContext<any, any>, matrixTypeOrId: string | number) {
-            API.getViewLastOwn(matrixTypeOrId).then(response => commit('SET_VIEW_LAST_OWN', response.data))
+            API.getViewLastOwn(matrixTypeOrId).then(response => {
+                console.log('response.data', response.data)
+                commit('SET_VIEW_LAST_OWN', response.data)
+            })
         },
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
             API.getPaymentForm(matrixType).then(response => {

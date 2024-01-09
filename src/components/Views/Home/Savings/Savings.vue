@@ -5,13 +5,13 @@
     <div class="savings__partners savings__partners_mt-16">
       <!--   FIRST CEIL    -->
       <PartnerCell
-          type="cumulative"
+          :type="firstCeilIsCumulative ? 'cumulative' : 'profitable'"
           :ceil="firstCeil"
           @open-m-matrix-partner="emit('open-m-matrix-partner')"
           v-if="firstCeil?.matrix"
       />
       <AddPartnerCell
-          type="cumulative"
+          :type="firstCeilIsCumulative ? 'cumulative' : 'profitable'"
           :ceil="firstCeil"
           @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
           v-if="!firstCeil?.matrix"
@@ -19,13 +19,13 @@
 
       <!--   SECOND CEIL    -->
       <PartnerCell
-          type="cumulative"
+          :type="secondCeilIsCumulative ? 'cumulative' : 'profitable'"
           :ceil="secondCeil"
           @open-m-matrix-partner="emit('open-m-matrix-partner')"
           v-if="secondCeil?.matrix"
       />
       <AddPartnerCell
-          type="cumulative"
+          :type="secondCeilIsCumulative ? 'cumulative' : 'profitable'"
           :ceil="secondCeil"
           @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
           v-if="!secondCeil?.matrix"
@@ -41,27 +41,41 @@ import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
 import { useStore } from "vuex";
 import {
   computed,
-  Ref
+  ComputedRef,
 } from "vue";
-import { Ceils } from "../../../../interfaces/store.interface.ts";
+import {
+  Ceil,
+  Ceils
+} from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
 const emit = defineEmits(['open-m-matrix-partner', 'open-m-add-partner', 'set-position-for-partner'])
 
 const store = useStore()
 
-const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection?.['1'])
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 
-const firstCeil: Ref = computed(() => ceils.value?.['1'])
-const secondCeil: Ref = computed(() => ceils.value?.['2'])
+const ceils: ComputedRef<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection?.['1'])
+
+const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
+const secondCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['2'])
+
+const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
+    !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
+)
+const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
+    !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
+)
 
 const getPosition = (depth: number, pos: number): IPosition => {
   return { depth, pos }
 }
 
 const openMAddPartner = (pos: IPosition) => {
-  emit('open-m-add-partner')
-  emit('set-position-for-partner', pos)
+  if (partnersCount.value) {
+    emit('open-m-add-partner')
+    emit('set-position-for-partner', pos)
+  }
 }
 </script>
 

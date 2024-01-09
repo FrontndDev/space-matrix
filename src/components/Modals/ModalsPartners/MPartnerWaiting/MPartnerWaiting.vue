@@ -5,9 +5,9 @@
     </ModalHeader>
     <div
         class="modal-partner-waiting__container"
-        :class="{'less-four': cells.length < 4 }"
+        :class="{'less-four': cells?.length < 4 }"
     >
-      <template v-if="cells.length">
+      <template v-if="cells">
         <div
             class="modal-partner-waiting__block"
             :class="{ active: selectedCell?.id === cell.id }"
@@ -20,7 +20,7 @@
           />
         </div>
       </template>
-      <Preloader :with-text="true" v-if="!cells.length"/>
+      <Preloader :with-text="true" v-if="!cells"/>
     </div>
     <div class="modal-partner-waiting__buttons">
       <template v-if="selectedCell">
@@ -54,7 +54,7 @@ import {
 import Preloader from "../../../UI/Preloader/Preloader.vue";
 
 const store = useStore()
-const cells: ComputedRef<IPartnersList[]> = computed(() => store.state.partners.partnersPending.list)
+const cells: ComputedRef<IPartnersList[]> = computed(() => store.state.partners.partnersPending?.list)
 
 const partnerPos = inject('partnerPos') as Ref<IPosition>
 let selectedCell: Ref<IPartnersList | null> = ref(null)
@@ -66,8 +66,8 @@ const selectCell = (cell: IPartnersList) => {
 const exposePartner = () => {
   if (selectedCell.value) {
     const data: IExposePartnerParams = {
-      matrix_id: store.state.viewLastOwn.matrix?.id,
-      child_id: +selectedCell.value.owner.id,
+      matrix_id: +store.state.viewLastOwn.matrix?.id,
+      child_id: +selectedCell.value?.id,
       depth: partnerPos.value.depth,
       pos: partnerPos.value.pos
     }
