@@ -1,7 +1,7 @@
 <template>
   <div
+      :class="[{ active: activeClass, indicator: props.tab.indicator }, props.type]"
       class="tab-matrix"
-      :class="[{ active: active, indicator: props.tab.indicator }, props.type]"
       @click="emit('tab', props.tab)"
   >
     {{ props.tab.name }} {{ props.tab.value }}
@@ -9,6 +9,9 @@
 </template>
 
 <script setup lang="ts">
+
+import { useStore } from "vuex";
+import { computed } from "vue";
 
 const props = defineProps(<any>{
   type: {
@@ -25,6 +28,12 @@ const props = defineProps(<any>{
 });
 
 const emit = defineEmits(['tab']);
+
+const store = useStore()
+
+const littleTabID = computed(() => store.state.partners.littleTabID)
+
+const activeClass = computed(() => props.type === 'little' ? littleTabID.value === props.tab.id : props.active)
 
 </script>
 

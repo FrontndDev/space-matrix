@@ -12,13 +12,13 @@
           v-for="(cell, idx) in partnersPending?.list"
           :key="idx"
           :cell="cell"
-          v-if="pagePartnerID === 1"
+          v-if="littleTabID === 1"
       />
       <SmallCell
           v-for="(cell, idx) in partnersExposed?.list"
           :key="idx"
           :cell="cell"
-          v-if="pagePartnerID === 2"
+          v-if="littleTabID === 2"
       />
 <!--      :type="cell.type"-->
 <!--      :state="cell.state"-->
@@ -26,7 +26,7 @@
   </div>
   <EmptyCells
       :cellsType="'partners'"
-      v-if="partnersPending.list?.length === 0 && pagePartnerID === 1 || partnersExposed.list?.length === 0 && pagePartnerID === 2"
+      v-if="partnersPending.list?.length === 0 && littleTabID === 1 || partnersExposed.list?.length === 0 && littleTabID === 2"
   />
 
 <!--  <Pagination v-if="partnersExposed.count !== 0" />-->
@@ -41,7 +41,7 @@ import {
   watch
 } from "vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
-import Pagination from "../../../Pagination/Pagination.vue";
+// import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 import { useStore } from "vuex";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
@@ -51,7 +51,7 @@ const store = useStore()
 const partnersExposed: ComputedRef<IPartners> = computed(() => store.state.partners.partnersExposed)
 const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.partnersPending)
 
-const pagePartnerID = computed(() => store.state.partners.pagePartnerID)
+const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
 
 const tabs = reactive([
   {
