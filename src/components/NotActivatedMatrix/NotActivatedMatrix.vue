@@ -46,6 +46,6 @@ const openPaymentForm = () => {
 
 </script>
 
-<style scoped>
-@import "_notActivatedMatrix.scss";
+<style scoped lang="scss">
+@import "notActivatedMatrix";
 </style>

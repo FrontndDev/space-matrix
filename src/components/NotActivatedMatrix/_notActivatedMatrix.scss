@@ -22,6 +22,7 @@
     @include flexbox(column, flex-start, center);
     gap: 8px;
     @include get-font(14px, 500, 142%, $text-base-secondary);
+    text-align: center;
 
     & > h3 {
       @include get-font(20px, 500, 160%, $text-base);
@@ -34,5 +35,17 @@
 
   & span {
     color: $text-violet;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .not-activated-matrix {
+    height: 285px;
+  }
+}
+
+@media screen and (max-width: 756px) {
+  .not-activated-matrix {
+    height: 560px;
   }
 }
