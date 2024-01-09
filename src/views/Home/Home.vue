@@ -176,7 +176,7 @@ const selectPartner = (ceil: Ceil) => {
 }
 
 const copyLink = () => {
-  const link = window.location.origin + route.path + '/' + (store.state.selectedType?.title ?? '')
+  const link = window.location.href
   navigator.clipboard.writeText(link)
 }
 </script>
