@@ -9,7 +9,7 @@
   padding: 0;
 }
 
-body {
+#matrix-app {
   min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
@@ -26,10 +26,6 @@ body {
   }
 }
 
-#app {
-  min-height: 100vh;
-  background: #f5f7f8; //временный бг, при релизе удалить
-}
 
 ul[class],
 ol[class] {

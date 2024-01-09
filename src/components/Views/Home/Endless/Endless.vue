@@ -1,6 +1,6 @@
 <template>
   <div class="endless">
-    <h3>Бесконечные</h3>
+    <div class="endless__title">Бесконечные</div>
 
     <div class="endless__menu endless__menu_mt-16">
       <AddPartnerCell

@@ -2,7 +2,7 @@
   <div class="matrix-header">
     <h1>Мои матрицы</h1>
 
-    <div class="matrix-header__buttons matrix-header__buttons_mt-16">
+    <div class="matrix-header__buttons">
       <Preloader v-if="!listOfTypes.types?.length"/>
       <DButton
           :class="{ active: selectedType?.type === type.type }"
@@ -34,17 +34,23 @@ import {
 } from "../../../../interfaces/store.interface.ts";
 import {useStore} from "vuex";
 import Preloader from "../../../UI/Preloader/Preloader.vue";
-import { useRoute } from "vue-router";
+import {
+  useRoute,
+  useRouter
+} from "vue-router";
+import { baseUrl } from "../../../../router";
 
 const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
 const selectedType: Ref<Type> = computed(() => store.state.selectedType)
 
 const store = useStore()
+const router = useRouter()
 const route = useRoute()
 
 const selectType = (type: Type) => {
   store.commit('SET_SELECTED_TYPE', type)
   store.dispatch('getViewLastOwn', type.type)
+  router.push(`${baseUrl}/${type.type}`)
 }
 
 const selectDButton = (type: Type) => {
@@ -55,7 +61,7 @@ const selectDButton = (type: Type) => {
 }
 
 watch(() => listOfTypes.value.types?.length, () => {
-  const type = listOfTypes.value.types.find(type => type.title === route.params.type) ?? listOfTypes.value.types[0]
+  const type = listOfTypes.value.types.find(type => type.type === route.params.type) ?? listOfTypes.value.types[0]
   selectType(type)
 })
 

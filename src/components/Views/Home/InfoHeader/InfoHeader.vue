@@ -1,10 +1,10 @@
 <template>
-  <div class="header">
+  <div class="header-info">
     <Tabs
         :tabs="tabs"
         @open-cells="openCells"
     />
-    <div v-if="props.infoHeader === 1" class="header__selects">
+    <div v-if="props.infoHeader === 1" class="header-info__selects">
       <Select
           :items="selectItemsPartners"
           v-show="littleTabID !== 1"
@@ -12,7 +12,7 @@
       />
       <Select :items="selectItemsPartners"/>
     </div>
-    <div v-if="props.infoHeader === 2" class="header__selects">
+    <div v-if="props.infoHeader === 2" class="header-info__selects">
       <Select :items="selectItemsBoost" v-show="littleTabID !== 3" />
       <Select :items="selectItemsBoost"/>
     </div>

@@ -6,6 +6,12 @@
   background: $bg-base;
   text-align: center;
 
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 150%;
+  }
+
   &__menu {
     @include flexbox(row, center, flex-start);
     column-gap: 40px;
