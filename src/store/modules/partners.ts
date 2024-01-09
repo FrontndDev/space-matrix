@@ -2,9 +2,13 @@ import * as API from '../../api/index'
 import {
   IExposePartnerParams,
   IGetPendingBoostersParams,
-  IPartners
+  IPartners,
+  IPartnersList
 } from "../../interfaces/partners.interface.ts";
-import { Commit } from "vuex";
+import {
+  ActionContext,
+  Commit
+} from "vuex";
 
 export default {
   namespaced: true,
@@ -14,8 +18,12 @@ export default {
       partnersPending: {} as IPartners,
       littleTabID: 1 as number,
       bigTabID: 1 as number,
-      infinityPartners: [],
-      countPendingBoosters: null
+      infinityPartners: [] as IPartnersList[],
+      countPendingBoosters: null,
+
+      ////////Матрица партнёра
+      partnersPendingSecond: {} as IPartners,
+      infinityPartnersSecond: [] as IPartnersList[],
     }
   },
   actions: {
@@ -38,7 +46,7 @@ export default {
 
     getPendingPartners(
       { commit, rootState }: { commit: Commit; rootState: any },
-      { matrixFilterUserId, matrixFilterPageId }: IGetPendingBoostersParams
+      { matrixFilterUserId, matrixFilterPageId, isPartnerMatrix = false }: IGetPendingBoostersParams
     ) {
       API.filterOfActivatedMatrix({
           matrixType: rootState.selectedType.type,
@@ -48,7 +56,11 @@ export default {
         }
       ).then(response => {
         console.log(response.data)
-        commit('SET_PENDING_PARTNERS', response.data)
+        if (!isPartnerMatrix) {
+          commit('SET_PENDING_PARTNERS', response.data)
+        } else {
+          commit('SET_PENDING_PARTNERS_SECOND', response.data)
+        }
       })
     },
 
@@ -58,7 +70,7 @@ export default {
         commit('SET_INFINITY_PARTNERS', response.data.list)
       })
     },
-    exposePartner({ commit }: { commit: Commit }, data: IExposePartnerParams) {
+    exposePartner(_: ActionContext<any, any>, data: IExposePartnerParams) {
       API.placementExistMatrix(data).then(response => {
         console.log('exposePartner', response)
       })
@@ -70,6 +82,9 @@ export default {
     },
     SET_PENDING_PARTNERS(state: any, partnersPending: Object) {
       state.partnersPending = partnersPending
+    },
+    SET_PENDING_PARTNERS_SECOND(state: any, partnersPending: Object) {
+      state.partnersPendingSecond = partnersPending
     },
     CHANGE_LITTLE_TAB(state: any, id: number) {
       state.littleTabID = id
@@ -90,7 +105,7 @@ export default {
     },
     SET_COUNT_PENDING_BOOSTERS(state: any, count: number) {
       state.countPendingBoosters = count
-    }
+    },
   },
   getters: {}
 }
