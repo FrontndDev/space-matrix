@@ -2,7 +2,7 @@
   <div class="matrix-header">
     <h1>Мои матрицы</h1>
 
-    <div class="matrix-header__buttons matrix-header__buttons_mt-16">
+    <div class="matrix-header__buttons">
       <Preloader v-if="!listOfTypes.types?.length"/>
       <DButton
           :class="{ active: selectedType?.type === type.type }"

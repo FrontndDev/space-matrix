@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs" :class="[{ 'cells': props.cells }, props.type]">
+  <div class="tabs-matrix" :class="[{ 'cells': props.cells }, props.type]">
     <Tab
         v-for="item in props.tabs"
         :key="item.id"

@@ -1,6 +1,6 @@
 <template>
   <div class="savings">
-    <h3>Накопительные</h3>
+    <div class="savings__title">Накопительные</div>
 
     <div class="savings__partners savings__partners_mt-16">
       <!--   FIRST CEIL    -->

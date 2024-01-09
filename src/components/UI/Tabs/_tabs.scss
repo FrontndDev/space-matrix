@@ -1,7 +1,7 @@
 @import '../../../assets/scss/variables';
 @import '../../../assets/scss/mixins';
 
-.tabs {
+.tabs-matrix {
   @include flexbox(row, flex-start, center);
 
   &.big,
@@ -18,7 +18,7 @@
 }
 
 @media (max-width: 992px) {
-  .tabs {
+  .tabs-matrix {
     width: 100%;
 
     &.big,

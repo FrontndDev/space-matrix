@@ -15,9 +15,13 @@
     border: 2px solid;
     border-radius: 32px;
     position: relative;
+    width: 160px;
+    height: 160px;
 
     & > img {
       border-radius: 28px;
+      width: 100%;
+      object-fit: cover;
     }
 
     &.cumulative,
@@ -79,6 +83,8 @@
 
     &__avatar {
       border-radius: 16px;
+      width: 120px;
+      height: 120px;
 
       & > img {
         border-radius: 14px;

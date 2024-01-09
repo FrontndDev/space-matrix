@@ -1,6 +1,6 @@
 <template>
   <div
-      class="tab"
+      class="tab-matrix"
       :class="[{ active: active, indicator: props.tab.indicator }, props.type]"
       @click="emit('tab', props.tab)"
   >
