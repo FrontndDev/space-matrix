@@ -23,16 +23,13 @@ export default {
       ).then(response => {
         console.log(response.data)
         commit('SET_PENDING_BOOSTERS', response.data)
+        commit('partners/SET_COUNT_PENDING_BOOSTERS', response.data?.count, { root: true })
       })
     },
   },
   mutations: {
     SET_PENDING_BOOSTERS(state: any, boostersPending: any) {
       state.boostersPending = boostersPending
-    },
-    CHANGE_PAGE_BOOSTER(state: any, id: number) {
-      state.pagePartnerID = id
     }
   },
-  getters: {}
 }

@@ -12,9 +12,10 @@ export default {
     return {
       partnersExposed: {} as IPartners,
       partnersPending: {} as IPartners,
-      pagePartnerID: 1 as number,
-      pageTabID: 1 as number,
+      littleTabID: 1 as number,
+      bigTabID: 1 as number,
       infinityPartners: [],
+      countPendingBoosters: null
     }
   },
   actions: {
@@ -30,6 +31,7 @@ export default {
       }
     ).then(response => {
         console.log(response.data)
+        commit('CHANGE_BIG_TAB', 1)
         commit('SET_EXPOSED_PARTNERS', response.data)
       })
     },
@@ -60,7 +62,7 @@ export default {
       API.placementExistMatrix(data).then(response => {
         console.log('exposePartner', response)
       })
-    }
+    },
   },
   mutations: {
     SET_EXPOSED_PARTNERS(state: any, partnersExposed: Object) {
@@ -69,14 +71,25 @@ export default {
     SET_PENDING_PARTNERS(state: any, partnersPending: Object) {
       state.partnersPending = partnersPending
     },
-    CHANGE_PAGE_PARTNER(state: any, id: number) {
-      state.pagePartnerID = id
+    CHANGE_LITTLE_TAB(state: any, id: number) {
+      state.littleTabID = id
     },
-    CHANGE_PAGE_TAB(state: any, id: number) {
-      state.pageTabID = id
+    CHANGE_BIG_TAB(state: any, id: number) {
+      console.log(state)
+      switch (id) {
+        case 1:
+          state.partnersPending.count === 0 ? state.littleTabID = 2 : state.littleTabID = 1
+          break;
+        case 2:
+          state.countPendingBoosters === 0 ? state.littleTabID = 4 : state.littleTabID = 3
+          break;
+      }
     },
     SET_INFINITY_PARTNERS(state: any, infinityPartners: any) {
       state.infinityPartners = infinityPartners
+    },
+    SET_COUNT_PENDING_BOOSTERS(state: any, count: number) {
+      state.countPendingBoosters = count
     }
   },
   getters: {}

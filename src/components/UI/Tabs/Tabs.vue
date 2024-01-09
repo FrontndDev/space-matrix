@@ -22,7 +22,7 @@ import {
   Ref,
   ref,
 } from "vue";
-import {useStore} from "vuex";
+import { useStore } from "vuex";
 
 const props = defineProps({
   type: {
@@ -47,9 +47,15 @@ onBeforeMount(() => tab.value = props.tabs[0])
 
 const emit = defineEmits(['open-cells', 'toggle-expose-tabs'])
 const clickTab = (id: number) => {
+
+  if (props.type === 'little') {
+    store.commit('partners/CHANGE_LITTLE_TAB', id)
+  } else if (props.type === 'big') {
+    store.commit('partners/CHANGE_BIG_TAB', id)
+  }
+
   emit('open-cells', id)
   emit('toggle-expose-tabs', id)
-  store.commit('partners/CHANGE_PAGE_PARTNER', id)
 }
 </script>
 
