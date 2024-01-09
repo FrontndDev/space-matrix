@@ -7,7 +7,7 @@
       <PartnerCell
           :type="firstCeilIsCumulative ? 'cumulative' : 'profitable'"
           :ceil="firstCeil"
-          @open-m-matrix-partner="emit('open-m-matrix-partner')"
+          @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
           v-if="firstCeil?.matrix"
       />
       <AddPartnerCell
@@ -21,7 +21,7 @@
       <PartnerCell
           :type="secondCeilIsCumulative ? 'cumulative' : 'profitable'"
           :ceil="secondCeil"
-          @open-m-matrix-partner="emit('open-m-matrix-partner')"
+          @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
           v-if="secondCeil?.matrix"
       />
       <AddPartnerCell
@@ -49,7 +49,12 @@ import {
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
-const emit = defineEmits(['open-m-matrix-partner', 'open-m-add-partner', 'set-position-for-partner'])
+const emit = defineEmits([
+  'open-m-matrix-partner',
+  'open-m-add-partner',
+  'set-position-for-partner',
+  'select-partner',
+])
 
 const store = useStore()
 
@@ -76,6 +81,11 @@ const openMAddPartner = (pos: IPosition) => {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
   }
+}
+
+const openMMatrixPartner = (ceil: Ceil) => {
+  emit('open-m-matrix-partner')
+  emit('select-partner', ceil)
 }
 </script>
 

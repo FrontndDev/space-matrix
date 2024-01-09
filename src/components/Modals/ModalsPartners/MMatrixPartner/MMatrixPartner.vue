@@ -12,6 +12,7 @@
           <PartnerCell
               type="cumulative"
               size="small"
+              :ceil="selectedPartner"
           />
         </div>
         <div class="modal-matrix-partner__block">
@@ -58,13 +59,18 @@ import InfinityPartnerCard from "../../../InfinityPartnerCard/InfinityPartnerCar
 import { useStore } from "vuex";
 import {
   computed,
+  inject,
   Ref
 } from "vue";
-import { Ceils } from "../../../../interfaces/store.interface.ts";
+import {
+  Ceil,
+  Ceils
+} from "../../../../interfaces/store.interface.ts";
 
 const store = useStore()
-
 const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection?.['1'])
+
+const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 
 const firstCeil: Ref = computed(() => ceils.value?.['1'])
 </script>
