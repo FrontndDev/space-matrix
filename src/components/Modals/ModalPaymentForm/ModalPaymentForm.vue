@@ -4,6 +4,7 @@
       <div class="modal__content">
         <div class="modal-payment-form">
           <div v-html="store.state.paymentForm" />
+          <Preloader :with-text="true" v-if="!store.state.paymentForm"/>
         </div>
         <div @click="$emit('close-modal')" class="modal__overlay"></div>
       </div>
@@ -13,6 +14,7 @@
 
 <script setup lang="ts">
 import { useStore } from "vuex";
+import Preloader from "../../UI/Preloader/Preloader.vue";
 
 const store = useStore()
 
@@ -25,6 +27,6 @@ const props = defineProps({
 
 </script>
 
-<style scoped>
-@import "_modalPaymentForm.scss";
+<style scoped lang="scss">
+@import "modalPaymentForm";
 </style>

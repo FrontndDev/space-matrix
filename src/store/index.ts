@@ -24,7 +24,7 @@ export default createStore({
         selectedType: {} as Type,
         listOfTypes: {} as ListOfTypes,
         viewLastOwn: {} as ViewLastOwn,
-        paymentForm: {}
+        paymentForm: null
     },
     actions: {
         getListOfTypes({ commit }: ActionContext<any, any>, category = 'dream-ton') {
@@ -44,6 +44,7 @@ export default createStore({
             })
         },
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
+            commit('SET_PAYMENT_FORM', null)
             API.getPaymentForm(matrixType).then(response => {
                 commit('SET_PAYMENT_FORM', response.data.html)
                 // @ts-ignore
