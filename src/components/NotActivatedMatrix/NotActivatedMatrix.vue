@@ -8,13 +8,13 @@
     <div class="not-activated-matrix__text">
       <h3>Вы еще не активировали эту матрицу</h3>
       <div class="text__column">
-        {{ props.viewLastOwn?.ctaText }}
+        {{ props.matrixByType?.ctaText }}
 <!--        Заполните накопительные ячейки в предыдущей матрице, или активируйте её-->
 <!--        <span>со скидкой 50%</span>-->
       </div>
     </div>
     <ActivateButton
-        :price="props.viewLastOwn?.matrixConfig.activationPrice ?? 0"
+        :price="props.matrixByType?.matrixConfig.activationPrice ?? 0"
         @click="openPaymentForm"
     />
   </div>
@@ -22,7 +22,10 @@
 
 <script setup lang="ts">
 import ActivateButton from "../UI/ActivateButton/ActivateButton.vue";
-import {Type, ViewLastOwn} from "../../interfaces/store.interface.ts";
+import {
+  IMatrix,
+  Type,
+} from "../../interfaces/store.interface.ts";
 import {computed, PropType, Ref} from "vue";
 import { useStore } from "vuex";
 
@@ -31,8 +34,8 @@ const store = useStore()
 const selectedType: Ref<Type> = computed(() => store.state.selectedType)
 
 const props = defineProps({
-  viewLastOwn: {
-    type: Object as PropType<ViewLastOwn>,
+  matrixByType: {
+    type: Object as PropType<IMatrix>,
     required: true,
   }
 })

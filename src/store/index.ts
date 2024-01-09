@@ -7,7 +7,7 @@ import {
 import {
     ListOfTypes,
     Type,
-    ViewLastOwn
+    IMatrix
 } from "../interfaces/store.interface.ts";
 
 import * as API from '../api/index.ts'
@@ -23,7 +23,8 @@ export default createStore({
     state: {
         selectedType: {} as Type,
         listOfTypes: {} as ListOfTypes,
-        viewLastOwn: {} as ViewLastOwn,
+        matrixByType: {} as IMatrix,
+        matrixById: {} as IMatrix,
         paymentForm: null as string | null
     },
     actions: {
@@ -37,10 +38,14 @@ export default createStore({
                 API.setDataToLS(key, response.data)
             })
         },
-        getViewLastOwn({ commit }: ActionContext<any, any>, matrixTypeOrId: string | number) {
-            API.getViewLastOwn(matrixTypeOrId).then(response => {
-                console.log('response.data', response.data)
-                commit('SET_VIEW_LAST_OWN', response.data)
+        getMatrixByType({ commit }: { commit: Commit }, matrixType: string) {
+            API.getMatrix(matrixType).then(response => {
+                commit('SET_MATRIX_BY_TYPE', response.data)
+            })
+        },
+        getMatrixById({ commit }: { commit: Commit }, matrixId: number) {
+            API.getMatrix(matrixId).then(response => {
+                commit('SET_MATRIX_BY_ID', response.data)
             })
         },
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
@@ -60,8 +65,11 @@ export default createStore({
         SET_LIST_OF_TYPES(state: any, list: ListOfTypes) {
             state.listOfTypes = list
         },
-        SET_VIEW_LAST_OWN(state: any, data: ViewLastOwn) {
-            state.viewLastOwn = data
+        SET_MATRIX_BY_TYPE(state: any, data: IMatrix) {
+            state.matrixByType = data
+        },
+        SET_MATRIX_BY_ID(state: any, data: IMatrix) {
+            state.matrixById = data
         },
         SET_SELECTED_TYPE(state: any, type: Type | undefined) {
             state.selectedType = type

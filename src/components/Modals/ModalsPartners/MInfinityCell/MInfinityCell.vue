@@ -30,6 +30,8 @@ import { useStore } from "vuex";
 const store = useStore()
 
 const infinityPartners: ComputedRef = computed(() => store.state.partners.infinityPartners)
+
+
 </script>
 
 <style scoped lang="scss">

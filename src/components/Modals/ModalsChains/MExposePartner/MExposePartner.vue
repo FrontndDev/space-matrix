@@ -107,7 +107,7 @@ const toggleExposeTabs = (id: number) => {
 
 const store = useStore()
 
-const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection?.['1'])
+const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
 
 const firstCeil: Ref = computed(() => ceils.value?.['1'])
 </script>

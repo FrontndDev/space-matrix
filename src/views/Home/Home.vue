@@ -5,8 +5,8 @@
         <div class="home__matrices">
           <MatrixHeader style="grid-area: header;"/>
 
-          <template v-if="Object.keys(store.state.viewLastOwn).length">
-            <div class="home__matrices-inner" v-if="!store.state.viewLastOwn?.ctaText">
+          <template v-if="Object.keys(store.state.matrixByType).length">
+            <div class="home__matrices-inner" v-if="!store.state.matrixByType?.ctaText">
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
                   @open-m-add-partner="openModalPartner(3)"
@@ -21,13 +21,13 @@
             </div>
 
             <NotActivatedMatrix
-                :view-last-own="store.state.viewLastOwn"
+                :matrix-by-type="store.state.matrixByType"
                 @open-payment-form="toggleModalPaymentForm = true"
-                v-if="store.state.viewLastOwn?.ctaText"
+                v-if="store.state.matrixByType?.ctaText"
             />
             <TimeActivatedMatrix v-if="false"/>
           </template>
-          <div class="home__preloader" v-if="!Object.keys(store.state.viewLastOwn).length">
+          <div class="home__preloader" v-if="!Object.keys(store.state.matrixByType).length">
             <Preloader :with-text="true"/>
           </div>
 
@@ -56,6 +56,8 @@
         @open-m-add-partner="openModalPartner(3)"
         @open-partner-waiting="openModalPartner(5)"
         @close-modal="closeModal"
+
+        @set-position-for-partner="setPositionForPartner"
     />
     <ModalChains
         :toggleModalChains="toggleModalChains"
@@ -102,7 +104,6 @@ import ModalNotification from "../../components/Modals/ModalNotification/ModalNo
 import { useStore } from "vuex";
 import Preloader from "../../components/UI/Preloader/Preloader.vue";
 import ModalPaymentForm from "../../components/Modals/ModalPaymentForm/ModalPaymentForm.vue";
-import { useRoute } from "vue-router";
 import { IPosition } from "../../interfaces/partners.interface.ts";
 import {
   Ceil,
@@ -121,18 +122,10 @@ const toggleModalNotification = ref(false)
 const toggleModalPaymentForm = ref(false)
 
 const store = useStore()
-const route = useRoute()
 
 const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
-const selectedPartner: Ref<Ceil> = ref({
-  depth: 0,
-  pos: 0,
-  matrix: null,
-  allowBuyClone: false,
-  allowBuyBoost: false,
-  fillRevard: [],
-  isInfinity: false,
-})
+
+const selectedPartner: Ref<Ceil | null> = ref(null)
 
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
@@ -164,6 +157,7 @@ const closeModal = () => {
   toggleModalChains.value = false
   toggleModalNotification.value = false
   toggleModalPaymentForm.value = false
+  selectedPartner.value = null
   document.body.style.overflow = 'auto'
 }
 

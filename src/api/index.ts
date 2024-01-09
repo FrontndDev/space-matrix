@@ -25,7 +25,7 @@ export async function getListOfTypes(category: string) {
   return getAsync(`/api/matrix/list-of-types/${category}`)
 }
 
-export async function getViewLastOwn(matrixTypeOrId: string | number) {
+export async function getMatrix(matrixTypeOrId: string | number) {
   return getAsync(`/api/matrix/${matrixTypeOrId}`)
 }
 

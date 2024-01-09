@@ -13,6 +13,7 @@
       <AddPartnerCell
           :type="firstCeilIsCumulative ? 'cumulative' : 'profitable'"
           :ceil="firstCeil"
+          :partners-count="partnersCount"
           @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
           v-if="!firstCeil?.matrix"
       />
@@ -27,6 +28,7 @@
       <AddPartnerCell
           :type="secondCeilIsCumulative ? 'cumulative' : 'profitable'"
           :ceil="secondCeil"
+          :partners-count="partnersCount"
           @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
           v-if="!secondCeil?.matrix"
       />
@@ -60,7 +62,7 @@ const store = useStore()
 
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 
-const ceils: ComputedRef<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection?.['1'])
+const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
 
 const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['2'])
@@ -77,10 +79,10 @@ const getPosition = (depth: number, pos: number): IPosition => {
 }
 
 const openMAddPartner = (pos: IPosition) => {
-  if (partnersCount.value) {
+  // if (partnersCount.value) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
-  }
+  // }
 }
 
 const openMMatrixPartner = (ceil: Ceil) => {

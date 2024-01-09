@@ -23,7 +23,7 @@
 
     <div v-if="props.type == 'disable'" class="add-partner-cell__subtitle">Заполните левую ячейку</div>
     <div v-else-if="props.type == 'loading'" class="add-partner-cell__subtitle">Идет загрузка...</div>
-    <div v-else class="add-partner-cell__subtitle">Доступно ({{ partnersCount }})</div>
+    <div v-else class="add-partner-cell__subtitle">Доступно ({{ props.partnersCount }})</div>
 
     <CellType
         :size="props.size"
@@ -49,6 +49,10 @@ const props = defineProps({
     type: Object as PropType<Ceil>,
     required: true,
   },
+  partnersCount: {
+    type: Number,
+    required: true,
+  },
   type: {
     type: String,
     default: 'cumulative'
@@ -66,8 +70,6 @@ const props = defineProps({
 
 const emit = defineEmits(['open-m-add-partner'])
 
-const store = useStore()
-
 const openMAddPartner = () => {
   if (props.type === 'disable') return
   emit('open-m-add-partner')
@@ -81,8 +83,6 @@ const fillReward = computed(() => {
     'freeze': getFilteredRewards('freeze')?.value.amount
   }
 })
-
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 </script>
 
 <style scoped lang="scss">

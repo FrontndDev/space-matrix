@@ -20,7 +20,7 @@ export interface IPartnersList {
     is_booster: boolean;
     number: number;
     binstatus: IBinStatus[];
-    immutable: boolean;
+    immutable?: boolean;
 }
 
 export interface IPartners {
@@ -32,6 +32,7 @@ export interface IGetPendingBoostersParams {
     matrixFilterUserId: number;
     matrixFilterPageId: number;
     filter: number;
+    isPartnerMatrix?: boolean;
 }
 
 export interface IPosition {

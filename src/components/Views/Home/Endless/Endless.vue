@@ -36,7 +36,7 @@ const emit = defineEmits(['open-m-infinity-cell', 'open-m-add-partner', 'set-pos
 const store = useStore()
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 
-const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection['1'])
+const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection['1'])
 const thirdCeil: Ref<Ceil> = computed(() => ceils.value?.['3'])
 
 const getPosition = (depth: number, pos: number): IPosition => {

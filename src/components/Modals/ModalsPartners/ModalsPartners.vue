@@ -10,7 +10,7 @@
         />
         <MMatrixPartner
             @open-m-infinity-cell="$emit('open-m-infinity-cell')"
-            @open-m-add-partner="$emit('open-m-add-partner')"
+            @open-m-add-partner="openMAddPartner"
             @close-modal="$emit('close-modal')"
             v-else-if="props.openModalPartners === 2"
         />
@@ -41,7 +41,7 @@ import MMatrixPartner from "./MMatrixPartner/MMatrixPartner.vue";
 import MAddPartner from "./MAddPartner/MAddPartner.vue";
 import MPartnerWaiting from "./MPartnerWaiting/MPartnerWaiting.vue";
 import MAddpartnerInfinity from "./MAddPartnerInfinity/MAddpartnerInfinity.vue";
-
+import { IPosition } from "../../../interfaces/partners.interface.ts";
 
 const props = defineProps({
   toggleModalPartners: {
@@ -53,6 +53,13 @@ const props = defineProps({
     default: 0
   },
 })
+
+const emit = defineEmits(['open-m-add-partner', 'set-position-for-partner'])
+
+const openMAddPartner = (pos: IPosition) => {
+  emit('set-position-for-partner', pos)
+  emit('open-m-add-partner')
+}
 </script>
 
 <style lang="scss" scoped>

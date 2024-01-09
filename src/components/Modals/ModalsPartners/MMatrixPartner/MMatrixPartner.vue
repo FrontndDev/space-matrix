@@ -21,16 +21,39 @@
           <div class="modal-matrix-partner__savings">
             <div class="modal-matrix-partner__block-title">Накопительные</div>
             <div class="savings__partners savings__partners_mt-16">
+              <!--       FIRST CEIL        -->
               <PartnerCell
-                  size="small"
-                  cellType="boost"
-                  @open-m-matrix-partner="$emit('open-m-matrix-partner')"
-              />
-              <AddPartnerCell
-                  type="infinity"
+                  type="cumulative"
                   size="small"
                   :ceil="firstCeil"
-                  @open-m-add-partner="$emit('open-m-add-partner')"
+                  @open-m-matrix-partner="$emit('open-m-matrix-partner')"
+                  v-if="firstCeil?.matrix"
+              />
+<!--              cellType="boost"-->
+              <AddPartnerCell
+                  type="cumulative"
+                  size="small"
+                  :ceil="firstCeil"
+                  :partners-count="partnersCount"
+                  @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
+                  v-if="!firstCeil?.matrix"
+              />
+
+              <!--       SECOND CEIL        -->
+              <PartnerCell
+                  size="small"
+                  :ceil="secondCeil"
+                  @open-m-matrix-partner="$emit('open-m-matrix-partner')"
+                  v-if="secondCeil?.matrix"
+              />
+<!--              cellType="boost"-->
+              <AddPartnerCell
+                  type="cumulative"
+                  size="small"
+                  :ceil="secondCeil"
+                  :partners-count="partnersCount"
+                  @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
+                  v-if="!secondCeil?.matrix"
               />
             </div>
           </div>
@@ -39,9 +62,10 @@
             <div class="modal-matrix-partner__block-title">Бесконечные</div>
             <InfinityPartnerCard
                 modal="m-matrix-partner"
-                :ceil="firstCeil"
+                :partners-count="122"
                 @open-m-infinity-cell="$emit('open-m-infinity-cell')"
             />
+<!--            :ceil="selectedPartnerCeil"-->
           </div>
         </div>
       </div>
@@ -60,22 +84,54 @@ import InfinityPartnerCard from "../../../InfinityPartnerCard/InfinityPartnerCar
 import { useStore } from "vuex";
 import {
   computed,
+  ComputedRef,
   inject,
+  onMounted,
   Ref
 } from "vue";
 import {
   Ceil,
-  Ceils
+  Ceils,
 } from "../../../../interfaces/store.interface.ts";
+import { IPosition } from "../../../../interfaces/partners.interface.ts";
+
+const emit = defineEmits(['open-m-add-partner'])
 
 const store = useStore()
-const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollection?.['1'])
+
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.count)
+
+const ceils: Ref<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 
-const firstCeil: Ref = computed(() => ceils.value?.['1'])
+const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
+const secondCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['2'])
+
+const infinityPartners: ComputedRef = computed(() => store.state.partners.infinityPartners.list)
+
+const getPosition = (depth: number, pos: number): IPosition => {
+  return { depth, pos }
+}
+
+const openMAddPartner = (pos: IPosition) => {
+  emit('open-m-add-partner', pos)
+}
+
+onMounted(() => {
+  if (selectedPartner.value.matrix) {
+    store.dispatch('getMatrixById', selectedPartner.value.matrix.id)
+    store.dispatch('partners/getPendingPartners',
+        {
+          matrixFilterUserId: +selectedPartner.value?.matrix.owner.id,
+          matrixFilterPageId: 1,
+          isPartnerMatrix: true
+        }
+    )
+  }
+})
 </script>
 
-<style scoped>
-@import "_mMatrixPartner.scss";
+<style scoped lang="scss">
+@import "mMatrixPartner";
 </style>

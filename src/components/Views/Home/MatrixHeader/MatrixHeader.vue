@@ -12,9 +12,6 @@
           :opened="listOfTypes.opened"
           @click="selectDButton"
       />
-<!--      :price="(idx + 1) * 10"-->
-<!--      :class="button.class"-->
-<!--      :isTime="button.class"-->
     </div>
   </div>
 </template>
@@ -49,13 +46,13 @@ const route = useRoute()
 
 const selectType = (type: Type) => {
   store.commit('SET_SELECTED_TYPE', type)
-  store.dispatch('getViewLastOwn', type.type)
+  store.dispatch('getMatrixByType', type.type)
   router.push(`${baseUrl}/${type.type}`)
 }
 
 const selectDButton = (type: Type) => {
   if (selectedType.value.type !== type.type) {
-    store.commit('SET_VIEW_LAST_OWN', {})
+    store.commit('SET_MATRIX_BY_TYPE', {})
   }
   selectType(type)
 }

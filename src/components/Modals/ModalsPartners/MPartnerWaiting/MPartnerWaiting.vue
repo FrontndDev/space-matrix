@@ -66,7 +66,7 @@ const selectCell = (cell: IPartnersList) => {
 const exposePartner = () => {
   if (selectedCell.value) {
     const data: IExposePartnerParams = {
-      matrix_id: +store.state.viewLastOwn.matrix?.id,
+      matrix_id: +store.state.matrixByType.matrix?.id,
       child_id: +selectedCell.value?.id,
       depth: partnerPos.value.depth,
       pos: partnerPos.value.pos

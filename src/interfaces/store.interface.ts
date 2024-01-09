@@ -80,9 +80,9 @@ export interface Ceils {
     [key: string]: Ceil
 }
 
-export interface ViewLastOwn {
-    ctaText: string;
-    in_queue: boolean;
+export interface IMatrix {
+    ctaText?: string;
+    in_queue?: boolean;
     matrix: Matrix | null;
     matrixConfig: MatrixConfig;
     ceilsCollection?: CeilsCollection;
