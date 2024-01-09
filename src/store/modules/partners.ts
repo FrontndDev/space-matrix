@@ -13,6 +13,7 @@ export default {
       partnersExposed: {} as IPartners,
       partnersPending: {} as IPartners,
       pagePartnerID: 1 as number,
+      pageTabID: 1 as number,
       infinityPartners: [],
     }
   },
@@ -49,13 +50,13 @@ export default {
       })
     },
 
-    getInfinityPartners({ commit }: any, parentId: number) {
+    getInfinityPartners({ commit }: { commit: Commit }, parentId: number) {
       API.getListOfInfinity(parentId).then(response => {
         console.log('getInfinityPartners', response.data)
         commit('SET_INFINITY_PARTNERS', response.data.list)
       })
     },
-    exposePartner({ commit }: any, data: IExposePartnerParams) {
+    exposePartner({ commit }: { commit: Commit }, data: IExposePartnerParams) {
       API.placementExistMatrix(data).then(response => {
         console.log('exposePartner', response)
       })
@@ -70,6 +71,9 @@ export default {
     },
     CHANGE_PAGE_PARTNER(state: any, id: number) {
       state.pagePartnerID = id
+    },
+    CHANGE_PAGE_TAB(state: any, id: number) {
+      state.pageTabID = id
     },
     SET_INFINITY_PARTNERS(state: any, infinityPartners: any) {
       state.infinityPartners = infinityPartners

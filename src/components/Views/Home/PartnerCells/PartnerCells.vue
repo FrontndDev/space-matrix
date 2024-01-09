@@ -9,13 +9,13 @@
     </div>
     <div class="partners-cells__container">
       <SmallCell
-          v-for="(cell, idx) in partnersExposed?.list"
+          v-for="(cell, idx) in partnersPending?.list"
           :key="idx"
           :cell="cell"
           v-if="pagePartnerID === 1"
       />
       <SmallCell
-          v-for="(cell, idx) in partnersPending?.list"
+          v-for="(cell, idx) in partnersExposed?.list"
           :key="idx"
           :cell="cell"
           v-if="pagePartnerID === 2"
@@ -26,10 +26,10 @@
   </div>
   <EmptyCells
       :cellsType="'partners'"
-      v-if="partnersExposed.list?.length === 0 && pagePartnerID === 1 || partnersPending.list?.length === 0 && pagePartnerID === 2"
+      v-if="partnersPending.list?.length === 0 && pagePartnerID === 1 || partnersExposed.list?.length === 0 && pagePartnerID === 2"
   />
 
-  <Pagination v-if="partnersExposed.count !== 0" />
+<!--  <Pagination v-if="partnersExposed.count !== 0" />-->
 </template>
 
 <script setup lang="ts">
@@ -51,19 +51,19 @@ const store = useStore()
 const partnersExposed: ComputedRef<IPartners> = computed(() => store.state.partners.partnersExposed)
 const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.partnersPending)
 
-const pagePartnerID: ComputedRef<number> = computed(() => store.state.partners.pagePartnerID)
+const pagePartnerID = computed(() => store.state.partners.pagePartnerID)
 
 const tabs = reactive([
   {
     id: 1,
-    name: 'Выставленные',
-    value: computed(() => partnersExposed.value.count)
+    name: 'В ожидании',
+    value: computed(() => partnersPending.value.count)
   },
   {
     id: 2,
-    name: 'В ожидании',
-    value: computed(() => partnersPending.value.count)
-  }
+    name: 'Выставленные',
+    value: computed(() => partnersExposed.value.count)
+  },
 ]);
 
 watch(() => store.state.selectedType, () => {
@@ -89,27 +89,6 @@ watch(() => store.state.selectedType, () => {
   )
 })
 
-
-// const smallCells = ref([
-//   { type: 'partners', state: 'exhibited', id: 0 },
-//   { type: 'partners', state: 'exhibited', id: 1 },
-//   { type: 'partners', state: 'waiting', id: 2 },
-//   { type: 'partners', state: 'exhibited', id: 3 },
-//   { type: 'partners', state: 'exhibited', id: 4 },
-//   { type: 'partners', state: 'exhibited', id: 5 },
-//   { type: 'partners', state: 'exhibited', id: 6 },
-//   { type: 'partners', state: 'exhibited', id: 7 },
-//   { type: 'partners', state: 'waiting', id: 8 },
-//   { type: 'partners', state: 'exhibited', id: 9 },
-//   { type: 'partners', state: 'exhibited', id: 10 },
-//   { type: 'partners', state: 'exhibited', id: 11 },
-//   { type: 'partners', state: 'exhibited', id: 12 },
-//   { type: 'partners', state: 'exhibited', id: 13},
-//   { type: 'partners', state: 'waiting', id: 14 },
-//   { type: 'partners', state: 'exhibited', id: 15 },
-//   { type: 'partners', state: 'exhibited', id: 16 },
-//   { type: 'partners', state: 'exhibited', id: 17 },
-// ])
 </script>
 
 <style scoped lang="scss">

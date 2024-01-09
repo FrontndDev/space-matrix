@@ -17,5 +17,5 @@ export default defineConfig({
     build: {
         manifest: true
     },
-    base: process.env.VITE_VUE_APP_BASE_ROUTER_URL
+    base: '/app/matrix/v'
 })

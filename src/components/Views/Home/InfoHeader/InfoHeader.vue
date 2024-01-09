@@ -2,19 +2,19 @@
   <div class="header">
     <Tabs
         :tabs="tabs"
-        @open-cells="id => $emit('open-cells', id)"
+        @open-cells="openCells"
     />
     <div v-if="props.infoHeader === 1" class="header__selects">
       <Select
           :items="selectItemsPartners"
-          v-show="pagePartnerID !== 2"
+          v-show="pagePartnerID !== 1"
           @select="changeLineOfPartners"
       />
       <Select :items="selectItemsPartners"/>
     </div>
     <div v-if="props.infoHeader === 2" class="header__selects">
-      <Select :items="selectItemsBoost" v-show="pagePartnerID !== 4"/>
-      <Select :items="selectItemsBoost"/>
+      <Select :items="selectItemsBoost" v-show="pagePartnerID !== 3 && pageTabID === 2" />a
+      <Select :items="selectItemsBoost"/>f
     </div>
     <ChainsButton v-if="props.infoHeader === 3">
       <span>Примеры цепочек</span>
@@ -41,8 +41,10 @@ const props = defineProps({
 })
 
 const store = useStore()
+const emit = defineEmits(['open-cells'])
 
 const pagePartnerID = computed(() => store.state.partners.pagePartnerID)
+const pageTabID = computed(() => store.state.partners.pageTabID)
 
 const changeLineOfPartners = (id: number) => {
   store.dispatch('partners/getExposedPartners', {
@@ -50,6 +52,11 @@ const changeLineOfPartners = (id: number) => {
     matrixFilterPageId: 1,
     filter: id
   })
+}
+
+const openCells = (id: number) => {
+  emit('open-cells', id)
+  store.commit('partners/CHANGE_PAGE_TAB', id)
 }
 
 const tabs = reactive([

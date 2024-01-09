@@ -41,14 +41,14 @@ const boostersPending: ComputedRef<IPartners> = computed(() => store.state.boost
 const tabs = reactive([
   {
     id: 3,
-    name: 'Выставленные',
-    value: 110
+    name: 'В ожидании',
+    value: computed(() => boostersPending.value.count)
   },
   {
     id: 4,
-    name: 'В ожидании',
-    value: computed(() => boostersPending.value.count)
-  }
+    name: 'Выставленные',
+    value: 110
+  },
 ]);
 
 

@@ -17,7 +17,7 @@ function setGlobalConfig(token: string | null) {
         "Accept": "application/json",
         "x-auth": getCookie('dasdasdaddjdj'),
         // @ts-ignore
-        "X-SPACE-ID": window.SpaceId,
+        "X-SPACE-ID": `${window.SpaceId}:${window.SpaceIdHash}`,
         // "VerificationToken": import.meta.env.VUE_APP_VEREFICATION_TOKEN
     };
 
