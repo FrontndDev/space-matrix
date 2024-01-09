@@ -10,6 +10,7 @@
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
                   @open-m-add-partner="openModalPartner(3)"
+                  @set-position-for-partner="setPositionForPartner"
               />
               <Endless
                   @open-m-infinity-cell="openModalPartner(1)"
@@ -64,8 +65,8 @@
         @open-expose-partner="openModalChain(4)"
     />
     <ModalNotification
+        statusNotification="failure"
         :toggleModalNotification="toggleModalNotification"
-        :statusNotification="'failure'"
         @close-modal="closeModal"
     />
     <ModalPaymentForm
@@ -87,6 +88,8 @@ import ModalsPartners from "../../components/Modals/ModalsPartners/ModalsPartner
 import NotActivatedMatrix from "../../components/NotActivatedMatrix/NotActivatedMatrix.vue";
 
 import {
+  provide,
+  Ref,
   ref
 } from "vue";
 import TimeActivatedMatrix from "../../components/TimeActivatedMatrix/TimeActivatedMatrix.vue";
@@ -98,6 +101,7 @@ import { useStore } from "vuex";
 import Preloader from "../../components/UI/Preloader/Preloader.vue";
 import ModalPaymentForm from "../../components/Modals/ModalPaymentForm/ModalPaymentForm.vue";
 import { useRoute } from "vue-router";
+import { IPosition } from "../../interfaces/partners.interface.ts";
 
 const isCells = ref(1)
 
@@ -112,7 +116,11 @@ const toggleModalNotification = ref(false)
 const toggleModalPaymentForm = ref(false)
 
 const store = useStore()
-const route = useRoute();
+const route = useRoute()
+
+const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
+
+provide('partnerPos', partnerPos)
 
 const openModalPartner = (num: number) => {
   toggleModalPartners.value = true
@@ -144,8 +152,12 @@ const closeModal = () => {
   document.body.style.overflow = 'auto'
 }
 
+const setPositionForPartner = (pos: IPosition) => {
+  partnerPos.value = pos
+}
+
 const copyLink = () => {
-  const link = window.location.origin + route.path + (store.state.selectedType?.title ?? '')
+  const link = window.location.origin + route.path + '/' + (store.state.selectedType?.title ?? '')
   navigator.clipboard.writeText(link)
 }
 </script>

@@ -13,7 +13,7 @@
       <AddPartnerCell
           type="cumulative"
           :ceil="firstCeil"
-          @open-m-add-partner="emit('open-m-add-partner')"
+          @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
           v-if="!firstCeil?.matrix"
       />
 
@@ -25,9 +25,9 @@
           v-if="secondCeil?.matrix"
       />
       <AddPartnerCell
-          :type="!firstCeil?.matrix ? 'disable' : 'cumulative'"
+          type="cumulative"
           :ceil="secondCeil"
-          @open-m-add-partner="emit('open-m-add-partner')"
+          @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
           v-if="!secondCeil?.matrix"
       />
     </div>
@@ -44,8 +44,9 @@ import {
   Ref
 } from "vue";
 import { Ceils } from "../../../../interfaces/store.interface.ts";
+import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
-const emit = defineEmits(['open-m-matrix-partner', 'open-m-add-partner'])
+const emit = defineEmits(['open-m-matrix-partner', 'open-m-add-partner', 'set-position-for-partner'])
 
 const store = useStore()
 
@@ -53,6 +54,15 @@ const ceils: Ref<Ceils> = computed(() => store.state.viewLastOwn?.ceilsCollectio
 
 const firstCeil: Ref = computed(() => ceils.value?.['1'])
 const secondCeil: Ref = computed(() => ceils.value?.['2'])
+
+const getPosition = (depth: number, pos: number): IPosition => {
+  return { depth, pos }
+}
+
+const openMAddPartner = (pos: IPosition) => {
+  emit('open-m-add-partner')
+  emit('set-position-for-partner', pos)
+}
 </script>
 
 <style scoped lang="scss">

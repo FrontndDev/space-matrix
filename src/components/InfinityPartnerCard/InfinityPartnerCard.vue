@@ -35,6 +35,7 @@ import BonusItem from "./BonusItem/BonusItem.vue";
 import {
   computed,
   ComputedRef,
+  onMounted,
   PropType,
   ref
 } from "vue";
@@ -70,6 +71,10 @@ const fillReward = computed(() => {
     'cashout': getFilteredRewards('cashout').map(reward => reward.value.amount) as number[],
     'custom': getFilteredRewards('custom').map(reward => reward.value.amount) as number[],
   }
+})
+
+onMounted(() => {
+  // store.dispatch('partners/getInfinityPartners')
 })
 </script>
 

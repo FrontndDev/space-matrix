@@ -1,5 +1,7 @@
 import * as API from '../../api/index'
 import {
+  IExposePartner,
+  IExposePartnerParams,
   IGetPendingBoostersParams,
   IPartners
 } from "../../interfaces/partners.interface.ts";
@@ -52,6 +54,11 @@ export default {
       API.getListOfInfinity(parentId).then(response => {
         console.log('getInfinityPartners', response.data)
         commit('SET_INFINITY_PARTNERS', response.data)
+      })
+    },
+    exposePartner({ commit }: any, data: IExposePartnerParams) {
+      API.placementExistMatrix(data).then(response => {
+        console.log('exposePartner', response)
       })
     }
   },

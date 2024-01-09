@@ -1,4 +1,12 @@
-import { getAsync, postAsync } from "./config.ts";
+import {
+  getAsync,
+  postAsync,
+  putAsync
+} from "./config.ts";
+import {
+  IExposePartner,
+  IExposePartnerParams
+} from "../interfaces/partners.interface.ts";
 
 
 export function setDataToLS(key: string, data: any) {
@@ -34,6 +42,12 @@ export async function getListOfInfinity(parentId: number) {
 
 export async function filterOfActivatedMatrix({ matrixType, matrixFilterUserId, matrixFilterPageId, filter }: any) {
   return postAsync(`/api/matrix/get-clones/${matrixType}/${matrixFilterUserId}/${matrixFilterPageId}`, { filter })
+}
+
+// PUT
+
+export async function placementExistMatrix(data: IExposePartnerParams) {
+  return putAsync('/api/matrix/placement/exist', data)
 }
 
 

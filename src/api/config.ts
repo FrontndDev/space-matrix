@@ -24,7 +24,7 @@ function setGlobalConfig(token: string | null) {
     return token ? { ...defaultSettings, "Authorization": 'Bearer ' + token } : defaultSettings
 }
 
-export async function putAsync(url: string, data: never[], checkError = true) {
+export async function putAsync(url: string, data: unknown, checkError = true) {
     try {
         let response = await axios.put(BASE_URL + url, data, { headers: setGlobalConfig(localStorage.getItem('token')) })
         // console.log(response)
@@ -65,9 +65,9 @@ export async function postAsync(url: string, data = {}, checkError = true) {
     return undefined
 }
 
-export async function getAsync(url: string, token = localStorage.getItem('token')) {
+export async function getAsync(url: string) {
     try {
-        let response = await axios.get(BASE_URL + url, { headers: setGlobalConfig(token) })
+        let response = await axios.get(BASE_URL + url, { headers: setGlobalConfig(localStorage.getItem('token')) })
 
         if (response.status === 200) {
             return response?.data
