@@ -3,10 +3,10 @@
     <h1>Мои матрицы</h1>
 
     <div class="matrix-header__buttons">
-      <Preloader v-if="!listOfTypes.types?.length"/>
+      <Preloader v-if="!listOfTypes?.types?.length"/>
       <DButton
           :class="{ active: selectedType?.type === type.type }"
-          v-for="type in listOfTypes.types"
+          v-for="type in listOfTypes?.types"
           :key="type.title"
           :type="type"
           :opened="listOfTypes.opened"
@@ -57,7 +57,7 @@ const selectDButton = (type: Type) => {
   selectType(type)
 }
 
-watch(() => listOfTypes.value.types?.length, () => {
+watch(() => listOfTypes.value?.types?.length, () => {
   const type = listOfTypes.value.types.find(type => type.type === route.params.type) ?? listOfTypes.value.types[0]
   selectType(type)
 })
