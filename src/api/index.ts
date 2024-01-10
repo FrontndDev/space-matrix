@@ -6,8 +6,6 @@ import {
 import {
   IExposePartnerParams
 } from "../interfaces/partners.interface.ts";
-import { IBuyCloneParams } from "../interfaces/store.interface.ts";
-
 
 export function setDataToLS(key: string, data: any) {
   localStorage.setItem(key, JSON.stringify(data))
