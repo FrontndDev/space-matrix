@@ -1,15 +1,15 @@
 <template>
   <div class="modal-add-partner">
-    <ModalHeader @close-modal="$emit('close-modal')">
+    <ModalHeader @close-modal="emit('close-modal')">
       Выставить партнера
     </ModalHeader>
     <div class="modal-add-partner__container">
-      <BuyBoostCell />
+      <BuyBoostCell v-if="thirdCeil.allowBuyClone"/>
       <AddPartnerCell
           type="profitable"
-          :ceil="firstCeil"
+          :ceil="thirdCeil"
           :partners-count="partnersCount"
-          @click="$emit('open-partner-waiting')"
+          @click="emit('open-partner-waiting')"
       />
     </div>
   </div>
@@ -23,16 +23,27 @@ import { useStore } from "vuex";
 import {
   computed,
   ComputedRef,
-  Ref
+  onMounted,
 } from "vue";
-import { Ceils } from "../../../../interfaces/store.interface.ts";
+import {
+  Ceil,
+  Ceils
+} from "../../../../interfaces/store.interface.ts";
+
+const emit = defineEmits(['close-modal', 'open-partner-waiting'])
 
 const store = useStore()
 
-const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
+const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
 
-const firstCeil: Ref = computed(() => ceils.value?.['1'])
+const thirdCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['3'])
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
+
+onMounted(() => {
+  if (!thirdCeil.value.allowBuyClone && thirdCeil.value.allowSniper && partnersCount.value) {
+    emit('open-partner-waiting')
+  }
+})
 </script>
 
 <style scoped>

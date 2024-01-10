@@ -23,16 +23,15 @@
             <div class="savings__partners savings__partners_mt-16">
               <!--       FIRST CEIL        -->
               <PartnerCell
-                  type="cumulative"
                   size="small"
+                  :type="getTypeForFirstCeil"
                   :ceil="firstCeil"
-                  @open-m-matrix-partner="$emit('open-m-matrix-partner')"
+                  @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
                   v-if="firstCeil?.matrix"
               />
-<!--              cellType="boost"-->
               <AddPartnerCell
-                  type="cumulative"
                   size="small"
+                  :type="getTypeForFirstCeil"
                   :ceil="firstCeil"
                   :partners-count="partnersCount"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
@@ -42,14 +41,14 @@
               <!--       SECOND CEIL        -->
               <PartnerCell
                   size="small"
+                  :type="getTypeForSecondCeil"
                   :ceil="secondCeil"
-                  @open-m-matrix-partner="$emit('open-m-matrix-partner')"
+                  @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
                   v-if="secondCeil?.matrix"
               />
-<!--              cellType="boost"-->
               <AddPartnerCell
-                  type="cumulative"
                   size="small"
+                  :type="getTypeForSecondCeil"
                   :ceil="secondCeil"
                   :partners-count="partnersCount"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
@@ -66,11 +65,11 @@
                 :partners-count="infinityPartners?.length ?? 0"
                 @open-m-infinity-cell="$emit('open-m-infinity-cell')"
             />
-<!--            :ceil="selectedPartnerCeil"-->
+            <!--            :ceil="selectedPartnerCeil"-->
           </div>
         </div>
       </div>
-      <CopyLink />
+      <CopyLink/>
     </div>
   </div>
 </template>
@@ -103,6 +102,7 @@ const emit = defineEmits([
   'open-m-add-partner',
   'open-m-infinity-cell',
   'open-m-matrix-partner',
+  'select-partner',
   'close-modal',
 ])
 
@@ -120,26 +120,69 @@ const thirdCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['3'])
 
 const infinityPartners: ComputedRef<IPartnersList[]> = computed(() => store.state.partners.infinityPartners)
 
+const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
+    !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
+)
+const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
+    !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
+)
+
+// TODO Не трогать!!! Хочу сделать покомпактнее!!!
+// const getCeilType = (num: number) => {
+//   let ceil: Ceil | null = null
+//   switch (num) {
+//     case 1:
+//       ceil = firstCeil.value
+//       break;
+//     case 2:
+//       ceil = secondCeil.value
+//       break;
+//     default:
+//       break;
+//   }
+// }
+
+const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
+  if (!firstCeil.value?.matrix) {
+    if (!store.state.matrixById.matrix) {
+      return 'loading'
+    }
+    if (!firstCeil.value?.allowSniper || !partnersCount.value) {
+      return 'disable'
+    }
+  }
+
+  return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
+})
+
+const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
+  if (!secondCeil.value?.matrix) {
+    if (!store.state.matrixById.matrix) {
+      return 'loading'
+    }
+    if (!secondCeil.value?.allowSniper || !partnersCount.value) {
+      return 'disable'
+    }
+  }
+
+  return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
+})
+
 const getPosition = (depth: number, pos: number): IPosition => {
   return { depth, pos }
 }
 
 const openMAddPartner = (pos: IPosition) => {
-  emit('open-m-add-partner', pos)
+  const ceil: Ceil = ceils.value[String(pos.pos)]
+  if (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone) {
+    emit('open-m-add-partner', pos)
+  }
 }
 
-onMounted(() => {
-  if (selectedPartner.value.matrix) {
-    store.dispatch('getMatrixById', selectedPartner.value.matrix.id)
-    store.dispatch('partners/getPendingPartners',
-        {
-          matrixFilterUserId: +selectedPartner.value?.matrix.owner.id,
-          matrixFilterPageId: 1,
-          isPartnerMatrix: true
-        }
-    )
-  }
-})
+const openMMatrixPartner = (ceil: Ceil) => {
+  emit('open-m-matrix-partner')
+  emit('select-partner', ceil)
+}
 </script>
 
 <style scoped lang="scss">

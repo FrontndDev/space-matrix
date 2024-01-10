@@ -4,12 +4,16 @@
       Выставить партнера
     </ModalHeader>
     <div class="modal-add-partner__container">
-      <BuyBoostCell />
+      <BuyBoostCell
+          @click="buyBooster"
+          v-if="getCeil.allowBuyClone"
+      />
       <AddPartnerCell
           :type="getCeilCumulative ? 'cumulative' : 'profitable'"
           :ceil="getCeil"
           :partners-count="partnersCount"
           @click="$emit('open-partner-waiting')"
+          v-if="getCeil.allowSniper && partnersCount"
       />
     </div>
   </div>
@@ -24,13 +28,17 @@ import {
   computed,
   ComputedRef,
   inject,
+  onMounted,
   Ref
 } from "vue";
 import {
   Ceil,
-  Ceils
+  Ceils,
+  IBuyBoosterParams
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
+
+const emit = defineEmits(['close-modal', 'open-partner-waiting'])
 
 const store = useStore()
 
@@ -53,8 +61,20 @@ const partnersCount: ComputedRef<number> = computed(() => {
     return store.state.partners.partnersPending.count
   }
 })
+
+const buyBooster = () => {
+  const data: IBuyBoosterParams = { matrix_id: 0, pos: 0, depth: 0 }
+  store.dispatch('buyBooster', data)
+  emit('close-modal')
+}
+
+onMounted(() => {
+  if (!getCeil.value.allowBuyClone && getCeil.value.allowSniper && partnersCount.value) {
+    emit('open-partner-waiting')
+  }
+})
 </script>
 
-<style scoped>
-@import "_mAddPartner.scss";
+<style scoped lang="scss">
+@import "mAddPartner";
 </style>

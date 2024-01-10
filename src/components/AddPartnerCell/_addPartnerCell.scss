@@ -26,12 +26,20 @@
       }
     }
 
-    &.disable {
+    &.disable,
+    &.disable2,
+    &.disable3 {
       background: $bg-base-light;
       cursor: auto;
 
       & path {
         fill: $text-base-light;
+      }
+    }
+
+    &.disable3 {
+      & > svg {
+        transform: rotate(45deg);
       }
     }
 
@@ -108,6 +116,7 @@
   }
 
   &.small {
+    padding: 16px 14px;
     width: 144px;
 
     .partner-cell__avatar {
@@ -130,8 +139,16 @@
     }
   }
 
-  &.small .add-partner-cell__title {
-    font-size: 12px;
+  &.small {
+    .add-partner-cell {
+      &__title {
+        font-size: 12px;
+      }
+
+      &__subtitle {
+        font-size: 10px;
+      }
+    }
   }
 }
 

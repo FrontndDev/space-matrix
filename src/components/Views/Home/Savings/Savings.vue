@@ -5,13 +5,13 @@
     <div class="savings__partners savings__partners_mt-16">
       <!--   FIRST CEIL    -->
       <PartnerCell
-          :type="firstCeilIsCumulative ? 'cumulative' : 'profitable'"
+          :type="getTypeForFirstCeil"
           :ceil="firstCeil"
           @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
           v-if="firstCeil?.matrix"
       />
       <AddPartnerCell
-          :type="firstCeilIsCumulative ? 'cumulative' : 'profitable'"
+          :type="getTypeForFirstCeil"
           :ceil="firstCeil"
           :partners-count="partnersCount"
           @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
@@ -20,13 +20,13 @@
 
       <!--   SECOND CEIL    -->
       <PartnerCell
-          :type="secondCeilIsCumulative ? 'cumulative' : 'profitable'"
+          :type="getTypeForSecondCeil"
           :ceil="secondCeil"
           @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
           v-if="secondCeil?.matrix"
       />
       <AddPartnerCell
-          :type="secondCeilIsCumulative ? 'cumulative' : 'profitable'"
+          :type="getTypeForSecondCeil"
           :ceil="secondCeil"
           :partners-count="partnersCount"
           @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
@@ -74,12 +74,29 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
 )
 
+const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
+  if (!firstCeil.value?.matrix && (!firstCeil.value.allowSniper || !partnersCount.value && !firstCeil.value.allowBuyClone)) {
+    return 'disable'
+  }
+
+  return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
+})
+
+const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
+  if (!secondCeil.value?.matrix && (!secondCeil.value.allowSniper || !partnersCount.value && !secondCeil.value.allowBuyClone)) {
+    return 'disable'
+  }
+
+  return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
+})
+
 const getPosition = (depth: number, pos: number): IPosition => {
   return { depth, pos }
 }
 
 const openMAddPartner = (pos: IPosition) => {
-  if (partnersCount.value) {
+  const ceil: Ceil = ceils.value[String(pos.pos)]
+  if (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
   }

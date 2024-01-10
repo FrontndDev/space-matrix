@@ -6,6 +6,7 @@ import {
 import {
   IExposePartnerParams
 } from "../interfaces/partners.interface.ts";
+import { IBuyCloneParams } from "../interfaces/store.interface.ts";
 
 
 export function setDataToLS(key: string, data: any) {
@@ -36,11 +37,14 @@ export async function getListOfInfinity(parentId: number) {
   return getAsync(`/api/matrix/list-of-infinity/${parentId}`)
 }
 
-
 // POST
 
 export async function filterOfActivatedMatrix({ matrixType, matrixFilterUserId, matrixFilterPageId, filter }: any) {
   return postAsync(`/api/matrix/get-clones/${matrixType}/${matrixFilterUserId}/${matrixFilterPageId}`, { filter })
+}
+
+export async function buyClone(data: IBuyBoosterParams) {
+  return postAsync('/api/matrix/placement/buyClone', data)
 }
 
 // PUT

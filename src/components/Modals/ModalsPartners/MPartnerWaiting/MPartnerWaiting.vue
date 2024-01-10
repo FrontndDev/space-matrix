@@ -1,6 +1,6 @@
 <template>
   <div class="modal-partner-waiting">
-    <ModalHeader @close-modal="$emit('close-modal')">
+    <ModalHeader @close-modal="emit('close-modal')">
       Партнеры в ожидании
     </ModalHeader>
     <div
@@ -24,7 +24,7 @@
     </div>
     <div class="modal-partner-waiting__buttons">
       <template v-if="selectedCell">
-        <CancelButton @click="$emit('open-m-add-partner')" />
+        <CancelButton @click="emit('open-m-add-partner')" />
         <ChainsButton @click="exposePartner">
           Выставить
         </ChainsButton>
@@ -52,10 +52,14 @@ import {
   IPosition
 } from "../../../../interfaces/partners.interface.ts";
 import Preloader from "../../../UI/Preloader/Preloader.vue";
+import { Ceil } from "../../../../interfaces/store.interface.ts";
+
+const emit = defineEmits(['close-modal', 'open-m-add-partner'])
 
 const store = useStore()
 const cells: ComputedRef<IPartnersList[]> = computed(() => store.state.partners.partnersPending?.list)
 
+const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 const partnerPos = inject('partnerPos') as Ref<IPosition>
 let selectedCell: Ref<IPartnersList | null> = ref(null)
 
@@ -64,14 +68,15 @@ const selectCell = (cell: IPartnersList) => {
 }
 
 const exposePartner = () => {
-  if (selectedCell.value) {
+  if (selectedCell.value && selectedPartner.value?.matrix) {
     const data: IExposePartnerParams = {
-      matrix_id: +store.state.matrixByType.matrix?.id,
+      matrix_id: +selectedPartner.value.matrix.id,
       child_id: +selectedCell.value?.id,
       depth: partnerPos.value.depth,
       pos: partnerPos.value.pos
     }
     store.dispatch('partners/exposePartner', data)
+    emit('close-modal')
   }
 }
 </script>

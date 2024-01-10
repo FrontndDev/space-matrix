@@ -56,6 +56,7 @@ export default {
         }
       ).then(response => {
         if (response.data?.count === 0) commit('CHANGE_LITTLE_TAB', 2)
+        
         if (!isPartnerMatrix) {
           commit('SET_PENDING_PARTNERS', response.data)
         } else {
@@ -66,14 +67,11 @@ export default {
 
     getInfinityPartners({ commit }: { commit: Commit }, parentId: number) {
       API.getListOfInfinity(parentId).then(response => {
-        console.log('getInfinityPartners', response.data)
         commit('SET_INFINITY_PARTNERS', response.data.list)
       })
     },
     exposePartner(_: ActionContext<any, any>, data: IExposePartnerParams) {
-      API.placementExistMatrix(data).then(response => {
-        console.log('exposePartner', response)
-      })
+      API.placementExistMatrix(data)
     },
   },
   mutations: {
