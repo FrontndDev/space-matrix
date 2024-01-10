@@ -62,7 +62,7 @@
             <InfinityPartnerCard
                 modal="m-matrix-partner"
                 :ceil="thirdCeil"
-                :partners-count="infinityPartners?.length ?? 0"
+                :partners-count="infinityPartnersCount"
                 @open-m-infinity-cell="$emit('open-m-infinity-cell')"
             />
             <!--            :ceil="selectedPartnerCeil"-->
@@ -118,7 +118,7 @@ const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['2'])
 const thirdCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['3'])
 
-const infinityPartners: ComputedRef<IPartnersList[]> = computed(() => store.state.partners.infinityPartners)
+const infinityPartnersCount: ComputedRef<IPartnersList[]> = computed(() => store.state.partners.infinityPartners?.length ?? 0)
 
 const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
