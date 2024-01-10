@@ -43,18 +43,24 @@ export default createStore({
             API.getMatrix(matrixType).then(response => {
                 ctx.commit('SET_MATRIX_BY_TYPE', response.data)
                 ctx.commit('partners/SET_INFINITY_PARTNERS', null)
-                ctx.dispatch('partners/getInfinityPartners', {
-                    parentId: response.data?.matrix?.id
-                })
+                if (response.data?.matrix?.id) {
+                    ctx.dispatch('partners/getInfinityPartners', {
+                        parentId: response.data.matrix.id
+                    })
+                } else {
+                    ctx.commit('partners/SET_INFINITY_PARTNERS', [])
+                }
             })
         },
         getMatrixById(ctx: ActionContext<any, any>, matrixId: number) {
             API.getMatrix(matrixId).then(response => {
                 ctx.commit('SET_MATRIX_BY_ID', response.data)
-                ctx.dispatch('partners/getInfinityPartners', {
-                    parentId: response.data?.matrix?.id,
-                    isPartnerMatrix: true
-                })
+                if (response.data?.matrix?.id) {
+                    ctx.dispatch('partners/getInfinityPartners', {
+                        parentId: response.data.matrix.id,
+                        isPartnerMatrix: true
+                    })
+                }
             })
         },
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
