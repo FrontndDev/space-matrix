@@ -44,3 +44,8 @@ export interface IExposePartnerParams extends IPosition {
     matrix_id: number;
     child_id: number;
 }
+
+export interface ILineOfPartners {
+    id: number;
+    name: string;
+}

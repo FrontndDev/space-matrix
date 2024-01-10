@@ -9,8 +9,12 @@
           :items="selectItemsPartners"
           v-show="littleTabID !== 1"
           @select="changeLineOfPartners"
+          data="static"
       />
-      <Select :items="selectItemsPartners"/>
+      <Select :items="listOfTypes?.types"
+              keyObj="title"
+              keyOfID="type"
+      />
     </div>
     <div v-if="props.infoHeader === 2" class="header-info__selects">
       <Select :items="selectItemsBoost" v-show="littleTabID !== 3" />
@@ -28,10 +32,12 @@
 
 <script setup lang="ts">
 import Tabs from "../../../UI/Tabs/Tabs.vue";
-import {computed, reactive} from "vue";
+import {computed, reactive, Ref} from "vue";
 import Select from "../../../UI/Select/Select.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
-import { useStore } from "vuex";
+import {  useStore } from "vuex";
+import { ListOfTypes } from "../../../../interfaces/store.interface.ts";
+import { ILineOfPartners } from "../../../../interfaces/partners.interface.ts";
 
 const props = defineProps({
   infoHeader: {
@@ -44,13 +50,12 @@ const store = useStore()
 const emit = defineEmits(['open-cells'])
 
 const littleTabID = computed(() => store.state.partners.littleTabID)
-// const bigTabID = computed(() => store.state.partners.bigTabID)
-
-const changeLineOfPartners = (id: number) => {
+const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
+const changeLineOfPartners = (item: ILineOfPartners) => {
   store.dispatch('partners/getExposedPartners', {
     matrixFilterUserId: 2969585,
     matrixFilterPageId: 1,
-    filter: id
+    filter: item.id
   })
 }
 

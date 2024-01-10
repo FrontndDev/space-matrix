@@ -21,7 +21,7 @@ export default {
       infinityPartners: [] as IPartnersList[],
       countPendingBoosters: null,
 
-      ////////Матрица партнёра
+      // Матрица партнёра
       partnersPendingSecond: {} as IPartners,
       infinityPartnersSecond: [] as IPartnersList[],
     }
@@ -39,7 +39,7 @@ export default {
       }
     ).then(response => {
         console.log(response.data)
-        commit('CHANGE_BIG_TAB', 1)
+        // commit('CHANGE_BIG_TAB', 1)
         commit('SET_EXPOSED_PARTNERS', response.data)
       })
     },
@@ -55,7 +55,7 @@ export default {
           filter: { pending: 1 }
         }
       ).then(response => {
-        console.log(response.data)
+        if (response.data?.count === 0) commit('CHANGE_LITTLE_TAB', 2)
         if (!isPartnerMatrix) {
           commit('SET_PENDING_PARTNERS', response.data)
         } else {
