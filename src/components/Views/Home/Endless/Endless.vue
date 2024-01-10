@@ -6,10 +6,12 @@
       <AddPartnerCell
           type="infinity"
           :ceil="thirdCeil"
+          :partners-count="partnersCount"
           @open-m-add-partner="openMAddPartner(getPosition(1, 3))"
       />
       <InfinityPartnerCard
           :ceil="thirdCeil"
+          :partners-count="infinityPartnersCount"
           @open-m-infinity-cell="emit('open-m-infinity-cell')"
       />
     </div>
@@ -36,6 +38,8 @@ const emit = defineEmits(['open-m-infinity-cell', 'open-m-add-partner', 'set-pos
 const store = useStore()
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 
+const infinityPartnersCount: ComputedRef<number> = computed(() => store.state.partners.infinityPartners?.length ?? 0)
+
 const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection['1'])
 const thirdCeil: Ref<Ceil> = computed(() => ceils.value?.['3'])
 
@@ -44,10 +48,10 @@ const getPosition = (depth: number, pos: number): IPosition => {
 }
 
 const openMAddPartner = (pos: IPosition) => {
-  if (partnersCount.value) {
+  // if (partnersCount.value) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
-  }
+  // }
 }
 </script>
 

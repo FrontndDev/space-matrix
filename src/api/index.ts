@@ -4,7 +4,6 @@ import {
   putAsync
 } from "./config.ts";
 import {
-  IExposePartner,
   IExposePartnerParams
 } from "../interfaces/partners.interface.ts";
 

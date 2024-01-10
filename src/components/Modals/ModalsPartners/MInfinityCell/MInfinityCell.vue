@@ -8,28 +8,30 @@
       Бесконечная ячейка
     </ModalHeader>
     <div class="modal-infinity-cell__container">
-      <PartnerCell
-          type="infinity"
-          size="small"
-          v-for="partner in infinityPartners"
-          :key="partner.id"
-      />
+<!--      <PartnerCell-->
+<!--          type="infinity"-->
+<!--          size="small"-->
+<!--          v-for="partner in infinityPartners"-->
+<!--          :key="partner.id"-->
+<!--          :ceil="partner"-->
+<!--      />-->
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
-import {
-  computed,
-  ComputedRef
-} from "vue";
-import { useStore } from "vuex";
+// import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
+// import {
+//   computed,
+//   ComputedRef
+// } from "vue";
+// import { useStore } from "vuex";
+// import { IPartnersList } from "../../../../interfaces/partners.interface.ts";
 
-const store = useStore()
+// const store = useStore()
 
-const infinityPartners: ComputedRef = computed(() => store.state.partners.infinityPartners)
+// const infinityPartners: ComputedRef<IPartnersList[]> = computed(() => store.state.partners.infinityPartners)
 
 
 </script>

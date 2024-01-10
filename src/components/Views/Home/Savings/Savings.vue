@@ -79,10 +79,10 @@ const getPosition = (depth: number, pos: number): IPosition => {
 }
 
 const openMAddPartner = (pos: IPosition) => {
-  // if (partnersCount.value) {
+  if (partnersCount.value) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
-  // }
+  }
 }
 
 const openMMatrixPartner = (ceil: Ceil) => {

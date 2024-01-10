@@ -44,7 +44,7 @@ const store = useStore()
 const emit = defineEmits(['open-cells'])
 
 const littleTabID = computed(() => store.state.partners.littleTabID)
-const bigTabID = computed(() => store.state.partners.bigTabID)
+// const bigTabID = computed(() => store.state.partners.bigTabID)
 
 const changeLineOfPartners = (id: number) => {
   store.dispatch('partners/getExposedPartners', {

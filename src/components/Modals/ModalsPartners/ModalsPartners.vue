@@ -54,7 +54,14 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['open-m-add-partner', 'set-position-for-partner'])
+const emit = defineEmits([
+  'open-m-matrix-partner',
+  'open-m-add-partner',
+  'open-m-infinity-cell',
+  'set-position-for-partner',
+  'open-partner-waiting',
+  'close-modal',
+])
 
 const openMAddPartner = (pos: IPosition) => {
   emit('set-position-for-partner', pos)

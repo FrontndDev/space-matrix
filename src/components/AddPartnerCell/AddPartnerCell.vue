@@ -38,11 +38,9 @@ import Reward from "../UI/Reward/Reward.vue";
 import CellType from "../UI/CellType/CellType.vue";
 import {
   computed,
-  ComputedRef,
   PropType
 } from "vue";
 import { Ceil } from "../../interfaces/store.interface.ts";
-import { useStore } from "vuex";
 
 const props = defineProps({
   ceil: {

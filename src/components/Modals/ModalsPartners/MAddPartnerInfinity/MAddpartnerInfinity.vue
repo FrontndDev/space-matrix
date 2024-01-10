@@ -8,6 +8,7 @@
       <AddPartnerCell
           type="profitable"
           :ceil="firstCeil"
+          :partners-count="partnersCount"
           @click="$emit('open-partner-waiting')"
       />
     </div>
@@ -21,6 +22,7 @@ import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
 import { useStore } from "vuex";
 import {
   computed,
+  ComputedRef,
   Ref
 } from "vue";
 import { Ceils } from "../../../../interfaces/store.interface.ts";
@@ -30,6 +32,7 @@ const store = useStore()
 const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
 
 const firstCeil: Ref = computed(() => ceils.value?.['1'])
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 </script>
 
 <style scoped>

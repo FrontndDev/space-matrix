@@ -62,7 +62,8 @@
             <div class="modal-matrix-partner__block-title">Бесконечные</div>
             <InfinityPartnerCard
                 modal="m-matrix-partner"
-                :partners-count="122"
+                :ceil="thirdCeil"
+                :partners-count="infinityPartners?.length ?? 0"
                 @open-m-infinity-cell="$emit('open-m-infinity-cell')"
             />
 <!--            :ceil="selectedPartnerCeil"-->
@@ -93,9 +94,17 @@ import {
   Ceil,
   Ceils,
 } from "../../../../interfaces/store.interface.ts";
-import { IPosition } from "../../../../interfaces/partners.interface.ts";
+import {
+  IPartnersList,
+  IPosition
+} from "../../../../interfaces/partners.interface.ts";
 
-const emit = defineEmits(['open-m-add-partner'])
+const emit = defineEmits([
+  'open-m-add-partner',
+  'open-m-infinity-cell',
+  'open-m-matrix-partner',
+  'close-modal',
+])
 
 const store = useStore()
 
@@ -107,8 +116,9 @@ const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 
 const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['2'])
+const thirdCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['3'])
 
-const infinityPartners: ComputedRef = computed(() => store.state.partners.infinityPartners.list)
+const infinityPartners: ComputedRef<IPartnersList[]> = computed(() => store.state.partners.infinityPartners)
 
 const getPosition = (depth: number, pos: number): IPosition => {
   return { depth, pos }
