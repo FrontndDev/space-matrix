@@ -28,6 +28,10 @@ export interface IOwner {
     immutable?: boolean;
 }
 
+export interface IBinStatus {
+    [key: string]: number;
+}
+
 export interface Matrix {
     id: number;
     owner: IOwner;
@@ -37,7 +41,8 @@ export interface Matrix {
     is_bonus: boolean;
     is_booster: boolean;
     number: number;
-    binstatus: ({ [key: string]: number })[];
+    binstatus: IBinStatus[];
+    immutable?: boolean;
 }
 
 export interface MatrixConfig {

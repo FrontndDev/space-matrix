@@ -13,7 +13,8 @@
               type="cumulative"
               size="small"
               cellType="circle-avatar"
-              :ceil="selectedPartner"
+              :ceil="selectedPartner.matrix"
+              v-if="selectedPartner?.matrix"
           />
         </div>
         <div class="modal-matrix-partner__block">
@@ -25,7 +26,7 @@
               <PartnerCell
                   size="small"
                   :type="getTypeForFirstCeil"
-                  :ceil="firstCeil"
+                  :ceil="firstCeil.matrix"
                   @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
                   v-if="firstCeil?.matrix"
               />
@@ -42,7 +43,7 @@
               <PartnerCell
                   size="small"
                   :type="getTypeForSecondCeil"
-                  :ceil="secondCeil"
+                  :ceil="secondCeil.matrix"
                   @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
                   v-if="secondCeil?.matrix"
               />
@@ -116,7 +117,9 @@ const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['2'])
 const thirdCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['3'])
 
-const infinityPartnersCount: ComputedRef<number> = computed(() => store.state.partners.infinityPartners?.length ?? 0)
+const infinityPartnersCount: ComputedRef<number> = computed(() =>
+    store.state.partners.infinityPartnersSecond?.length ?? 0
+)
 
 const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')

@@ -1,25 +1,10 @@
-import { IOwner } from "./store.interface.ts";
-
-export interface IBinStatus {
-    [key: string]: number;
-}
-
-export interface IPartnersList {
-    id: number;
-    owner: IOwner;
-    parent_matrix_id: null | number;
-    filled: boolean;
-    prev_type_matrix_id: null | number;
-    is_bonus: boolean;
-    is_booster: boolean;
-    number: number;
-    binstatus: IBinStatus[];
-    immutable?: boolean;
-}
+import {
+    Matrix
+} from "./store.interface.ts";
 
 export interface IPartners {
     count: number;
-    list: IPartnersList[];
+    list: Matrix[];
 }
 
 export interface IGetPendingBoostersParams {
@@ -40,4 +25,9 @@ export interface IExposePartnerParams extends IPosition {
 export interface ILineOfPartners {
     id: number;
     name: string;
+}
+
+export interface IInfinityPartnersParams {
+    parentId: number;
+    isPartnerMatrix: boolean;
 }

@@ -6,7 +6,8 @@
       <!--   FIRST CEIL    -->
       <PartnerCell
           :type="getTypeForFirstCeil"
-          :ceil="firstCeil"
+          :ceil="firstCeil.matrix"
+          :fill-reward="firstCeil.fillRevard"
           @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
           v-if="firstCeil?.matrix"
       />
@@ -21,7 +22,8 @@
       <!--   SECOND CEIL    -->
       <PartnerCell
           :type="getTypeForSecondCeil"
-          :ceil="secondCeil"
+          :ceil="secondCeil.matrix"
+          :fill-reward="secondCeil.fillRevard"
           @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
           v-if="secondCeil?.matrix"
       />

@@ -41,11 +41,11 @@ import {
   computed,
   PropType
 } from "vue";
-import { IPartnersList } from "../../interfaces/partners.interface.ts";
+import { Matrix } from "../../interfaces/store.interface.ts";
 
 const props = defineProps({
   cell: {
-    type: Object as PropType<IPartnersList>,
+    type: Object as PropType<Matrix>,
     required: true,
   },
   cellType: {

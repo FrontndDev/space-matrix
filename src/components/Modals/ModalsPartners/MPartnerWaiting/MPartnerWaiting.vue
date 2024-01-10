@@ -48,22 +48,24 @@ import {
 } from "vue";
 import {
   IExposePartnerParams,
-  IPartnersList,
   IPosition
 } from "../../../../interfaces/partners.interface.ts";
 import Preloader from "../../../UI/Preloader/Preloader.vue";
-import { Ceil } from "../../../../interfaces/store.interface.ts";
+import {
+  Ceil,
+  Matrix
+} from "../../../../interfaces/store.interface.ts";
 
 const emit = defineEmits(['close-modal', 'open-m-add-partner'])
 
 const store = useStore()
-const cells: ComputedRef<IPartnersList[]> = computed(() => store.state.partners.partnersPending?.list)
+const cells: ComputedRef<Matrix[]> = computed(() => store.state.partners.partnersPending?.list)
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 const partnerPos = inject('partnerPos') as Ref<IPosition>
-let selectedCell: Ref<IPartnersList | null> = ref(null)
+let selectedCell: Ref<Matrix | null> = ref(null)
 
-const selectCell = (cell: IPartnersList) => {
+const selectCell = (cell: Matrix) => {
   selectedCell.value = cell
 }
 
@@ -76,6 +78,7 @@ const exposePartner = () => {
       pos: partnerPos.value.pos
     }
     store.dispatch('partners/exposePartner', data)
+    store.dispatch('getMatrixByType', store.state.selectedType.type)
     emit('close-modal')
   }
 }
