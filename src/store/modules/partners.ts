@@ -3,12 +3,12 @@ import {
   IExposePartnerParams,
   IGetPendingBoostersParams,
   IPartners,
-  IPartnersList
 } from "../../interfaces/partners.interface.ts";
 import {
   ActionContext,
   Commit
 } from "vuex";
+import { Matrix } from "../../interfaces/store.interface.ts";
 
 export default {
   namespaced: true,
@@ -18,12 +18,12 @@ export default {
       partnersPending: {} as IPartners,
       littleTabID: 1 as number,
       bigTabID: 1 as number,
-      infinityPartners: [] as IPartnersList[],
+      infinityPartners: [] as Matrix[],
       countPendingBoosters: null,
 
       // Матрица партнёра
       partnersPendingSecond: {} as IPartners,
-      infinityPartnersSecond: [] as IPartnersList[],
+      infinityPartnersSecond: [] as Matrix[],
     }
   },
   actions: {
