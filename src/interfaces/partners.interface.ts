@@ -1,14 +1,7 @@
+import { IOwner } from "./store.interface.ts";
+
 export interface IBinStatus {
     [key: string]: number;
-}
-
-export interface IOwner {
-    id: string;
-    fio: string;
-    photo: string;
-    photoHash: string;
-    lvl_insystem: string;
-    immutable?: boolean;
 }
 
 export interface IPartnersList {

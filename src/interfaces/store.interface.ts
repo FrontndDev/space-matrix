@@ -19,16 +19,18 @@ export interface ListOfTypes {
     opened: string[];
 }
 
-export interface Owner {
+export interface IOwner {
     id: number;
     fio: string;
     photo: string;
     photoHash: string;
+    lvl_insystem: string;
+    immutable?: boolean;
 }
 
 export interface Matrix {
     id: number;
-    owner: Owner;
+    owner: IOwner;
     parent_matrix_id: number | null;
     filled: boolean;
     prev_type_matrix_id: number | null;

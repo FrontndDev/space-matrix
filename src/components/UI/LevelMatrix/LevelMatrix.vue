@@ -20,7 +20,7 @@ import { Type } from "../../../interfaces/store.interface.ts";
 const props = defineProps({
   level: {
     type: Number,
-    default: true
+    default: 0
   },
 })
 

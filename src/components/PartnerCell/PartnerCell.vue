@@ -7,7 +7,10 @@
           :custom="fillReward.custom"
           v-if="props.size !== 'small'"
       />
-      <LevelMatrix v-else/>
+      <LevelMatrix
+          :level="getLevel"
+          v-else
+      />
     </div>
     <div class="partner-cell__name partner-cell__name_mt-8">{{ props.ceil?.matrix?.owner.fio }}</div>
     <div class="partner-cell__id">
@@ -67,10 +70,6 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  showLevelMatrix: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const fillReward = computed(() => {
@@ -80,6 +79,11 @@ const fillReward = computed(() => {
     'custom': getFilteredRewards('custom')?.value.title,
     'freeze': getFilteredRewards('freeze')?.value.amount
   }
+})
+
+const getLevel = computed(() => {
+  // @ts-ignore
+  return +(window.UserData.level ?? 0) - +props.ceil?.matrix?.owner.lvl_insystem
 })
 </script>
 
