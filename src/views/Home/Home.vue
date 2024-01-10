@@ -173,13 +173,7 @@ const selectPartner = (ceil: Ceil) => {
     store.commit('SET_MATRIX_BY_ID', {})
     store.dispatch('getMatrixById', ceil.matrix.id)
     // Получаем партнеров в ожидании "Матрицы партнёра"
-    store.dispatch('partners/getPendingPartners',
-        {
-          matrixFilterUserId: +ceil.matrix.owner.id,
-          matrixFilterPageId: 1,
-          isPartnerMatrix: true
-        }
-    )
+    store.dispatch('partners/getPendingPartners', { isPartnerMatrix: true })
   }
   selectedPartner.value = ceil
 }

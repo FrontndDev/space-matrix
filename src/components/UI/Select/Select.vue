@@ -30,6 +30,7 @@ import {
   Ref,
   ref, watch
 } from "vue";
+import { useStore } from "vuex";
 
 const props = defineProps({
   keyObj: {
@@ -50,9 +51,13 @@ const props = defineProps({
   defaultValue: {
     type: Object as PropType<any>,
   },
+  route: {
+    type: String
+  }
 });
 
 const emit = defineEmits(['select']);
+const store = useStore()
 
 const selectedItem: Ref<any> = ref(null);
 
@@ -70,8 +75,19 @@ onMounted(() => {
   }
 })
 
+const changeSelectedItem = () => {
+  if (props.route === 'types') {
+    selectedItem.value = store.state.selectedType
+  }
+}
+
 watch(() => props.items?.length, () => {
   selectedItem.value = props.defaultValue ?? props.items[0]
+  changeSelectedItem()
+})
+
+watch(() => store.state.selectedType, () => {
+  changeSelectedItem()
 })
 
 

@@ -67,26 +67,11 @@ const tabs = reactive([
 ]);
 
 watch(() => store.state.selectedType, () => {
-  store.dispatch('partners/getExposedPartners',
-      {
-        matrixFilterUserId: 2969585,
-        matrixFilterPageId: 1,
-      }
-  )
+  store.dispatch('partners/getExposedPartners', { filter: 0 })
 
-  store.dispatch('partners/getPendingPartners',
-      {
-        matrixFilterUserId: 2969585,
-        matrixFilterPageId: 1,
-      }
-  )
+  store.dispatch('partners/getPendingPartners', { matrixFilterUserId: 2969585, matrixFilterPageId: 1 })
 
-  store.dispatch('boosters/getPendingBoosters',
-      {
-        matrixFilterUserId: 2969585,
-        matrixFilterPageId: 1,
-      }
-  )
+  store.dispatch('boosters/getPendingBoosters')
 })
 
 </script>

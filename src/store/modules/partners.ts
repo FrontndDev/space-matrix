@@ -21,6 +21,8 @@ export default {
       infinityPartners: [] as IPartnersList[],
       countPendingBoosters: null,
 
+      matrixFilterPageId: 1,
+
       // Матрица партнёра
       partnersPendingSecond: {} as IPartners,
       infinityPartnersSecond: [] as IPartnersList[],
@@ -28,13 +30,13 @@ export default {
   },
   actions: {
     getExposedPartners(
-      { commit, rootState }: { commit: Commit; rootState: any },
-      { matrixFilterUserId, matrixFilterPageId, filter }: IGetPendingBoostersParams,
+      { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
+      { filter }: IGetPendingBoostersParams,
     ) {
       API.filterOfActivatedMatrix({
         matrixType: rootState.selectedType.type,
-        matrixFilterUserId,
-        matrixFilterPageId,
+        matrixFilterPageId: state.matrixFilterPageId,
+        matrixFilterUserId: window.UserData.id,
         filter: { level: filter }
       }
     ).then(response => {
@@ -45,18 +47,18 @@ export default {
     },
 
     getPendingPartners(
-      { commit, rootState }: { commit: Commit; rootState: any },
-      { matrixFilterUserId, matrixFilterPageId, isPartnerMatrix = false }: IGetPendingBoostersParams
+      { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
+      { isPartnerMatrix = false }: IGetPendingBoostersParams
     ) {
       API.filterOfActivatedMatrix({
           matrixType: rootState.selectedType.type,
-          matrixFilterUserId,
-          matrixFilterPageId,
+          matrixFilterPageId: state.matrixFilterPageId,
+          matrixFilterUserId: window.UserData.id,
           filter: { pending: 1 }
         }
       ).then(response => {
         if (response.data?.count === 0) commit('CHANGE_LITTLE_TAB', 2)
-        
+
         if (!isPartnerMatrix) {
           commit('SET_PENDING_PARTNERS', response.data)
         } else {

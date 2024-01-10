@@ -14,6 +14,8 @@
       <Select :items="listOfTypes?.types"
               keyObj="title"
               keyOfID="type"
+              route="types"
+              @select="changeMatrixType"
       />
     </div>
     <div v-if="props.infoHeader === 2" class="header-info__selects">
@@ -56,6 +58,13 @@ const changeLineOfPartners = (item: ILineOfPartners) => {
     matrixFilterUserId: 2969585,
     matrixFilterPageId: 1,
     filter: item.id
+  })
+}
+
+const changeMatrixType = (item: ILineOfPartners) => {
+  store.dispatch('partners/getExposedPartners', {
+    matrixFilterUserId: 2969585,
+    matrixFilterPageId: 1
   })
 }
 

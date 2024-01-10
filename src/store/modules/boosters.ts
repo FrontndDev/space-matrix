@@ -6,18 +6,18 @@ export default {
   namespaced: true,
   state() {
     return {
-      boostersPending: []
+      boostersPending: [],
+      pageIdBooster: 1
     }
   },
   actions: {
     getPendingBoosters(
-      { commit, rootState }: { commit: Commit; rootState: any },
-      { matrixFilterUserId, matrixFilterPageId }: IGetPendingBoostersParams
+      { commit, rootState, state }: { commit: Commit; rootState: any, state: any },
     ) {
       API.filterOfActivatedMatrix({
           matrixType: rootState.selectedType.type,
-          matrixFilterUserId,
-          matrixFilterPageId,
+          matrixFilterUserId: window.UserData.id,
+          matrixFilterPageId: state.pageIdBooster,
           filter: { pending: 1, is_booster: true }
         }
       ).then(response => {
