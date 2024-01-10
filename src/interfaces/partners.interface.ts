@@ -7,7 +7,8 @@ export interface IOwner {
     fio: string;
     photo: string;
     photoHash: string;
-    immutable: boolean;
+    lvl_insystem: string;
+    immutable?: boolean;
 }
 
 export interface IPartnersList {

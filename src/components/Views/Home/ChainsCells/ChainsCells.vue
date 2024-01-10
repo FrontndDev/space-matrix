@@ -1,9 +1,10 @@
 <template>
   <div class="chains-cells">
     <div class="chains-cells__header">
-      <Tabs type="little"
-            :tabs="tabs"
-            :cells="true"
+      <Tabs
+          type="little"
+          :tabs="tabs"
+          :cells="true"
       />
     </div>
     <div class="chains-cells__container">
@@ -21,10 +22,10 @@
     </div>
   </div>
   <EmptyCells
+      cellsType="chains"
       v-if="cells.length === 0"
-      :cellsType="'chains'"
   />
-  <Pagination v-if="cells.length !== 0" />
+  <Pagination v-if="cells.length !== 0"/>
 </template>
 
 <script setup lang="ts">

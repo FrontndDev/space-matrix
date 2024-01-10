@@ -9,7 +9,7 @@
     >
       <img alt="avatar" :src="props.cell?.owner?.photo">
 <!--      <img src="../../assets/images/Avatar.png" alt="">-->
-      <LevelMatrix :level="props.level" />
+      <LevelMatrix :level="getLevel"/>
     </div>
     <div class="small-cell__info">
       <span class="small-cell__name">{{ props.cell?.owner?.fio }}</span>
@@ -37,7 +37,10 @@
 import PartnerType from "../PartnerCell/PartnerType/PartnerType.vue";
 import LevelMatrix from "../UI/LevelMatrix/LevelMatrix.vue";
 import SmallCellType from "../UI/SmallCellType/SmallCellType.vue";
-import { PropType } from "vue";
+import {
+  computed,
+  PropType
+} from "vue";
 import { IPartnersList } from "../../interfaces/partners.interface.ts";
 
 const props = defineProps({
@@ -58,10 +61,11 @@ const props = defineProps({
     type: String,
     default: 'exhibited'
   },
-  level: {
-    type: Boolean,
-    default: true
-  }
+})
+
+const getLevel = computed(() => {
+  // @ts-ignore
+  return +(window.UserData.level ?? 0) - +props.cell?.owner.lvl_insystem
 })
 </script>
 

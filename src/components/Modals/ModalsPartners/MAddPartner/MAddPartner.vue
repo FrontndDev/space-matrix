@@ -34,7 +34,8 @@ import {
 import {
   Ceil,
   Ceils,
-  IBuyBoosterParams
+  IBuyBoosterParams,
+  IMatrix
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
@@ -42,6 +43,7 @@ const emit = defineEmits(['close-modal', 'open-partner-waiting'])
 
 const store = useStore()
 
+const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
 const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
 
@@ -63,9 +65,15 @@ const partnersCount: ComputedRef<number> = computed(() => {
 })
 
 const buyBooster = () => {
-  const data: IBuyBoosterParams = { matrix_id: 0, pos: 0, depth: 0 }
-  store.dispatch('buyBooster', data)
-  emit('close-modal')
+  if (matrixByType.value?.matrix?.id) {
+    const data: IBuyBoosterParams = {
+      matrix_id: +matrixByType.value.matrix.id,
+      pos: partnerPos.value.pos,
+      depth: partnerPos.value.depth
+    }
+    store.dispatch('buyBooster', data)
+    emit('close-modal')
+  }
 }
 
 onMounted(() => {

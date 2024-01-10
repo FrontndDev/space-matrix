@@ -86,7 +86,6 @@ import {
   computed,
   ComputedRef,
   inject,
-  onMounted,
   Ref
 } from "vue";
 import {
@@ -94,7 +93,6 @@ import {
   Ceils,
 } from "../../../../interfaces/store.interface.ts";
 import {
-  IPartnersList,
   IPosition
 } from "../../../../interfaces/partners.interface.ts";
 
@@ -118,7 +116,7 @@ const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['2'])
 const thirdCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['3'])
 
-const infinityPartnersCount: ComputedRef<IPartnersList[]> = computed(() => store.state.partners.infinityPartners?.length ?? 0)
+const infinityPartnersCount: ComputedRef<number> = computed(() => store.state.partners.infinityPartners?.length ?? 0)
 
 const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
@@ -180,8 +178,10 @@ const openMAddPartner = (pos: IPosition) => {
 }
 
 const openMMatrixPartner = (ceil: Ceil) => {
-  emit('open-m-matrix-partner')
-  emit('select-partner', ceil)
+  if (!ceil?.matrix?.is_booster) {
+    emit('open-m-matrix-partner')
+    emit('select-partner', ceil)
+  }
 }
 </script>
 
