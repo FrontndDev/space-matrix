@@ -7,11 +7,7 @@
     </div>
     <div class="not-activated-matrix__text">
       <h3>Вы еще не активировали эту матрицу</h3>
-      <div class="text__column">
-        {{ props.matrixByType?.ctaText }}
-<!--        Заполните накопительные ячейки в предыдущей матрице, или активируйте её-->
-<!--        <span>со скидкой 50%</span>-->
-      </div>
+      <div class="text__column" v-html="props.matrixByType?.ctaText"/>
     </div>
     <ActivateButton
         :price="props.matrixByType?.matrixConfig.activationPrice ?? 0"

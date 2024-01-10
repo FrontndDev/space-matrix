@@ -33,7 +33,7 @@
 .text__column {
   @include flexbox(column, flex-start, center);
 
-  & span {
+  & ::v-deep(span) {
     color: $text-violet;
   }
 }
