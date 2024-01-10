@@ -28,3 +28,8 @@ export interface ILineOfPartners {
     id: number;
     name: string;
 }
+
+export interface IInfinityPartnersParams {
+    parentId: number;
+    isPartnerMatrix: boolean;
+}

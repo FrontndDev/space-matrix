@@ -2,6 +2,7 @@ import * as API from '../../api/index'
 import {
   IExposePartnerParams,
   IGetPendingBoostersParams,
+  IInfinityPartnersParams,
   IPartners,
 } from "../../interfaces/partners.interface.ts";
 import {
@@ -18,7 +19,7 @@ export default {
       partnersPending: {} as IPartners,
       littleTabID: 1 as number,
       bigTabID: 1 as number,
-      infinityPartners: [] as Matrix[],
+      infinityPartners: null as Matrix[] | null,
       countPendingBoosters: null,
 
       // Матрица партнёра
@@ -65,9 +66,13 @@ export default {
       })
     },
 
-    getInfinityPartners({ commit }: { commit: Commit }, parentId: number) {
+    getInfinityPartners({ commit }: { commit: Commit }, { parentId, isPartnerMatrix = false }: IInfinityPartnersParams) {
       API.getListOfInfinity(parentId).then(response => {
-        commit('SET_INFINITY_PARTNERS', response.data.list)
+        if (!isPartnerMatrix) {
+          commit('SET_INFINITY_PARTNERS', response.data.list)
+        } else {
+          commit('SET_INFINITY_PARTNERS_SECOND', response.data.list)
+        }
       })
     },
     exposePartner(_: ActionContext<any, any>, data: IExposePartnerParams) {
@@ -100,6 +105,9 @@ export default {
     },
     SET_INFINITY_PARTNERS(state: any, infinityPartners: any) {
       state.infinityPartners = infinityPartners
+    },
+    SET_INFINITY_PARTNERS_SECOND(state: any, infinityPartners: any) {
+      state.infinityPartnersSecond = infinityPartners
     },
     SET_COUNT_PENDING_BOOSTERS(state: any, count: number) {
       state.countPendingBoosters = count

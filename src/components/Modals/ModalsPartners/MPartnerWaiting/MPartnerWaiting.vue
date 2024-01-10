@@ -78,6 +78,7 @@ const exposePartner = () => {
       pos: partnerPos.value.pos
     }
     store.dispatch('partners/exposePartner', data)
+    store.dispatch('getMatrixByType', store.state.selectedType.type)
     emit('close-modal')
   }
 }

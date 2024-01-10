@@ -5,7 +5,7 @@
         <div class="home__matrices">
           <MatrixHeader style="grid-area: header;"/>
 
-          <template v-if="Object.keys(store.state.matrixByType).length">
+          <template v-if="Object.keys(store.state.matrixByType).length && store.state.partners.infinityPartners">
             <div class="home__matrices-inner" v-if="!store.state.matrixByType?.ctaText">
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
@@ -27,7 +27,7 @@
             />
             <TimeActivatedMatrix v-if="false"/>
           </template>
-          <div class="home__preloader" v-if="!Object.keys(store.state.matrixByType).length">
+          <div class="home__preloader" v-if="!Object.keys(store.state.matrixByType).length || !store.state.partners.infinityPartners">
             <Preloader :with-text="true"/>
           </div>
 
