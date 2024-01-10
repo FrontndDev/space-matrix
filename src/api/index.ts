@@ -6,6 +6,8 @@ import {
 import {
   IExposePartnerParams
 } from "../interfaces/partners.interface.ts";
+import { IBuyBoosterParams } from "../interfaces/store.interface.ts";
+
 
 export function setDataToLS(key: string, data: any) {
   localStorage.setItem(key, JSON.stringify(data))
