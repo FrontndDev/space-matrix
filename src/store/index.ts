@@ -44,7 +44,7 @@ export default createStore({
                 ctx.commit('SET_MATRIX_BY_TYPE', response.data)
                 ctx.commit('partners/SET_INFINITY_PARTNERS', null)
                 ctx.dispatch('partners/getInfinityPartners', {
-                    parentId: response.data.matrix?.id
+                    parentId: response.data.matrix.id
                 })
             })
         },
@@ -53,7 +53,7 @@ export default createStore({
                 ctx.commit('SET_MATRIX_BY_ID', response.data)
                 ctx.dispatch('partners/getInfinityPartners', {
                     parentId: response.data.matrix.id,
-                    isParentMatrix: true
+                    isPartnerMatrix: true
                 })
             })
         },
