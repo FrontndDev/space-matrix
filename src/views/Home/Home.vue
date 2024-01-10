@@ -57,6 +57,7 @@
         @open-partner-waiting="openModalPartner(5)"
         @close-modal="closeModal"
 
+        @select-partner="selectPartner"
         @set-position-for-partner="setPositionForPartner"
     />
     <ModalChains
@@ -167,6 +168,19 @@ const setPositionForPartner = (pos: IPosition) => {
 }
 
 const selectPartner = (ceil: Ceil) => {
+  if (ceil.matrix) {
+    // Получаем Матрицу партнёра
+    store.commit('SET_MATRIX_BY_ID', {})
+    store.dispatch('getMatrixById', ceil.matrix.id)
+    // Получаем партнеров в ожидании "Матрицы партнёра"
+    store.dispatch('partners/getPendingPartners',
+        {
+          matrixFilterUserId: +ceil.matrix.owner.id,
+          matrixFilterPageId: 1,
+          isPartnerMatrix: true
+        }
+    )
+  }
   selectedPartner.value = ceil
 }
 

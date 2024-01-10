@@ -75,7 +75,7 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
 )
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
-  if (!firstCeil.value.allowSniper || !partnersCount.value && !firstCeil.value.allowBuyClone) {
+  if (!firstCeil.value?.matrix && (!firstCeil.value.allowSniper || !partnersCount.value && !firstCeil.value.allowBuyClone)) {
     return 'disable'
   }
 
@@ -83,7 +83,7 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
-  if (!secondCeil.value.allowSniper || !partnersCount.value && !secondCeil.value.allowBuyClone) {
+  if (!secondCeil.value?.matrix && (!secondCeil.value.allowSniper || !partnersCount.value && !secondCeil.value.allowBuyClone)) {
     return 'disable'
   }
 

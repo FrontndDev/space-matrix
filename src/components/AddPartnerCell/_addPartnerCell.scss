@@ -26,16 +26,20 @@
       }
     }
 
-    &.disable {
+    &.disable,
+    &.disable2,
+    &.disable3 {
       background: $bg-base-light;
       cursor: auto;
 
-      & > svg {
-        transform: rotate(45deg);
-      }
-
       & path {
         fill: $text-base-light;
+      }
+    }
+
+    &.disable3 {
+      & > svg {
+        transform: rotate(45deg);
       }
     }
 

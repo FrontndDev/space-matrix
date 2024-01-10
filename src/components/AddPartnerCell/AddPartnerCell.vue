@@ -13,22 +13,22 @@
       <Reward
           :freeze="fillReward.freeze"
           :custom="fillReward.custom"
-          v-if="!['disable', 'infinity', 'loading'].includes(props.type)"
+          v-if="!['disable', 'disable2', 'disable3', 'infinity', 'loading'].includes(props.type)"
       />
     </div>
 
-    <div v-if="props.type == 'disable'" class="add-partner-cell__title add-partner-cell__title_mt-8">Недоступно</div>
+    <div v-if="props.type == 'disable3'" class="add-partner-cell__title add-partner-cell__title_mt-8">Недоступно</div>
     <div v-else-if="props.type == 'loading'" class="add-partner-cell__title add-partner-cell__title_mt-8">Ожидайте</div>
     <div v-else class="add-partner-cell__title add-partner-cell__title_mt-8">Выставить партнера</div>
 
-    <div v-if="props.type == 'disable'" class="add-partner-cell__subtitle">На этой матрице нет накопительных ячеек</div>
+    <div v-if="props.type == 'disable3'" class="add-partner-cell__subtitle">На этой матрице нет накопительных ячеек</div>
     <div v-else-if="props.type == 'loading'" class="add-partner-cell__subtitle">Идет загрузка...</div>
     <div v-else class="add-partner-cell__subtitle">Доступно ({{ props.partnersCount }})</div>
 
     <CellType
         :size="props.size"
         :cell-type="props.type"
-        v-if="props.type !== 'disable'"
+        v-if="!['disable', 'disable2', 'disable3'].includes(props.type)"
     />
   </div>
 </template>
@@ -54,7 +54,7 @@ const props = defineProps({
   type: {
     type: String,
     default: 'cumulative'
-    //cumulative, profitable, boost, infinity ,disable, loading
+    //cumulative, profitable, boost, infinity ,disable, disable2, loading
   },
   showCellType: {
     type: Boolean,

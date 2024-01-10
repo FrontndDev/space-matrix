@@ -26,10 +26,9 @@
                   size="small"
                   :type="getTypeForFirstCeil"
                   :ceil="firstCeil"
-                  @open-m-matrix-partner="$emit('open-m-matrix-partner')"
+                  @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
                   v-if="firstCeil?.matrix"
               />
-              <!--              cellType="boost"-->
               <AddPartnerCell
                   size="small"
                   :type="getTypeForFirstCeil"
@@ -44,10 +43,9 @@
                   size="small"
                   :type="getTypeForSecondCeil"
                   :ceil="secondCeil"
-                  @open-m-matrix-partner="$emit('open-m-matrix-partner')"
+                  @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
                   v-if="secondCeil?.matrix"
               />
-              <!--              cellType="boost"-->
               <AddPartnerCell
                   size="small"
                   :type="getTypeForSecondCeil"
@@ -104,6 +102,7 @@ const emit = defineEmits([
   'open-m-add-partner',
   'open-m-infinity-cell',
   'open-m-matrix-partner',
+  'select-partner',
   'close-modal',
 ])
 
@@ -128,19 +127,20 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
 )
 
-const getCeilType = (num: number) => {
-  let ceil: Ceil | null = null
-  switch (num) {
-    case 1:
-      ceil = firstCeil.value
-      break;
-    case 2:
-      ceil = secondCeil.value
-      break;
-    default:
-      break;
-  }
-}
+// TODO Не трогать!!! Хочу сделать покомпактнее!!!
+// const getCeilType = (num: number) => {
+//   let ceil: Ceil | null = null
+//   switch (num) {
+//     case 1:
+//       ceil = firstCeil.value
+//       break;
+//     case 2:
+//       ceil = secondCeil.value
+//       break;
+//     default:
+//       break;
+//   }
+// }
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
   if (!firstCeil.value?.matrix) {
@@ -179,20 +179,10 @@ const openMAddPartner = (pos: IPosition) => {
   }
 }
 
-onMounted(() => {
-  if (selectedPartner.value.matrix) {
-    // Получаем Матрицу партнёра
-    store.dispatch('getMatrixById', selectedPartner.value.matrix.id)
-    // Получаем партнеров в ожидании "Матрицы партнёра"
-    store.dispatch('partners/getPendingPartners',
-        {
-          matrixFilterUserId: +selectedPartner.value?.matrix.owner.id,
-          matrixFilterPageId: 1,
-          isPartnerMatrix: true
-        }
-    )
-  }
-})
+const openMMatrixPartner = (ceil: Ceil) => {
+  emit('open-m-matrix-partner')
+  emit('select-partner', ceil)
+}
 </script>
 
 <style scoped lang="scss">
