@@ -7,7 +7,8 @@ import {
 import {
     ListOfTypes,
     Type,
-    IMatrix
+    IMatrix,
+    IBuyBoosterParams
 } from "../interfaces/store.interface.ts";
 
 import * as API from '../api/index.ts'
@@ -28,7 +29,7 @@ export default createStore({
         paymentForm: null as string | null
     },
     actions: {
-        getListOfTypes({ commit }: ActionContext<any, any>, category = 'dream-ton') {
+        getListOfTypes({ commit }: { commit: Commit }, category = 'dream-ton') {
             const key = `/api/matrix/list-of-types/${category}`
             const data = API.getDataFromLS(key)
             if (data) commit('SET_LIST_OF_TYPES', data)
@@ -60,6 +61,9 @@ export default createStore({
                 // })
             })
         },
+        buyBooster(_: ActionContext<any, any>, data: IBuyBoosterParams) {
+            API.buyClone(data)
+        }
     },
     mutations: {
         SET_LIST_OF_TYPES(state: any, list: ListOfTypes) {

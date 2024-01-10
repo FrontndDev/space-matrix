@@ -153,6 +153,7 @@ const openModalTeleport = () => {
 }
 
 const closeModal = () => {
+  store.commit('SET_MATRIX_BY_ID', {})
   toggleModalPartners.value = false
   toggleModalChains.value = false
   toggleModalNotification.value = false

@@ -1,3 +1,5 @@
+import { IPosition } from "./partners.interface.ts";
+
 export type Type = {
     currency: string;
     price: number;
@@ -65,7 +67,7 @@ export interface Ceil {
     pos: number;
     matrix?: Matrix | null;
     allowBuyClone: boolean;
-    allowBuyBoost: boolean;
+    allowSniper: boolean;
     fillRevard: FillReward[];
     isInfinity: boolean;
 }
@@ -86,4 +88,8 @@ export interface IMatrix {
     matrix: Matrix | null;
     matrixConfig: MatrixConfig;
     ceilsCollection?: CeilsCollection;
+}
+
+export interface IBuyBoosterParams extends IPosition {
+    matrix_id: number;
 }

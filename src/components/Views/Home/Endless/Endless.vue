@@ -4,7 +4,7 @@
 
     <div class="endless__menu endless__menu_mt-16">
       <AddPartnerCell
-          type="infinity"
+          :type="getTypeForThirdCeil"
           :ceil="thirdCeil"
           :partners-count="partnersCount"
           @open-m-add-partner="openMAddPartner(getPosition(1, 3))"
@@ -47,11 +47,19 @@ const getPosition = (depth: number, pos: number): IPosition => {
   return { depth, pos }
 }
 
+const getTypeForThirdCeil: ComputedRef<string> = computed(() => {
+  if (!thirdCeil.value.allowSniper || !partnersCount.value && !thirdCeil.value.allowBuyClone) {
+    return 'disable'
+  }
+
+  return 'infinity'
+})
+
 const openMAddPartner = (pos: IPosition) => {
-  // if (partnersCount.value) {
+  if (partnersCount.value && thirdCeil.value.allowSniper || thirdCeil.value.allowBuyClone) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
-  // }
+  }
 }
 </script>
 

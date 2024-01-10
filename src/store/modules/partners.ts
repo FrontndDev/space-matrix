@@ -38,7 +38,6 @@ export default {
         filter: { level: filter }
       }
     ).then(response => {
-        console.log(response.data)
         commit('CHANGE_BIG_TAB', 1)
         commit('SET_EXPOSED_PARTNERS', response.data)
       })
@@ -55,7 +54,6 @@ export default {
           filter: { pending: 1 }
         }
       ).then(response => {
-        console.log(response.data)
         if (!isPartnerMatrix) {
           commit('SET_PENDING_PARTNERS', response.data)
         } else {
@@ -66,14 +64,11 @@ export default {
 
     getInfinityPartners({ commit }: { commit: Commit }, parentId: number) {
       API.getListOfInfinity(parentId).then(response => {
-        console.log('getInfinityPartners', response.data)
         commit('SET_INFINITY_PARTNERS', response.data.list)
       })
     },
     exposePartner(_: ActionContext<any, any>, data: IExposePartnerParams) {
-      API.placementExistMatrix(data).then(response => {
-        console.log('exposePartner', response)
-      })
+      API.placementExistMatrix(data)
     },
   },
   mutations: {

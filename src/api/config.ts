@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios'
 
-const BASE_URL = 'https://dev.halk.ai'
+const BASE_URL = 'https://stage1.halk.ai'
 
 function setGlobalConfig(token: string | null) {
 
