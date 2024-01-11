@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios'
+import { useShowMessage } from "../use/useShowMessage.ts";
 
 const BASE_URL = 'https://dev.halk.ai'
 
@@ -30,8 +31,7 @@ export async function putAsync(url: string, data: unknown, checkError = true) {
 
         if (response?.data?.error_code) {
             const error = response.data
-            // @ts-ignore
-            show_message('red', error.error_message, 'Ошибка:');
+            useShowMessage('red', error.error_message, 'Ошибка:')
         }
 
         if (response.status === 200 || response.status === 202) {
@@ -45,8 +45,7 @@ export async function putAsync(url: string, data: unknown, checkError = true) {
             return error.response
         }
         console.error(error)
-        // @ts-ignore
-        show_message('red', error.message, 'Ошибка:');
+        useShowMessage('red', error.message, 'Ошибка:')
     }
 
     return undefined
@@ -58,8 +57,7 @@ export async function postAsync(url: string, data = {}, checkError = true) {
 
         if (response?.data?.error_code) {
             const error = response.data
-            // @ts-ignore
-            show_message('red', error.error_message, 'Ошибка:');
+            useShowMessage('red', error.error_message, 'Ошибка:')
         }
 
         if (response.status === 200) {
@@ -73,8 +71,7 @@ export async function postAsync(url: string, data = {}, checkError = true) {
         if (checkError && error.response) {
             return error.response
         }
-        // @ts-ignore
-        show_message('red', error.message, 'Ошибка:');
+        useShowMessage('red', error.message, 'Ошибка:')
         console.error(error)
     }
 
@@ -87,8 +84,7 @@ export async function getAsync(url: string) {
 
         if (response?.data?.error_code) {
             const error = response.data
-            // @ts-ignore
-            show_message('red', error.error_message, 'Ошибка:');
+            useShowMessage('red', error.error_message, 'Ошибка:')
         }
 
         if (response.status === 200) {
@@ -96,8 +92,7 @@ export async function getAsync(url: string) {
         }
     } catch (e) {
         const error = e as AxiosError
-        // @ts-ignore
-        show_message('red', error.message, 'Ошибка:');
+        useShowMessage('red', error.message, 'Ошибка:')
         console.error(error)
     }
 }

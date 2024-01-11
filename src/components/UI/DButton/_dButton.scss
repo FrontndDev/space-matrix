@@ -41,7 +41,6 @@
 
   &.disabled {
     border: 1px solid $border-base-contrast;
-    cursor: not-allowed;
 
     & .d-button {
       &__name,
@@ -55,9 +54,11 @@
     }
   }
 
-  &.time {
-    border: 1px solid $border-red;
-    animation: time 2s linear infinite;
+  &:not(.active) {
+    &.time {
+      border: 1px solid $border-red;
+      animation: time 2s linear infinite;
+    }
   }
 }
 

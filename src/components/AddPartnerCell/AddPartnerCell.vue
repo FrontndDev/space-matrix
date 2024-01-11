@@ -28,7 +28,7 @@
     <CellType
         :size="props.size"
         :cell-type="props.cellType"
-        v-if="!['disable2', 'disable3'].includes(props.type)"
+        v-if="!['disable2', 'disable3'].includes(props.type) && props.cellType"
     />
   </div>
 </template>
@@ -58,7 +58,7 @@ const props = defineProps({
   },
   cellType: {
     type: String,
-    required: true,
+    default: ''
   },
   size: {
     type: String,

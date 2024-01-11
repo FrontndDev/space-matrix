@@ -111,6 +111,7 @@ import ModalPaymentForm from "../../components/Modals/ModalPaymentForm/ModalPaym
 import { IPosition } from "../../interfaces/partners.interface.ts";
 import {
   Ceil,
+  IMatrix,
   Matrix,
 } from "../../interfaces/store.interface.ts";
 import { useRoute } from "vue-router";
@@ -187,11 +188,18 @@ const selectPartner = (ceil: Ceil) => {
   selectedPartner.value = ceil
 }
 
-onMounted(() => {
-  console.log('query321', route.query)
+onMounted(async () => {
   if (route.query.id) {
-    store.dispatch('getMatrixById', route.query.id)
-    // openModalPartner(3)
+    const response: { data: IMatrix } = await store.dispatch('getMatrixById', route.query.id)
+    selectedPartner.value = {
+      depth: 0,
+      pos: 0,
+      matrix: response.data.matrix,
+      allowBuyClone: false,
+      allowSniper: false,
+      fillRevard: [],
+      isInfinity: false,
+    }
     openModalPartner(2)
   }
 })

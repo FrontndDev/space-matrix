@@ -34,6 +34,7 @@
         :type="props.type"
         v-if="props.ceil"
         @click="$emit('open-m-matrix-partner')"
+        @circle-avatar="$emit('circle-avatar')"
     />
 
     <CellType

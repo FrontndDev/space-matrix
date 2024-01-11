@@ -11,16 +11,16 @@
           :cell-type="getTypeForFirstCeil"
           :ceil="firstCeil.matrix"
           :fill-reward="firstCeil.fillRevard"
-          @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
           v-if="firstCeil?.matrix"
+          @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
       />
       <AddPartnerCell
           :type="getTypeForFirstCeil"
           :cell-type="getTypeForFirstCeil"
           :ceil="firstCeil"
           :partners-count="partnersCount"
-          @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
           v-if="!firstCeil?.matrix"
+          @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
       />
 
       <!--   SECOND CEIL    -->
@@ -29,16 +29,16 @@
           :cell-type="getTypeForSecondCeil"
           :ceil="secondCeil.matrix"
           :fill-reward="secondCeil.fillRevard"
-          @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
           v-if="secondCeil?.matrix"
+          @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
       />
       <AddPartnerCell
           :type="getTypeForSecondCeil"
           :cell-type="getTypeForSecondCeil"
           :ceil="secondCeil"
           :partners-count="partnersCount"
-          @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
           v-if="!secondCeil?.matrix"
+          @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
       />
     </div>
   </div>

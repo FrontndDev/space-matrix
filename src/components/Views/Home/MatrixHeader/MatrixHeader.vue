@@ -1,10 +1,14 @@
 <template>
   <div class="matrix-header">
-
     <div class="matrix-header__buttons">
       <Preloader v-if="!listOfTypes?.types?.length"/>
       <DButton
-          :class="{ active: selectedType?.type === type.type }"
+          :class="{
+            disabled: !listOfTypes.opened.includes(type.type),
+            time: listOfTypes.teamOpened.includes(type.type),
+            active: selectedType?.type === type.type,
+          }"
+          :is-time="listOfTypes.teamOpened.includes(type.type)"
           v-for="type in listOfTypes?.types"
           :key="type.title"
           :type="type"

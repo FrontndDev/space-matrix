@@ -1,7 +1,7 @@
 <template>
   <div class="modal-matrix-partner">
     <ModalHeader
-        :modal-header="'MMatrixPartner'"
+        modal-header="MMatrixPartner"
         @open-m-matrix-partner="parentMatrix"
         @close-modal="$emit('close-modal')"
     >
@@ -17,6 +17,7 @@
               :type="getTypeForSelectedCeil"
               :ceil="selectedPartner?.matrix"
               v-if="selectedPartner?.matrix"
+              @circle-avatar="getUser"
           />
           <AddPartnerCell
               size="small"
@@ -38,16 +39,17 @@
                   size="small"
                   :type="getTypeForFirstCeil"
                   :ceil="firstCeil.matrix"
-                  @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
                   v-if="firstCeil?.matrix"
+                  @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
               />
               <AddPartnerCell
                   size="small"
                   :type="getTypeForFirstCeil"
+                  :cell-type="getTypeForFirstCeil"
                   :ceil="firstCeil"
                   :partners-count="partnersCount"
-                  @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
                   v-if="!firstCeil?.matrix"
+                  @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
               />
 
               <!--       SECOND CEIL        -->
@@ -55,16 +57,17 @@
                   size="small"
                   :type="getTypeForSecondCeil"
                   :ceil="secondCeil.matrix"
-                  @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
                   v-if="secondCeil?.matrix"
+                  @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
               />
               <AddPartnerCell
                   size="small"
                   :type="getTypeForSecondCeil"
+                  :cell-type="getTypeForSecondCeil"
                   :ceil="secondCeil"
                   :partners-count="partnersCount"
-                  @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
                   v-if="!secondCeil?.matrix"
+                  @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
               />
             </div>
           </div>
@@ -208,6 +211,11 @@ const openMMatrixPartner = (ceil: Ceil) => {
     emit('open-m-matrix-partner')
     emit('select-partner', ceil)
   }
+}
+
+const getUser = () => {
+  // @ts-ignore
+  getUserInfo(selectedPartner.value.matrix?.owner.id)
 }
 
 const parentMatrix = () => {

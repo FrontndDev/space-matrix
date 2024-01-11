@@ -2,7 +2,7 @@
   <div class="d-button" @click="emit('click', props.type)">
     <div class="d-button__name">{{ props.type.title }}</div>
     <div
-        v-if="props.isTime == 'time'"
+        v-if="props.isTime"
         class="d-button__time"
     >
       24:00
@@ -31,14 +31,15 @@ const props = defineProps({
   type: {
     type: Object as PropType<Type>,
     required: true,
+    // active, disabled, true
   },
   opened: {
     type: Array as PropType<string[]>,
     required: true,
   },
   isTime: {
-    type: String,
-    default: ''
+    type: Boolean,
+    default: false,
   }
 })
 
