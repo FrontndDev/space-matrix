@@ -1,6 +1,8 @@
 <template>
   <div class="savings">
-    <div class="savings__title">Накопительные</div>
+    <div class="savings__title">
+      {{ [getTypeForFirstCeil, getTypeForSecondCeil].includes('profitable') ? 'Доходные' : 'Накопительные' }}
+    </div>
 
     <div class="savings__partners savings__partners_mt-16">
       <!--   FIRST CEIL    -->
