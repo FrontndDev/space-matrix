@@ -27,7 +27,7 @@
             />
             <TimeActivatedMatrix v-if="false"/>
           </template>
-          <div class="home__preloader" v-if="!Object.keys(store.state.matrixByType).length || !store.state.partners.infinityPartners">
+          <div class="home__preloader" v-if="!Object.keys(store.state.matrixByType).length || !infinityPartners">
             <Preloader :with-text="true"/>
           </div>
 
@@ -93,6 +93,9 @@ import ModalsPartners from "../../components/Modals/ModalsPartners/ModalsPartner
 import NotActivatedMatrix from "../../components/NotActivatedMatrix/NotActivatedMatrix.vue";
 
 import {
+  computed,
+  ComputedRef,
+  onMounted,
   provide,
   Ref,
   ref
@@ -108,7 +111,9 @@ import ModalPaymentForm from "../../components/Modals/ModalPaymentForm/ModalPaym
 import { IPosition } from "../../interfaces/partners.interface.ts";
 import {
   Ceil,
+  Matrix,
 } from "../../interfaces/store.interface.ts";
+import { useRoute } from "vue-router";
 
 const isCells = ref(1)
 
@@ -123,6 +128,7 @@ const toggleModalNotification = ref(false)
 const toggleModalPaymentForm = ref(false)
 
 const store = useStore()
+const route = useRoute()
 
 const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 
@@ -130,6 +136,8 @@ const selectedPartner: Ref<Ceil | null> = ref(null)
 
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
+
+const infinityPartners: ComputedRef<Matrix[] | null> = computed(() => store.state.partners.infinityPartners)
 
 const openModalPartner = (num: number) => {
   toggleModalPartners.value = true
@@ -179,9 +187,19 @@ const selectPartner = (ceil: Ceil) => {
 }
 
 const copyLink = () => {
-  const link = window.location.href
-  navigator.clipboard.writeText(link)
+  const link = window.location.origin + window.location.pathname
+  const id = `?id=${store.state.matrixByType.matrix?.id}`
+  navigator.clipboard.writeText(link + id)
 }
+
+onMounted(() => {
+  console.log('query321', route.query)
+  if (route.query.id) {
+    store.dispatch('getMatrixById', route.query.id)
+    // openModalPartner(3)
+    openModalPartner(2)
+  }
+})
 </script>
 
 <style scoped lang="scss">

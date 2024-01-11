@@ -46,7 +46,8 @@ const route = useRoute()
 const selectType = (type: Type) => {
   store.commit('SET_SELECTED_TYPE', type)
   store.dispatch('getMatrixByType', type.type)
-  router.push(`${baseUrl}/${type.type}`)
+  const queryId = route.query.id ? `?id=${route.query.id}` : ''
+  router.push(`${baseUrl}/${type.type}` + queryId)
 }
 
 const selectDButton = (type: Type) => {

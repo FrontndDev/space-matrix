@@ -27,7 +27,13 @@ function setGlobalConfig(token: string | null) {
 export async function putAsync(url: string, data: unknown, checkError = true) {
     try {
         let response = await axios.put(BASE_URL + url, data, { headers: setGlobalConfig(localStorage.getItem('token')) })
-        // console.log(response)
+
+        if (response?.data?.error_code) {
+            const error = response.data
+            // @ts-ignore
+            show_message('red', error.error_message, 'Ошибка:');
+        }
+
         if (response.status === 200 || response.status === 202) {
             return response?.data
         }
@@ -39,6 +45,8 @@ export async function putAsync(url: string, data: unknown, checkError = true) {
             return error.response
         }
         console.error(error)
+        // @ts-ignore
+        show_message('red', error.message, 'Ошибка:');
     }
 
     return undefined
@@ -47,7 +55,13 @@ export async function putAsync(url: string, data: unknown, checkError = true) {
 export async function postAsync(url: string, data = {}, checkError = true) {
     try {
         let response = await axios.post(BASE_URL + url, data, { headers: setGlobalConfig(localStorage.getItem('token')) })
-        // console.log(response)
+
+        if (response?.data?.error_code) {
+            const error = response.data
+            // @ts-ignore
+            show_message('red', error.error_message, 'Ошибка:');
+        }
+
         if (response.status === 200) {
             return response?.data
         }
@@ -59,6 +73,8 @@ export async function postAsync(url: string, data = {}, checkError = true) {
         if (checkError && error.response) {
             return error.response
         }
+        // @ts-ignore
+        show_message('red', error.message, 'Ошибка:');
         console.error(error)
     }
 
@@ -69,15 +85,19 @@ export async function getAsync(url: string) {
     try {
         let response = await axios.get(BASE_URL + url, { headers: setGlobalConfig(localStorage.getItem('token')) })
 
+        if (response?.data?.error_code) {
+            const error = response.data
+            // @ts-ignore
+            show_message('red', error.error_message, 'Ошибка:');
+        }
+
         if (response.status === 200) {
             return response?.data
         }
     } catch (e) {
         const error = e as AxiosError
-        if (error?.response?.status === 401) {
-            // localStorage.removeItem('token')
-            // localStorage.removeItem('profile-user')
-        }
+        // @ts-ignore
+        show_message('red', error.message, 'Ошибка:');
         console.error(error)
     }
 }

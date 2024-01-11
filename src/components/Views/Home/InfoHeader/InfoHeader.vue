@@ -145,52 +145,6 @@ const selectItemsPartners = reactive([
     name: '9 линия'
   },
 ]);
-
-const selectItemsBoost = reactive([
-  {
-    id: 0,
-    name: 'Все бустеры команды',
-  },
-  {
-    id: 1,
-    name: '1 линия'
-  },
-  {
-    id: 2,
-    name: '2 линия'
-  },
-  {
-    id: 3,
-    name: '3 линия'
-  },
-  {
-    id: 4,
-    name: '4 линия'
-  },
-  {
-    id: 5,
-    name: '5 линия'
-  },
-  {
-    id: 6,
-    name: '6 линия'
-  },
-  {
-    id: 6,
-    name: '6 линия'
-  },
-  {
-    id: 7,
-    name: '7 линия'
-  },
-  {
-    id: 8,
-    name: '8 линия'
-  },  {
-    id: 9,
-    name: '9 линия'
-  },
-]);
 </script>
 
 <style scoped lang="scss">
