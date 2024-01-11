@@ -1,7 +1,7 @@
 <template>
-  <div v-if="props.level" class="level-matrix">
+  <div class="level-matrix">
     <div>{{ selectedType.title }}</div>
-    <div>
+    <div v-if="props.level > 0">
       {{ props.level }}
       <span>lvl</span>
     </div>

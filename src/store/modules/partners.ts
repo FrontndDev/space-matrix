@@ -21,7 +21,7 @@ export default {
       bigTabID: 1 as number,
       infinityPartners: null as Matrix[] | null,
       countPendingBoosters: null,
-      levelID: 0 as number,
+      levelID: 1 as number,
 
       matrixFilterPageId: 1,
 
@@ -33,7 +33,7 @@ export default {
   actions: {
     getExposedPartners(
       { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
-      { filter }: IGetPendingBoostersParams,
+      { filter } : IGetPendingBoostersParams,
     ) {
       state.levelID = filter
 
@@ -42,7 +42,7 @@ export default {
         matrixFilterPageId: state.matrixFilterPageId,
         //@ts-ignore
         matrixFilterUserId: window.UserData.id,
-        filter: { level: filter  }
+        filter: { level: filter }
       }
     ).then(response => {
         console.log(response.data)
