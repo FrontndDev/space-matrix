@@ -184,11 +184,16 @@ const setPositionForPartner = (pos: IPosition) => {
   partnerPos.value = pos
 }
 
-const selectPartner = (ceil: Ceil) => {
+const selectPartner = async (ceil: Ceil) => {
   if (ceil.matrix) {
     // Получаем Матрицу партнёра
     store.commit('SET_MATRIX_BY_ID', {})
-    store.dispatch('getMatrixById', ceil.matrix.id)
+    const response = await store.dispatch('getMatrixById', ceil.matrix.id)
+
+    if (response?.error_code) {
+      closeModal()
+    }
+
     // Получаем партнеров в ожидании "Матрицы партнёра"
     store.dispatch('partners/getPendingPartners', { isPartnerMatrix: true })
   }
@@ -198,12 +203,6 @@ const selectPartner = (ceil: Ceil) => {
 onMounted(async () => {
   if (route.query.id) {
     const response = await store.dispatch('getMatrixById', route.query.id)
-
-    console.log('response', response)
-
-    if (response?.error_code) {
-      closeModal()
-    }
 
     if (response?.data?.matrix) {
       selectedPartner.value = {

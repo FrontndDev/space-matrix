@@ -32,7 +32,7 @@
               v-else-if="props.openModalPartners === 5"
           />
         </div>
-        <div @click="$emit('close-modal')" class="modal__overlay"></div>
+        <div @click="$emit('close-modal')" class="modal__overlay"/>
       </div>
     </transition>
   </Teleport>
