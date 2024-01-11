@@ -60,6 +60,7 @@ import {
 } from "../../interfaces/store.interface.ts";
 import { useCopyLink } from "../../use/useCopyLink.ts";
 import { useGetLevel } from "../../use/useGetLevel.ts";
+import CellType from "../UI/CellType/CellType.vue";
 
 const props = defineProps({
   ceil: {

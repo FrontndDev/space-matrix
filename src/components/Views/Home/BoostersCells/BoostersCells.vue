@@ -12,6 +12,7 @@
           :cell="cell"
           :key="idx"
           v-if="littleTabID === 3"
+          @open-m-matrix-partner="openMMatrixPartner(cell)"
       />
 
       <SmallCell
@@ -42,6 +43,9 @@ import Tabs from "../../../UI/Tabs/Tabs.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 import { useStore } from "vuex";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
+import { Matrix } from "../../../../interfaces/store.interface.ts";
+
+const emit = defineEmits(['open-m-matrix-partner', 'select-partner'])
 
 const store = useStore()
 const boostersPending: ComputedRef<IPartners> = computed(() => store.state.boosters.boostersPending)
@@ -62,7 +66,19 @@ const tabs = reactive([
   },
 ]);
 
-
+const openMMatrixPartner = (cell: Matrix) => {
+  const selectedPartner = {
+    depth: 0,
+    pos: 0,
+    matrix: cell,
+    allowBuyClone: false,
+    allowSniper: false,
+    fillRevard: [],
+    isInfinity: false,
+  }
+  emit('open-m-matrix-partner')
+  emit('select-partner', selectedPartner)
+}
 </script>
 
 <style scoped lang="scss">

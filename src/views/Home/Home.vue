@@ -38,8 +38,16 @@
               :infoHeader="isCells"
               @open-cells="openCells"
           />
-          <PartnerCells v-if="isCells === 1" />
-          <BoostersCells v-else-if="isCells === 2" />
+          <PartnerCells
+              v-if="isCells === 1"
+              @open-m-matrix-partner="openModalPartner(2)"
+              @select-partner="selectPartner"
+          />
+          <BoostersCells
+              v-else-if="isCells === 2"
+              @open-m-matrix-partner="openModalPartner(2)"
+              @select-partner="selectPartner"
+          />
           <ChainsCells
               @open-general-chains="openModalChain(1)"
               @open-m-teleport="openModalTeleport"
@@ -111,7 +119,6 @@ import ModalPaymentForm from "../../components/Modals/ModalPaymentForm/ModalPaym
 import { IPosition } from "../../interfaces/partners.interface.ts";
 import {
   Ceil,
-  IMatrix,
   Matrix,
 } from "../../interfaces/store.interface.ts";
 import { useRoute } from "vue-router";
@@ -190,15 +197,17 @@ const selectPartner = (ceil: Ceil) => {
 
 onMounted(async () => {
   if (route.query.id) {
-    const response: { data: IMatrix } = await store.dispatch('getMatrixById', route.query.id)
-    selectedPartner.value = {
-      depth: 0,
-      pos: 0,
-      matrix: response.data.matrix,
-      allowBuyClone: false,
-      allowSniper: false,
-      fillRevard: [],
-      isInfinity: false,
+    const response = await store.dispatch('getMatrixById', route.query.id)
+    if (response?.data?.matrix) {
+      selectedPartner.value = {
+        depth: 0,
+        pos: 0,
+        matrix: response.data.matrix,
+        allowBuyClone: false,
+        allowSniper: false,
+        fillRevard: [],
+        isInfinity: false,
+      }
     }
     openModalPartner(2)
   }

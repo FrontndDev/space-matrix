@@ -5,10 +5,10 @@
       <DButton
           :class="{
             disabled: !listOfTypes.opened.includes(type.type),
-            time: listOfTypes.teamOpened.includes(type.type),
+            time: Object.keys(listOfTypes.teamOpened).includes(type.type),
             active: selectedType?.type === type.type,
           }"
-          :is-time="listOfTypes.teamOpened.includes(type.type)"
+          :is-time="Object.keys(listOfTypes.teamOpened).includes(type.type)"
           v-for="type in listOfTypes?.types"
           :key="type.title"
           :type="type"

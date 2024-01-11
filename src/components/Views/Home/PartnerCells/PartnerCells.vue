@@ -3,8 +3,8 @@
     <div class="partners-cells__header">
       <Tabs
           type="little"
-          :tabs="tabs"
           :cells="true"
+          :tabs="tabs"
       />
     </div>
     <div class="partners-cells__container">
@@ -12,20 +12,20 @@
           v-for="(cell, idx) in partnersPending?.list"
           :key="idx"
           :cell="cell"
+          @open-m-matrix-partner="openMMatrixPartner(cell)"
           v-if="littleTabID === 1"
       />
       <SmallCell
           v-for="(cell, idx) in partnersExposed?.list"
           :key="idx"
           :cell="cell"
+          @open-m-matrix-partner="openMMatrixPartner(cell)"
           v-if="littleTabID === 2"
       />
-<!--      :type="cell.type"-->
-<!--      :state="cell.state"-->
     </div>
   </div>
   <EmptyCells
-      :cellsType="'partners'"
+      cellsType="partners"
       v-if="partnersPending.list?.length === 0 && littleTabID === 1 || partnersExposed.list?.length === 0 && littleTabID === 2"
   />
 
@@ -44,6 +44,9 @@ import SmallCell from "../../../SmallCell/SmallCell.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 import { useStore } from "vuex";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
+import { Matrix } from "../../../../interfaces/store.interface.ts";
+
+const emit = defineEmits(['open-m-matrix-partner', 'select-partner'])
 
 const store = useStore()
 
@@ -65,7 +68,19 @@ const tabs = reactive([
   },
 ]);
 
-
+const openMMatrixPartner = (cell: Matrix) => {
+  const selectedPartner = {
+    depth: 0,
+    pos: 0,
+    matrix: cell,
+    allowBuyClone: false,
+    allowSniper: false,
+    fillRevard: [],
+    isInfinity: false,
+  }
+  emit('open-m-matrix-partner')
+  emit('select-partner', selectedPartner)
+}
 </script>
 
 <style scoped lang="scss">

@@ -105,6 +105,7 @@ import {
 import {
   Ceil,
   Ceils,
+  IMatrix,
 } from "../../../../interfaces/store.interface.ts";
 import {
   IPosition
@@ -177,6 +178,10 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     if (!firstCeil.value?.allowSniper || !partnersCount.value) {
       return 'disable'
     }
+
+    if (firstCeil.value.matrix?.is_booster) {
+      return 'boost'
+    }
   }
 
   return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
@@ -189,6 +194,10 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
     }
     if (!secondCeil.value?.allowSniper || !partnersCount.value) {
       return 'disable'
+    }
+
+    if (secondCeil.value.matrix?.is_booster) {
+      return 'boost'
     }
   }
 
@@ -218,17 +227,29 @@ const getUser = () => {
   getUserInfo(selectedPartner.value.matrix?.owner.id)
 }
 
-const parentMatrix = () => {
+const parentMatrix = async () => {
   const parentMatrixId = selectedPartner.value?.matrix?.parent_matrix_id
   if (parentMatrixId) {
     emit('select-partner', {})
     store.commit('SET_MATRIX_BY_ID', {})
 
-    store.dispatch('getMatrixById', parentMatrixId).then(response => {
-      if (response?.error_code) {
-        emit('close-modal')
+    const response = await store.dispatch('getMatrixById', parentMatrixId)
+
+    if (response?.error_code) {
+      emit('close-modal')
+    }
+
+    if (response?.data?.matrix) {
+      selectedPartner.value = {
+        depth: 0,
+        pos: 0,
+        matrix: response.data.matrix,
+        allowBuyClone: false,
+        allowSniper: false,
+        fillRevard: [],
+        isInfinity: false,
       }
-    })
+    }
   }
 }
 </script>

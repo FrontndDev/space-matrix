@@ -2,9 +2,10 @@
 @import "../../assets/scss/mixins";
 
 .small-cell {
-  @include flexbox(column);
+  @include flexbox(column, flex-start, center);
   gap: 12px;
   padding: 12px;
+  cursor: pointer;
   position: relative;
 
   &__avatar {
