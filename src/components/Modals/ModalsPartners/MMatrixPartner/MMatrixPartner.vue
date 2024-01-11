@@ -10,6 +10,7 @@
     <div class="modal-matrix-partner__container">
       <div class="modal-matrix-partner__overflow">
         <div class="modal-matrix-partner__cell">
+          <!--     PARTNER CEIL      -->
           <PartnerCell
               size="small"
               cellType="circle-avatar"
@@ -76,11 +77,10 @@
                 :partners-count="infinityPartnersCount"
                 @open-m-infinity-cell="$emit('open-m-infinity-cell')"
             />
-            <!--            :ceil="selectedPartnerCeil"-->
           </div>
         </div>
       </div>
-      <CopyLink @click="copyLink"/>
+      <CopyLink @click="useCopyLink(store.state.matrixById.matrix?.id)"/>
     </div>
   </div>
 </template>
@@ -106,6 +106,7 @@ import {
 import {
   IPosition
 } from "../../../../interfaces/partners.interface.ts";
+import { useCopyLink } from "../../../../use/useCopyLink.ts";
 
 const emit = defineEmits([
   'open-m-add-partner',
@@ -200,12 +201,6 @@ const openMAddPartner = (pos: IPosition) => {
   if (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone) {
     emit('open-m-add-partner', pos)
   }
-}
-
-const copyLink = () => {
-  const link = window.location.origin + window.location.pathname
-  const id = `?id=${store.state.matrixById.matrix?.id}`
-  navigator.clipboard.writeText(link + id)
 }
 
 const openMMatrixPartner = (ceil: Ceil) => {

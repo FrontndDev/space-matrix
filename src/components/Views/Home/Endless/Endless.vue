@@ -4,6 +4,7 @@
 
     <div class="endless__menu endless__menu_mt-16">
       <AddPartnerCell
+          cell-type="infinity"
           :type="getTypeForThirdCeil"
           :ceil="thirdCeil"
           :partners-count="partnersCount"
