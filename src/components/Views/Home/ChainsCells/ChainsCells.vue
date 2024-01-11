@@ -25,31 +25,21 @@
       cellsType="chains"
       v-if="cells.length === 0"
   />
-  <Pagination v-if="cells.length !== 0"/>
+<!--  <Pagination v-if="cells.length !== 0"/>-->
 </template>
 
 <script setup lang="ts">
 import Tabs from "../../../UI/Tabs/Tabs.vue";
-import {ref, reactive} from "vue";
+import { ref, reactive } from "vue";
 import ChainCell from "../../../ChainCell/ChainCell.vue";
-import Pagination from "../../../Pagination/Pagination.vue";
+// import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 
 const tabs = reactive([
   {
-    id: 1,
-    name: 'Все',
-    value: 152
-  },
-  {
-    id: 2,
+    id: 5,
     name: 'Выставленные',
     value: 100
-  },
-  {
-    id: 3,
-    name: 'В ожидании',
-    value: 52
   }
 ]);
 

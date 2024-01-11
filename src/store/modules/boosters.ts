@@ -23,6 +23,7 @@ export default {
           filter: { pending: 1, is_booster: true }
         }
       ).then(response => {
+        if (response.data?.count === 0 && rootState.partners.bigTabID === 2) commit('partners/CHANGE_LITTLE_TAB', 4, { root: true })
         console.log(response.data)
         commit('SET_PENDING_BOOSTERS', response.data)
         commit('partners/SET_COUNT_PENDING_BOOSTERS', response.data?.count, { root: true })

@@ -26,7 +26,7 @@
       v-if="boostersPending.count === 0"
       :cellsType="'boosters'"
   />
-  <Pagination v-if="boostersPending.count !== 0" />
+<!--  <Pagination v-if="boostersPending.count !== 0" />-->
 </template>
 
 <script setup lang="ts">
@@ -38,7 +38,7 @@ import {
 
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 import Tabs from "../../../UI/Tabs/Tabs.vue";
-import Pagination from "../../../Pagination/Pagination.vue";
+// import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 import { useStore } from "vuex";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
