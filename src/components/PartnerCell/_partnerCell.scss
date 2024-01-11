@@ -8,16 +8,16 @@
   height: fit-content;
   padding: 16px;
   text-align: center;
-  cursor: pointer;
   position: relative;
 
   &__avatar {
     padding: 2px;
     border: 2px solid;
     border-radius: 32px;
-    position: relative;
     width: 160px;
     height: 160px;
+    cursor: pointer;
+    position: relative;
 
     & > img {
       border-radius: 28px;
@@ -25,13 +25,16 @@
       object-fit: cover;
     }
 
-    &.cumulative,
-    &.boost {
+    &.cumulative {
       border-color: $border-blue;
     }
 
     &.profitable {
       border-color: $border-green;
+    }
+
+    &.boost {
+      border-color: $border-violet;
     }
 
     &.infinity {
@@ -47,7 +50,7 @@
     text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
-
+    cursor: pointer;
 
     &_mt-8 {
       margin-top: 8px;
@@ -58,6 +61,7 @@
     @include flex-center;
     column-gap: 4px;
     @include get-font(12px, 500, 16px, $text-base-light);
+    cursor: pointer;
   }
 
   &.small {

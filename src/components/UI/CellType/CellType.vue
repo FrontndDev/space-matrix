@@ -29,13 +29,12 @@ const props = defineProps({
 const getIconPath: Ref<string> = computed(() => {
   switch (props.cellType) {
     case 'cumulative':
-    case 'boost':
       return CumulativeIcon;
     case 'profitable':
       return ProfitableIcon;
     case 'infinity':
       return InfinityIcon;
-    case 'booster':
+    case 'boost':
       return BoosterIcon;
     default:
       return CumulativeIcon;
@@ -53,6 +52,7 @@ const getIconPath: Ref<string> = computed(() => {
   height: 40px;
   border: 2px solid $border-base;
   border-radius: 12px;
+  cursor: pointer;
   position: absolute;
   top: 8px;
   right: 8px;
@@ -88,9 +88,9 @@ const getIconPath: Ref<string> = computed(() => {
     }
   }
 
-  //&.boost {
-  //  background: $bg-violet;
-  //}
+  &.boost {
+    background: $bg-violet;
+  }
 }
 
 @media (max-width: 992px) {
