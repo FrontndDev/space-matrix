@@ -89,7 +89,7 @@ const fillReward = computed(() => {
 
 const getLevel = computed(() => {
   // @ts-ignore
-  return +(window.UserData.level ?? 0) - +props.ceil.owner.lvl_insystem
+  return +props.ceil.owner.lvl_insystem - +(window.UserData.level ?? 0)
 })
 </script>
 

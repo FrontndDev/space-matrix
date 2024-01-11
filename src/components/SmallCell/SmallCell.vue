@@ -65,7 +65,7 @@ const props = defineProps({
 
 const getLevel = computed(() => {
   // @ts-ignore
-  return +(window.UserData.level ?? 0) - +props.cell?.owner.lvl_insystem
+  return +props.cell?.owner.lvl_insystem - +(window.UserData.level ?? 0)
 })
 </script>
 
