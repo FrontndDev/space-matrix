@@ -33,6 +33,11 @@
   }
 }
 
+.matrix-rotate-90 {
+  transform: rotate(90deg);
+}
+
+
 @media (max-width: 992px) {
   .matrix-modal-header {
     padding: 16px 16px 8px;
@@ -54,6 +59,9 @@
   }
 }
 
-.matrix-rotate-90 {
-  transform: rotate(90deg);
+@media (max-width: 576px) {
+  .mobile__none {
+    display: none;
+  }
 }
+

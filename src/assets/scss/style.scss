@@ -32,17 +32,17 @@ ol[class] {
   list-style: none;
 }
 
-a {
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  color: $text-link;
-
-  &:not([class]) {
-    text-decoration-skip-ink: auto;
-  }
-}
+//a {
+//  text-decoration: none;
+//  font-weight: 500;
+//  font-size: 12px;
+//  line-height: 16px;
+//  color: $text-link;
+//
+//  &:not([class]) {
+//    text-decoration-skip-ink: auto;
+//  }
+//}
 
 img {
   display: block;
@@ -73,25 +73,6 @@ button {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-h1 {
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 44px;
-  text-align: center;
-}
-
-h2 {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 163%;
-  text-align: center;
-}
-
-h3 {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-}
 
 .container {
   margin: 0 auto;
@@ -101,10 +82,6 @@ h3 {
 }
 
 @media (max-width: 992px) {
-  h1 {
-    font-size: 22px;
-    font-weight: 700;
-  }
 
   .container {
     padding: 0;

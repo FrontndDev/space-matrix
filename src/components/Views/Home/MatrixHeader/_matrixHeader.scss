@@ -39,6 +39,10 @@
       height: 69px;
       overflow: scroll;
 
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+
       &_mt-16 {
         margin-top: 8px;
       }

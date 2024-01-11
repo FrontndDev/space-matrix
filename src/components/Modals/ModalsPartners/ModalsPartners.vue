@@ -1,39 +1,41 @@
 <template>
-  <transition name="modal" class="modal">
-    <div v-if="props.toggleModalPartners" class="modal__container">
-      <div class="modal__content">
-        <MInfinityCell
-            @open-m-matrix-partner="$emit('open-m-matrix-partner')"
-            @open-m-add-partner="$emit('open-m-add-partner')"
-            @close-modal="$emit('close-modal')"
-            v-if="props.openModalPartners === 1"
-        />
-        <MMatrixPartner
-            @open-m-infinity-cell="$emit('open-m-infinity-cell')"
-            @open-m-add-partner="openMAddPartner"
-            @select-partner="selectPartner"
-            @close-modal="$emit('close-modal')"
-            v-else-if="props.openModalPartners === 2"
-        />
-        <MAddPartner
-            @close-modal="$emit('close-modal')"
-            @open-partner-waiting="$emit('open-partner-waiting')"
-            v-else-if="props.openModalPartners === 3"
-        />
-        <MAddpartnerInfinity
-            @close-modal="$emit('close-modal')"
-            @open-partner-waiting="$emit('open-partner-waiting')"
-            v-else-if="props.openModalPartners === 4"
-        />
-        <MPartnerWaiting
-            @close-modal="$emit('close-modal')"
-            @open-m-add-partner="$emit('open-m-add-partner')"
-            v-else-if="props.openModalPartners === 5"
-        />
+  <Teleport to="body">
+    <transition name="modal" class="modal">
+      <div v-if="props.toggleModalPartners" class="modal__container">
+        <div class="modal__content">
+          <MInfinityCell
+              @open-m-matrix-partner="$emit('open-m-matrix-partner')"
+              @open-m-add-partner="$emit('open-m-add-partner')"
+              @close-modal="$emit('close-modal')"
+              v-if="props.openModalPartners === 1"
+          />
+          <MMatrixPartner
+              @open-m-infinity-cell="$emit('open-m-infinity-cell')"
+              @open-m-add-partner="openMAddPartner"
+              @select-partner="selectPartner"
+              @close-modal="$emit('close-modal')"
+              v-else-if="props.openModalPartners === 2"
+          />
+          <MAddPartner
+              @close-modal="$emit('close-modal')"
+              @open-partner-waiting="$emit('open-partner-waiting')"
+              v-else-if="props.openModalPartners === 3"
+          />
+          <MAddpartnerInfinity
+              @close-modal="$emit('close-modal')"
+              @open-partner-waiting="$emit('open-partner-waiting')"
+              v-else-if="props.openModalPartners === 4"
+          />
+          <MPartnerWaiting
+              @close-modal="$emit('close-modal')"
+              @open-m-add-partner="$emit('open-m-add-partner')"
+              v-else-if="props.openModalPartners === 5"
+          />
+        </div>
+        <div @click="$emit('close-modal')" class="modal__overlay"></div>
       </div>
-      <div @click="$emit('close-modal')" class="modal__overlay"></div>
-    </div>
-  </transition>
+    </transition>
+  </Teleport>
 </template>
 
 <script setup lang="ts">

@@ -1,23 +1,25 @@
 <template>
-  <transition name="modal" class="modal">
-    <div v-if="toggleModalNotification" class="modal__container">
-      <div class="modal__content">
-        <div class="modal-notification">
-          <img :src="getIconPath" :alt="props.statusNotification">
-          <div v-if="statusNotification === 'success'" class="modal-notification__text">
-            <div>Поздравляем!</div>
-            <span>Вы успешно активировали цепочку!</span>
+  <Teleport to="body">
+    <transition name="modal" class="modal">
+      <div v-if="toggleModalNotification" class="modal__container">
+        <div class="modal__content">
+          <div class="modal-notification">
+            <img :src="getIconPath" :alt="props.statusNotification">
+            <div v-if="statusNotification === 'success'" class="modal-notification__text">
+              <div>Поздравляем!</div>
+              <span>Вы успешно активировали цепочку!</span>
+            </div>
+            <div v-if="statusNotification === 'failure'" class="modal-notification__text">
+              <div>Что-то пошло не так!</div>
+              <span>Цепочка не активирована, пожалуйста попробуйте снова</span>
+            </div>
+            <button class="modal-notification__btn">Вернуться на главную</button>
           </div>
-          <div v-if="statusNotification === 'failure'" class="modal-notification__text">
-            <div>Что-то пошло не так!</div>
-            <span>Цепочка не активирована, пожалуйста попробуйте снова</span>
-          </div>
-          <button class="modal-notification__btn">Вернуться на главную</button>
+          <div @click="$emit('close-modal')" class="modal__overlay"></div>
         </div>
-        <div @click="$emit('close-modal')" class="modal__overlay"></div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
