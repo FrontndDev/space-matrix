@@ -31,7 +31,7 @@
             <Preloader :with-text="true"/>
           </div>
 
-          <CopyLink style="grid-area: copy-link;" @click="copyLink"/>
+          <CopyLink style="grid-area: copy-link;" @click="useCopyLink(store.state.matrixByType.matrix?.id)"/>
         </div>
         <div class="home__info">
           <InfoHeader
@@ -114,6 +114,7 @@ import {
   Matrix,
 } from "../../interfaces/store.interface.ts";
 import { useRoute } from "vue-router";
+import { useCopyLink } from "../../use/useCopyLink.ts";
 
 const isCells = ref(1)
 
@@ -184,12 +185,6 @@ const selectPartner = (ceil: Ceil) => {
     store.dispatch('partners/getPendingPartners', { isPartnerMatrix: true })
   }
   selectedPartner.value = ceil
-}
-
-const copyLink = () => {
-  const link = window.location.origin + window.location.pathname
-  const id = `?id=${store.state.matrixByType.matrix?.id}`
-  navigator.clipboard.writeText(link + id)
 }
 
 onMounted(() => {
