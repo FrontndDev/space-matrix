@@ -26,7 +26,7 @@
       v-if="boostersPending.count === 0"
       :cellsType="'boosters'"
   />
-  <Pagination v-if="boostersPending.count !== 0" />
+<!--  <Pagination v-if="boostersPending.count !== 0" />-->
 </template>
 
 <script setup lang="ts">
