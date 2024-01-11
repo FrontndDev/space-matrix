@@ -1,26 +1,37 @@
 <template>
   <div class="modal-matrix-partner">
     <ModalHeader
+        :modal-header="'MMatrixPartner'"
+        @open-m-matrix-partner="parentMatrix"
         @close-modal="$emit('close-modal')"
-        :modalHeader="'MMatrixPartner'"
     >
       Матрица партнера
     </ModalHeader>
     <div class="modal-matrix-partner__container">
       <div class="modal-matrix-partner__overflow">
         <div class="modal-matrix-partner__cell">
+          <!--     PARTNER CEIL      -->
           <PartnerCell
-              type="cumulative"
               size="small"
               cellType="circle-avatar"
-              :ceil="selectedPartner.matrix"
+              :type="getTypeForSelectedCeil"
+              :ceil="selectedPartner?.matrix"
               v-if="selectedPartner?.matrix"
+          />
+          <AddPartnerCell
+              size="small"
+              type="loading"
+              :ceil="selectedPartner"
+              :partners-count="partnersCount"
+              v-if="!selectedPartner?.matrix"
           />
         </div>
         <div class="modal-matrix-partner__block">
 
           <div class="modal-matrix-partner__savings">
-            <div class="modal-matrix-partner__block-title">Накопительные</div>
+            <div class="modal-matrix-partner__block-title">
+              {{ [getTypeForFirstCeil, getTypeForSecondCeil].includes('profitable') ? 'Доходные' : 'Накопительные' }}
+            </div>
             <div class="savings__partners savings__partners_mt-16">
               <!--       FIRST CEIL        -->
               <PartnerCell
@@ -66,11 +77,10 @@
                 :partners-count="infinityPartnersCount"
                 @open-m-infinity-cell="$emit('open-m-infinity-cell')"
             />
-            <!--            :ceil="selectedPartnerCeil"-->
           </div>
         </div>
       </div>
-      <CopyLink/>
+      <CopyLink @click="useCopyLink(store.state.matrixById.matrix?.id)"/>
     </div>
   </div>
 </template>
@@ -96,6 +106,7 @@ import {
 import {
   IPosition
 } from "../../../../interfaces/partners.interface.ts";
+import { useCopyLink } from "../../../../use/useCopyLink.ts";
 
 const emit = defineEmits([
   'open-m-add-partner',
@@ -121,6 +132,10 @@ const infinityPartnersCount: ComputedRef<number> = computed(() =>
     store.state.partners.infinityPartnersSecond?.length ?? 0
 )
 
+const selectedCeilIsCumulative: ComputedRef<boolean> = computed(() =>
+    !!selectedPartner.value.fillRevard?.find(reward => reward.event === 'freeze')
+)
+
 const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
 )
@@ -143,9 +158,17 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
 //   }
 // }
 
+const getTypeForSelectedCeil: ComputedRef<string> = computed(() => {
+  if (!selectedPartner) {
+    return 'loading'
+  }
+
+  return selectedCeilIsCumulative.value ? 'cumulative' : 'profitable'
+})
+
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
   if (!firstCeil.value?.matrix) {
-    if (!store.state.matrixById.matrix) {
+    if (!store.state.matrixById?.matrix) {
       return 'loading'
     }
     if (!firstCeil.value?.allowSniper || !partnersCount.value) {
@@ -158,7 +181,7 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
   if (!secondCeil.value?.matrix) {
-    if (!store.state.matrixById.matrix) {
+    if (!store.state.matrixById?.matrix) {
       return 'loading'
     }
     if (!secondCeil.value?.allowSniper || !partnersCount.value) {
@@ -184,6 +207,20 @@ const openMMatrixPartner = (ceil: Ceil) => {
   if (!ceil?.matrix?.is_booster) {
     emit('open-m-matrix-partner')
     emit('select-partner', ceil)
+  }
+}
+
+const parentMatrix = () => {
+  const parentMatrixId = selectedPartner.value?.matrix?.parent_matrix_id
+  if (parentMatrixId) {
+    emit('select-partner', {})
+    store.commit('SET_MATRIX_BY_ID', {})
+
+    store.dispatch('getMatrixById', parentMatrixId).then(response => {
+      if (response?.error_code) {
+        emit('close-modal')
+      }
+    })
   }
 }
 </script>

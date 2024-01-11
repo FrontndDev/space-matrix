@@ -1,11 +1,14 @@
 <template>
   <div class="savings">
-    <div class="savings__title">Накопительные</div>
+    <div class="savings__title">
+      {{ [getTypeForFirstCeil, getTypeForSecondCeil].includes('profitable') ? 'Доходные' : 'Накопительные' }}
+    </div>
 
     <div class="savings__partners savings__partners_mt-16">
       <!--   FIRST CEIL    -->
       <PartnerCell
           :type="getTypeForFirstCeil"
+          :cell-type="getTypeForFirstCeil"
           :ceil="firstCeil.matrix"
           :fill-reward="firstCeil.fillRevard"
           @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
@@ -13,6 +16,7 @@
       />
       <AddPartnerCell
           :type="getTypeForFirstCeil"
+          :cell-type="getTypeForFirstCeil"
           :ceil="firstCeil"
           :partners-count="partnersCount"
           @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
@@ -22,6 +26,7 @@
       <!--   SECOND CEIL    -->
       <PartnerCell
           :type="getTypeForSecondCeil"
+          :cell-type="getTypeForSecondCeil"
           :ceil="secondCeil.matrix"
           :fill-reward="secondCeil.fillRevard"
           @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
@@ -29,6 +34,7 @@
       />
       <AddPartnerCell
           :type="getTypeForSecondCeil"
+          :cell-type="getTypeForSecondCeil"
           :ceil="secondCeil"
           :partners-count="partnersCount"
           @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
@@ -81,12 +87,20 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     return 'disable'
   }
 
+  if (firstCeil.value?.matrix?.is_booster) {
+    return 'boost'
+  }
+
   return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
 })
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
   if (!secondCeil.value?.matrix && (!secondCeil.value.allowSniper || !partnersCount.value && !secondCeil.value.allowBuyClone)) {
     return 'disable'
+  }
+
+  if (secondCeil.value?.matrix?.is_booster) {
+    return 'boost'
   }
 
   return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
@@ -105,10 +119,10 @@ const openMAddPartner = (pos: IPosition) => {
 }
 
 const openMMatrixPartner = (ceil: Ceil) => {
-  if (!ceil?.matrix?.is_booster) {
-    emit('open-m-matrix-partner')
-    emit('select-partner', ceil)
-  }
+  // if (!ceil?.matrix?.is_booster) {
+  emit('open-m-matrix-partner')
+  emit('select-partner', ceil)
+  // }
 }
 </script>
 

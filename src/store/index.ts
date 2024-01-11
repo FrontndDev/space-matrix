@@ -15,11 +15,13 @@ import * as API from '../api/index.ts'
 
 import partners from "./modules/partners.ts";
 import boosters from "./modules/boosters.ts";
+import chains from "./modules/chains.ts";
 
 export default createStore({
     modules: {
         partners,
-        boosters
+        boosters,
+        chains
     },
     state: {
         selectedType: {} as Type,
@@ -53,16 +55,18 @@ export default createStore({
                 }
             })
         },
-        getMatrixById(ctx: ActionContext<any, any>, matrixId: number) {
-            API.getMatrix(matrixId).then(response => {
-                ctx.commit('SET_MATRIX_BY_ID', response.data)
-                if (response.data?.matrix?.id) {
-                    ctx.dispatch('partners/getInfinityPartners', {
-                        parentId: response.data.matrix.id,
-                        isPartnerMatrix: true
-                    })
-                }
-            })
+        async getMatrixById(ctx: ActionContext<any, any>, matrixId: number) {
+            const response = await API.getMatrix(matrixId)
+
+            ctx.commit('SET_MATRIX_BY_ID', response.data)
+            if (response.data?.matrix?.id) {
+                await ctx.dispatch('partners/getInfinityPartners', {
+                    parentId: response.data.matrix.id,
+                    isPartnerMatrix: true
+                })
+            }
+
+            return response
         },
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
             commit('SET_PAYMENT_FORM', null)

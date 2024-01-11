@@ -37,6 +37,10 @@ export async function getListOfInfinity(parentId: number) {
   return getAsync(`/api/matrix/list-of-infinity/${parentId}`)
 }
 
+export async function getListOfChains(pageID: number) {
+  return getAsync(`/api/matrix/chains/profit?page=${pageID}&demo=1`)
+}
+
 // POST
 
 export async function filterOfActivatedMatrix({ matrixType, matrixFilterUserId, matrixFilterPageId, filter }: any) {

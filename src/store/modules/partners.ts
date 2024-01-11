@@ -63,7 +63,7 @@ export default {
           filter: { pending: 1 }
         }
       ).then(response => {
-        if (response.data?.count === 0) commit('CHANGE_LITTLE_TAB', 2)
+        if (response.data?.count === 0 && state.bigTabID === 1) commit('CHANGE_LITTLE_TAB', 2)
 
         if (!isPartnerMatrix) {
           commit('SET_PENDING_PARTNERS', response.data)
@@ -82,8 +82,10 @@ export default {
         }
       })
     },
-    exposePartner(_: ActionContext<any, any>, data: IExposePartnerParams) {
-      API.placementExistMatrix(data)
+    exposePartner(ctx: ActionContext<any, any>, data: IExposePartnerParams) {
+      API.placementExistMatrix(data).then(() => {
+        ctx.dispatch('getMatrixByType', ctx.state.selectedType.type)
+      })
     },
   },
   mutations: {
