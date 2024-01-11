@@ -78,7 +78,7 @@ const openCells = (id: number) => {
 }
 
 watch(() => store.state.selectedType, () => {
-  store.dispatch('partners/getExposedPartners', { filter: 0 })
+  store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value || 1 })
 
   store.dispatch('partners/getPendingPartners', { matrixFilterUserId: 2969585, matrixFilterPageId: 1 })
 
@@ -106,10 +106,6 @@ const tabs = reactive([
 ]);
 
 const selectItemsPartners = reactive([
-  {
-    id: 0,
-    name: 'Вся структура',
-  },
   {
     id: 1,
     name: '1 линия'
