@@ -79,11 +79,6 @@
         @open-change-partner="openModalChain(3)"
         @open-expose-partner="openModalChain(4)"
     />
-    <ModalNotification
-        statusNotification="failure"
-        :toggleModalNotification="toggleModalNotification"
-        @close-modal="closeModal"
-    />
     <ModalPaymentForm
         :toggleModalPaymentForm="toggleModalPaymentForm"
         @close-modal="closeModal"
@@ -114,7 +109,6 @@ import TimeActivatedMatrix from "../../components/TimeActivatedMatrix/TimeActiva
 import ChainsCells from "../../components/Views/Home/ChainsCells/ChainsCells.vue";
 import BoostersCells from "../../components/Views/Home/BoostersCells/BoostersCells.vue";
 import ModalChains from "../../components/Modals/ModalsChains/ModalChains.vue";
-import ModalNotification from "../../components/Modals/ModalNotification/ModalNotification.vue";
 import { useStore } from "vuex";
 import Preloader from "../../components/UI/Preloader/Preloader.vue";
 import ModalPaymentForm from "../../components/Modals/ModalPaymentForm/ModalPaymentForm.vue";

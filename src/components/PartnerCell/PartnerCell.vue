@@ -40,7 +40,8 @@
     <CellType
         :size="props.size"
         :cell-type="props.type"
-        v-if="props.showCellType"
+        v-if="['boost', 'infinity'].includes(props.type)"
+        @click="$emit('open-m-matrix-partner')"
     />
   </div>
 </template>
@@ -83,10 +84,6 @@ const props = defineProps({
   size: {
     type: String,
     default: '',
-  },
-  showCellType: {
-    type: Boolean,
-    default: true,
   },
 });
 

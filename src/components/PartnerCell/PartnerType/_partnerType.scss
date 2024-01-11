@@ -4,6 +4,7 @@
 .partner-type {
   @include flex-center;
   column-gap: 16px;
+  cursor: pointer;
 
   &__circle {
     width: 12px;

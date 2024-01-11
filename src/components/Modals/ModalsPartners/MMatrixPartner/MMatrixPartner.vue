@@ -162,8 +162,12 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
 // }
 
 const getTypeForSelectedCeil: ComputedRef<string> = computed(() => {
-  if (!selectedPartner) {
+  if (!selectedPartner.value) {
     return 'loading'
+  }
+
+  if (selectedPartner.value?.matrix?.is_booster) {
+    return 'boost'
   }
 
   return selectedCeilIsCumulative.value ? 'cumulative' : 'profitable'
