@@ -198,6 +198,13 @@ const selectPartner = (ceil: Ceil) => {
 onMounted(async () => {
   if (route.query.id) {
     const response = await store.dispatch('getMatrixById', route.query.id)
+
+    console.log('response', response)
+
+    if (response?.error_code) {
+      closeModal()
+    }
+
     if (response?.data?.matrix) {
       selectedPartner.value = {
         depth: 0,

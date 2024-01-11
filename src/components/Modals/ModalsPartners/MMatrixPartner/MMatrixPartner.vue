@@ -225,6 +225,7 @@ const openMMatrixPartner = (ceil: Ceil) => {
 const getUser = () => {
   // @ts-ignore
   getUserInfo(selectedPartner.value.matrix?.owner.id)
+  console.log('getuser')
 }
 
 const parentMatrix = async () => {
