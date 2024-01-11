@@ -4,21 +4,23 @@
         :tabs="tabs"
         @open-cells="openCells"
     />
-    <div class="header-info__selects" v-if="props.infoHeader === 1">
-      <Select
-          :items="selectItemsPartners"
-          v-show="littleTabID !== 1"
-          @select="changeLineOfPartners"
-          data="static"
-      />
-    </div>
     <div class="header-info__selects">
-      <Select :items="listOfTypes?.types"
-              keyObj="title"
-              keyOfID="type"
-              route="types"
-              @select="changeMatrixType"
-      />
+      <div v-if="props.infoHeader === 1">
+        <Select
+            :items="selectItemsPartners"
+            v-show="littleTabID !== 1"
+            @select="changeLineOfPartners"
+            data="static"
+        />
+      </div>
+      <div>
+        <Select :items="listOfTypes?.types"
+                keyObj="title"
+                keyOfID="type"
+                route="types"
+                @select="changeMatrixType"
+        />
+      </div>
     </div>
     <ChainsButton v-if="props.infoHeader === 3">
       <span>Примеры цепочек</span>
