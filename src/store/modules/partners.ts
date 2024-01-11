@@ -82,8 +82,10 @@ export default {
         }
       })
     },
-    exposePartner(_: ActionContext<any, any>, data: IExposePartnerParams) {
-      API.placementExistMatrix(data)
+    exposePartner(ctx: ActionContext<any, any>, data: IExposePartnerParams) {
+      API.placementExistMatrix(data).then(() => {
+        ctx.dispatch('getMatrixByType', ctx.state.selectedType.type)
+      })
     },
   },
   mutations: {

@@ -7,18 +7,19 @@
     <div class="header-info__selects">
       <div v-if="props.infoHeader === 1">
         <Select
+            data="static"
             :items="selectItemsPartners"
             v-show="littleTabID !== 1"
             @select="changeLineOfPartners"
-            data="static"
         />
       </div>
       <div>
-        <Select :items="listOfTypes?.types"
-                keyObj="title"
-                keyOfID="type"
-                route="types"
-                @select="changeMatrixType"
+        <Select
+            keyObj="title"
+            keyOfID="type"
+            route="types"
+            :items="listOfTypes?.types"
+            @select="changeMatrixType"
         />
       </div>
     </div>

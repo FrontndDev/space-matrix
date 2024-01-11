@@ -74,15 +74,17 @@ const selectCell = (cell: Matrix) => {
 }
 
 const exposePartner = () => {
-  if (selectedCell.value && selectedPartner.value?.matrix) {
+  const myMatrix = store.state.matrixByType?.matrix
+  const partnerMatrix = selectedPartner.value?.matrix
+  console.log('cells', cells)
+  if ((partnerMatrix || myMatrix) && selectedCell.value) {
     const data: IExposePartnerParams = {
-      matrix_id: +selectedPartner.value.matrix.id,
+      matrix_id: partnerMatrix ? +partnerMatrix.id : +myMatrix?.id,
       child_id: +selectedCell.value?.id,
       depth: partnerPos.value.depth,
       pos: partnerPos.value.pos
     }
     store.dispatch('partners/exposePartner', data)
-    store.dispatch('getMatrixByType', store.state.selectedType.type)
     emit('close-modal')
   }
 }
