@@ -93,12 +93,12 @@ const tabs = reactive([
   {
     id: 1,
     name: 'Партнеры',
-    indicator: false,
+    indicator: computed(() => store.state.partners.partnersPending.count > 0),
   },
   {
     id: 2,
     name: 'Бустеры',
-    indicator: true,
+    indicator: computed(() => store.state.boosters.boostersPending.count > 0),
   },
   {
     id: 3,
