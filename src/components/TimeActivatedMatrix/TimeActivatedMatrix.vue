@@ -1,18 +1,18 @@
 <template>
   <div class="time-activated-matrix">
-    <div class="time-activated-matrix__timer">
-      <div class="time-activated-matrix__timer__number">24</div>
-      <div class="time-activated-matrix__timer__dots">
-        <div></div>
-        <div></div>
-      </div>
-      <div class="time-activated-matrix__timer__number">00</div>
-      <div class="time-activated-matrix__timer__dots">
-        <div></div>
-        <div></div>
-      </div>
-      <div class="time-activated-matrix__timer__number">00</div>
-    </div>
+<!--    <div class="time-activated-matrix__timer">-->
+<!--      <div class="time-activated-matrix__timer__number">24</div>-->
+<!--      <div class="time-activated-matrix__timer__dots">-->
+<!--        <div></div>-->
+<!--        <div></div>-->
+<!--      </div>-->
+<!--      <div class="time-activated-matrix__timer__number">00</div>-->
+<!--      <div class="time-activated-matrix__timer__dots">-->
+<!--        <div></div>-->
+<!--        <div></div>-->
+<!--      </div>-->
+<!--      <div class="time-activated-matrix__timer__number">00</div>-->
+<!--    </div>-->
     <div class="time-activated-matrix__text">
       <h3>Не упустите прибыль!</h3>
       <div class="text__column" v-html="matrixByType?.ctaText"/>
