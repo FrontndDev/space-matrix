@@ -5,7 +5,7 @@
         :class="props.type"
         @click="$emit('open-m-matrix-partner')"
     >
-      <img :src="props.ceil.owner.photo" alt="Avatar">
+      <img alt="Avatar" :src="props.ceil.owner.photo">
       <Reward
           :freeze="fillReward.freeze"
           :custom="fillReward.custom"
@@ -36,11 +36,11 @@
         @click="$emit('open-m-matrix-partner')"
     />
 
-<!--    <CellType-->
-<!--        :size="props.size"-->
-<!--        :cell-type="props.type"-->
-<!--        v-if="props.showCellType"-->
-<!--    />-->
+    <CellType
+        :size="props.size"
+        :cell-type="props.type"
+        v-if="props.showCellType"
+    />
   </div>
 </template>
 

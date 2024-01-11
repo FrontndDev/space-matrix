@@ -27,8 +27,8 @@
 
     <CellType
         :size="props.size"
-        :cell-type="props.type"
-        v-if="!['disable', 'disable2', 'disable3'].includes(props.type)"
+        :cell-type="props.cellType"
+        v-if="!['disable2', 'disable3'].includes(props.type)"
     />
   </div>
 </template>
@@ -53,16 +53,16 @@ const props = defineProps({
   },
   type: {
     type: String,
-    default: 'cumulative'
+    default: 'cumulative',
     //cumulative, profitable, boost, infinity ,disable, disable2, loading
   },
-  showCellType: {
-    type: Boolean,
-    default: true,
+  cellType: {
+    type: String,
+    required: true,
   },
   size: {
     type: String,
-    default: ''
+    default: '',
   }
 });
 

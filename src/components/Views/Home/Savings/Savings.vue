@@ -16,6 +16,7 @@
       />
       <AddPartnerCell
           :type="getTypeForFirstCeil"
+          :cell-type="getTypeForFirstCeil"
           :ceil="firstCeil"
           :partners-count="partnersCount"
           @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
@@ -33,6 +34,7 @@
       />
       <AddPartnerCell
           :type="getTypeForSecondCeil"
+          :cell-type="getTypeForSecondCeil"
           :ceil="secondCeil"
           :partners-count="partnersCount"
           @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
