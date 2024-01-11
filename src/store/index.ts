@@ -16,6 +16,7 @@ import * as API from '../api/index.ts'
 import partners from "./modules/partners.ts";
 import boosters from "./modules/boosters.ts";
 import chains from "./modules/chains.ts";
+import { useMyOverlay } from "../use/useMyOverlay.ts";
 
 export default createStore({
     modules: {
@@ -72,12 +73,7 @@ export default createStore({
             commit('SET_PAYMENT_FORM', null)
             API.getPaymentForm(matrixType).then(response => {
                 commit('SET_PAYMENT_FORM', response.data.html)
-                // @ts-ignore
-                // MY_OVERLAY.active(response.data.html, () => {
-                //     console.log('callback1')
-                // }, () => {
-                //     console.log('callback2')
-                // })
+                useMyOverlay(response.data.html)
             })
         },
         buyBooster(_: ActionContext<any, any>, data: IBuyBoosterParams) {
