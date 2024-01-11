@@ -21,6 +21,7 @@ export default {
       bigTabID: 1 as number,
       infinityPartners: null as Matrix[] | null,
       countPendingBoosters: null,
+      levelID: 0 as number,
 
       matrixFilterPageId: 1,
 
@@ -34,11 +35,14 @@ export default {
       { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
       { filter }: IGetPendingBoostersParams,
     ) {
+      state.levelID = filter
+
       API.filterOfActivatedMatrix({
-        matrixType: rootState.selectedType.type,
+        matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
         matrixFilterPageId: state.matrixFilterPageId,
+        //@ts-ignore
         matrixFilterUserId: window.UserData.id,
-        filter: { level: filter }
+        filter: { level: filter  }
       }
     ).then(response => {
         console.log(response.data)
@@ -52,8 +56,9 @@ export default {
       { isPartnerMatrix = false }: IGetPendingBoostersParams
     ) {
       API.filterOfActivatedMatrix({
-          matrixType: rootState.selectedType.type,
+          matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
           matrixFilterPageId: state.matrixFilterPageId,
+          //@ts-ignore
           matrixFilterUserId: window.UserData.id,
           filter: { pending: 1 }
         }
@@ -95,7 +100,7 @@ export default {
       state.littleTabID = id
     },
     CHANGE_BIG_TAB(state: any, id: number) {
-      console.log(state)
+      state.bigTabID = id
       switch (id) {
         case 1:
           state.partnersPending.count === 0 ? state.littleTabID = 2 : state.littleTabID = 1
@@ -113,7 +118,7 @@ export default {
     },
     SET_COUNT_PENDING_BOOSTERS(state: any, count: number) {
       state.countPendingBoosters = count
-    },
+    }
   },
   getters: {}
 }

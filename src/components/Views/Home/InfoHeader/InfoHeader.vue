@@ -4,23 +4,21 @@
         :tabs="tabs"
         @open-cells="openCells"
     />
-    <div v-if="props.infoHeader === 1" class="header-info__selects">
+    <div class="header-info__selects" v-if="props.infoHeader === 1">
       <Select
           :items="selectItemsPartners"
           v-show="littleTabID !== 1"
           @select="changeLineOfPartners"
           data="static"
       />
+    </div>
+    <div class="header-info__selects">
       <Select :items="listOfTypes?.types"
               keyObj="title"
               keyOfID="type"
               route="types"
               @select="changeMatrixType"
       />
-    </div>
-    <div v-if="props.infoHeader === 2" class="header-info__selects">
-      <Select :items="selectItemsBoost" v-show="littleTabID !== 3" />
-      <Select :items="selectItemsBoost"/>
     </div>
     <ChainsButton v-if="props.infoHeader === 3">
       <span>Примеры цепочек</span>
@@ -34,11 +32,16 @@
 
 <script setup lang="ts">
 import Tabs from "../../../UI/Tabs/Tabs.vue";
-import {computed, reactive, Ref} from "vue";
+import {
+  computed,
+  reactive,
+  Ref,
+  watch
+} from "vue";
 import Select from "../../../UI/Select/Select.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
-import {  useStore } from "vuex";
-import { ListOfTypes } from "../../../../interfaces/store.interface.ts";
+import { useStore } from "vuex";
+import { ListOfTypes, Type } from "../../../../interfaces/store.interface.ts";
 import { ILineOfPartners } from "../../../../interfaces/partners.interface.ts";
 
 const props = defineProps({
@@ -53,24 +56,36 @@ const emit = defineEmits(['open-cells'])
 
 const littleTabID = computed(() => store.state.partners.littleTabID)
 const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
+
+const levelIDOfPartners = computed(() => store.state.partners.levelID)
+const levelIDOfBoosters = computed(() => store.state.boosters.levelID)
+
 const changeLineOfPartners = (item: ILineOfPartners) => {
-  store.dispatch('partners/getExposedPartners', {
-    matrixFilterUserId: 2969585,
-    matrixFilterPageId: 1,
-    filter: item.id
-  })
+  store.dispatch('partners/getExposedPartners', { filter: item.id })
 }
 
-const changeMatrixType = (item: ILineOfPartners) => {
-  store.dispatch('partners/getExposedPartners', {
-    matrixFilterUserId: 2969585,
-    matrixFilterPageId: 1
-  })
+const changeMatrixType = (item: Type) => {
+  store.commit('SET_NEW_TYPE_MATRIX', item.type)
+  store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value })
+  store.dispatch('partners/getPendingPartners', { isPartnerMatrix: false })
+
+  store.dispatch('boosters/getPendingBoosters')
+  store.dispatch('boosters/getExposedBoosters', { filter:  levelIDOfBoosters.value })
 }
 
 const openCells = (id: number) => {
   emit('open-cells', id)
 }
+
+watch(() => store.state.selectedType, () => {
+  store.dispatch('partners/getExposedPartners', { filter: 0 })
+
+  store.dispatch('partners/getPendingPartners', { matrixFilterUserId: 2969585, matrixFilterPageId: 1 })
+
+  store.dispatch('boosters/getPendingBoosters')
+
+  store.dispatch('boosters/getExposedBoosters')
+})
 
 const tabs = reactive([
   {

@@ -1,6 +1,5 @@
 <template>
   <div class="matrix-header">
-    <h1>Мои матрицы</h1>
 
     <div class="matrix-header__buttons">
       <Preloader v-if="!listOfTypes?.types?.length"/>
@@ -29,7 +28,7 @@ import {
   ListOfTypes,
   Type
 } from "../../../../interfaces/store.interface.ts";
-import {useStore} from "vuex";
+import { useStore } from "vuex";
 import Preloader from "../../../UI/Preloader/Preloader.vue";
 import {
   useRoute,

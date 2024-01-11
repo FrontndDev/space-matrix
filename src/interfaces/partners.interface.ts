@@ -10,6 +10,7 @@ export interface IPartners {
 export interface IGetPendingBoostersParams {
     filter?: number;
     isPartnerMatrix?: boolean;
+    newTypeMatrix?: null | string;
 }
 
 export interface IPosition {

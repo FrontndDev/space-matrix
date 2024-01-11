@@ -11,6 +11,14 @@
           v-for="(cell, idx) in boostersPending?.list"
           :cell="cell"
           :key="idx"
+          v-if="littleTabID === 3"
+      />
+
+      <SmallCell
+          v-for="(cell, idx) in boostersExposed?.list"
+          :cell="cell"
+          :key="idx"
+          v-if="littleTabID === 4"
       />
     </div>
   </div>
@@ -37,6 +45,9 @@ import { IPartners } from "../../../../interfaces/partners.interface.ts";
 
 const store = useStore()
 const boostersPending: ComputedRef<IPartners> = computed(() => store.state.boosters.boostersPending)
+const boostersExposed: ComputedRef<IPartners> = computed(() => store.state.boosters.boostersExposed)
+
+const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
 
 const tabs = reactive([
   {
@@ -47,7 +58,7 @@ const tabs = reactive([
   {
     id: 4,
     name: 'Выставленные',
-    value: 110
+    value: computed(() => boostersExposed.value.count)
   },
 ]);
 

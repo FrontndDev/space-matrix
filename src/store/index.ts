@@ -23,6 +23,7 @@ export default createStore({
     },
     state: {
         selectedType: {} as Type,
+        newTypeMatrix: null as string | null,
         listOfTypes: {} as ListOfTypes,
         matrixByType: {} as IMatrix,
         matrixById: {} as IMatrix,
@@ -95,6 +96,9 @@ export default createStore({
         SET_PAYMENT_FORM(state: any, form) {
             state.paymentForm = form
         },
+        SET_NEW_TYPE_MATRIX(state: any, type: string) {
+            state.newTypeMatrix = type
+        }
     },
     getters: {}
 });

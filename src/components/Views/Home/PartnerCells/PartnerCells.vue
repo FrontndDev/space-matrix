@@ -38,7 +38,6 @@ import {
   reactive,
   computed,
   ComputedRef,
-  watch
 } from "vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 // import Pagination from "../../../Pagination/Pagination.vue";
@@ -66,13 +65,6 @@ const tabs = reactive([
   },
 ]);
 
-watch(() => store.state.selectedType, () => {
-  store.dispatch('partners/getExposedPartners', { filter: 0 })
-
-  store.dispatch('partners/getPendingPartners', { matrixFilterUserId: 2969585, matrixFilterPageId: 1 })
-
-  store.dispatch('boosters/getPendingBoosters')
-})
 
 </script>
 
