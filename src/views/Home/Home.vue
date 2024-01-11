@@ -5,8 +5,8 @@
         <div class="home__matrices">
           <MatrixHeader style="grid-area: header;"/>
 
-          <template v-if="Object.keys(store.state.matrixByType).length && store.state.partners.infinityPartners">
-            <div class="home__matrices-inner" v-if="!store.state.matrixByType?.ctaText">
+          <template v-if="Object.keys(matrixByType).length && infinityPartners">
+            <div class="home__matrices-inner" v-if="!matrixByType?.ctaText">
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
                   @open-m-add-partner="openModalPartner(3)"
@@ -21,17 +21,19 @@
             </div>
 
             <NotActivatedMatrix
-                :matrix-by-type="store.state.matrixByType"
+                :matrix-by-type="matrixByType"
                 @open-payment-form="toggleModalPaymentForm = true"
-                v-if="store.state.matrixByType?.ctaText"
+                v-if="matrixByType?.ctaText && !matrixIsTemporarilyUnavailable"
             />
-            <TimeActivatedMatrix v-if="false"/>
+            <TimeActivatedMatrix
+                v-if="matrixIsTemporarilyUnavailable"
+            />
           </template>
-          <div class="home__preloader" v-if="!Object.keys(store.state.matrixByType).length || !infinityPartners">
+          <div class="home__preloader" v-if="!Object.keys(matrixByType).length || !infinityPartners">
             <Preloader :with-text="true"/>
           </div>
 
-          <CopyLink style="grid-area: copy-link;" @click="useCopyLink(store.state.matrixByType.matrix?.id)"/>
+          <CopyLink style="grid-area: copy-link;" @click="useCopyLink(matrixByType.matrix?.id ?? 0)"/>
         </div>
         <div class="home__info">
           <InfoHeader
@@ -119,7 +121,10 @@ import ModalPaymentForm from "../../components/Modals/ModalPaymentForm/ModalPaym
 import { IPosition } from "../../interfaces/partners.interface.ts";
 import {
   Ceil,
+  IMatrix,
+  ListOfTypes,
   Matrix,
+  Type,
 } from "../../interfaces/store.interface.ts";
 import { useRoute } from "vue-router";
 import { useCopyLink } from "../../use/useCopyLink.ts";
@@ -138,6 +143,14 @@ const toggleModalPaymentForm = ref(false)
 
 const store = useStore()
 const route = useRoute()
+
+const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfTypes)
+
+const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() =>
+    Object.keys(listOfTypes.value.teamOpened).includes(route.params.type as string)
+)
+
+const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
 const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 

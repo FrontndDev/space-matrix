@@ -40,8 +40,6 @@ const props = defineProps({
 const openPaymentForm = () => {
   store.dispatch('getPaymentForm', selectedType.value.type)
 }
-
-
 </script>
 
 <style scoped lang="scss">

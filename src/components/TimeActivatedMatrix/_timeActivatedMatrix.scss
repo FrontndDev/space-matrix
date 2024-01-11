@@ -50,8 +50,9 @@
 
 .text__column {
   @include flexbox(column, flex-start, center);
+  text-align: center;
 
-  & a {
+  & ::v-deep(a) {
     font-size: 14px;
     color: $text-link;
   }
