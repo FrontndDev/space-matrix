@@ -42,7 +42,7 @@ import {
   watch
 } from "vue";
 import Select from "../../../UI/Select/Select.vue";
-import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
+// import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
 import { useStore } from "vuex";
 import { ListOfTypes, Type } from "../../../../interfaces/store.interface.ts";
 import { ILineOfPartners } from "../../../../interfaces/partners.interface.ts";

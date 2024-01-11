@@ -32,7 +32,7 @@
 import Tabs from "../../../UI/Tabs/Tabs.vue";
 import { ref, reactive } from "vue";
 import ChainCell from "../../../ChainCell/ChainCell.vue";
-import Pagination from "../../../Pagination/Pagination.vue";
+// import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 
 const tabs = reactive([

@@ -38,7 +38,6 @@ import PartnerType from "../PartnerCell/PartnerType/PartnerType.vue";
 import LevelMatrix from "../UI/LevelMatrix/LevelMatrix.vue";
 import SmallCellType from "../UI/SmallCellType/SmallCellType.vue";
 import {
-  computed,
   PropType
 } from "vue";
 import { Matrix } from "../../interfaces/store.interface.ts";
