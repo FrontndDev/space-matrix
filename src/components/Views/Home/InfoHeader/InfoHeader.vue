@@ -13,7 +13,7 @@
             @select="changeLineOfPartners"
         />
       </div>
-      <div>
+      <div v-show="props.infoHeader !== 3">
         <Select
             keyObj="title"
             keyOfID="type"
@@ -74,6 +74,7 @@ const changeMatrixType = (item: Type) => {
 
   store.dispatch('boosters/getPendingBoosters')
   store.dispatch('boosters/getExposedBoosters', { filter:  levelIDOfBoosters.value })
+
 }
 
 const openCells = (id: number) => {
@@ -88,6 +89,8 @@ watch(() => store.state.selectedType, () => {
   store.dispatch('boosters/getPendingBoosters')
 
   store.dispatch('boosters/getExposedBoosters')
+
+  store.dispatch('chains/getChainsList')
 })
 
 const tabs = reactive([
@@ -99,7 +102,7 @@ const tabs = reactive([
   {
     id: 2,
     name: 'Бустеры',
-    indicator: computed(() => store.state.boosters.boostersPending.count > 0),
+    indicator: false,
   },
   {
     id: 3,

@@ -9,60 +9,56 @@
     </div>
     <div class="chains-cells__container">
       <ChainCell
-          v-for="cell in cells"
-          :key="cell.id"
-          :type="cell.type"
-          :cost="cell.cost"
-          :reward="cell.reward"
-          :lvlOne="cell.lvlOne"
-          :lvlTwo="cell.lvlTwo"
-          @open-general-chains="$emit('open-general-chains')"
+          v-for="(cell, idx) in chainsList?.list"
+          :key="idx"
+          :type="'default'"
+          :cost="cell.price?.amount"
+          :reward="cell.profit?.amount"
+          :matrixStart="cell?.start"
+          :matrixEnd="cell?.end"
+          :countLinks="cell?.count_links"
+          @open-general-chains="openGeneralChains"
           @open-m-teleport="$emit('open-m-teleport')"
       />
     </div>
   </div>
   <EmptyCells
       cellsType="chains"
-      v-if="cells.length === 0"
+      v-if="chainsList.totalCount === 0"
   />
 <!--  <Pagination v-if="cells.length !== 0"/>-->
 </template>
 
 <script setup lang="ts">
 import Tabs from "../../../UI/Tabs/Tabs.vue";
-import { ref, reactive } from "vue";
+import {
+  computed,
+  ComputedRef,
+  reactive
+} from "vue";
 import ChainCell from "../../../ChainCell/ChainCell.vue";
 // import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
+import { IChainsList } from "../../../../interfaces/chains.interface.ts";
+import { useStore } from "vuex";
 
 const tabs = reactive([
   {
     id: 5,
     name: 'Выставленные',
-    value: 100
+    value: computed(() => chainsList.value.totalCount)
   }
 ]);
 
-const cells = ref([
-  { type: 'teleport', lvlOne: 1, lvlTwo: 2, reward: 20, cost: 10, id: 0 },
-  { type: 'default', lvlOne: 1, lvlTwo: 3, reward: 40, cost: 10, id: 1 },
-  { type: 'default', lvlOne: 1, lvlTwo: 4, reward: 40, cost: 20, id: 2 },
-  { type: 'default', lvlOne: 2, lvlTwo: 5, reward: 80, cost: 40, id: 3 },
-  { type: 'default', lvlOne: 2, lvlTwo: 4, reward: 30, cost: 20, id: 4 },
-  { type: 'teleport', lvlOne: 1, lvlTwo: 3, reward: 60, cost: 30, id: 5 },
-  { type: 'default', lvlOne: 1, lvlTwo: 2, reward: 20, cost: 10, id: 6 },
-  { type: 'teleport', lvlOne: 1, lvlTwo: 3, reward: 40, cost: 10, id: 7 },
-  { type: 'teleport', lvlOne: 1, lvlTwo: 4, reward: 40, cost: 20, id: 8 },
-  { type: 'default', lvlOne: 2, lvlTwo: 5, reward: 80, cost: 40, id: 9 },
-  { type: 'teleport', lvlOne: 2, lvlTwo: 4, reward: 30, cost: 20, id: 10 },
-  { type: 'default', lvlOne: 1, lvlTwo: 3, reward: 60, cost: 30, id: 11 },
-  { type: 'teleport', lvlOne: 1, lvlTwo: 2, reward: 20, cost: 10, id: 12 },
-  { type: 'default', lvlOne: 1, lvlTwo: 3, reward: 40, cost: 10, id: 13 },
-  { type: 'default', lvlOne: 1, lvlTwo: 4, reward: 40, cost: 20, id: 14 },
-  { type: 'teleport', lvlOne: 2, lvlTwo: 5, reward: 80, cost: 40, id: 15 },
-  { type: 'default', lvlOne: 2, lvlTwo: 4, reward: 30, cost: 20, id: 16 },
-  { type: 'default', lvlOne: 1, lvlTwo: 3, reward: 60, cost: 30, id: 17 },
-])
+const store = useStore()
+const emit = defineEmits(['open-general-chains', 'open-m-teleport'])
+
+const openGeneralChains = () => {
+  store.dispatch('chains/getChainDetail', )
+  emit('open-general-chains')
+}
+
+const chainsList: ComputedRef<IChainsList> = computed(() => store.state.chains.chainsList)
 
 </script>
 

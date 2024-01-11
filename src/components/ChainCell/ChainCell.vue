@@ -8,12 +8,12 @@
     </div>
     <div class="chain-cell__info">
       <div class="chain-cell__level">
-        <span>D{{ props.lvlOne }}</span>
+        <span>{{ props.matrixStart }}</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M6.73355 12.3999C6.53829 12.5952 6.22171 12.5952 6.02645 12.3999L1.97978 8.35327C1.88601 8.25951 1.83333 8.13233 1.83333 7.99972C1.83333 7.86711 1.88601 7.73993 1.97978 7.64617L6.02645 3.5995C6.22171 3.40424 6.53829 3.40424 6.73355 3.5995C6.92881 3.79476 6.92881 4.11135 6.73355 4.30661L3.04044 7.99972L6.73355 11.6928C6.92881 11.8881 6.92881 12.2047 6.73355 12.3999Z" fill="#576175"/>
           <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1665 7.99951C14.1665 8.27565 13.9426 8.49951 13.6665 8.49951H2.44646C2.17032 8.49951 1.94646 8.27565 1.94646 7.99951C1.94646 7.72337 2.17032 7.49951 2.44646 7.49951H13.6665C13.9426 7.49951 14.1665 7.72337 14.1665 7.99951Z" fill="#576175"/>
         </svg>
-        <span>D{{ props.lvlTwo }}</span>
+        <span>{{ props.matrixEnd }}</span>
       </div>
       <div class="chain-cell__cost">
         <span>+{{ props.reward }}</span>
@@ -29,6 +29,7 @@
     </div>
     <SmallCellType
         :cellType="props.type"
+        :countLinks="countLinks"
     />
   </div>
 </template>
@@ -38,6 +39,9 @@ import SmallCellType from "../UI/SmallCellType/SmallCellType.vue";
 import ChainTypeButton from "./ChainTypeButton/ChainTypeButton.vue";
 
 const props = defineProps({
+  countLinks: {
+    type: Number
+  },
   cellType: {
     type: String,
     default: 'cumulative'
@@ -54,12 +58,12 @@ const props = defineProps({
     type: Number,
     default: ''
   },
-  lvlOne: {
-    type: Number,
+  matrixStart: {
+    type: String,
     default: ''
   },
-  lvlTwo: {
-    type: Number,
+  matrixEnd: {
+    type: String,
     default: ''
   },
 })

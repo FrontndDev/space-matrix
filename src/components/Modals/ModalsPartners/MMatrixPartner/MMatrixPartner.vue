@@ -105,7 +105,6 @@ import {
 import {
   Ceil,
   Ceils,
-  IMatrix,
 } from "../../../../interfaces/store.interface.ts";
 import {
   IPosition

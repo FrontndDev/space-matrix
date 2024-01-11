@@ -41,6 +41,10 @@ export async function getListOfChains(pageID: number) {
   return getAsync(`/api/matrix/chains/profit?page=${pageID}&demo=1`)
 }
 
+export async function getChainDetail(id: number) {
+  return getAsync(`/api/matrix/chain-details/${id}`)
+}
+
 // POST
 
 export async function filterOfActivatedMatrix({ matrixType, matrixFilterUserId, matrixFilterPageId, filter }: any) {

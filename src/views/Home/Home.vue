@@ -124,7 +124,6 @@ import {
   IMatrix,
   ListOfTypes,
   Matrix,
-  Type,
 } from "../../interfaces/store.interface.ts";
 import { useRoute } from "vue-router";
 import { useCopyLink } from "../../use/useCopyLink.ts";

@@ -110,6 +110,9 @@ export default {
         case 2:
           state.countPendingBoosters === 0 ? state.littleTabID = 4 : state.littleTabID = 3
           break;
+        case 3:
+          state.littleTabID = 5
+          break;
       }
     },
     SET_INFINITY_PARTNERS(state: any, infinityPartners: any) {

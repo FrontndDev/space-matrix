@@ -12,27 +12,6 @@
 <!--          <div class="general-chains__block">-->
 <!--            <SmallCell />-->
 <!--          </div>-->
-<!--          <div class="general-chains__block">-->
-<!--            <SmallCell />-->
-<!--          </div>-->
-<!--          <div class="general-chains__block">-->
-<!--            <SmallCell />-->
-<!--          </div>-->
-<!--          <div class="general-chains__block">-->
-<!--            <SmallCell />-->
-<!--          </div>-->
-<!--          <div class="general-chains__block">-->
-<!--            <SmallCell />-->
-<!--          </div>-->
-<!--          <div class="general-chains__block">-->
-<!--            <SmallCell />-->
-<!--          </div>-->
-<!--          <div class="general-chains__block">-->
-<!--            <SmallCell />-->
-<!--          </div>-->
-<!--          <div class="general-chains__block">-->
-<!--            <SmallCell />-->
-<!--          </div>-->
         </div>
         <ChainsButton @click="$emit('open-m-replace-partner')">
           <span>Активировать цепочку</span>
@@ -52,7 +31,7 @@ import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
 // import SmallCell from "../../../SmallCell/SmallCell.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
-import {ref} from "vue";
+import { ref } from "vue";
 
 const cells = ref([
   {id: 0},
