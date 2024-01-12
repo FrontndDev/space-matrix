@@ -18,7 +18,8 @@
             <div class="replace-partner__block">
               <div class="replace-partner__level">D1</div>
               <SmallCell
-                  :type="getTypeForCeil(cell, ceilIsCumulative(cell))"
+                  :type="getTypeForCeil(cell)"
+                  :cell-type="getTypeForCeil(cell)"
                   :cell="cell"
               />
               <div class="replace-partner__change-partner">
@@ -64,21 +65,19 @@ import {
 
 const store = useStore()
 
-const chainDetails: ComputedRef<Matrix[]> = computed(() => store.state.chains.chainDetails.list)
+const chainDetails: ComputedRef<Matrix[]> = computed(() => store.state.Спроси оchains.chainDetails.list)
 
-const ceilIsCumulative = (cell: any) => !!cell.fillRevard.find((reward: any) => reward.event === 'freeze')
-
-const getTypeForCeil = (cell: Matrix, type: boolean) => {
+const getTypeForCeil = (cell: Matrix) => {
   if (cell.is_booster) {
-    return 'boost'
+    return 'chains-boost'
   }
 
-  return type ? 'cumulative' : 'profitable'
+  return ''
 }
 </script>
 
-<style scoped>
-@import "_mReplacePartner.scss";
+<style scoped lang="scss">
+@import "mReplacePartner";
 
 .rotate-img {
   transform: rotate(180deg);

@@ -33,11 +33,13 @@
           :cellType="props.cellType"
           :type="props.type"
           @click="$emit('open-m-matrix-partner')"
+          v-if="props.cellType && props.type"
       />
     </div>
     <SmallCellType
         :cellType="props.type"
         :state="props.state"
+        v-if="props.type"
     />
   </div>
 </template>

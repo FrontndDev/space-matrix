@@ -20,7 +20,7 @@
         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 1.83337C4.59424 1.83337 1.83333 4.59428 1.83333 8.00004C1.83333 11.4058 4.59409 14.1664 7.99984 14.1664C11.4056 14.1664 14.1667 11.4058 14.1667 8.00004C14.1667 4.59428 11.4058 1.83337 8 1.83337ZM0.833328 8.00004C0.833328 4.042 4.04195 0.833374 8 0.833374C11.958 0.833374 15.1667 4.042 15.1667 8.00004C15.1667 11.9581 11.9579 15.1664 7.99984 15.1664C4.0418 15.1664 0.833328 11.9581 0.833328 8.00004Z" fill="#1A86E5"/>
       </svg>
     </template>
-    <template v-if="props.type !== 'boost' && props.cellType !== 'circle-avatar'">
+    <template v-if="!['boost', 'chains-boost'].includes(props.type) && props.cellType !== 'circle-avatar'">
       <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus?.['1'] }"/>
       <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus?.['2'] }"/>
 <!--      классы => ( fill-green, fill-orange, fill-blue )  -->

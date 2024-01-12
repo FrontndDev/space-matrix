@@ -12,7 +12,6 @@
           :cell="cell"
           :key="idx"
           v-if="littleTabID === 3"
-          @open-m-matrix-partner="openMMatrixPartner(cell)"
       />
 
       <SmallCell
@@ -20,6 +19,7 @@
           :cell="cell"
           :key="idx"
           v-if="littleTabID === 4"
+          @open-m-matrix-partner="openMMatrixPartner(cell)"
       />
     </div>
   </div>
