@@ -57,7 +57,7 @@
           />
           <PartnerCells
               v-if="isCells === 1"
-              @open-m-matrix-partner="openModalPartner(2)"
+              @open-m-matrix-partner="openModalPartnematrixByType?.in_queuer(2)"
               @select-partner="selectPartner"
           />
           <BoostersCells
@@ -164,6 +164,8 @@ const matrixIsInQueueForPublication: ComputedRef<boolean> = computed(() => {
   return ceilsCollection ? Object.values(ceilsCollection).map(ceil => !!(ceil as Ceil).queueId).includes(true) : false
 })
 
+const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
+
 watch(() => matrixIsInQueueForPublication.value, () => {
   if (matrixIsInQueueForPublication.value) {
     interval.value = setInterval(() => {
@@ -178,6 +180,19 @@ watch(() => matrixIsInQueueForPublication.value, () => {
   }
 });
 
+watch(() => matrixByType.value?.in_queue, () => {
+  if (matrixByType.value?.in_queue) {
+    interval.value = setInterval(() => {
+      store.dispatch('getMatrixByType', {
+        matrixType: store.state.selectedType.type,
+        dropInfinityPartners: false
+      });
+    }, 3000);
+  } else if (!matrixByType.value?.in_queue && interval.value) {
+    clearInterval(interval.value);
+  }
+})
+
 const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfTypes)
 
 const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
@@ -185,7 +200,6 @@ const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
   return teamOpened ? Object.keys(teamOpened).includes(route.params.type as string) : false
 })
 
-const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
 const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 
