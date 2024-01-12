@@ -1,4 +1,4 @@
-import { IMatrix } from "./store.interface.ts";
+import { Matrix } from "./store.interface.ts";
 
 export type TInitiator = {
   id: string;
@@ -33,5 +33,5 @@ export interface IChainsList {
 }
 
 export interface IChainDetails {
-  list: IMatrix[];
+  list: Matrix[];
 }

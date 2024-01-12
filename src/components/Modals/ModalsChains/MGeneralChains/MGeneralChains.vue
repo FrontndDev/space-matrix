@@ -47,7 +47,7 @@ import { IChainDetails } from "../../../../interfaces/chains.interface.ts";
 
 const store = useStore()
 
-const chainDetails: ComputedRef<IChainDetails[]> = computed(() => store.state.chains.chainDetails)
+const chainDetails: ComputedRef<IChainDetails> = computed(() => store.state.chains.chainDetails)
 
 const cells = ref([
   {id: 0},
