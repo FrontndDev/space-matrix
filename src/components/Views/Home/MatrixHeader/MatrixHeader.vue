@@ -49,7 +49,7 @@ const route = useRoute()
 
 const selectType = (type: Type) => {
   store.commit('SET_SELECTED_TYPE', type)
-  store.dispatch('getMatrixByType', type.type)
+  store.dispatch('getMatrixByType', { matrixType: type.type })
   const queryId = route.query.id ? `?id=${route.query.id}` : ''
   router.push(`${baseUrl}/${type.type}` + queryId)
 }

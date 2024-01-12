@@ -73,6 +73,7 @@ export interface FillReward {
 export interface Ceil {
     depth: number;
     pos: number;
+    queueId: number | null;
     matrix?: Matrix | null;
     allowBuyClone: boolean;
     allowSniper: boolean;

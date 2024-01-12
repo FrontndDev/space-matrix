@@ -11,7 +11,7 @@
           :cell-type="getTypeForFirstCeil"
           :ceil="firstCeil.matrix"
           :fill-reward="firstCeil.fillRevard"
-          v-if="firstCeil?.matrix"
+          v-if="firstCeil?.matrix && !firstCeil.queueId"
           @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
       />
       <AddPartnerCell
@@ -19,7 +19,7 @@
           :cell-type="getTypeForFirstCeil"
           :ceil="firstCeil"
           :partners-count="partnersCount"
-          v-if="!firstCeil?.matrix"
+          v-if="!firstCeil?.matrix || firstCeil.queueId"
           @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
       />
 
@@ -29,7 +29,7 @@
           :cell-type="getTypeForSecondCeil"
           :ceil="secondCeil.matrix"
           :fill-reward="secondCeil.fillRevard"
-          v-if="secondCeil?.matrix"
+          v-if="secondCeil?.matrix && !secondCeil.queueId"
           @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
       />
       <AddPartnerCell
@@ -37,7 +37,7 @@
           :cell-type="getTypeForSecondCeil"
           :ceil="secondCeil"
           :partners-count="partnersCount"
-          v-if="!secondCeil?.matrix"
+          v-if="!secondCeil?.matrix || secondCeil.queueId"
           @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
       />
     </div>
@@ -83,6 +83,10 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
 )
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
+  if (firstCeil.value.queueId) {
+    return 'loading'
+  }
+
   if (!firstCeil.value?.matrix && (!firstCeil.value.allowSniper || !partnersCount.value && !firstCeil.value.allowBuyClone)) {
     return 'disable'
   }
@@ -95,6 +99,10 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
+  if (secondCeil.value.queueId) {
+    return 'loading'
+  }
+
   if (!secondCeil.value?.matrix && (!secondCeil.value.allowSniper || !partnersCount.value && !secondCeil.value.allowBuyClone)) {
     return 'disable'
   }

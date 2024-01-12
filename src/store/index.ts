@@ -43,16 +43,22 @@ export default createStore({
                 API.setDataToLS(key, response.data)
             })
         },
-        getMatrixByType(ctx: ActionContext<any, any>, matrixType: string) {
+        getMatrixByType(ctx: ActionContext<any, any>, { matrixType, dropInfinityPartners = true }) {
             API.getMatrix(matrixType).then(response => {
                 ctx.commit('SET_MATRIX_BY_TYPE', response.data)
-                ctx.commit('partners/SET_INFINITY_PARTNERS', null)
-                if (response.data?.matrix?.id) {
-                    ctx.dispatch('partners/getInfinityPartners', {
-                        parentId: response.data.matrix.id
-                    })
-                } else {
-                    ctx.commit('partners/SET_INFINITY_PARTNERS', [])
+
+                if (dropInfinityPartners) {
+                    ctx.commit('partners/SET_INFINITY_PARTNERS', null)
+
+                    if (response.data?.matrix?.id) {
+                        ctx.dispatch('partners/getInfinityPartners', {
+                            parentId: response.data.matrix.id
+                        })
+                    } else {
+                        if (dropInfinityPartners) {
+                            ctx.commit('partners/SET_INFINITY_PARTNERS', [])
+                        }
+                    }
                 }
             })
         },

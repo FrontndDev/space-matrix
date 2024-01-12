@@ -246,6 +246,7 @@ const parentMatrix = async () => {
       selectedPartner.value = {
         depth: 0,
         pos: 0,
+        queueId: null,
         matrix: response.data.matrix,
         allowBuyClone: false,
         allowSniper: false,

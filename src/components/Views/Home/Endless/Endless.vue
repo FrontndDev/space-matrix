@@ -49,6 +49,10 @@ const getPosition = (depth: number, pos: number): IPosition => {
 }
 
 const getTypeForThirdCeil: ComputedRef<string> = computed(() => {
+  if (thirdCeil.value.queueId) {
+    return 'loading'
+  }
+
   if (!thirdCeil.value.allowSniper || !partnersCount.value && !thirdCeil.value.allowBuyClone) {
     return 'disable'
   }

@@ -33,7 +33,10 @@
             <Preloader :with-text="true"/>
           </div>
 
-          <CopyLink style="grid-area: copy-link;" @click="useCopyLink(matrixByType.matrix?.id ?? 0)"/>
+          <CopyLink
+              style="grid-area: copy-link;"
+              @click="useCopyLink(matrixByType.matrix?.id ?? 0)"
+          />
         </div>
         <div class="home__info">
           <InfoHeader
@@ -103,7 +106,8 @@ import {
   onMounted,
   provide,
   Ref,
-  ref
+  ref,
+  watch
 } from "vue";
 import TimeActivatedMatrix from "../../components/TimeActivatedMatrix/TimeActivatedMatrix.vue";
 import ChainsCells from "../../components/Views/Home/ChainsCells/ChainsCells.vue";
@@ -136,6 +140,27 @@ const toggleModalPaymentForm = ref(false)
 
 const store = useStore()
 const route = useRoute()
+
+const interval: Ref<number | null> = ref(null)
+
+const matrixIsInQueueForPublication: ComputedRef<boolean> = computed(() => {
+  const ceilsCollection = store.state.matrixByType?.ceilsCollection?.['1']
+  return ceilsCollection ? Object.values(ceilsCollection).map(ceil => !!(ceil as Ceil).queueId).includes(true) : false
+})
+
+watch(() => matrixIsInQueueForPublication.value, () => {
+  if (matrixIsInQueueForPublication.value) {
+    interval.value = setInterval(() => {
+      store.dispatch('getMatrixByType', {
+        matrixType: store.state.selectedType.type,
+        dropInfinityPartners: false
+      });
+    }, 3000);
+    // Use clearInterval to clear the interval
+  } else if (!matrixIsInQueueForPublication.value && interval.value) {
+    clearInterval(interval.value);
+  }
+});
 
 const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfTypes)
 
@@ -214,6 +239,7 @@ onMounted(async () => {
       selectedPartner.value = {
         depth: 0,
         pos: 0,
+        queueId: null,
         matrix: response.data.matrix,
         allowBuyClone: false,
         allowSniper: false,
