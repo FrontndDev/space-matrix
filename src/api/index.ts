@@ -42,7 +42,7 @@ export async function getListOfChains(pageID: number) {
 }
 
 export async function getChainDetail(id: number) {
-  return getAsync(`/api/matrix/chain-details/${id}`)
+  return getAsync(`/api/matrix/chain-details/${id}?demo=1`)
 }
 
 // POST

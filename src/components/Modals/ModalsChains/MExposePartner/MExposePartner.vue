@@ -11,7 +11,11 @@
       <div class="expose-partner__container">
         <div class="expose-partner__cell">
           <div class="expose-partner__block">
-            <SmallCell type="chains-partner" :cell="firstCeil"/>
+            <SmallCell
+                type="profitable"
+                :show-cell-type="false"
+                :cell="ceil"
+            />
           </div>
         </div>
         <div class="expose-partner__info">
@@ -33,8 +37,8 @@
                 </svg>
               </div>
               <div class="expose-partner__bonus">
-                <ExposeBonusItem :type="'auto'"/>
-                <ExposeBonusItem :type="'boost'"/>
+                <ExposeBonusItem type="auto"/>
+                <ExposeBonusItem type="boost"/>
               </div>
             </div>
 
@@ -75,9 +79,13 @@ import {
   reactive,
   ref,
   computed,
+  ComputedRef,
+  inject,
   Ref
 } from "vue";
-import { Ceils } from "../../../../interfaces/store.interface.ts";
+import {
+  Matrix
+} from "../../../../interfaces/store.interface.ts";
 
 const tabs = reactive([
   {
@@ -90,6 +98,8 @@ const tabs = reactive([
   },
 ]);
 
+const isBoosterForChain = inject('isBoosterForChain') as Ref<boolean>;
+
 const isExposeTabs = ref(1)
 
 const toggleExposeTabs = (id: number) => {
@@ -98,11 +108,13 @@ const toggleExposeTabs = (id: number) => {
 
 const store = useStore()
 
-const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
-
-const firstCeil: Ref = computed(() => ceils.value?.['1'])
+const ceil: ComputedRef<Matrix> = computed(() => {
+  if (isBoosterForChain.value) {
+    return store.state.chains.chainDetails.list?.at(-1)
+  }
+})
 </script>
 
-<style scoped>
-@import "_mExposePartner.scss";
+<style scoped lang="scss">
+@import "mExposePartner";
 </style>

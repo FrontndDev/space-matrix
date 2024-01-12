@@ -47,7 +47,8 @@ import { IPartners } from "../../../../interfaces/partners.interface.ts";
 const emit = defineEmits([
   'close-modal',
   'open-expose-partner',
-  'open-add-partner-chains'
+  'open-add-partner-chains',
+  'buy-booster',
 ])
 
 const store = useStore()
@@ -57,7 +58,8 @@ const chainDetails: ComputedRef<IChainDetails> = computed(() => store.state.chai
 const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.partnersPending)
 
 const activateTheChain = () => {
-  if (partnersPending.value) {
+  if (!partnersPending.value.count) {
+    emit('buy-booster', true)
     emit('open-expose-partner')
   } else {
     emit('open-add-partner-chains')

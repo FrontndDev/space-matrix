@@ -95,7 +95,7 @@
         @open-add-partner-chains="openModalChain(6)"
 
         @close-modal="closeModal"
-        @buy-booster=""
+        @buy-booster="buyBoosterInChain"
     />
     <ModalPaymentForm
         :toggleModalPaymentForm="toggleModalPaymentForm"
@@ -166,6 +166,13 @@ const matrixIsInQueueForPublication: ComputedRef<boolean> = computed(() => {
 
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
+const isBoosterForChain: Ref<boolean> = ref(false)
+
+
+const buyBoosterInChain = (bool: boolean) => {
+  isBoosterForChain.value = bool
+}
+
 watch(() => matrixIsInQueueForPublication.value, () => {
   if (matrixIsInQueueForPublication.value) {
     interval.value = setInterval(() => {
@@ -204,6 +211,7 @@ const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 
 const selectedPartner: Ref<Ceil | null> = ref(null)
 
+provide('isBoosterForChain', isBoosterForChain)
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
 

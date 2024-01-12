@@ -8,6 +8,7 @@
               @close-modal="$emit('close-modal')"
               @open-expose-partner="$emit('open-expose-partner')"
               @open-add-partner-chains="$emit('open-add-partner-chains')"
+              @buy-booster="buyBooster"
           />
           <MReplacePartner
               v-if="props.openModalChains === 2"
@@ -34,7 +35,7 @@
           <MAddPartnerChains
               v-if="props.openModalChains === 6"
               @close-modal="$emit('close-modal')"
-              @buy-booster="$emit('buy-booster')"
+              @buy-booster="buyBooster"
           />
         </div>
         <div @click="$emit('close-modal')" class="modal__overlay" />
@@ -61,6 +62,20 @@ const props = defineProps({
     default: 0
   }
 })
+
+const emit = defineEmits([
+  'open-add-partner-chains',
+  'open-change-partner',
+  'open-general-chains',
+  'open-expose-partner',
+  'open-m-replace-partner',
+  'buy-booster',
+  'close-modal',
+])
+
+const buyBooster = (bool: boolean) => {
+  emit('buy-booster', bool)
+}
 </script>
 
 <style scoped>

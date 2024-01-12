@@ -5,7 +5,7 @@
     </ModalHeader>
     <div class="modal-add-partner-chains__container">
       <BuyBoostCell
-          @click="$emit('buy-booster')"
+          @click="$emit('buy-booster', true)"
       />
       <AddPartnerCell
           type="cumulative"

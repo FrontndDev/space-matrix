@@ -39,6 +39,7 @@ export interface Matrix {
     parent_matrix_id: number | null;
     filled: boolean;
     prev_type_matrix_id: number | null;
+    type: string;
     is_bonus: boolean;
     is_booster: boolean;
     number: number;
