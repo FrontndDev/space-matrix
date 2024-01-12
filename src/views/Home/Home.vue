@@ -76,11 +76,14 @@
     <ModalChains
         :toggleModalChains="toggleModalChains"
         :openModalChains="openModalChains"
-        @close-modal="closeModal"
         @open-general-chains="openModalChain(1)"
         @open-m-replace-partner="openModalChain(2)"
         @open-change-partner="openModalChain(3)"
         @open-expose-partner="openModalChain(4)"
+        @open-add-partner-chains="openModalChain(6)"
+
+        @close-modal="closeModal"
+        @buy-booster=""
     />
     <ModalPaymentForm
         :toggleModalPaymentForm="toggleModalPaymentForm"

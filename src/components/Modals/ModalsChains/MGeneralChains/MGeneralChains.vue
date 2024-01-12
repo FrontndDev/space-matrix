@@ -1,7 +1,7 @@
 <template>
   <div class="general-chains">
     <div class="general-chains__content">
-      <ModalHeader @close-modal="$emit('close-modal')">
+      <ModalHeader @close-modal="emit('close-modal')">
         Цепочка
       </ModalHeader>
       <div class="general-chains__container">
@@ -18,7 +18,7 @@
             />
           </div>
         </div>
-        <ChainsButton @click="$emit('open-m-replace-partner')">
+        <ChainsButton @click="activateTheChain">
           <span>Активировать цепочку</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M5.16668 4.66667C3.32282 4.66667 1.83334 6.15614 1.83334 8C1.83334 9.84386 3.32282 11.3333 5.16668 11.3333C7.01053 11.3333 8.50001 9.84386 8.50001 8C8.50001 7.72386 8.72387 7.5 9.00001 7.5C9.27615 7.5 9.50001 7.72386 9.50001 8C9.50001 10.3961 7.56282 12.3333 5.16668 12.3333C2.77053 12.3333 0.833344 10.3961 0.833344 8C0.833344 5.60386 2.77053 3.66667 5.16668 3.66667C5.44282 3.66667 5.66668 3.89052 5.66668 4.16667C5.66668 4.44281 5.44282 4.66667 5.16668 4.66667Z" fill="white"/>
@@ -42,11 +42,27 @@ import {
 import { useStore } from "vuex";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 import { IChainDetails } from "../../../../interfaces/chains.interface.ts";
+import { IPartners } from "../../../../interfaces/partners.interface.ts";
+
+const emit = defineEmits([
+  'close-modal',
+  'open-expose-partner',
+  'open-add-partner-chains'
+])
 
 const store = useStore()
 
 const chainDetails: ComputedRef<IChainDetails> = computed(() => store.state.chains.chainDetails)
 
+const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.partnersPending)
+
+const activateTheChain = () => {
+  if (partnersPending.value) {
+    emit('open-expose-partner')
+  } else {
+    emit('open-add-partner-chains')
+  }
+}
 </script>
 
 <style scoped>
