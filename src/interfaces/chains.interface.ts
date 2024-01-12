@@ -1,3 +1,5 @@
+import { IMatrix } from "./store.interface.ts";
+
 export type TInitiator = {
   id: string;
   fio: string;
@@ -28,4 +30,8 @@ export interface IChainsList {
   currentPage: number;
   totalPages: number;
   list: IChains[];
+}
+
+export interface IChainDetails {
+  list: IMatrix[];
 }

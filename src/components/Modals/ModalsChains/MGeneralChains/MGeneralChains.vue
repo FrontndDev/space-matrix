@@ -41,13 +41,13 @@ import {
   ComputedRef,
   ref
 } from "vue";
-import { Matrix } from "../../../../interfaces/store.interface.ts";
 import { useStore } from "vuex";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
+import { IChainDetails } from "../../../../interfaces/chains.interface.ts";
 
 const store = useStore()
 
-const chainDetails: ComputedRef<Matrix[]> = computed(() => store.state.chains.chainDetails)
+const chainDetails: ComputedRef<IChainDetails[]> = computed(() => store.state.chains.chainDetails)
 
 const cells = ref([
   {id: 0},
