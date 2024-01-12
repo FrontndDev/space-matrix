@@ -7,7 +7,7 @@
       <div class="general-chains__container">
         <div
             class="general-chains__overflow "
-            :class="{'less-four': chainDetails?.list.length < 4}"
+            :class="{'less-four': chainDetails?.list?.length < 4}"
         >
           <div v-for="(cell, idx) in chainDetails?.list"
                class="general-chains__block"
@@ -34,12 +34,10 @@
 <script setup lang="ts">
 import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
-// import SmallCell from "../../../SmallCell/SmallCell.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
 import {
   computed,
   ComputedRef,
-  ref
 } from "vue";
 import { useStore } from "vuex";
 import SmallCell from "../../../SmallCell/SmallCell.vue";

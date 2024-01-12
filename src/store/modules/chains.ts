@@ -1,12 +1,16 @@
 import * as API from '../../api/index'
 import { Commit } from "vuex";
+import {
+  IChainDetails,
+  IChainsList
+} from "../../interfaces/chains.interface.ts";
 
 export default {
   namespaced: true,
   state() {
     return {
-      chainsList: [],
-      chainDetails: [],
+      chainsList: {} as IChainsList,
+      chainDetails: {} as IChainDetails,
       pageIdChains: 1
     }
   },

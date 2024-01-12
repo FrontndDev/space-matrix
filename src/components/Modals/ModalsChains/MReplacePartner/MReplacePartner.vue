@@ -11,13 +11,16 @@
       <div class="replace-partner__container">
         <div
             class="replace-partner__overflow"
-            :class="[{ 'four': cells.length === 4 }, {'less-three': cells.length < 4 }]"
+            :class="[{ 'four': chainDetails.length === 4 }, {'less-three': chainDetails.length < 4 }]"
         >
 
-          <div v-for="cell in cells" class="replace-partner__cell">
+          <div v-for="cell in chainDetails" class="replace-partner__cell">
             <div class="replace-partner__block">
               <div class="replace-partner__level">D1</div>
-              <SmallCell :type="cell.type" :cell="firstCeil"/>
+              <SmallCell
+                  :type="getTypeForCeil(cell, ceilIsCumulative(cell))"
+                  :cell="cell"
+              />
               <div class="replace-partner__change-partner">
                 <button
                     @click="$emit('open-change-partner')"
@@ -47,29 +50,31 @@
 <script setup lang="ts">
 import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
-import SmallCell from "../../../SmallCell/SmallCell.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
+import SmallCell from "../../../SmallCell/SmallCell.vue";
+
 import {
   computed,
-  Ref,
-  ref
+  ComputedRef,
 } from "vue";
 import { useStore } from "vuex";
-import { Ceils } from "../../../../interfaces/store.interface.ts";
-
-const cells = ref([
-  { type: 'chains-partner' , id: 0},
-  { type: 'chains-boost' , id: 1},
-  { type: 'chains-boost' , id: 2},
-  { type: 'chains-boost' , id: 3},
-  { type: 'chains-boost' , id: 4},
-])
+import {
+  Matrix,
+} from "../../../../interfaces/store.interface.ts";
 
 const store = useStore()
 
-const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
+const chainDetails: ComputedRef<Matrix[]> = computed(() => store.state.chains.chainDetails.list)
 
-const firstCeil: Ref = computed(() => ceils.value?.['1'])
+const ceilIsCumulative = (cell: any) => !!cell.fillRevard.find((reward: any) => reward.event === 'freeze')
+
+const getTypeForCeil = (cell: Matrix, type: boolean) => {
+  if (cell.is_booster) {
+    return 'boost'
+  }
+
+  return type ? 'cumulative' : 'profitable'
+}
 </script>
 
 <style scoped>

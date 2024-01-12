@@ -30,7 +30,7 @@
               @close-modal="$emit('close-modal')"
           />
         </div>
-        <div @click="$emit('close-modal')" class="modal__overlay"></div>
+        <div @click="$emit('close-modal')" class="modal__overlay" />
       </div>
     </transition>
   </Teleport>
