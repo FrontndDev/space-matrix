@@ -10,7 +10,7 @@
     >
       <img alt="avatar" :src="props.cell?.owner?.photo">
 <!--      <img src="../../assets/images/Avatar.png" alt="">-->
-      <LevelMatrix :level="useGetLevel(props.cell?.owner.lvl_insystem)"/>
+      <LevelMatrix :level="useGetLevel(props.cell?.owner?.lvl_insystem)"/>
     </div>
     <div class="small-cell__info">
       <span
@@ -29,7 +29,7 @@
         <span>{{ props.cell?.id }}</span>
       </div>
       <PartnerType
-          :binstatus="cell.binstatus[1]"
+          :binstatus="cell.binstatus?.[1]"
           :cellType="props.cellType"
           :type="props.type"
           @click="$emit('open-m-matrix-partner')"

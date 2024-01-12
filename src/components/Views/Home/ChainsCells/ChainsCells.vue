@@ -9,8 +9,9 @@
     </div>
     <div class="chains-cells__container">
       <ChainCell
-          v-for="(cell, idx) in chainsList?.list"
-          :key="idx"
+          v-for="cell in chainsList?.list"
+          :key="cell?.id"
+          :id="cell?.id"
           :type="'default'"
           :cost="cell.price?.amount"
           :reward="cell.profit?.amount"
@@ -53,8 +54,8 @@ const tabs = reactive([
 const store = useStore()
 const emit = defineEmits(['open-general-chains', 'open-m-teleport'])
 
-const openGeneralChains = () => {
-  store.dispatch('chains/getChainDetail', )
+const openGeneralChains = (id: number) => {
+  store.dispatch('chains/getChainDetail', id)
   emit('open-general-chains')
 }
 

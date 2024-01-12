@@ -7,6 +7,7 @@ export type TInitiator = {
 };
 
 export interface IChains {
+  id: number;
   start: string;
   end: string;
   profit: {

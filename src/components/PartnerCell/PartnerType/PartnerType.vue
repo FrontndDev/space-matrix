@@ -21,8 +21,8 @@
       </svg>
     </template>
     <template v-if="props.type !== 'boost' && props.cellType !== 'circle-avatar'">
-      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus['1'] }"/>
-      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus['2'] }"/>
+      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus?.['1'] }"/>
+      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus?.['2'] }"/>
 <!--      классы => ( fill-green, fill-orange, fill-blue )  -->
     </template>
   </div>

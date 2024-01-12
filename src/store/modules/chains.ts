@@ -6,7 +6,7 @@ export default {
   state() {
     return {
       chainsList: [],
-      chainDetail: [],
+      chainDetails: [],
       pageIdChains: 1
     }
   },
@@ -32,8 +32,8 @@ export default {
     SET_CHAINS_LIST(state: any, chainsList: any) {
       state.chainsList = chainsList
     },
-    SET_CHAIN_DETAIL(state: any, chainDetail: any) {
-      state.chainDetail = chainDetail
+    SET_CHAIN_DETAIL(state: any, chainDetails: any) {
+      state.chainDetails = chainDetails
     },
   },
 }

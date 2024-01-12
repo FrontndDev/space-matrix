@@ -9,9 +9,14 @@
             class="general-chains__overflow"
             :class="{'less-four': cells.length < 4}"
         >
-<!--          <div class="general-chains__block">-->
-<!--            <SmallCell />-->
-<!--          </div>-->
+          <div v-for="(cell, idx) in chainDetails?.list"
+               class="general-chains__block"
+          >
+            <SmallCell
+                :key="idx"
+                :cell="cell"
+            />
+          </div>
         </div>
         <ChainsButton @click="$emit('open-m-replace-partner')">
           <span>Активировать цепочку</span>
@@ -31,7 +36,18 @@ import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
 // import SmallCell from "../../../SmallCell/SmallCell.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
-import { ref } from "vue";
+import {
+  computed,
+  ComputedRef,
+  ref
+} from "vue";
+import { Matrix } from "../../../../interfaces/store.interface.ts";
+import { useStore } from "vuex";
+import SmallCell from "../../../SmallCell/SmallCell.vue";
+
+const store = useStore()
+
+const chainDetails: ComputedRef<Matrix[]> = computed(() => store.state.chains.chainDetails)
 
 const cells = ref([
   {id: 0},
