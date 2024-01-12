@@ -20,14 +20,20 @@
               />
             </div>
 
-            <NotActivatedMatrix
-                :matrix-by-type="matrixByType"
-                @open-payment-form="toggleModalPaymentForm = true"
-                v-if="matrixByType?.ctaText && !matrixIsTemporarilyUnavailable"
-            />
-            <TimeActivatedMatrix
-                v-if="matrixIsTemporarilyUnavailable"
-            />
+            <template v-if="!matrixByType?.in_queue">
+              <NotActivatedMatrix
+                  :matrix-by-type="matrixByType"
+                  @open-payment-form="toggleModalPaymentForm = true"
+                  v-if="matrixByType?.ctaText && !matrixIsTemporarilyUnavailable"
+              />
+              <TimeActivatedMatrix
+                  v-if="matrixIsTemporarilyUnavailable"
+              />
+            </template>
+            <template v-else>
+              <MatrixActivationInProgress/>
+            </template>
+
           </template>
           <div class="home__preloader" v-if="!Object.keys(matrixByType).length || !infinityPartners">
             <Preloader :with-text="true"/>
@@ -35,6 +41,12 @@
 
           <CopyLink
               style="grid-area: copy-link;"
+              v-if="
+                !matrixByType?.in_queue &&
+                !matrixIsTemporarilyUnavailable &&
+                Object.keys(matrixByType).length &&
+                infinityPartners
+              "
               @click="useCopyLink(matrixByType.matrix?.id ?? 0)"
           />
         </div>
@@ -128,6 +140,7 @@ import {
 } from "../../interfaces/store.interface.ts";
 import { useRoute } from "vue-router";
 import { useCopyLink } from "../../use/useCopyLink.ts";
+import MatrixActivationInProgress from "../../components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
 
 const isCells = ref(1)
 
@@ -167,9 +180,10 @@ watch(() => matrixIsInQueueForPublication.value, () => {
 
 const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfTypes)
 
-const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() =>
-    Object.keys(listOfTypes.value.teamOpened).includes(route.params.type as string)
-)
+const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
+  const teamOpened = listOfTypes.value.teamOpened
+  return teamOpened ? Object.keys(teamOpened).includes(route.params.type as string) : false
+})
 
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
