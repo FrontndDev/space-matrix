@@ -6,8 +6,8 @@
       </ModalHeader>
       <div class="general-chains__container">
         <div
-            class="general-chains__overflow"
-            :class="{'less-four': cells.length < 4}"
+            class="general-chains__overflow "
+            :class="{'less-four': chainDetails?.list.length < 4}"
         >
           <div v-for="(cell, idx) in chainDetails?.list"
                class="general-chains__block"
@@ -49,11 +49,6 @@ const store = useStore()
 
 const chainDetails: ComputedRef<IChainDetails> = computed(() => store.state.chains.chainDetails)
 
-const cells = ref([
-  {id: 0},
-  {id: 1},
-  {id: 2},
-])
 </script>
 
 <style scoped>

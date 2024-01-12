@@ -16,6 +16,7 @@
     gap: 8px;
     width: 100%;
     position: relative;
+    padding: 0 16px 16px;
   }
 
   &__cell {
@@ -121,7 +122,7 @@
     }
 
     &__choice {
-      @include flexbox(column, flex-start, center);
+      @include flexbox(column, center, center);
       gap: 16px;
       width: 100%;
     }
@@ -131,7 +132,7 @@
     }
 
     &__reward {
-      @include flexbox(column);
+      @include flexbox(column, center, center);
       gap: 8px;
       width: 100%;
       padding: 0 16px;
