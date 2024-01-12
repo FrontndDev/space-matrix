@@ -65,7 +65,7 @@ import {
 
 const store = useStore()
 
-const chainDetails: ComputedRef<Matrix[]> = computed(() => store.state.Спроси оchains.chainDetails.list)
+const chainDetails: ComputedRef<Matrix[]> = computed(() => store.state.chains.chainDetails.list)
 
 const getTypeForCeil = (cell: Matrix) => {
   if (cell.is_booster) {
