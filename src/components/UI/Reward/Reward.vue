@@ -29,7 +29,7 @@ const props = defineProps({
     required: true,
   },
   custom: {
-    type: Object as PropType<number | undefined>,
+    type: Object as PropType<string | undefined>,
     required: true,
   }
 })

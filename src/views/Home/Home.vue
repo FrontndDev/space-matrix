@@ -57,7 +57,7 @@
           />
           <PartnerCells
               v-if="isCells === 1"
-              @open-m-matrix-partner="openModalPartnematrixByType?.in_queuer(2)"
+              @open-m-matrix-partner="openModalPartner(2)"
               @select-partner="selectPartner"
           />
           <BoostersCells
@@ -174,7 +174,6 @@ watch(() => matrixIsInQueueForPublication.value, () => {
         dropInfinityPartners: false
       });
     }, 3000);
-    // Use clearInterval to clear the interval
   } else if (!matrixIsInQueueForPublication.value && interval.value) {
     clearInterval(interval.value);
   }

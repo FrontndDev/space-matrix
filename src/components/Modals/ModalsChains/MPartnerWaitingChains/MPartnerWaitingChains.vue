@@ -46,25 +46,25 @@ import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
 import {
   computed,
   ComputedRef,
-  inject,
+  // inject,
   ref,
   Ref
 } from "vue";
 import {
-  Ceil,
+  // Ceil,
   Matrix
 } from "../../../../interfaces/store.interface.ts";
 import { useStore } from "vuex";
-import { IPosition } from "../../../../interfaces/partners.interface.ts";
+// import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
 const emit = defineEmits(['close-modal', 'open-m-add-partner'])
 
 const store = useStore()
 const cells: ComputedRef<Matrix[]> = computed(() => store.state.partners.partnersPending?.list)
 
-const selectedPartner = inject('selectedPartner') as Ref<Ceil>
-
-const partnerPos = inject('partnerPos') as Ref<IPosition>
+// const selectedPartner = inject('selectedPartner') as Ref<Ceil>
+//
+// const partnerPos = inject('partnerPos') as Ref<IPosition>
 let selectedCell: Ref<Matrix | null> = ref(null)
 
 const selectCell = (cell: Matrix) => {
