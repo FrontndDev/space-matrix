@@ -47,7 +47,7 @@
                 Object.keys(matrixByType).length &&
                 infinityPartners
               "
-              @click="useCopyLink(matrixByType.matrix?.id ?? 0)"
+              @click="useCopyLink(matrixByType.matrix?.id ?? 0, matrixByType.matrix)"
           />
         </div>
         <div class="home__info">

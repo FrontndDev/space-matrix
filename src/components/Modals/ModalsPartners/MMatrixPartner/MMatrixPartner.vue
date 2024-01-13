@@ -83,7 +83,7 @@
           </div>
         </div>
       </div>
-      <CopyLink @click="useCopyLink(store.state.matrixById.matrix?.id)"/>
+      <CopyLink @click="useCopyLink(store.state.matrixById.matrix?.id, selectedPartner?.matrix)"/>
     </div>
   </div>
 </template>
