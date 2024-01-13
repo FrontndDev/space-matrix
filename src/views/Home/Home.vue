@@ -93,9 +93,9 @@
         @open-change-partner="openModalChain(3)"
         @open-expose-partner="openModalChain(4)"
         @open-add-partner-chains="openModalChain(6)"
+        @open-partner-waiting-chains="openModalChain(7)"
 
         @close-modal="closeModal"
-        @buy-booster="buyBoosterInChain"
     />
     <ModalPaymentForm
         :toggleModalPaymentForm="toggleModalPaymentForm"
@@ -166,12 +166,6 @@ const matrixIsInQueueForPublication: ComputedRef<boolean> = computed(() => {
 
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
-const isBoosterForChain: Ref<boolean> = ref(false)
-
-
-const buyBoosterInChain = (bool: boolean) => {
-  isBoosterForChain.value = bool
-}
 
 watch(() => matrixIsInQueueForPublication.value, () => {
   if (matrixIsInQueueForPublication.value) {
@@ -211,7 +205,6 @@ const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 
 const selectedPartner: Ref<Ceil | null> = ref(null)
 
-provide('isBoosterForChain', isBoosterForChain)
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
 
@@ -271,21 +264,22 @@ const selectPartner = async (ceil: Ceil) => {
 
 onMounted(async () => {
   if (route.query.id) {
-    const response = await store.dispatch('getMatrixById', route.query.id)
+    const { data } = await store.dispatch('getMatrixById', route.query.id)
 
-    if (response?.data?.matrix) {
+    if (data?.matrix && !data.matrix.is_booster) {
       selectedPartner.value = {
         depth: 0,
         pos: 0,
         queueId: null,
-        matrix: response.data.matrix,
+        matrix: data.matrix,
         allowBuyClone: false,
         allowSniper: false,
         fillRevard: [],
         isInfinity: false,
       }
+
+      openModalPartner(2)
     }
-    openModalPartner(2)
   }
 })
 </script>

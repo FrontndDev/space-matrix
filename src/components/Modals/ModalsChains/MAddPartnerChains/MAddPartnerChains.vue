@@ -11,7 +11,7 @@
           type="cumulative"
           :ceil="getCeil"
           :partners-count="partnersCount"
-          @click="$emit('open-partner-waiting')"
+          @click="$emit('open-partner-waiting-chains')"
           v-if="partnersCount"
       />
     </div>

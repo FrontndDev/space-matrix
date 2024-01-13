@@ -5,6 +5,7 @@
     </ModalHeader>
     <div class="modal-add-partner__container">
       <BuyBoostCell
+          :price="matrixByType.matrixConfig.price"
           @click="buyBooster"
           v-if="getCeil.allowBuyClone"
       />

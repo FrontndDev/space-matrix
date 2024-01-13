@@ -9,7 +9,7 @@
     </ModalHeader>
     <div
         class="modal-partner-waiting-chains__container"
-        :class="{'less-four': cells?.length < 4 }"
+        :class="{ 'less-four': cells?.length < 4 }"
     >
       <template v-if="cells">
         <div
@@ -29,7 +29,7 @@
     <div class="modal-partner-waiting-chains__buttons">
       <template v-if="selectedCell">
         <CancelButton @click="emit('open-m-add-partner')" />
-        <ChainsButton>
+        <ChainsButton @click="selectPartner">
           Выставить
         </ChainsButton>
       </template>
@@ -57,7 +57,12 @@ import {
 import { useStore } from "vuex";
 // import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
-const emit = defineEmits(['close-modal', 'open-m-add-partner'])
+const emit = defineEmits([
+  'close-modal',
+  'open-m-add-partner',
+  'select-partner',
+  'open-expose-partner',
+])
 
 const store = useStore()
 const cells: ComputedRef<Matrix[]> = computed(() => store.state.partners.partnersPending?.list)
@@ -69,6 +74,12 @@ let selectedCell: Ref<Matrix | null> = ref(null)
 
 const selectCell = (cell: Matrix) => {
   selectedCell.value = cell
+}
+
+const selectPartner = () => {
+  emit('select-partner', selectedCell.value)
+  emit('close-modal')
+  emit('open-expose-partner')
 }
 </script>
 

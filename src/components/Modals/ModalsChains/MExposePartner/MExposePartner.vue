@@ -53,7 +53,7 @@
             </div>
 
           </div>
-          <ChainsButton>
+          <ChainsButton @click="exposePartner">
             <span>Купить за 40</span>
             <!--     Либо подтвердить       -->
             <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,10 +70,10 @@
 <script setup lang="ts">
 import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
-import SmallCell from "../../../SmallCell/SmallCell.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
 import Tabs from "../../../UI/Tabs/Tabs.vue";
 import ExposeBonusItem from "./ExposeBonusItem/ExposeBonusItem.vue";
+import SmallCell from "../../../SmallCell/SmallCell.vue";
 import { useStore } from "vuex";
 import {
   reactive,
@@ -84,8 +84,12 @@ import {
   Ref
 } from "vue";
 import {
+  Ceil,
+  IBuyBoosterParams,
   Matrix
 } from "../../../../interfaces/store.interface.ts";
+import { IChains } from "../../../../interfaces/chains.interface.ts";
+import { IExposePartnerParams } from "../../../../interfaces/partners.interface.ts";
 
 const tabs = reactive([
   {
@@ -98,7 +102,10 @@ const tabs = reactive([
   },
 ]);
 
+const chainsList: ComputedRef<IChains[]> = computed(() => store.state.chains.chainsList.list)
+
 const isBoosterForChain = inject('isBoosterForChain') as Ref<boolean>;
+const selectedPartner = inject('selectedPartner') as Ref<Ceil>;
 
 const isExposeTabs = ref(1)
 
@@ -111,8 +118,33 @@ const store = useStore()
 const ceil: ComputedRef<Matrix> = computed(() => {
   if (isBoosterForChain.value) {
     return store.state.chains.chainDetails.list?.at(-1)
+  } else {
+    return selectedPartner.value
   }
 })
+
+const exposePartner = () => {
+  if (isBoosterForChain.value) {
+    console.log('buyBooster')
+    // const data: IBuyBoosterParams = {
+    //   matrix_id: +matrixByType.value.matrix.id,
+    //   pos: partnerPos.value.pos,
+    //   depth: partnerPos.value.depth
+    // }
+    // const response = await store.dispatch('buyBooster', data)
+  } else {
+    if (ceil.value.parent_matrix_id) {
+      console.log('exposePartner')
+      const data: IExposePartnerParams = {
+        matrix_id: ceil.value.parent_matrix_id,
+        child_id: +selectedCell.value?.id,
+        depth: partnerPos.value.depth,
+        pos: partnerPos.value.pos
+      }
+      store.dispatch('partners/exposePartner', data)
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

@@ -1,4 +1,7 @@
-import { Matrix } from "./store.interface.ts";
+import {
+  FillReward,
+  Matrix
+} from "./store.interface.ts";
 
 export type TInitiator = {
   id: string;
@@ -34,4 +37,5 @@ export interface IChainsList {
 
 export interface IChainDetails {
   list: Matrix[];
+  rewards: FillReward[];
 }
