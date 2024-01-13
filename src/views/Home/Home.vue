@@ -160,7 +160,7 @@ const toggleModalNotification = ref(false)
 
 const toggleModalPaymentForm = ref(false)
 
-const toggleModalConfirmPayment = ref(true)
+const toggleModalConfirmPayment = ref(false)
 const resultModalConfirmPayment = ref('failure')
 
 const store = useStore()
