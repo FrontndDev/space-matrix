@@ -1,9 +1,10 @@
 <template>
   <div class="boosters-cells">
     <div class="boosters-cells__header">
-      <Tabs type="little"
-            :tabs="tabs"
-            :cells="true"
+      <Tabs
+          type="little"
+          :tabs="tabs"
+          :cells="true"
       />
     </div>
     <div class="boosters-cells__container">

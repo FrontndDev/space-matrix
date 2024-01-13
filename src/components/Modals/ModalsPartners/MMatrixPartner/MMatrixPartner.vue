@@ -167,10 +167,10 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     if (!firstCeil.value?.allowSniper && !partnersCount.value && !firstCeil.value.allowBuyClone) {
       return 'disable'
     }
+  }
 
-    if (firstCeil.value.matrix?.is_booster) {
-      return 'boost'
-    }
+  if (firstCeil.value.matrix?.is_booster) {
+    return 'boost'
   }
 
   return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
@@ -181,13 +181,14 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
     if (!store.state.matrixById?.matrix) {
       return 'loading'
     }
+
     if (!secondCeil.value?.allowSniper && !partnersCount.value && !secondCeil.value.allowBuyClone) {
       return 'disable'
     }
+  }
 
-    if (secondCeil.value.matrix?.is_booster) {
-      return 'boost'
-    }
+  if (secondCeil.value.matrix?.is_booster) {
+    return 'boost'
   }
 
   return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
