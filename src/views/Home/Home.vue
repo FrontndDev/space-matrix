@@ -101,6 +101,11 @@
         :toggleModalPaymentForm="toggleModalPaymentForm"
         @close-modal="closeModal"
     />
+    <ModalConfirmPayment
+        :toggleModalConfirmPayment="toggleModalConfirmPayment"
+        :result="resultModalConfirmPayment"
+        @close-modal="closeModal"
+    />
   </div>
 </template>
 
@@ -141,6 +146,7 @@ import {
 import { useRoute } from "vue-router";
 import { useCopyLink } from "../../use/useCopyLink.ts";
 import MatrixActivationInProgress from "../../components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
+import ModalConfirmPayment from "../../components/Modals/ModalConfirmPayment/ModalConfirmPayment.vue";
 
 const isCells = ref(1)
 
@@ -153,6 +159,9 @@ const openModalChains = ref(0)
 const toggleModalNotification = ref(false)
 
 const toggleModalPaymentForm = ref(false)
+
+const toggleModalConfirmPayment = ref(true)
+const resultModalConfirmPayment = ref('failure')
 
 const store = useStore()
 const route = useRoute()
@@ -238,6 +247,7 @@ const closeModal = () => {
   toggleModalChains.value = false
   toggleModalNotification.value = false
   toggleModalPaymentForm.value = false
+  toggleModalConfirmPayment.value = false
   selectedPartner.value = null
   document.body.style.overflow = 'auto'
 }
