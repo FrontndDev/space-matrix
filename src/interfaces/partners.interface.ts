@@ -21,6 +21,7 @@ export interface IPosition {
 export interface IExposePartnerParams extends IPosition {
     matrix_id: number;
     child_id: number;
+    chainMode: string;
 }
 
 export interface ILineOfPartners {

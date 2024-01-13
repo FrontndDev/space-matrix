@@ -104,6 +104,7 @@
     <ModalConfirmPayment
         :toggleModalConfirmPayment="toggleModalConfirmPayment"
         :result="resultModalConfirmPayment"
+        v-if="false"
         @close-modal="closeModal"
     />
   </div>

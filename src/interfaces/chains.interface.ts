@@ -35,7 +35,13 @@ export interface IChainsList {
   list: IChains[];
 }
 
+
+
 export interface IChainDetails {
   list: Matrix[];
+  price: {
+    amount: number;
+    currency: string;
+  };
   rewards: FillReward[];
 }

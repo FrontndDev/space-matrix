@@ -5,13 +5,13 @@
     </ModalHeader>
     <div class="modal-add-partner-chains__container">
       <BuyBoostCell
-          @click="buyBooster"
+          @click="buyBooster(true)"
       />
       <AddPartnerCell
           type="cumulative"
           :ceil="getCeil"
           :partners-count="partnersCount"
-          @click="$emit('open-partner-waiting-chains')"
+          @click="openPartnerWaitingChains"
           v-if="partnersCount"
       />
     </div>
@@ -37,6 +37,7 @@ import {
 const emit = defineEmits([
     'buy-booster',
     'select-partner',
+    'open-partner-waiting-chains',
 ])
 
 const store = useStore()
@@ -57,9 +58,14 @@ const getCeil: ComputedRef<Ceil> = computed(() => {
   }
 })
 
-const buyBooster = async () => {
+const buyBooster = (bool: boolean) => {
   // emit('select-partner', chainsDetails.value.list[0])
-  emit('buy-booster', true)
+  emit('buy-booster', bool)
+}
+
+const openPartnerWaitingChains = () => {
+  buyBooster(false)
+  emit('open-partner-waiting-chains')
 }
 </script>
 
