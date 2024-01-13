@@ -36,6 +36,7 @@
               v-if="props.openModalChains === 6"
               @close-modal="emit('close-modal')"
               @open-partner-waiting-chains="emit('open-partner-waiting-chains')"
+
               @buy-booster="buyBooster"
           />
           <MPartnerWaitingChains
@@ -66,7 +67,9 @@ import {
   ref,
   Ref
 } from "vue";
-import { Ceil } from "../../../interfaces/store.interface.ts";
+import {
+  Matrix,
+} from "../../../interfaces/store.interface.ts";
 
 const props = defineProps({
   toggleModalChains: {
@@ -90,7 +93,7 @@ const emit = defineEmits([
 ])
 
 const isBoosterForChain: Ref<boolean> = ref(false)
-const selectedPartner: Ref<Ceil | null> = ref(null)
+const selectedPartner: Ref<Matrix | null> = ref(null)
 
 provide('isBoosterForChain', isBoosterForChain)
 provide('selectedPartner', selectedPartner)
@@ -100,7 +103,7 @@ const buyBooster = (bool: boolean) => {
   emit('open-expose-partner')
 }
 
-const selectPartner = (partner: Ceil) => {
+const selectPartner = (partner: Matrix) => {
   selectedPartner.value = partner
 }
 </script>

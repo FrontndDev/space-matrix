@@ -84,7 +84,6 @@ import {
   Ref
 } from "vue";
 import {
-  Ceil,
   IBuyBoosterParams,
   Matrix
 } from "../../../../interfaces/store.interface.ts";
@@ -103,9 +102,10 @@ const tabs = reactive([
 ]);
 
 const chainsList: ComputedRef<IChains[]> = computed(() => store.state.chains.chainsList.list)
+const chainsDetails: ComputedRef<Matrix[]> = computed(() => store.state.chains.chainDetails.list)
 
 const isBoosterForChain = inject('isBoosterForChain') as Ref<boolean>;
-const selectedPartner = inject('selectedPartner') as Ref<Ceil>;
+const selectedPartner = inject('selectedPartner') as Ref<Matrix>;
 
 const isExposeTabs = ref(1)
 
@@ -125,26 +125,22 @@ const ceil: ComputedRef<Matrix> = computed(() => {
 
 const exposePartner = async () => {
   if (isBoosterForChain.value) {
-    if (ceil.value.parent_matrix_id) {
-      console.log('buyBooster')
-      const data: IBuyBoosterParams = {
-        matrix_id: ceil.value.parent_matrix_id,
-        depth: 1,
-        pos: 2,
-      }
-      await store.dispatch('buyBooster', data)
+    console.log('buyBooster')
+    const data: IBuyBoosterParams = {
+      matrix_id: chainsDetails.value[0].id,
+      depth: 1,
+      pos: 2,
     }
+    await store.dispatch('buyBooster', data)
   } else {
-    if (ceil.value.parent_matrix_id) {
-      console.log('exposePartner')
-      const data: IExposePartnerParams = {
-        matrix_id: ceil.value.parent_matrix_id,
-        child_id: +ceil.value.id,
-        depth: 1,
-        pos: 2,
-      }
-      await store.dispatch('partners/exposePartner', data)
+    console.log('exposePartner')
+    const data: IExposePartnerParams = {
+      matrix_id: 0,
+      child_id: ceil.value.id,
+      depth: 1,
+      pos: 2,
     }
+    await store.dispatch('partners/exposePartner', data)
   }
 }
 </script>

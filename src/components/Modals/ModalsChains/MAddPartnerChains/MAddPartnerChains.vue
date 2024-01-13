@@ -5,7 +5,7 @@
     </ModalHeader>
     <div class="modal-add-partner-chains__container">
       <BuyBoostCell
-          @click="$emit('buy-booster', true)"
+          @click="buyBooster"
       />
       <AddPartnerCell
           type="cumulative"
@@ -30,7 +30,14 @@ import {
   IChainDetails,
 } from "../../../../interfaces/chains.interface.ts";
 import { useStore } from "vuex";
-import { Ceil } from "../../../../interfaces/store.interface.ts";
+import {
+  Ceil,
+} from "../../../../interfaces/store.interface.ts";
+
+const emit = defineEmits([
+    'buy-booster',
+    'select-partner',
+])
 
 const store = useStore()
 
@@ -49,6 +56,11 @@ const getCeil: ComputedRef<Ceil> = computed(() => {
     isInfinity: false,
   }
 })
+
+const buyBooster = async () => {
+  // emit('select-partner', chainsDetails.value.list[0])
+  emit('buy-booster', true)
+}
 </script>
 
 <style scoped lang="scss">
