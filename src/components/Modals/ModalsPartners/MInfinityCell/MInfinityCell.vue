@@ -14,6 +14,7 @@
           v-for="partner in infinityPartners"
           :key="partner.id"
           :ceil="partner"
+          @click="selectPartner(partner)"
       />
     </div>
   </div>
@@ -34,6 +35,12 @@ import {
   Matrix
 } from "../../../../interfaces/store.interface.ts";
 
+const emit = defineEmits([
+  'close-modal',
+  'open-m-matrix-partner',
+  'select-partner',
+])
+
 const store = useStore()
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
@@ -42,6 +49,22 @@ const infinityPartners: ComputedRef<Matrix[]> = computed(() => {
   const partnersState = store.state.partners
   return selectedPartner.value ? partnersState.infinityPartnersSecond : partnersState.infinityPartners
 })
+
+const selectPartner = (partner: Matrix) => {
+  const ceil = {
+    depth: 0,
+    pos: 0,
+    queueId: null,
+    matrix: partner,
+    allowBuyClone: false,
+    allowSniper: false,
+    fillRevard: [],
+    isInfinity: false,
+  }
+
+  emit('select-partner', ceil)
+  emit('open-m-matrix-partner')
+}
 </script>
 
 <style scoped lang="scss">

@@ -30,19 +30,23 @@ import {
 } from "vue";
 import {
   Ceil,
-  Ceils
+  Ceils,
+  Type
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
 const emit = defineEmits(['open-m-infinity-cell', 'open-m-add-partner', 'set-position-for-partner'])
 
 const store = useStore()
+
+const selectedType: ComputedRef<Type> = computed(() => store.state.selectedType)
+
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 
 const infinityPartnersCount: ComputedRef<number> = computed(() => store.state.partners.infinityPartners?.length ?? 0)
 
 const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection['1'])
-const thirdCeil: Ref<Ceil> = computed(() => ceils.value?.['3'])
+const thirdCeil: Ref<Ceil> = computed(() => selectedType.value.type === 'dream-ton_9' ? ceils.value?.['1'] : ceils.value?.['3'])
 
 const getPosition = (depth: number, pos: number): IPosition => {
   return { depth, pos }

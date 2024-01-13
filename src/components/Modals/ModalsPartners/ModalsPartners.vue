@@ -7,6 +7,7 @@
               @open-m-matrix-partner="$emit('open-m-matrix-partner')"
               @open-m-add-partner="$emit('open-m-add-partner')"
               @close-modal="$emit('close-modal')"
+              @select-partner="selectPartner"
               v-if="props.openModalPartners === 1"
           />
           <MMatrixPartner
