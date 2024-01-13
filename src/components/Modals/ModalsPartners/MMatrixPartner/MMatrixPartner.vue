@@ -116,12 +116,13 @@ const emit = defineEmits([
   'open-m-infinity-cell',
   'open-m-matrix-partner',
   'select-partner',
+  'set-partner-by',
   'close-modal',
 ])
 
 const store = useStore()
 
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.count)
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.count ?? 0)
 
 const ceils: Ref<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
 
@@ -146,21 +147,6 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
 )
 
-// TODO Не трогать!!! Хочу сделать покомпактнее!!!
-// const getCeilType = (num: number) => {
-//   let ceil: Ceil | null = null
-//   switch (num) {
-//     case 1:
-//       ceil = firstCeil.value
-//       break;
-//     case 2:
-//       ceil = secondCeil.value
-//       break;
-//     default:
-//       break;
-//   }
-// }
-
 const getTypeForSelectedCeil: ComputedRef<string> = computed(() => {
   if (!selectedPartner.value) {
     return 'loading'
@@ -178,7 +164,7 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     if (!store.state.matrixById?.matrix) {
       return 'loading'
     }
-    if (!firstCeil.value?.allowSniper || !partnersCount.value) {
+    if (!firstCeil.value?.allowSniper && !partnersCount.value && !firstCeil.value.allowBuyClone) {
       return 'disable'
     }
 
@@ -195,7 +181,7 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
     if (!store.state.matrixById?.matrix) {
       return 'loading'
     }
-    if (!secondCeil.value?.allowSniper || !partnersCount.value) {
+    if (!secondCeil.value?.allowSniper && !partnersCount.value && !secondCeil.value.allowBuyClone) {
       return 'disable'
     }
 
@@ -214,6 +200,8 @@ const getPosition = (depth: number, pos: number): IPosition => {
 const openMAddPartner = (pos: IPosition) => {
   const ceil: Ceil = ceils.value[String(pos.pos)]
   if (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone) {
+    emit('select-partner', null)
+    emit('set-partner-by', 'id')
     emit('open-m-add-partner', pos)
   }
 }

@@ -113,7 +113,6 @@ const tabs = reactive([
 
 const chainModes: string[] = ['profit', 'wait']
 
-const chainsList: ComputedRef<IChains[]> = computed(() => store.state.chains.chainsList.list)
 const chainsDetails: ComputedRef<Matrix[]> = computed(() => store.state.chains.chainDetails.list)
 const price: ComputedRef<number> = computed(() => store.state.chains.chainDetails.price.amount)
 
