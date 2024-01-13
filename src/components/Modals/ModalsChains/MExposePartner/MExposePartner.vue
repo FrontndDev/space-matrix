@@ -95,9 +95,6 @@ import {
   Matrix,
   Type
 } from "../../../../interfaces/store.interface.ts";
-import {
-  IChains
-} from "../../../../interfaces/chains.interface.ts";
 import { IExposePartnerParams } from "../../../../interfaces/partners.interface.ts";
 
 const tabs = reactive([

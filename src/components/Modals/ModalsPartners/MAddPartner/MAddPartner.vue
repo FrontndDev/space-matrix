@@ -61,7 +61,7 @@ const getPrice: ComputedRef<number> = computed(() => {
     return matrixByType.value.matrixConfig.price
   }
 })
-
+// @ts-ignore
 const ceils: ComputedRef<Ceils> = computed(() => {
   if (props.selectedType === 'id') {
     return matrixById.value?.ceilsCollection?.['1']
@@ -91,6 +91,7 @@ const buyBooster = async () => {
   const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
 
   if (matrix?.matrix?.id) {
+    // @ts-ignore
     const data: IBuyBoosterParams = {
       matrix_id: +matrix.matrix.id,
       pos: partnerPos.value.pos,

@@ -38,6 +38,7 @@ const emit = defineEmits([
     'buy-booster',
     'select-partner',
     'open-partner-waiting-chains',
+    'close-modal',
 ])
 
 const store = useStore()
