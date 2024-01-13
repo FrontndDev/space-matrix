@@ -69,7 +69,7 @@ const fillReward = computed(() => {
     'boost': getFilteredRewards('boost')
         .map(reward => types.value.find(type => type.type === reward.value?.type)?.title) as string[],
     'cashout': getFilteredRewards('cashout').map(reward => reward.value.amount) as number[],
-    'custom': getFilteredRewards('custom').map(reward => reward.value.amount) as number[],
+    'custom': getFilteredRewards('custom').map(reward => reward.value.title) as string[],
   }
 })
 </script>

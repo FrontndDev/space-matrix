@@ -69,6 +69,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  avatar: {
+    type: String,
+    default: ''
+  }
 })
 </script>
 

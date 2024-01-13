@@ -5,10 +5,10 @@ import {
 } from "vuex";
 
 import {
-    ListOfTypes,
-    Type,
+    IBuyBoosterParams,
     IMatrix,
-    IBuyBoosterParams
+    ListOfTypes,
+    Type
 } from "../interfaces/store.interface.ts";
 
 import * as API from '../api/index.ts'
@@ -82,8 +82,8 @@ export default createStore({
                 useMyOverlay(response.data.html)
             })
         },
-        buyBooster(_: ActionContext<any, any>, data: IBuyBoosterParams) {
-            API.buyClone(data)
+        async buyBooster(_: ActionContext<any, any>, data: IBuyBoosterParams) {
+            return await API.buyClone(data)
         }
     },
     mutations: {

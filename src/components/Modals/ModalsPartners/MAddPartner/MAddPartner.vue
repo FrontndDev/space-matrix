@@ -64,14 +64,15 @@ const partnersCount: ComputedRef<number> = computed(() => {
   }
 })
 
-const buyBooster = () => {
+const buyBooster = async () => {
   if (matrixByType.value?.matrix?.id) {
     const data: IBuyBoosterParams = {
       matrix_id: +matrixByType.value.matrix.id,
       pos: partnerPos.value.pos,
       depth: partnerPos.value.depth
     }
-    store.dispatch('buyBooster', data)
+    const response = await store.dispatch('buyBooster', data)
+    store.state.matrixByType.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = response.queueId
     emit('close-modal')
   }
 }

@@ -10,7 +10,10 @@
     >
       <img alt="avatar" :src="props.cell?.owner?.photo">
 <!--      <img src="../../assets/images/Avatar.png" alt="">-->
-      <LevelMatrix :level="useGetLevel(props.cell?.owner?.lvl_insystem)"/>
+      <LevelMatrix
+          :type-title="selectedTypeTitle"
+          :level="useGetLevel(props.cell?.owner?.lvl_insystem)"
+      />
     </div>
     <div class="small-cell__info">
       <span
@@ -39,7 +42,7 @@
     <SmallCellType
         :cellType="props.type"
         :state="props.state"
-        v-if="props.type"
+        v-if="props.type && showCellType"
     />
   </div>
 </template>
@@ -49,11 +52,17 @@ import PartnerType from "../PartnerCell/PartnerType/PartnerType.vue";
 import LevelMatrix from "../UI/LevelMatrix/LevelMatrix.vue";
 import SmallCellType from "../UI/SmallCellType/SmallCellType.vue";
 import {
-  PropType
+  PropType,
+  computed,
+  ComputedRef
 } from "vue";
-import { Matrix } from "../../interfaces/store.interface.ts";
+import {
+  Matrix,
+  Type
+} from "../../interfaces/store.interface.ts";
 import { useGetLevel } from "../../use/useGetLevel.ts";
 import { useCopyLink } from "../../use/useCopyLink.ts";
+import { useStore } from "vuex";
 
 const props = defineProps({
   cell: {
@@ -67,13 +76,23 @@ const props = defineProps({
   type: {
     type: String,
     default: 'partners'
-    // partners, boost, chains-boost, chain-partner, teleport
+    // partners, boost, chains-boost, chain-partner, teleport, profitable
   },
   state: {
     type: String,
     default: 'exhibited'
   },
+  showCellType: {
+    type: Boolean,
+    default: true,
+  }
 })
+
+const store = useStore()
+
+const selectedTypeTitle: ComputedRef<string> = computed(() =>
+    store.state.listOfTypes.types.find((type: Type) => props.cell.type === type.type)?.title
+)
 </script>
 
 <style scoped lang="scss">

@@ -18,6 +18,7 @@
           :matrixStart="cell?.start"
           :matrixEnd="cell?.end"
           :countLinks="cell?.count_links"
+          :avatar="cell?.initiator.photo"
           @open-general-chains="openGeneralChains"
           @open-m-teleport="$emit('open-m-teleport')"
       />

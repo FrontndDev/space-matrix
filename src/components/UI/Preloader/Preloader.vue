@@ -8,7 +8,7 @@
     </div>
     <template v-if="props.withText">
       <div class="preloader__title preloader__title_mt-8">Ожидайте</div>
-      <div class="preloader__subtitle">Идет загрузка...</div>
+      <div class="preloader__subtitle">{{ props.text }}</div>
     </template>
   </div>
 </template>
@@ -18,6 +18,10 @@ const props = defineProps({
   withText: {
     type: Boolean,
     default: false
+  },
+  text: {
+    type: String,
+    default: 'Идет загрузка...'
   }
 })
 </script>

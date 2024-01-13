@@ -20,14 +20,20 @@
               />
             </div>
 
-            <NotActivatedMatrix
-                :matrix-by-type="matrixByType"
-                @open-payment-form="toggleModalPaymentForm = true"
-                v-if="matrixByType?.ctaText && !matrixIsTemporarilyUnavailable"
-            />
-            <TimeActivatedMatrix
-                v-if="matrixIsTemporarilyUnavailable"
-            />
+            <template v-if="!matrixByType?.in_queue">
+              <NotActivatedMatrix
+                  :matrix-by-type="matrixByType"
+                  @open-payment-form="toggleModalPaymentForm = true"
+                  v-if="matrixByType?.ctaText && !matrixIsTemporarilyUnavailable"
+              />
+              <TimeActivatedMatrix
+                  v-if="matrixIsTemporarilyUnavailable"
+              />
+            </template>
+            <template v-else>
+              <MatrixActivationInProgress/>
+            </template>
+
           </template>
           <div class="home__preloader" v-if="!Object.keys(matrixByType).length || !infinityPartners">
             <Preloader :with-text="true"/>
@@ -35,6 +41,12 @@
 
           <CopyLink
               style="grid-area: copy-link;"
+              v-if="
+                !matrixByType?.in_queue &&
+                !matrixIsTemporarilyUnavailable &&
+                Object.keys(matrixByType).length &&
+                infinityPartners
+              "
               @click="useCopyLink(matrixByType.matrix?.id ?? 0)"
           />
         </div>
@@ -76,11 +88,14 @@
     <ModalChains
         :toggleModalChains="toggleModalChains"
         :openModalChains="openModalChains"
-        @close-modal="closeModal"
         @open-general-chains="openModalChain(1)"
         @open-m-replace-partner="openModalChain(2)"
         @open-change-partner="openModalChain(3)"
         @open-expose-partner="openModalChain(4)"
+        @open-add-partner-chains="openModalChain(6)"
+
+        @close-modal="closeModal"
+        @buy-booster="buyBoosterInChain"
     />
     <ModalPaymentForm
         :toggleModalPaymentForm="toggleModalPaymentForm"
@@ -125,6 +140,7 @@ import {
 } from "../../interfaces/store.interface.ts";
 import { useRoute } from "vue-router";
 import { useCopyLink } from "../../use/useCopyLink.ts";
+import MatrixActivationInProgress from "../../components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
 
 const isCells = ref(1)
 
@@ -148,6 +164,15 @@ const matrixIsInQueueForPublication: ComputedRef<boolean> = computed(() => {
   return ceilsCollection ? Object.values(ceilsCollection).map(ceil => !!(ceil as Ceil).queueId).includes(true) : false
 })
 
+const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
+
+const isBoosterForChain: Ref<boolean> = ref(false)
+
+
+const buyBoosterInChain = (bool: boolean) => {
+  isBoosterForChain.value = bool
+}
+
 watch(() => matrixIsInQueueForPublication.value, () => {
   if (matrixIsInQueueForPublication.value) {
     interval.value = setInterval(() => {
@@ -156,24 +181,37 @@ watch(() => matrixIsInQueueForPublication.value, () => {
         dropInfinityPartners: false
       });
     }, 3000);
-    // Use clearInterval to clear the interval
   } else if (!matrixIsInQueueForPublication.value && interval.value) {
     clearInterval(interval.value);
   }
 });
 
+watch(() => matrixByType.value?.in_queue, () => {
+  if (matrixByType.value?.in_queue) {
+    interval.value = setInterval(() => {
+      store.dispatch('getMatrixByType', {
+        matrixType: store.state.selectedType.type,
+        dropInfinityPartners: false
+      });
+    }, 3000);
+  } else if (!matrixByType.value?.in_queue && interval.value) {
+    clearInterval(interval.value);
+  }
+})
+
 const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfTypes)
 
-const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() =>
-    Object.keys(listOfTypes.value.teamOpened).includes(route.params.type as string)
-)
+const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
+  const teamOpened = listOfTypes.value.teamOpened
+  return teamOpened ? Object.keys(teamOpened).includes(route.params.type as string) : false
+})
 
-const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
 const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 
 const selectedPartner: Ref<Ceil | null> = ref(null)
 
+provide('isBoosterForChain', isBoosterForChain)
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
 

@@ -12,6 +12,7 @@
           v-if="props.size !== 'small' && fillReward"
       />
       <LevelMatrix
+          :type-title="selectedTypeTitle"
           :level="useGetLevel(props.ceil.owner.lvl_insystem)"
           v-else
       />
@@ -57,11 +58,14 @@ import {
 } from "vue";
 import {
   FillReward,
-  Matrix
+  Matrix,
+  Type
 } from "../../interfaces/store.interface.ts";
 import { useCopyLink } from "../../use/useCopyLink.ts";
 import { useGetLevel } from "../../use/useGetLevel.ts";
 import CellType from "../UI/CellType/CellType.vue";
+import { ComputedRef } from "vue/dist/vue";
+import { useStore } from "vuex";
 
 const props = defineProps({
   ceil: {
@@ -87,6 +91,8 @@ const props = defineProps({
   },
 });
 
+const store = useStore()
+
 const fillReward = computed(() => {
   const getFilteredRewards = (event: string) => props.fillReward?.find(reward => reward.event === event)
 
@@ -95,6 +101,10 @@ const fillReward = computed(() => {
     'freeze': getFilteredRewards('freeze')?.value.amount
   }
 })
+
+const selectedTypeTitle: ComputedRef<string> = computed(() =>
+    store.state.listOfTypes.types.find((type: Type) => props.ceil?.type === type.type)?.title
+)
 </script>
 
 <style scoped lang="scss">
