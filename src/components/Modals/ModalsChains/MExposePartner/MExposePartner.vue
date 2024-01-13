@@ -69,7 +69,7 @@
         </div>
       </div>
     </div>
-    <CopyLink/>
+    <CopyLink @click="useCopyLink(chainsDetails[0].id, chainsDetails[0])"/>
   </div>
 </template>
 
@@ -96,6 +96,7 @@ import {
   Type
 } from "../../../../interfaces/store.interface.ts";
 import { IExposePartnerParams } from "../../../../interfaces/partners.interface.ts";
+import { useCopyLink } from "../../../../use/useCopyLink.ts";
 
 const tabs = reactive([
   {
