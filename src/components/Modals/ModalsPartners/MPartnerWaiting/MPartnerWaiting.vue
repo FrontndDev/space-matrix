@@ -1,9 +1,7 @@
 <template>
   <div class="modal-partner-waiting">
     <ModalHeader
-        :partnerWaiting="true"
         @close-modal="emit('close-modal')"
-        @open-m-add-partner="emit('open-m-add-partner')"
     >
       Партнеры в ожидании
     </ModalHeader>
