@@ -37,8 +37,15 @@
                 </svg>
               </div>
               <div class="expose-partner__bonus">
-                <ExposeBonusItem type="auto"/>
-                <ExposeBonusItem type="boost" :rewards="rewards"/>
+                <ExposeBonusItem
+                    type="auto"
+                    :rewards="[lineBonus]"
+                    v-if="lineBonus"
+                />
+                <ExposeBonusItem
+                    type="boost"
+                    :rewards="rewards"
+                />
               </div>
             </div>
 
@@ -83,12 +90,12 @@ import {
   Ref
 } from "vue";
 import {
+  FillReward,
   IBuyBoosterParams,
   Matrix,
   Type
 } from "../../../../interfaces/store.interface.ts";
 import {
-  IChainDetailsReward,
   IChains
 } from "../../../../interfaces/chains.interface.ts";
 import { IExposePartnerParams } from "../../../../interfaces/partners.interface.ts";
@@ -109,11 +116,19 @@ const chainModes: string[] = ['profit', 'wait']
 const chainsList: ComputedRef<IChains[]> = computed(() => store.state.chains.chainsList.list)
 const chainsDetails: ComputedRef<Matrix[]> = computed(() => store.state.chains.chainDetails.list)
 const price: ComputedRef<number> = computed(() => store.state.chains.chainDetails.price.amount)
-const rewards: ComputedRef<string[]> = computed(() =>
-    store.state.chains.chainDetails.rewards.map((reward: IChainDetailsReward) =>
-        store.state.listOfTypes.types.find((type: Type) => type.type === reward.value.type).title
-    )
+
+const lineBonus: ComputedRef<string> = computed(() =>
+    store.state.chains.chainDetails.rewards
+        .find((reward: FillReward) => reward.event === 'custom')?.value.title
 )
+
+const rewards: ComputedRef<string[]> = computed(() => {
+  return store.state.chains.chainDetails.rewards
+      .filter((reward: FillReward) => reward.event === 'boost')
+      .map((reward: FillReward) =>
+          store.state.listOfTypes.types.find((type: Type) => type.type === reward.value.type).title
+      )
+})
 
 const isBoosterForChain = inject('isBoosterForChain') as Ref<boolean>;
 const selectedPartner = inject('selectedPartner') as Ref<Matrix>;

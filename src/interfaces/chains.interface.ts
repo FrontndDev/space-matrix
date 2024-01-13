@@ -1,4 +1,5 @@
 import {
+  FillReward,
   Matrix
 } from "./store.interface.ts";
 
@@ -34,13 +35,7 @@ export interface IChainsList {
   list: IChains[];
 }
 
-export interface IChainDetailsReward {
-  event: string;
-  value: {
-    count: number;
-    type: string;
-  };
-}
+
 
 export interface IChainDetails {
   list: Matrix[];
@@ -48,5 +43,5 @@ export interface IChainDetails {
     amount: number;
     currency: string;
   };
-  rewards: IChainDetailsReward[];
+  rewards: FillReward[];
 }

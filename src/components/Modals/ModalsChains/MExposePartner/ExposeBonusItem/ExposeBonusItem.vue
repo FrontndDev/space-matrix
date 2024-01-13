@@ -3,10 +3,10 @@
     <div class="expose-bonus__icon">
       <img :src="getIconPath" :alt="props.type">
     </div>
-    <div v-if="props.type === 'auto'" class="expose-bonus__car">
-      LINE BONUS
+    <div class="expose-bonus__car" v-if="props.type === 'auto' && rewards?.[0]">
+      {{ rewards[0] }}
     </div>
-    <div v-else-if="props.type === 'boost'" class="expose-bonus__boost">
+    <div class="expose-bonus__boost" v-else-if="props.type === 'boost'">
       <span v-for="reward in props.rewards">{{ reward }}</span>
     </div>
   </div>
