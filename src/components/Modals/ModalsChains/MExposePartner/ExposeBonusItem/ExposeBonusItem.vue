@@ -7,17 +7,24 @@
       LINE BONUS
     </div>
     <div v-else-if="props.type === 'boost'" class="expose-bonus__boost">
-      <span v-for="item in boost">{{ item.name }}</span>
+      <span v-for="reward in props.rewards">{{ reward }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {computed, Ref} from "vue";
+import {
+  computed,
+  PropType,
+  Ref
+} from "vue";
 import BoostIcon from "../../../../../assets/svg/bonuses/boost.svg";
 import AutoIcon from "../../../../../assets/svg/bonuses/auto.svg";
 
 const props = defineProps({
+  rewards: {
+    type: Array as PropType<string[]>,
+  },
   type: {
     type: String,
     default: 'ton'
@@ -36,14 +43,14 @@ const getIconPath: Ref<string> = computed(() => {
   }
 });
 
-const boost = [
-  { name: 'D1', id: 0 },
-  { name: 'D2', id: 1 },
-  { name: 'D3', id: 2 },
-  { name: 'D4', id: 3 },
-  { name: 'D5', id: 4 },
-  { name: 'D6', id: 5 },
-]
+// const boost = [
+//   { name: 'D1', id: 0 },
+//   { name: 'D2', id: 1 },
+//   { name: 'D3', id: 2 },
+//   { name: 'D4', id: 3 },
+//   { name: 'D5', id: 4 },
+//   { name: 'D6', id: 5 },
+// ]
 </script>
 
 <style scoped lang="scss">
