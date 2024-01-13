@@ -15,7 +15,7 @@
     background: lightgray 50% / cover no-repeat;
     position: relative;
 
-    & > img {
+    &  img {
       border-radius: 16px;
       width: 100%;
       object-fit: cover;
@@ -24,7 +24,12 @@
     &.chains-boost {
       border: 2px solid $border-violet;
 
-      & > img {
+      & > div:first-child {
+        border-radius: 16px;
+        border: 2px solid $border-base;
+      }
+
+      &  img {
         border: 2px solid $border-base;
       }
     }
@@ -32,7 +37,7 @@
     &.teleport {
       border: 2px solid $border-orange;
 
-      & > img {
+      &  img {
         border: 2px solid $border-base;
       }
     }

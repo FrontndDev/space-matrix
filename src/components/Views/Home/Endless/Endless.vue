@@ -25,14 +25,14 @@ import InfinityPartnerCard from "../../../InfinityPartnerCard/InfinityPartnerCar
 import { useStore } from "vuex";
 import {
   computed,
-  Ref
+  Ref,
+  ComputedRef
 } from "vue";
 import {
   Ceil,
   Ceils
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
-import { ComputedRef } from "vue/dist/vue";
 
 const emit = defineEmits(['open-m-infinity-cell', 'open-m-add-partner', 'set-position-for-partner'])
 

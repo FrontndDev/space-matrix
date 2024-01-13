@@ -37,8 +37,15 @@
                 </svg>
               </div>
               <div class="expose-partner__bonus">
-                <ExposeBonusItem type="auto"/>
-                <ExposeBonusItem type="boost"/>
+                <ExposeBonusItem
+                    type="auto"
+                    :rewards="[lineBonus]"
+                    v-if="lineBonus"
+                />
+                <ExposeBonusItem
+                    type="boost"
+                    :rewards="rewards"
+                />
               </div>
             </div>
 
@@ -53,9 +60,8 @@
             </div>
 
           </div>
-          <ChainsButton>
-            <span>Купить за 40</span>
-            <!--     Либо подтвердить       -->
+          <ChainsButton @click="exposePartner">
+            <span>{{ isBoosterForChain ? 'Купить за ' + price : 'Подтвердить' }}</span>
             <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.08838 12.4279C7.69782 13.5452 9.30215 13.5452 9.91159 12.4279L13.6347 5.60218C14.2192 4.53069 13.4436 3.22428 12.2231 3.22428H4.77687C3.55635 3.22428 2.78082 4.53069 3.36526 5.60218L7.08838 12.4279ZM9.20578 12.0429L12.9289 5.2172C13.2211 4.68146 12.8334 4.02825 12.2231 4.02825H8.90197V12.3558C9.02376 12.2859 9.13011 12.1816 9.20578 12.0429ZM7.79418 12.0429C7.86985 12.1816 7.9762 12.2859 8.098 12.3558V4.02825H4.77687C4.16661 4.02825 3.77884 4.68146 4.07107 5.2172L7.79418 12.0429Z" fill="#FFFFFF"/>
             </svg>
@@ -70,10 +76,10 @@
 <script setup lang="ts">
 import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
-import SmallCell from "../../../SmallCell/SmallCell.vue";
 import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
 import Tabs from "../../../UI/Tabs/Tabs.vue";
 import ExposeBonusItem from "./ExposeBonusItem/ExposeBonusItem.vue";
+import SmallCell from "../../../SmallCell/SmallCell.vue";
 import { useStore } from "vuex";
 import {
   reactive,
@@ -84,8 +90,12 @@ import {
   Ref
 } from "vue";
 import {
-  Matrix
+  FillReward,
+  IBuyBoosterParams,
+  Matrix,
+  Type
 } from "../../../../interfaces/store.interface.ts";
+import { IExposePartnerParams } from "../../../../interfaces/partners.interface.ts";
 
 const tabs = reactive([
   {
@@ -98,7 +108,26 @@ const tabs = reactive([
   },
 ]);
 
+const chainModes: string[] = ['profit', 'wait']
+
+const chainsDetails: ComputedRef<Matrix[]> = computed(() => store.state.chains.chainDetails.list)
+const price: ComputedRef<number> = computed(() => store.state.chains.chainDetails.price.amount)
+
+const lineBonus: ComputedRef<string> = computed(() =>
+    store.state.chains.chainDetails.rewards
+        .find((reward: FillReward) => reward.event === 'custom')?.value.title
+)
+
+const rewards: ComputedRef<string[]> = computed(() => {
+  return store.state.chains.chainDetails.rewards
+      .filter((reward: FillReward) => reward.event === 'boost')
+      .map((reward: FillReward) =>
+          store.state.listOfTypes.types.find((type: Type) => type.type === reward.value.type).title
+      )
+})
+
 const isBoosterForChain = inject('isBoosterForChain') as Ref<boolean>;
+const selectedPartner = inject('selectedPartner') as Ref<Matrix>;
 
 const isExposeTabs = ref(1)
 
@@ -111,8 +140,34 @@ const store = useStore()
 const ceil: ComputedRef<Matrix> = computed(() => {
   if (isBoosterForChain.value) {
     return store.state.chains.chainDetails.list?.at(-1)
+  } else {
+    return selectedPartner.value
   }
 })
+
+const exposePartner = async () => {
+  const matrixId = chainsDetails.value[0].id
+  if (isBoosterForChain.value) {
+    console.log('buyBooster')
+    const data: IBuyBoosterParams = {
+      matrix_id: matrixId,
+      depth: 1,
+      pos: 2,
+      chainMode: chainModes[isExposeTabs.value - 1],
+    }
+    await store.dispatch('buyBooster', data)
+  } else {
+    console.log('exposePartner')
+    const data: IExposePartnerParams = {
+      matrix_id: matrixId,
+      child_id: ceil.value.id,
+      depth: 1,
+      pos: 2,
+      chainMode: chainModes[isExposeTabs.value - 1],
+    }
+    await store.dispatch('partners/exposePartner', data)
+  }
+}
 </script>
 
 <style scoped lang="scss">

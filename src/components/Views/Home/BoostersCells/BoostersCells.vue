@@ -8,17 +8,23 @@
     </div>
     <div class="boosters-cells__container">
       <SmallCell
+          type="chains-boost"
+          cell-type="chains-boost"
           v-for="(cell, idx) in boostersPending?.list"
           :cell="cell"
           :key="idx"
+          type="chains-boost"
           v-if="littleTabID === 3"
       />
 
       <SmallCell
+          type="chains-boost"
+          cell-type="chains-boost"
           v-for="(cell, idx) in boostersExposed?.list"
           :cell="cell"
           :key="idx"
           v-if="littleTabID === 4"
+          type="chains-boost"
           @open-m-matrix-partner="openMMatrixPartner(cell)"
       />
     </div>

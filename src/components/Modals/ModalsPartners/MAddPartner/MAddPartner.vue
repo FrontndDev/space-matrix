@@ -5,6 +5,7 @@
     </ModalHeader>
     <div class="modal-add-partner__container">
       <BuyBoostCell
+          :price="getPrice"
           @click="buyBooster"
           v-if="getCeil.allowBuyClone"
       />
@@ -39,13 +40,35 @@ import {
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
+const props = defineProps({
+  selectedType: {
+    type: String,
+    default: 'type'
+  }
+})
+
 const emit = defineEmits(['close-modal', 'open-partner-waiting'])
 
 const store = useStore()
 
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
+const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
 
-const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
+const getPrice: ComputedRef<number> = computed(() => {
+  if (props.selectedType === 'id') {
+    return matrixById.value.matrixConfig.price
+  } else {
+    return matrixByType.value.matrixConfig.price
+  }
+})
+// @ts-ignore
+const ceils: ComputedRef<Ceils> = computed(() => {
+  if (props.selectedType === 'id') {
+    return matrixById.value?.ceilsCollection?.['1']
+  } else {
+    return matrixByType.value?.ceilsCollection?.['1']
+  }
+})
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 const partnerPos = inject('partnerPos') as Ref<IPosition>
@@ -65,14 +88,19 @@ const partnersCount: ComputedRef<number> = computed(() => {
 })
 
 const buyBooster = async () => {
-  if (matrixByType.value?.matrix?.id) {
+  const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
+
+  if (matrix?.matrix?.id) {
+    // @ts-ignore
     const data: IBuyBoosterParams = {
-      matrix_id: +matrixByType.value.matrix.id,
+      matrix_id: +matrix.matrix.id,
       pos: partnerPos.value.pos,
       depth: partnerPos.value.depth
     }
     const response = await store.dispatch('buyBooster', data)
-    store.state.matrixByType.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = response.queueId
+    if (matrix?.ceilsCollection) {
+      matrix.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = response.queueId
+    }
     emit('close-modal')
   }
 }

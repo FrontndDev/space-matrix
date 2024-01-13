@@ -8,7 +8,9 @@
         :class="props.type"
         @click="$emit('open-m-matrix-partner')"
     >
-      <img alt="avatar" :src="props.cell?.owner?.photo">
+      <div>
+        <img alt="avatar" :src="props.cell?.owner?.photo">
+      </div>
 <!--      <img src="../../assets/images/Avatar.png" alt="">-->
       <LevelMatrix
           :type-title="selectedTypeTitle"

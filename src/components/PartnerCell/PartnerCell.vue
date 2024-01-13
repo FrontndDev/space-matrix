@@ -54,7 +54,8 @@ import PartnerType from "./PartnerType/PartnerType.vue";
 import LevelMatrix from "../UI/LevelMatrix/LevelMatrix.vue";
 import {
   computed,
-  PropType
+  PropType,
+  ComputedRef,
 } from "vue";
 import {
   FillReward,
@@ -64,7 +65,6 @@ import {
 import { useCopyLink } from "../../use/useCopyLink.ts";
 import { useGetLevel } from "../../use/useGetLevel.ts";
 import CellType from "../UI/CellType/CellType.vue";
-import { ComputedRef } from "vue/dist/vue";
 import { useStore } from "vuex";
 
 const props = defineProps({

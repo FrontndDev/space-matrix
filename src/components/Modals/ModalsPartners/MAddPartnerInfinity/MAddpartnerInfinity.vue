@@ -48,6 +48,7 @@ const partnersCount: ComputedRef<number> = computed(() => store.state.partners.p
 
 const buyBooster = async () => {
   if (matrixByType.value?.matrix?.id) {
+    // @ts-ignore
     const data: IBuyBoosterParams = {
       matrix_id: +matrixByType.value.matrix.id,
       pos: 3,

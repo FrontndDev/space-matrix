@@ -1,9 +1,7 @@
 <template>
   <div class="modal-partner-waiting">
     <ModalHeader
-        :partnerWaiting="true"
         @close-modal="emit('close-modal')"
-        @open-m-add-partner="emit('open-m-add-partner')"
     >
       Партнеры в ожидании
     </ModalHeader>
@@ -78,6 +76,7 @@ const exposePartner = () => {
   const partnerMatrix = selectedPartner.value?.matrix
   console.log('cells', cells)
   if ((partnerMatrix || myMatrix) && selectedCell.value) {
+    // @ts-ignore
     const data: IExposePartnerParams = {
       matrix_id: partnerMatrix ? +partnerMatrix.id : +myMatrix?.id,
       child_id: +selectedCell.value?.id,
