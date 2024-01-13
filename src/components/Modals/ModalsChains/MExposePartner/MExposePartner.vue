@@ -123,25 +123,27 @@ const ceil: ComputedRef<Matrix> = computed(() => {
   }
 })
 
-const exposePartner = () => {
+const exposePartner = async () => {
   if (isBoosterForChain.value) {
-    console.log('buyBooster')
-    // const data: IBuyBoosterParams = {
-    //   matrix_id: +matrixByType.value.matrix.id,
-    //   pos: partnerPos.value.pos,
-    //   depth: partnerPos.value.depth
-    // }
-    // const response = await store.dispatch('buyBooster', data)
+    if (ceil.value.parent_matrix_id) {
+      console.log('buyBooster')
+      const data: IBuyBoosterParams = {
+        matrix_id: ceil.value.parent_matrix_id,
+        depth: 1,
+        pos: 2,
+      }
+      await store.dispatch('buyBooster', data)
+    }
   } else {
     if (ceil.value.parent_matrix_id) {
       console.log('exposePartner')
       const data: IExposePartnerParams = {
         matrix_id: ceil.value.parent_matrix_id,
-        child_id: +selectedCell.value?.id,
-        depth: partnerPos.value.depth,
-        pos: partnerPos.value.pos
+        child_id: +ceil.value.id,
+        depth: 1,
+        pos: 2,
       }
-      store.dispatch('partners/exposePartner', data)
+      await store.dispatch('partners/exposePartner', data)
     }
   }
 }
