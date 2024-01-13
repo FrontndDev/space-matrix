@@ -127,10 +127,10 @@ const openMAddPartner = (pos: IPosition) => {
 }
 
 const openMMatrixPartner = (ceil: Ceil) => {
-  // if (!ceil?.matrix?.is_booster) {
-  emit('open-m-matrix-partner')
-  emit('select-partner', ceil)
-  // }
+  if (!ceil?.matrix?.is_booster) {
+    emit('open-m-matrix-partner')
+    emit('select-partner', ceil)
+  }
 }
 </script>
 
