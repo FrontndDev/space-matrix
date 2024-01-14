@@ -89,7 +89,6 @@
 </template>
 
 <script setup lang="ts">
-
 import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
 import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
@@ -100,11 +99,14 @@ import {
   computed,
   ComputedRef,
   inject,
-  Ref
+  ref,
+  Ref,
+  watch,
 } from "vue";
 import {
   Ceil,
   Ceils,
+  IMatrix,
 } from "../../../../interfaces/store.interface.ts";
 import {
   IPosition
@@ -122,6 +124,10 @@ const emit = defineEmits([
 
 const store = useStore()
 
+const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisIsDreamTon9)
+
+const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
+
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.count ?? 0)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
@@ -129,8 +135,12 @@ const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixById?.ceilsCo
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 
 const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
-const secondCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['2'])
-const thirdCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['3'])
+const secondCeil: ComputedRef<Ceil> = computed(() =>
+    thisIsDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['2']
+)
+const thirdCeil: ComputedRef<Ceil> = computed(() =>
+    thisIsDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['3']
+)
 
 const selectedCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!selectedPartner.value.fillRevard?.find(reward => reward.event === 'freeze')
@@ -143,8 +153,20 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
 )
 
+const interval: Ref<number | null> = ref(null)
+
+watch(() => matrixById.value?.in_queue, () => {
+  if (matrixById.value?.in_queue) {
+    interval.value = setInterval(() => {
+      store.dispatch('getMatrixById', matrixById.value.matrix?.id);
+    }, 3000);
+  } else if (!matrixById.value?.in_queue && interval.value) {
+    clearInterval(interval.value);
+  }
+})
+
 const getTypeForSelectedCeil: ComputedRef<string> = computed(() => {
-  if (!selectedPartner.value) {
+  if (!selectedPartner.value || matrixById.value?.in_queue) {
     return 'loading'
   }
 
@@ -156,13 +178,12 @@ const getTypeForSelectedCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
-  if (!firstCeil.value?.matrix) {
-    if (!store.state.matrixById?.matrix) {
-      return 'loading'
-    }
-    if (!firstCeil.value?.allowSniper && !partnersCount.value && !firstCeil.value.allowBuyClone) {
-      return 'disable'
-    }
+  if (!matrixById.value?.matrix || firstCeil.value?.queueId) {
+    return 'loading'
+  }
+
+  if (!firstCeil.value.allowBuyClone && !firstCeil.value?.allowSniper && !firstCeil.value?.matrix) {
+    return 'disable'
   }
 
   if (firstCeil.value.matrix?.is_booster) {
@@ -173,14 +194,12 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
-  if (!secondCeil.value?.matrix) {
-    if (!store.state.matrixById?.matrix) {
-      return 'loading'
-    }
+  if (!matrixById.value?.matrix || secondCeil.value?.queueId) {
+    return 'loading'
+  }
 
-    if (!secondCeil.value?.allowSniper && !partnersCount.value && !secondCeil.value.allowBuyClone) {
-      return 'disable'
-    }
+  if (!secondCeil.value?.allowSniper && !secondCeil.value.allowBuyClone && !secondCeil.value?.matrix) {
+    return 'disable'
   }
 
   if (secondCeil.value.matrix?.is_booster) {

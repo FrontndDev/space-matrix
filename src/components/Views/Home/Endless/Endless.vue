@@ -32,7 +32,6 @@ import {
   Ceil,
   Ceils,
   IMatrix,
-  Type
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
@@ -40,12 +39,14 @@ const emit = defineEmits(['open-m-infinity-cell', 'open-m-add-partner', 'set-pos
 
 const store = useStore()
 
-const selectedType: ComputedRef<Type> = computed(() => store.state.selectedType)
+const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisIsDreamTon9)
 
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 
 const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection['1'])
-const thirdCeil: Ref<Ceil> = computed(() => selectedType.value.type === 'dream-ton_9' ? ceils.value?.['1'] : ceils.value?.['3'])
+const thirdCeil: Ref<Ceil> = computed(() =>
+    thisIsDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['3']
+)
 
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 

@@ -85,5 +85,9 @@ export default createStore({
             state.newTypeMatrix = type
         }
     },
-    getters: {}
+    getters: {
+        thisIsDreamTon9(state): boolean {
+            return state.selectedType.type === 'dream-ton_9'
+        }
+    }
 });

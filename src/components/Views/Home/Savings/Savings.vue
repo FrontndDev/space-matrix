@@ -56,7 +56,6 @@ import {
 import {
   Ceil,
   Ceils,
-  Type
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
@@ -69,7 +68,7 @@ const emit = defineEmits([
 
 const store = useStore()
 
-const selectedType: ComputedRef<Type> = computed(() => store.state.selectedType)
+const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisIsDreamTon9)
 
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 
@@ -77,7 +76,7 @@ const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixByType?.ceils
 
 const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() =>
-    selectedType.value.type === 'dream-ton_9' ? ceils.value?.['1'] : ceils.value?.['2']
+    thisIsDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['2']
 )
 
 const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
@@ -88,7 +87,7 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
 )
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
-  if (selectedType.value.type === 'dream-ton_9') {
+  if (thisIsDreamTon9.value) {
     return 'disable3'
   }
 
@@ -96,7 +95,7 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (!firstCeil.value?.matrix && (!firstCeil.value.allowSniper || !partnersCount.value && !firstCeil.value.allowBuyClone)) {
+  if (!firstCeil.value?.allowBuyClone && !firstCeil.value?.allowSniper) {
     return 'disable'
   }
 
@@ -108,7 +107,7 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
-  if (selectedType.value.type === 'dream-ton_9') {
+  if (thisIsDreamTon9.value) {
     return 'disable3'
   }
 
@@ -116,7 +115,7 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (!secondCeil.value?.matrix && (!secondCeil.value.allowSniper || !partnersCount.value && !secondCeil.value.allowBuyClone)) {
+  if (!secondCeil.value?.allowSniper && !secondCeil.value.allowBuyClone) {
     return 'disable'
   }
 
@@ -133,7 +132,7 @@ const getPosition = (depth: number, pos: number): IPosition => {
 
 const openMAddPartner = (pos: IPosition) => {
   const ceil: Ceil = ceils.value[String(pos.pos)]
-  if (selectedType.value.type !== 'dream-ton_9' && (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone)) {
+  if (!thisIsDreamTon9.value && (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone)) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
   }

@@ -74,7 +74,7 @@ const selectCell = (cell: Matrix) => {
 const exposePartner = () => {
   const myMatrix = store.state.matrixByType?.matrix
   const partnerMatrix = selectedPartner.value?.matrix
-  console.log('cells', cells)
+
   if ((partnerMatrix || myMatrix) && selectedCell.value) {
     // @ts-ignore
     const data: IExposePartnerParams = {

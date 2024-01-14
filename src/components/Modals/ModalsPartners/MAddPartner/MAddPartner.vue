@@ -98,9 +98,12 @@ const buyBooster = async () => {
       depth: partnerPos.value.depth
     }
     const response = await store.dispatch('buyBooster', data)
-    if (matrix?.ceilsCollection) {
-      matrix.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = response.queueId
-    }
+    console.log('buyBooster', response)
+    setTimeout(() => {
+      if (matrix?.ceilsCollection) {
+        matrix.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = response.queueId
+      }
+    }, 3000)
     emit('close-modal')
   }
 }
