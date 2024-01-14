@@ -84,7 +84,8 @@ export default {
     },
     async exposePartner(ctx: ActionContext<any, any>, data: IExposePartnerParams) {
       const response = await API.placementExistMatrix(data)
-      await ctx.dispatch('getMatrixByType', ctx.state.selectedType.type)
+      console.log('ctx.rootState.selectedType.type', ctx.rootState.selectedType.type)
+      await ctx.dispatch('getMatrixByType', ctx.rootState.selectedType.type, { root: true })
 
       return response
     },

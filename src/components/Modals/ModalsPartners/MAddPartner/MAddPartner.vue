@@ -97,13 +97,13 @@ const buyBooster = async () => {
       pos: partnerPos.value.pos,
       depth: partnerPos.value.depth
     }
-    const response = await store.dispatch('buyBooster', data)
-    console.log('buyBooster', response)
-    setTimeout(() => {
-      if (matrix?.ceilsCollection) {
-        matrix.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = response.queueId
-      }
-    })
+    await store.dispatch('buyBooster', data)
+
+    if (props.selectedType === 'id') {
+      await store.dispatch('getMatrixById', matrixById.value.matrix?.id)
+    } else {
+      await store.dispatch('getMatrixByType', store.state.selectedType.type)
+    }
     emit('close-modal')
   }
 }
