@@ -103,7 +103,7 @@ const buyBooster = async () => {
       if (matrix?.ceilsCollection) {
         matrix.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = response.queueId
       }
-    }, 3000)
+    })
     emit('close-modal')
   }
 }

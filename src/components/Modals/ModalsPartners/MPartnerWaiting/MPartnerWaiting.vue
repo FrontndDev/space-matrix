@@ -90,7 +90,7 @@ const exposePartner = async () => {
         if (matrixByType?.ceilsCollection) {
           matrixByType.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = response.queueId
         }
-      }, 3000)
+      }, 0)
     }
     emit('close-modal')
   }
