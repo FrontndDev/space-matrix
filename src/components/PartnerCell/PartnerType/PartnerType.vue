@@ -21,9 +21,10 @@
       </svg>
     </template>
     <template v-if="!['boost', 'chains-boost'].includes(props.type) && props.cellType !== 'circle-avatar'">
-      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus?.['1'] }"/>
-      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus?.['2'] }"/>
-<!--      классы => ( fill-green, fill-orange, fill-blue )  -->
+      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus?.['1'] === 1, 'dashed-red': props.binstatus?.['1'] === 2 }"><span></span></div>
+      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus?.['2'] === 1, 'dashed-red': props.binstatus?.['2'] === 2 }"><span></span></div>
+<!--      классы => ( fill-green, fill-orange, fill-blue, dashed-red, dashed-brown, dashed-mint  )  -->
+<!--      В span передовать цифру при необходимости-->
     </template>
   </div>
 </template>
@@ -44,6 +45,8 @@ const props = defineProps({
     default: ''
     //chains-boost,
   }
+
+
 });
 </script>
 

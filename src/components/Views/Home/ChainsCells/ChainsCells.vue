@@ -45,11 +45,7 @@ import { IChainsList } from "../../../../interfaces/chains.interface.ts";
 import { useStore } from "vuex";
 
 const tabs = reactive([
-  {
-    id: 5,
-    name: 'Выставленные',
-    value: computed(() => chainsList.value.totalCount)
-  }
+
 ]);
 
 const store = useStore()
