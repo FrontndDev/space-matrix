@@ -53,14 +53,16 @@ export default {
 
     getPendingPartners(
       { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
-      { isPartnerMatrix = false }: IGetPendingBoostersParams
+      { filter, isPartnerMatrix = false }: IGetPendingBoostersParams
     ) {
+      state.levelID = filter
+
       API.filterOfActivatedMatrix({
           matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
           matrixFilterPageId: state.matrixFilterPageId,
           //@ts-ignore
           matrixFilterUserId: window.UserData.id,
-          filter: { pending: 1 }
+          filter: { pending: 1, level: filter }
         }
       ).then(response => {
         if (response.data?.count === 0 && state.bigTabID === 1) commit('CHANGE_LITTLE_TAB', 2)

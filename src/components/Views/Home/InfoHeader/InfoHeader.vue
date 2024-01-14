@@ -9,7 +9,7 @@
         <Select
             data="static"
             :items="selectItemsPartners"
-            v-show="props.infoHeader === 1 && littleTabID !== 1"
+            v-show="props.infoHeader === 1"
             @select="changeLineOfPartners"
         />
       </div>
@@ -57,7 +57,6 @@ const props = defineProps({
 const store = useStore()
 const emit = defineEmits(['open-cells'])
 
-const littleTabID = computed(() => store.state.partners.littleTabID)
 const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
 
 const levelIDOfPartners = computed(() => store.state.partners.levelID)
@@ -65,6 +64,7 @@ const levelIDOfBoosters = computed(() => store.state.boosters.levelID)
 
 const changeLineOfPartners = (item: ILineOfPartners) => {
   store.dispatch('partners/getExposedPartners', { filter: item.id })
+  store.dispatch('partners/getPendingPartners', { filter: item.id })
 }
 
 const changeMatrixType = (item: Type) => {
