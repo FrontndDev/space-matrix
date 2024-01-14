@@ -5,7 +5,7 @@
         <div class="home__matrices">
           <MatrixHeader style="grid-area: header;"/>
 
-          <template v-if="Object.keys(matrixByType).length && infinityPartners">
+          <template v-if="Object.keys(matrixByType).length">
             <div class="home__matrices-inner" v-if="!matrixByType?.ctaText">
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
@@ -35,7 +35,7 @@
             </template>
 
           </template>
-          <div class="home__preloader" v-if="!Object.keys(matrixByType).length || !infinityPartners">
+          <div class="home__preloader" v-if="!Object.keys(matrixByType).length">
             <Preloader :with-text="true"/>
           </div>
 
@@ -44,8 +44,7 @@
               v-if="
                 !matrixByType?.in_queue &&
                 !matrixIsTemporarilyUnavailable &&
-                Object.keys(matrixByType).length &&
-                infinityPartners
+                Object.keys(matrixByType).length
               "
               @click="useCopyLink(matrixByType.matrix?.id ?? 0, matrixByType.matrix)"
           />
@@ -180,10 +179,7 @@ const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByTy
 watch(() => matrixIsInQueueForPublication.value, () => {
   if (matrixIsInQueueForPublication.value) {
     interval.value = setInterval(() => {
-      store.dispatch('getMatrixByType', {
-        matrixType: store.state.selectedType.type,
-        dropInfinityPartners: false
-      });
+      store.dispatch('getMatrixByType', store.state.selectedType.type);
     }, 3000);
   } else if (!matrixIsInQueueForPublication.value && interval.value) {
     clearInterval(interval.value);
@@ -193,10 +189,7 @@ watch(() => matrixIsInQueueForPublication.value, () => {
 watch(() => matrixByType.value?.in_queue, () => {
   if (matrixByType.value?.in_queue) {
     interval.value = setInterval(() => {
-      store.dispatch('getMatrixByType', {
-        matrixType: store.state.selectedType.type,
-        dropInfinityPartners: false
-      });
+      store.dispatch('getMatrixByType', store.state.selectedType.type);
     }, 3000);
   } else if (!matrixByType.value?.in_queue && interval.value) {
     clearInterval(interval.value);
@@ -217,8 +210,6 @@ const selectedPartner: Ref<Ceil | null> = ref(null)
 
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
-
-const infinityPartners: ComputedRef<Matrix[] | null> = computed(() => store.state.partners.infinityPartners)
 
 const openModalPartner = (num: number) => {
   toggleModalPartners.value = true

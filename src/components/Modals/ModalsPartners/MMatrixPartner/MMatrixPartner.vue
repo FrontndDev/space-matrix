@@ -77,8 +77,8 @@
             <InfinityPartnerCard
                 modal="m-matrix-partner"
                 :ceil="thirdCeil"
-                :partners-count="infinityPartnersCount"
-                @open-m-infinity-cell="$emit('open-m-infinity-cell')"
+                :partners-count="-1"
+                @open-m-infinity-cell="openMInfinityCell"
             />
           </div>
         </div>
@@ -131,10 +131,6 @@ const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['2'])
 const thirdCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['3'])
-
-const infinityPartnersCount: ComputedRef<number> = computed(() =>
-    store.state.partners.infinityPartnersSecond?.length ?? 0
-)
 
 const selectedCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!selectedPartner.value.fillRevard?.find(reward => reward.event === 'freeze')
@@ -196,6 +192,14 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
 
 const getPosition = (depth: number, pos: number): IPosition => {
   return { depth, pos }
+}
+
+const openMInfinityCell = () => {
+  store.dispatch('partners/getInfinityPartners', {
+      parentId: store.state.matrixById.matrix?.id,
+      isPartnerMatrix: true
+  })
+  emit('open-m-infinity-cell')
 }
 
 const openMAddPartner = (pos: IPosition) => {
