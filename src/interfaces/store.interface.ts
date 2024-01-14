@@ -98,6 +98,7 @@ export interface IMatrix {
     matrix: Matrix | null;
     matrixConfig: MatrixConfig;
     ceilsCollection?: CeilsCollection;
+    allowTop: boolean | undefined;
     countInInfinity: number;
 }
 

@@ -3,6 +3,7 @@
     <ModalHeader
         modal-header="MMatrixPartner"
         @open-m-matrix-partner="parentMatrix"
+        :allowTop="matrixById?.allowTop"
         @close-modal="$emit('close-modal')"
     >
       Матрица партнера

@@ -11,7 +11,7 @@
       <div>
         <img alt="avatar" :src="props.cell?.owner?.photo">
       </div>
-<!--      <img src="../../assets/images/Avatar.png" alt="">-->
+
       <LevelMatrix
           :type-title="selectedTypeTitle"
           :level="useGetLevel(props.cell?.owner?.lvl_insystem)"
@@ -24,7 +24,6 @@
       >{{ props.cell?.owner?.fio }}</span>
       <div
           class="small-cell__id"
-          v-if="props.type !== 'chains-boost'"
           @click="useCopy(props.cell?.owner.id)"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
