@@ -32,6 +32,7 @@ const props = defineProps({
   },
   countLinks: {
     type: Number,
+    default: 0
   },
   state: {
     type: String,
