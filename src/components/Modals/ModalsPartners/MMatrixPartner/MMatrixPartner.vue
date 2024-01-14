@@ -77,7 +77,7 @@
             <InfinityPartnerCard
                 modal="m-matrix-partner"
                 :ceil="thirdCeil"
-                :partners-count="-1"
+                :partners-count="store.state.matrixById.countInInfinity"
                 @open-m-infinity-cell="openMInfinityCell"
             />
           </div>
@@ -124,7 +124,7 @@ const store = useStore()
 
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.count ?? 0)
 
-const ceils: Ref<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
+const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 
