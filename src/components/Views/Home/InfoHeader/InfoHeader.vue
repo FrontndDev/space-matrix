@@ -5,11 +5,11 @@
         @open-cells="openCells"
     />
     <div class="header-info__selects">
-      <div v-if="props.infoHeader === 1">
+      <div v-show="props.infoHeader === 1">
         <Select
             data="static"
             :items="selectItemsPartners"
-            v-show="littleTabID !== 1"
+            v-show="props.infoHeader === 1 && littleTabID !== 1"
             @select="changeLineOfPartners"
         />
       </div>
