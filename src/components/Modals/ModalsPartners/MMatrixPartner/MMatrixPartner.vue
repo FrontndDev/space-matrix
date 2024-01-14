@@ -182,8 +182,10 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (!firstCeil.value.allowBuyClone && !firstCeil.value?.allowSniper && !firstCeil.value?.matrix) {
-    return 'disable'
+  if (!firstCeil.value?.matrix) {
+    if (!firstCeil.value.allowBuyClone && !firstCeil.value?.allowSniper || !firstCeil.value?.allowBuyClone && !partnersCount.value) {
+      return 'disable'
+    }
   }
 
   if (firstCeil.value.matrix?.is_booster) {
@@ -198,8 +200,10 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (!secondCeil.value?.allowSniper && !secondCeil.value.allowBuyClone && !secondCeil.value?.matrix) {
-    return 'disable'
+  if (!secondCeil.value?.matrix) {
+    if (!secondCeil.value?.allowSniper && !secondCeil.value.allowBuyClone || !secondCeil.value?.allowBuyClone && !partnersCount.value) {
+      return 'disable'
+    }
   }
 
   if (secondCeil.value.matrix?.is_booster) {

@@ -83,14 +83,10 @@ const exposePartner = async () => {
       depth: partnerPos.value.depth,
       pos: partnerPos.value.pos
     }
-    const response = await store.dispatch('partners/exposePartner', data)
+    await store.dispatch('partners/exposePartner', data)
+
     if (!partnerMatrix && myMatrix) {
-      const matrixByType = store.state.matrixByType
-      setTimeout(() => {
-        if (matrixByType?.ceilsCollection) {
-          matrixByType.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = response.queueId
-        }
-      }, 0)
+      await store.dispatch('getMatrixByType', store.state.selectedType.type)
     }
     emit('close-modal')
   }
