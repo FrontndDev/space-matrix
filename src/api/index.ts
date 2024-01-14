@@ -38,11 +38,11 @@ export async function getListOfInfinity(parentId: number) {
 }
 
 export async function getListOfChains(pageID: number) {
-  return getAsync(`/api/matrix/chains/profit?page=${pageID}&demo=1`)
+  return getAsync(`/api/matrix/chains/profit?page=${pageID}`)
 }
 
 export async function getChainDetail(id: number) {
-  return getAsync(`/api/matrix/chain-details/${id}?demo=1`)
+  return getAsync(`/api/matrix/chain-details/${id}`)
 }
 
 // POST

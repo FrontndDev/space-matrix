@@ -82,10 +82,12 @@ export default {
         }
       })
     },
-    exposePartner(ctx: ActionContext<any, any>, data: IExposePartnerParams) {
-      API.placementExistMatrix(data).then(() => {
-        ctx.dispatch('getMatrixByType', ctx.state.selectedType.type)
-      })
+    async exposePartner(ctx: ActionContext<any, any>, data: IExposePartnerParams) {
+      const response = await API.placementExistMatrix(data)
+      console.log('ctx.rootState.selectedType.type', ctx.rootState.selectedType.type)
+      await ctx.dispatch('getMatrixByType', ctx.rootState.selectedType.type, { root: true })
+
+      return response
     },
   },
   mutations: {

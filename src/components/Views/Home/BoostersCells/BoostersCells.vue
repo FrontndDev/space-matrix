@@ -1,32 +1,35 @@
 <template>
   <div class="boosters-cells">
     <div class="boosters-cells__header">
-      <Tabs type="little"
-            :tabs="tabs"
-            :cells="true"
+      <Tabs
+          type="little"
+          :tabs="tabs"
+          :cells="true"
       />
     </div>
     <div class="boosters-cells__container">
       <SmallCell
+          type="chains-boost"
+          cell-type="chains-boost"
           v-for="(cell, idx) in boostersPending?.list"
           :cell="cell"
           :key="idx"
-          type="chains-boost"
           v-if="littleTabID === 3"
       />
 
       <SmallCell
+          type="chains-boost"
+          cell-type="chains-boost"
           v-for="(cell, idx) in boostersExposed?.list"
           :cell="cell"
           :key="idx"
           v-if="littleTabID === 4"
-          type="chains-boost"
           @open-m-matrix-partner="openMMatrixPartner(cell)"
       />
     </div>
   </div>
   <EmptyCells
-      v-if="boostersPending.count === 0"
+      v-if="boostersPending.list?.length === 0 && littleTabID === 3 || boostersExposed.list?.length === 0 && littleTabID === 4"
       :cellsType="'boosters'"
   />
 <!--  <Pagination v-if="boostersPending.count !== 0" />-->

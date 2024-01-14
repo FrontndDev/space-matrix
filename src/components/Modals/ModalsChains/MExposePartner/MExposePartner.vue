@@ -69,7 +69,7 @@
         </div>
       </div>
     </div>
-    <CopyLink/>
+    <CopyLink @click="useCopyLink(chainsDetails[0].id, chainsDetails[0])"/>
   </div>
 </template>
 
@@ -95,10 +95,8 @@ import {
   Matrix,
   Type
 } from "../../../../interfaces/store.interface.ts";
-import {
-  IChains
-} from "../../../../interfaces/chains.interface.ts";
 import { IExposePartnerParams } from "../../../../interfaces/partners.interface.ts";
+import { useCopyLink } from "../../../../use/useCopyLink.ts";
 
 const tabs = reactive([
   {
@@ -113,7 +111,6 @@ const tabs = reactive([
 
 const chainModes: string[] = ['profit', 'wait']
 
-const chainsList: ComputedRef<IChains[]> = computed(() => store.state.chains.chainsList.list)
 const chainsDetails: ComputedRef<Matrix[]> = computed(() => store.state.chains.chainDetails.list)
 const price: ComputedRef<number> = computed(() => store.state.chains.chainDetails.price.amount)
 

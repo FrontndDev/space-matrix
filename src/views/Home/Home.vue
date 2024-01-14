@@ -5,7 +5,7 @@
         <div class="home__matrices">
           <MatrixHeader style="grid-area: header;"/>
 
-          <template v-if="Object.keys(matrixByType).length && infinityPartners">
+          <template v-if="Object.keys(matrixByType).length">
             <div class="home__matrices-inner" v-if="!matrixByType?.ctaText">
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
@@ -35,7 +35,7 @@
             </template>
 
           </template>
-          <div class="home__preloader" v-if="!Object.keys(matrixByType).length || !infinityPartners">
+          <div class="home__preloader" v-if="!Object.keys(matrixByType).length">
             <Preloader :with-text="true"/>
           </div>
 
@@ -44,10 +44,9 @@
               v-if="
                 !matrixByType?.in_queue &&
                 !matrixIsTemporarilyUnavailable &&
-                Object.keys(matrixByType).length &&
-                infinityPartners
+                Object.keys(matrixByType).length
               "
-              @click="useCopyLink(matrixByType.matrix?.id ?? 0)"
+              @click="useCopyLink(matrixByType.matrix?.id ?? 0, matrixByType.matrix)"
           />
         </div>
         <div class="home__info">
@@ -142,7 +141,6 @@ import {
   Ceil,
   IMatrix,
   ListOfTypes,
-  Matrix,
 } from "../../interfaces/store.interface.ts";
 import { useRoute } from "vue-router";
 import { useCopyLink } from "../../use/useCopyLink.ts";
@@ -180,10 +178,7 @@ const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByTy
 watch(() => matrixIsInQueueForPublication.value, () => {
   if (matrixIsInQueueForPublication.value) {
     interval.value = setInterval(() => {
-      store.dispatch('getMatrixByType', {
-        matrixType: store.state.selectedType.type,
-        dropInfinityPartners: false
-      });
+      store.dispatch('getMatrixByType', store.state.selectedType.type);
     }, 3000);
   } else if (!matrixIsInQueueForPublication.value && interval.value) {
     clearInterval(interval.value);
@@ -193,10 +188,7 @@ watch(() => matrixIsInQueueForPublication.value, () => {
 watch(() => matrixByType.value?.in_queue, () => {
   if (matrixByType.value?.in_queue) {
     interval.value = setInterval(() => {
-      store.dispatch('getMatrixByType', {
-        matrixType: store.state.selectedType.type,
-        dropInfinityPartners: false
-      });
+      store.dispatch('getMatrixByType', store.state.selectedType.type);
     }, 3000);
   } else if (!matrixByType.value?.in_queue && interval.value) {
     clearInterval(interval.value);
@@ -217,8 +209,6 @@ const selectedPartner: Ref<Ceil | null> = ref(null)
 
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
-
-const infinityPartners: ComputedRef<Matrix[] | null> = computed(() => store.state.partners.infinityPartners)
 
 const openModalPartner = (num: number) => {
   toggleModalPartners.value = true
@@ -258,7 +248,7 @@ const setPositionForPartner = (pos: IPosition) => {
 }
 
 const selectPartner = async (ceil: Ceil) => {
-  if (ceil.matrix) {
+  if (ceil?.matrix) {
     // Получаем Матрицу партнёра
     store.commit('SET_MATRIX_BY_ID', {})
     const response = await store.dispatch('getMatrixById', ceil.matrix.id)
@@ -276,6 +266,9 @@ const selectPartner = async (ceil: Ceil) => {
 onMounted(async () => {
   if (route.query.id) {
     const { data } = await store.dispatch('getMatrixById', route.query.id)
+
+    // Получаем партнеров в ожидании "Матрицы партнёра"
+    store.dispatch('partners/getPendingPartners', { isPartnerMatrix: true })
 
     if (data?.matrix && !data.matrix.is_booster) {
       selectedPartner.value = {

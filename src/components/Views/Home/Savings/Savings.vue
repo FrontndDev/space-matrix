@@ -55,7 +55,7 @@ import {
 } from "vue";
 import {
   Ceil,
-  Ceils
+  Ceils,
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
@@ -68,12 +68,16 @@ const emit = defineEmits([
 
 const store = useStore()
 
+const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisIsDreamTon9)
+
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
 
 const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
-const secondCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['2'])
+const secondCeil: ComputedRef<Ceil> = computed(() =>
+    thisIsDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['2']
+)
 
 const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
@@ -83,12 +87,18 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
 )
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
+  if (thisIsDreamTon9.value) {
+    return 'disable3'
+  }
+
   if (firstCeil.value.queueId) {
     return 'loading'
   }
 
-  if (!firstCeil.value?.matrix && (!firstCeil.value.allowSniper || !partnersCount.value && !firstCeil.value.allowBuyClone)) {
-    return 'disable'
+  if (!firstCeil.value?.matrix) {
+    if (!firstCeil.value?.allowBuyClone && !firstCeil.value?.allowSniper || !firstCeil.value?.allowBuyClone && !partnersCount.value) {
+      return 'disable'
+    }
   }
 
   if (firstCeil.value?.matrix?.is_booster) {
@@ -99,12 +109,18 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
+  if (thisIsDreamTon9.value) {
+    return 'disable3'
+  }
+
   if (secondCeil.value.queueId) {
     return 'loading'
   }
 
-  if (!secondCeil.value?.matrix && (!secondCeil.value.allowSniper || !partnersCount.value && !secondCeil.value.allowBuyClone)) {
-    return 'disable'
+  if (!secondCeil.value?.matrix) {
+    if (!secondCeil.value?.allowSniper && !secondCeil.value.allowBuyClone || !secondCeil.value?.allowBuyClone && !partnersCount.value) {
+      return 'disable'
+    }
   }
 
   if (secondCeil.value?.matrix?.is_booster) {
@@ -120,7 +136,7 @@ const getPosition = (depth: number, pos: number): IPosition => {
 
 const openMAddPartner = (pos: IPosition) => {
   const ceil: Ceil = ceils.value[String(pos.pos)]
-  if (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone) {
+  if (!thisIsDreamTon9.value && (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone)) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
   }

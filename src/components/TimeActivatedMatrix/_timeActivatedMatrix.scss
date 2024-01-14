@@ -50,6 +50,7 @@
 
 .text__column {
   @include flexbox(column, flex-start, center);
+  color: $text-base-secondary;
   text-align: center;
 
   & ::v-deep(a) {

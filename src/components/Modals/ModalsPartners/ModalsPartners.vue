@@ -7,16 +7,19 @@
               @open-m-matrix-partner="$emit('open-m-matrix-partner')"
               @open-m-add-partner="$emit('open-m-add-partner')"
               @close-modal="$emit('close-modal')"
+              @select-partner="selectPartner"
               v-if="props.openModalPartners === 1"
           />
           <MMatrixPartner
               @open-m-infinity-cell="$emit('open-m-infinity-cell')"
               @open-m-add-partner="openMAddPartner"
               @select-partner="selectPartner"
+              @set-partner-by="setPartnerBy"
               @close-modal="$emit('close-modal')"
               v-else-if="props.openModalPartners === 2"
           />
           <MAddPartner
+              :selected-type="selectedType"
               @close-modal="$emit('close-modal')"
               @open-partner-waiting="$emit('open-partner-waiting')"
               v-else-if="props.openModalPartners === 3"
@@ -46,6 +49,10 @@ import MPartnerWaiting from "./MPartnerWaiting/MPartnerWaiting.vue";
 import MAddpartnerInfinity from "./MAddPartnerInfinity/MAddpartnerInfinity.vue";
 import { IPosition } from "../../../interfaces/partners.interface.ts";
 import { Ceil } from "../../../interfaces/store.interface.ts";
+import {
+  Ref,
+  ref
+} from "vue";
 
 const props = defineProps({
   toggleModalPartners: {
@@ -68,8 +75,15 @@ const emit = defineEmits([
   'close-modal',
 ])
 
+const selectedType: Ref<string> = ref('type')
+
 const selectPartner = (selectedCeil: Ceil) => {
   emit('select-partner', selectedCeil)
+}
+
+const setPartnerBy = (type: string) => {
+  // type, id
+  selectedType.value = type
 }
 
 const openMAddPartner = (pos: IPosition) => {

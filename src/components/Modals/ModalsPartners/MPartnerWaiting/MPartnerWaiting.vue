@@ -71,18 +71,23 @@ const selectCell = (cell: Matrix) => {
   selectedCell.value = cell
 }
 
-const exposePartner = () => {
+const exposePartner = async () => {
   const myMatrix = store.state.matrixByType?.matrix
   const partnerMatrix = selectedPartner.value?.matrix
-  console.log('cells', cells)
+
   if ((partnerMatrix || myMatrix) && selectedCell.value) {
+    // @ts-ignore
     const data: IExposePartnerParams = {
       matrix_id: partnerMatrix ? +partnerMatrix.id : +myMatrix?.id,
       child_id: +selectedCell.value?.id,
       depth: partnerPos.value.depth,
       pos: partnerPos.value.pos
     }
-    store.dispatch('partners/exposePartner', data)
+    await store.dispatch('partners/exposePartner', data)
+
+    if (!partnerMatrix && myMatrix) {
+      await store.dispatch('getMatrixByType', store.state.selectedType.type)
+    }
     emit('close-modal')
   }
 }

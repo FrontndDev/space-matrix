@@ -32,29 +32,37 @@ import {
   Ceil,
   Ceils,
   IBuyBoosterParams,
-  IMatrix
+  IMatrix,
 } from "../../../../interfaces/store.interface.ts";
 
 const emit = defineEmits(['close-modal', 'open-partner-waiting'])
 
 const store = useStore()
 
+const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisIsDreamTon9)
+
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
 
-const thirdCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['3'])
+const thirdCeil: ComputedRef<Ceil> = computed(() =>
+    thisIsDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['3']
+)
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
 
 const buyBooster = async () => {
   if (matrixByType.value?.matrix?.id) {
+    // @ts-ignore
     const data: IBuyBoosterParams = {
       matrix_id: +matrixByType.value.matrix.id,
       pos: 3,
       depth: 1
     }
     const response = await store.dispatch('buyBooster', data)
-    store.state.matrixByType.ceilsCollection['1']['3'].queueId = response.queueId
+    console.log('response', response)
+    const ceilsCollectionDepth = store.state.matrixByType.ceilsCollection['1']
+    const ceilsCollectionPos = thisIsDreamTon9.value ? ceilsCollectionDepth['1'] : ceilsCollectionDepth['3']
+    ceilsCollectionPos.queueId = response.queueId
     emit('close-modal')
   }
 }
@@ -66,6 +74,6 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-@import "_mAddPartnerInfinity.scss";
+<style scoped lang="scss">
+@import "mAddPartnerInfinity";
 </style>

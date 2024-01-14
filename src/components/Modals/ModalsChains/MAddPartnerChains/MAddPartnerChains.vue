@@ -5,6 +5,7 @@
     </ModalHeader>
     <div class="modal-add-partner-chains__container">
       <BuyBoostCell
+          :price="boostPrice"
           @click="buyBooster(true)"
       />
       <AddPartnerCell
@@ -38,12 +39,14 @@ const emit = defineEmits([
     'buy-booster',
     'select-partner',
     'open-partner-waiting-chains',
+    'close-modal',
 ])
 
 const store = useStore()
 
 const chainsDetails: ComputedRef<IChainDetails> = computed(() => store.state.chains.chainDetails)
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
+const boostPrice: ComputedRef<number> = computed(() => chainsDetails.value.price.amount)
 
 const getCeil: ComputedRef<Ceil> = computed(() => {
   return {

@@ -24,7 +24,10 @@
       <!--        <div>Ваш партнер <a> Иванов Иван </a>активировал матрицу D5.</div>-->
       <!--        <div>Заполните накопительные ячейки в предыдущей матрице или активируйте её, чтобы не упустить прибыль.</div>-->
     </div>
-    <ActivateButton :price="selectedType.price"/>
+    <ActivateButton
+        :price="selectedType.price"
+        @click="openPaymentForm"
+    />
   </div>
 </template>
 
@@ -44,6 +47,10 @@ const store = useStore()
 
 const selectedType: ComputedRef<Type> = computed(() => store.state.selectedType)
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
+
+const openPaymentForm = () => {
+  store.dispatch('getPaymentForm', selectedType.value.type)
+}
 </script>
 
 <style scoped lang="scss">

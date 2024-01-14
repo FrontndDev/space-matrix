@@ -4,7 +4,7 @@
       :class="props.type"
   >
     <div @click="$emit('open-general-chains', props.id)" class="chain-cell__avatar">
-      <img src="../../assets/images/Avatar.png" alt="">
+      <img alt="Avatar" :src="props.avatar">
     </div>
     <div class="chain-cell__info">
       <div class="chain-cell__level">

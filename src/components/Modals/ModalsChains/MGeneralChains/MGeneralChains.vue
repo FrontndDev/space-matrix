@@ -27,7 +27,7 @@
         </ChainsButton>
       </div>
     </div>
-    <CopyLink />
+    <CopyLink @click="useCopyLink(chainDetails.list[0].id, chainDetails.list[0])"/>
   </div>
 </template>
 
@@ -43,6 +43,7 @@ import { useStore } from "vuex";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 import { IChainDetails } from "../../../../interfaces/chains.interface.ts";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
+import { useCopyLink } from "../../../../use/useCopyLink.ts";
 
 const emit = defineEmits([
   'close-modal',

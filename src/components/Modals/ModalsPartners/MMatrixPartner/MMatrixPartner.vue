@@ -3,6 +3,7 @@
     <ModalHeader
         modal-header="MMatrixPartner"
         @open-m-matrix-partner="parentMatrix"
+        :allowTop="matrixById?.allowTop"
         @close-modal="$emit('close-modal')"
     >
       Матрица партнера
@@ -77,19 +78,18 @@
             <InfinityPartnerCard
                 modal="m-matrix-partner"
                 :ceil="thirdCeil"
-                :partners-count="infinityPartnersCount"
-                @open-m-infinity-cell="$emit('open-m-infinity-cell')"
+                :partners-count="store.state.matrixById.countInInfinity"
+                @open-m-infinity-cell="openMInfinityCell"
             />
           </div>
         </div>
       </div>
-      <CopyLink @click="useCopyLink(store.state.matrixById.matrix?.id)"/>
+      <CopyLink @click="useCopyLink(store.state.matrixById.matrix?.id, selectedPartner?.matrix)"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-
 import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
 import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
 import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
@@ -100,11 +100,14 @@ import {
   computed,
   ComputedRef,
   inject,
-  Ref
+  ref,
+  Ref,
+  watch,
 } from "vue";
 import {
   Ceil,
   Ceils,
+  IMatrix,
 } from "../../../../interfaces/store.interface.ts";
 import {
   IPosition
@@ -116,23 +119,28 @@ const emit = defineEmits([
   'open-m-infinity-cell',
   'open-m-matrix-partner',
   'select-partner',
+  'set-partner-by',
   'close-modal',
 ])
 
 const store = useStore()
 
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.count)
+const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisIsDreamTon9)
 
-const ceils: Ref<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
+const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
+
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.count ?? 0)
+
+const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 
 const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
-const secondCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['2'])
-const thirdCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['3'])
-
-const infinityPartnersCount: ComputedRef<number> = computed(() =>
-    store.state.partners.infinityPartnersSecond?.length ?? 0
+const secondCeil: ComputedRef<Ceil> = computed(() =>
+    thisIsDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['2']
+)
+const thirdCeil: ComputedRef<Ceil> = computed(() =>
+    thisIsDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['3']
 )
 
 const selectedCeilIsCumulative: ComputedRef<boolean> = computed(() =>
@@ -146,23 +154,20 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
     !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
 )
 
-// TODO Не трогать!!! Хочу сделать покомпактнее!!!
-// const getCeilType = (num: number) => {
-//   let ceil: Ceil | null = null
-//   switch (num) {
-//     case 1:
-//       ceil = firstCeil.value
-//       break;
-//     case 2:
-//       ceil = secondCeil.value
-//       break;
-//     default:
-//       break;
-//   }
-// }
+const interval: Ref<number | null> = ref(null)
+
+watch(() => matrixById.value?.in_queue, () => {
+  if (matrixById.value?.in_queue) {
+    interval.value = setInterval(() => {
+      store.dispatch('getMatrixById', matrixById.value.matrix?.id);
+    }, 3000);
+  } else if (!matrixById.value?.in_queue && interval.value) {
+    clearInterval(interval.value);
+  }
+})
 
 const getTypeForSelectedCeil: ComputedRef<string> = computed(() => {
-  if (!selectedPartner.value) {
+  if (!selectedPartner.value || matrixById.value?.in_queue) {
     return 'loading'
   }
 
@@ -174,34 +179,36 @@ const getTypeForSelectedCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
+  if (!matrixById.value?.matrix || firstCeil.value?.queueId) {
+    return 'loading'
+  }
+
   if (!firstCeil.value?.matrix) {
-    if (!store.state.matrixById?.matrix) {
-      return 'loading'
-    }
-    if (!firstCeil.value?.allowSniper || !partnersCount.value) {
+    if (!firstCeil.value.allowBuyClone && !firstCeil.value?.allowSniper || !firstCeil.value?.allowBuyClone && !partnersCount.value) {
       return 'disable'
     }
+  }
 
-    if (firstCeil.value.matrix?.is_booster) {
-      return 'boost'
-    }
+  if (firstCeil.value.matrix?.is_booster) {
+    return 'boost'
   }
 
   return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
 })
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
+  if (!matrixById.value?.matrix || secondCeil.value?.queueId) {
+    return 'loading'
+  }
+
   if (!secondCeil.value?.matrix) {
-    if (!store.state.matrixById?.matrix) {
-      return 'loading'
-    }
-    if (!secondCeil.value?.allowSniper || !partnersCount.value) {
+    if (!secondCeil.value?.allowSniper && !secondCeil.value.allowBuyClone || !secondCeil.value?.allowBuyClone && !partnersCount.value) {
       return 'disable'
     }
+  }
 
-    if (secondCeil.value.matrix?.is_booster) {
-      return 'boost'
-    }
+  if (secondCeil.value.matrix?.is_booster) {
+    return 'boost'
   }
 
   return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
@@ -211,9 +218,19 @@ const getPosition = (depth: number, pos: number): IPosition => {
   return { depth, pos }
 }
 
+const openMInfinityCell = () => {
+  store.dispatch('partners/getInfinityPartners', {
+      parentId: store.state.matrixById.matrix?.id,
+      isPartnerMatrix: true
+  })
+  emit('open-m-infinity-cell')
+}
+
 const openMAddPartner = (pos: IPosition) => {
   const ceil: Ceil = ceils.value[String(pos.pos)]
   if (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone) {
+    emit('select-partner', null)
+    emit('set-partner-by', 'id')
     emit('open-m-add-partner', pos)
   }
 }
