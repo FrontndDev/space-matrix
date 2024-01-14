@@ -29,7 +29,7 @@
     </div>
   </div>
   <EmptyCells
-      v-if="boostersPending.count === 0"
+      v-if="boostersPending.list?.length === 0 && littleTabID === 3 || boostersExposed.list?.length === 0 && littleTabID === 4"
       :cellsType="'boosters'"
   />
 <!--  <Pagination v-if="boostersPending.count !== 0" />-->
