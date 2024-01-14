@@ -71,7 +71,7 @@ const selectCell = (cell: Matrix) => {
   selectedCell.value = cell
 }
 
-const exposePartner = () => {
+const exposePartner = async () => {
   const myMatrix = store.state.matrixByType?.matrix
   const partnerMatrix = selectedPartner.value?.matrix
 
@@ -83,7 +83,15 @@ const exposePartner = () => {
       depth: partnerPos.value.depth,
       pos: partnerPos.value.pos
     }
-    store.dispatch('partners/exposePartner', data)
+    const response = await store.dispatch('partners/exposePartner', data)
+    if (!partnerMatrix && myMatrix) {
+      const matrixByType = store.state.matrixByType
+      setTimeout(() => {
+        if (matrixByType?.ceilsCollection) {
+          matrixByType.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = response.queueId
+        }
+      }, 3000)
+    }
     emit('close-modal')
   }
 }

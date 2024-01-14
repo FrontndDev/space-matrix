@@ -59,6 +59,7 @@ const buyBooster = async () => {
       depth: 1
     }
     const response = await store.dispatch('buyBooster', data)
+    console.log('response', response)
     const ceilsCollectionDepth = store.state.matrixByType.ceilsCollection['1']
     const ceilsCollectionPos = thisIsDreamTon9.value ? ceilsCollectionDepth['1'] : ceilsCollectionDepth['3']
     ceilsCollectionPos.queueId = response.queueId
@@ -73,6 +74,6 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-@import "_mAddPartnerInfinity.scss";
+<style scoped lang="scss">
+@import "mAddPartnerInfinity";
 </style>
