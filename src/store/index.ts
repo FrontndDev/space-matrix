@@ -17,6 +17,7 @@ import partners from "./modules/partners.ts";
 import boosters from "./modules/boosters.ts";
 import chains from "./modules/chains.ts";
 import { useMyOverlay } from "../use/useMyOverlay.ts";
+import { useShowMessage } from "../use/useShowMessage.ts";
 
 export default createStore({
     modules: {
@@ -62,7 +63,12 @@ export default createStore({
             })
         },
         async buyBooster(_: ActionContext<any, any>, data: IBuyBoosterParams) {
-            return await API.buyClone(data)
+            const response = await API.buyClone(data)
+            if (!response?.error_code) {
+                useShowMessage('green', 'Буст успешно отправлен на активацию')
+            }
+
+            return response
         }
     },
     mutations: {

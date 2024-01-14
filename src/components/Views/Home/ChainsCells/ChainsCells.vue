@@ -49,14 +49,16 @@ const tabs = reactive([
 ]);
 
 const store = useStore()
-const emit = defineEmits(['open-general-chains', 'open-m-teleport'])
+const emit = defineEmits(['open-general-chains', 'open-m-teleport', 'select-chain'])
+
+const chainsList: ComputedRef<IChainsList> = computed(() => store.state.chains.chainsList)
 
 const openGeneralChains = (id: number) => {
   store.dispatch('chains/getChainDetail', id)
+  emit('select-chain', chainsList.value?.list.find(chain => chain.id === id))
   emit('open-general-chains')
 }
 
-const chainsList: ComputedRef<IChainsList> = computed(() => store.state.chains.chainsList)
 
 </script>
 

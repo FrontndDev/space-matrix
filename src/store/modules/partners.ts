@@ -10,6 +10,7 @@ import {
   Commit
 } from "vuex";
 import { Matrix } from "../../interfaces/store.interface.ts";
+import { useShowMessage } from "../../use/useShowMessage.ts";
 
 export default {
   namespaced: true,
@@ -86,7 +87,9 @@ export default {
     },
     async exposePartner(ctx: ActionContext<any, any>, data: IExposePartnerParams) {
       const response = await API.placementExistMatrix(data)
-      console.log('ctx.rootState.selectedType.type', ctx.rootState.selectedType.type)
+      if (!response?.error_code) {
+        useShowMessage('green', 'Партнёр успешно отправлен на расстановку')
+      }
       await ctx.dispatch('getMatrixByType', ctx.rootState.selectedType.type, { root: true })
 
       return response

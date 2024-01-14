@@ -27,7 +27,10 @@
         </ChainsButton>
       </div>
     </div>
-    <CopyLink @click="useCopyLink(chainDetails.list[0].id, chainDetails.list[0])"/>
+    <CopyLink
+        name="Скопировать ссылку на цепочку"
+        @click="useCopyLink(selectedChain.id, store.state.selectedType.type, 'chainId')"
+    />
   </div>
 </template>
 
@@ -38,10 +41,15 @@ import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
 import {
   computed,
   ComputedRef,
+  inject,
+  Ref,
 } from "vue";
 import { useStore } from "vuex";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
-import { IChainDetails } from "../../../../interfaces/chains.interface.ts";
+import {
+  IChainDetails,
+  IChains
+} from "../../../../interfaces/chains.interface.ts";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
 import { useCopyLink } from "../../../../use/useCopyLink.ts";
 
@@ -53,6 +61,8 @@ const emit = defineEmits([
 ])
 
 const store = useStore()
+
+const selectedChain = inject('selectedChain') as Ref<IChains>
 
 const chainDetails: ComputedRef<IChainDetails> = computed(() => store.state.chains.chainDetails)
 

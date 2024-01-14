@@ -87,6 +87,7 @@ const exposePartner = async () => {
 
     if (!partnerMatrix && myMatrix) {
       await store.dispatch('getMatrixByType', store.state.selectedType.type)
+      await store.dispatch('partners/getPendingPartners', { isPartnerMatrix: false })
     }
     emit('close-modal')
   }
