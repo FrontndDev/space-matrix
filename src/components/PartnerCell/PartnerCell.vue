@@ -65,7 +65,6 @@ import {
 import { useGetLevel } from "../../use/useGetLevel.ts";
 import CellType from "../UI/CellType/CellType.vue";
 import { useStore } from "vuex";
-import { useShowMessage } from "../../use/useShowMessage.ts";
 import { useCopy } from "../../use/useCopy.ts";
 
 const props = defineProps({
