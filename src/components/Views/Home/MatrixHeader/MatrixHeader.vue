@@ -50,8 +50,18 @@ const route = useRoute()
 const selectType = (type: Type) => {
   store.commit('SET_SELECTED_TYPE', type)
   store.dispatch('getMatrixByType', type.type)
-  const queryId = route.query.id ? `?id=${route.query.id}` : ''
-  router.push(`${baseUrl}/${type.type}` + queryId)
+  const queryId = () => {
+    const query = route.query
+    switch (true) {
+      case !!query.id:
+        return `?id=${route.query.id}`
+      case !!query.chainId:
+        return `?chainId=${route.query.chainId}`
+      default:
+        return ''
+    }
+  }
+  router.push(`${baseUrl}/${type.type}` + queryId())
 }
 
 const selectDButton = (type: Type) => {

@@ -1,7 +1,7 @@
 <template>
   <div class="savings">
     <div class="savings__title">
-      {{ [getTypeForFirstCeil, getTypeForSecondCeil].includes('profitable') ? 'Доходные' : 'Накопительные' }}
+      {{ [getCellTypeFirstCeil, getTypeForSecondCeil].includes('profitable') ? 'Доходные' : 'Накопительные' }}
     </div>
 
     <div class="savings__partners savings__partners_mt-16">
@@ -16,11 +16,11 @@
       />
       <AddPartnerCell
           :type="getTypeForFirstCeil"
-          :cell-type="getTypeForFirstCeil"
+          :cell-type="getCellTypeFirstCeil"
           :ceil="firstCeil"
           :partners-count="partnersCount"
           v-if="!firstCeil?.matrix || firstCeil.queueId"
-          @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
+          @open-m-add-partner="openMAddPartner(getPosition(firstCeil.depth, firstCeil.pos))"
       />
 
       <!--   SECOND CEIL    -->
@@ -34,11 +34,11 @@
       />
       <AddPartnerCell
           :type="getTypeForSecondCeil"
-          :cell-type="getTypeForSecondCeil"
+          :cell-type="getCellTypeSecondCeil"
           :ceil="secondCeil"
           :partners-count="partnersCount"
           v-if="!secondCeil?.matrix || secondCeil.queueId"
-          @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
+          @open-m-add-partner="openMAddPartner(getPosition(secondCeil.depth, secondCeil.pos))"
       />
     </div>
   </div>
@@ -108,6 +108,14 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
   return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
 })
 
+const getCellTypeFirstCeil: ComputedRef<string> = computed(() => {
+  if (getTypeForFirstCeil.value === 'disable') {
+    return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
+  } else {
+    return getTypeForFirstCeil.value
+  }
+})
+
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
   if (thisIsDreamTon9.value) {
     return 'disable3'
@@ -128,6 +136,14 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
   }
 
   return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
+})
+
+const getCellTypeSecondCeil: ComputedRef<string> = computed(() => {
+  if (getTypeForSecondCeil.value === 'disable') {
+    return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
+  } else {
+    return getTypeForSecondCeil.value
+  }
 })
 
 const getPosition = (depth: number, pos: number): IPosition => {

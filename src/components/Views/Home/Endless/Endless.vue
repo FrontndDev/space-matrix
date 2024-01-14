@@ -8,7 +8,7 @@
           :type="getTypeForThirdCeil"
           :ceil="thirdCeil"
           :partners-count="partnersCount"
-          @open-m-add-partner="openMAddPartner(getPosition(1, 3))"
+          @open-m-add-partner="openMAddPartner(getPosition(thirdCeil.depth, thirdCeil.pos))"
       />
       <InfinityPartnerCard
           :ceil="thirdCeil"
@@ -68,8 +68,10 @@ const getTypeForThirdCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (!thirdCeil.value.allowSniper || !partnersCount.value && !thirdCeil.value.allowBuyClone) {
-    return 'disable'
+  if (!thirdCeil.value?.matrix) {
+    if (!thirdCeil.value?.allowSniper && !thirdCeil.value.allowBuyClone || !thirdCeil.value?.allowBuyClone && !partnersCount.value) {
+      return 'disable'
+    }
   }
 
   return 'infinity'

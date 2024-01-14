@@ -35,8 +35,6 @@ export interface IChainsList {
   list: IChains[];
 }
 
-
-
 export interface IChainDetails {
   list: Matrix[];
   price: {

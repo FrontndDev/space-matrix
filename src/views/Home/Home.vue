@@ -46,7 +46,7 @@
                 !matrixIsTemporarilyUnavailable &&
                 Object.keys(matrixByType).length
               "
-              @click="useCopyLink(matrixByType.matrix?.id ?? 0, matrixByType.matrix)"
+              @click="useCopyLink(matrixByType.matrix?.id ?? 0, matrixByType.matrix?.type ?? '')"
           />
         </div>
         <div class="home__info">
@@ -67,6 +67,7 @@
           <ChainsCells
               @open-general-chains="openModalChain(1)"
               @open-m-teleport="openModalTeleport"
+              @select-chain="selectChain"
               v-else-if="isCells === 3"
           />
         </div>
@@ -146,6 +147,7 @@ import { useRoute } from "vue-router";
 import { useCopyLink } from "../../use/useCopyLink.ts";
 import MatrixActivationInProgress from "../../components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
 import ModalConfirmPayment from "../../components/Modals/ModalConfirmPayment/ModalConfirmPayment.vue";
+import { IChains } from "../../interfaces/chains.interface.ts";
 
 const isCells = ref(1)
 
@@ -167,13 +169,18 @@ const route = useRoute()
 
 const interval: Ref<number | null> = ref(null)
 
+const selectedChain: Ref<IChains | null> = ref(null)
+
+const selectChain = (chain: IChains) => {
+  selectedChain.value = chain
+}
+
 const matrixIsInQueueForPublication: ComputedRef<boolean> = computed(() => {
   const ceilsCollection = store.state.matrixByType?.ceilsCollection?.['1']
   return ceilsCollection ? Object.values(ceilsCollection).map(ceil => !!(ceil as Ceil).queueId).includes(true) : false
 })
 
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
-
 
 watch(() => matrixIsInQueueForPublication.value, () => {
   if (matrixIsInQueueForPublication.value) {
@@ -195,6 +202,10 @@ watch(() => matrixByType.value?.in_queue, () => {
   }
 })
 
+watch(() => store.state.chains.chainsList.list?.length, () => {
+  openChainViaLink()
+})
+
 const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfTypes)
 
 const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
@@ -209,6 +220,16 @@ const selectedPartner: Ref<Ceil | null> = ref(null)
 
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
+provide('selectedChain', selectedChain)
+
+const openChainViaLink = () => {
+  const chain = store.state.chains.chainsList.list.find((chain: IChains) => chain.id === +(route.query.chainId ?? 0))
+  if (chain) {
+    store.dispatch('chains/getChainDetail', chain.id)
+    selectChain(chain)
+    openModalChain(1)
+  }
+}
 
 const openModalPartner = (num: number) => {
   toggleModalPartners.value = true
@@ -264,7 +285,8 @@ const selectPartner = async (ceil: Ceil) => {
 }
 
 onMounted(async () => {
-  if (route.query.id) {
+  const query = route.query
+  if (query.id) {
     const { data } = await store.dispatch('getMatrixById', route.query.id)
 
     // Получаем партнеров в ожидании "Матрицы партнёра"
@@ -284,6 +306,11 @@ onMounted(async () => {
 
       openModalPartner(2)
     }
+  }
+
+
+  if (query.chainId && store.state.chains.chainsList?.list?.length) {
+    openChainViaLink()
   }
 })
 </script>

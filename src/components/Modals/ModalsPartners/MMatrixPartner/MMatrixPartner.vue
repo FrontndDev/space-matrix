@@ -31,7 +31,7 @@
 
           <div class="modal-matrix-partner__savings">
             <div class="modal-matrix-partner__block-title">
-              {{ [getTypeForFirstCeil, getTypeForSecondCeil].includes('profitable') ? 'Доходные' : 'Накопительные' }}
+              {{ [getCellTypeFirstCeil, getCellTypeSecondCeil].includes('profitable') ? 'Доходные' : 'Накопительные' }}
             </div>
             <div class="savings__partners savings__partners_mt-16">
               <!--       FIRST CEIL        -->
@@ -45,7 +45,7 @@
               <AddPartnerCell
                   size="small"
                   :type="getTypeForFirstCeil"
-                  :cell-type="getTypeForFirstCeil"
+                  :cell-type="getCellTypeFirstCeil"
                   :ceil="firstCeil"
                   :partners-count="partnersCount"
                   v-if="!firstCeil?.matrix"
@@ -63,7 +63,7 @@
               <AddPartnerCell
                   size="small"
                   :type="getTypeForSecondCeil"
-                  :cell-type="getTypeForSecondCeil"
+                  :cell-type="getCellTypeSecondCeil"
                   :ceil="secondCeil"
                   :partners-count="partnersCount"
                   v-if="!secondCeil?.matrix"
@@ -83,7 +83,7 @@
           </div>
         </div>
       </div>
-      <CopyLink @click="useCopyLink(store.state.matrixById.matrix?.id, selectedPartner?.matrix)"/>
+      <CopyLink @click="useCopyLink(store.state.matrixById.matrix?.id, selectedPartner?.matrix?.type ?? '')"/>
     </div>
   </div>
 </template>
@@ -195,6 +195,14 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
   return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
 })
 
+const getCellTypeFirstCeil: ComputedRef<string> = computed(() => {
+  if (getTypeForFirstCeil.value === 'disable') {
+    return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
+  } else {
+    return getTypeForFirstCeil.value
+  }
+})
+
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
   if (!matrixById.value?.matrix || secondCeil.value?.queueId) {
     return 'loading'
@@ -211,6 +219,14 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
   }
 
   return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
+})
+
+const getCellTypeSecondCeil: ComputedRef<string> = computed(() => {
+  if (getTypeForSecondCeil.value === 'disable') {
+    return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
+  } else {
+    return getTypeForSecondCeil.value
+  }
 })
 
 const getPosition = (depth: number, pos: number): IPosition => {

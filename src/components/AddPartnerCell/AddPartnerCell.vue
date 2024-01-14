@@ -78,7 +78,7 @@ const fillReward = computed(() => {
 
   return {
     'custom': getFilteredRewards('custom')?.value.title,
-    'freeze': getFilteredRewards('freeze')?.value.amount
+    'freeze': getFilteredRewards('freeze')?.value.amount ?? getFilteredRewards('cashout')?.value.amount
   }
 })
 </script>

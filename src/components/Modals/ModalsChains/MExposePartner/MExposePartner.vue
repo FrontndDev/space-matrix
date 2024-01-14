@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="expose-partner__info">
-          <h4 class="expose-partner__info__title">Партнер переходит к вам в матрицу D5</h4>
+          <h4 class="expose-partner__info__title">Партнер переходит к вам в матрицу {{ selectedChain.end }}</h4>
           <div class="expose-partner__choice">
             <div class="expose-partner__tabs">
               <Tabs
@@ -31,7 +31,7 @@
 
             <div class="expose-partner__reward" v-if="isExposeTabs === 1">
               <div class="expose-partner__ton">
-                +1000
+                +{{ selectedChain.profit.amount }}
                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M7.08838 12.4279C7.69782 13.5452 9.30215 13.5452 9.91159 12.4279L13.6347 5.60218C14.2192 4.53069 13.4436 3.22428 12.2231 3.22428H4.77687C3.55635 3.22428 2.78082 4.53069 3.36526 5.60218L7.08838 12.4279ZM9.20578 12.0429L12.9289 5.2172C13.2211 4.68146 12.8334 4.02825 12.2231 4.02825H8.90197V12.3558C9.02376 12.2859 9.13011 12.1816 9.20578 12.0429ZM7.79418 12.0429C7.86985 12.1816 7.9762 12.2859 8.098 12.3558V4.02825H4.77687C4.16661 4.02825 3.77884 4.68146 4.07107 5.2172L7.79418 12.0429Z" fill="#29A352"/>
                 </svg>
@@ -69,7 +69,10 @@
         </div>
       </div>
     </div>
-    <CopyLink @click="useCopyLink(chainsDetails[0].id, chainsDetails[0])"/>
+    <CopyLink
+        name="Скопировать ссылку на цепочку"
+        @click="useCopyLink(selectedChain.id, store.state.selectedType.type, 'chainId')"
+    />
   </div>
 </template>
 
@@ -97,6 +100,9 @@ import {
 } from "../../../../interfaces/store.interface.ts";
 import { IExposePartnerParams } from "../../../../interfaces/partners.interface.ts";
 import { useCopyLink } from "../../../../use/useCopyLink.ts";
+import { IChains } from "../../../../interfaces/chains.interface.ts";
+
+const selectedChain = inject('selectedChain') as Ref<IChains>
 
 const tabs = reactive([
   {
