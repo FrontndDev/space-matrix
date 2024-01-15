@@ -255,12 +255,13 @@ const openModalTeleport = () => {
 
 const closeModal = () => {
   store.commit('SET_MATRIX_BY_ID', {})
+  selectedPartner.value = null
+
   toggleModalPartners.value = false
   toggleModalChains.value = false
   toggleModalNotification.value = false
   toggleModalPaymentForm.value = false
   toggleModalConfirmPayment.value = false
-  selectedPartner.value = null
   document.body.style.overflow = 'auto'
 }
 

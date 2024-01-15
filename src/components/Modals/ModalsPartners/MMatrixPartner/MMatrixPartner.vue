@@ -49,6 +49,7 @@
                   :cell-type="getCellTypeFirstCeil"
                   :ceil="firstCeil"
                   :partners-count="partnersCount"
+                  :subtitle="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone ? 'Купить BOOST' : 'Выставить партнера'"
                   v-if="!firstCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
               />
@@ -245,7 +246,7 @@ const openMInfinityCell = () => {
 const openMAddPartner = (pos: IPosition) => {
   const ceil: Ceil = ceils.value[String(pos.pos)]
   if (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone) {
-    emit('select-partner', null)
+    // emit('select-partner', null)
     emit('set-partner-by', 'id')
     emit('open-m-add-partner', pos)
   }

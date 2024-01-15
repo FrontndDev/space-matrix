@@ -1,7 +1,7 @@
 <template>
   <div class="modal-add-partner">
-    <ModalHeader @close-modal="$emit('close-modal')">
-      Выставить партнера
+    <ModalHeader @close-modal="$emit('open-m-matrix-partner')">
+      {{ !getCeil?.allowSniper && !partnersCount && getCeil?.allowBuyClone ? 'Купить BOOST' : 'Выставить партнера' }}
     </ModalHeader>
     <div class="modal-add-partner__container">
       <BuyBoostCell
@@ -47,7 +47,11 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['close-modal', 'open-partner-waiting'])
+const emit = defineEmits([
+  'close-modal',
+  'open-partner-waiting',
+  'open-m-matrix-partner',
+])
 
 const store = useStore()
 
@@ -73,7 +77,13 @@ const ceils: ComputedRef<Ceils> = computed(() => {
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 const partnerPos = inject('partnerPos') as Ref<IPosition>
 
-const getCeil: ComputedRef<Ceil> = computed(() => selectedPartner.value ?? ceils.value[String(partnerPos.value.pos)])
+const getCeil: ComputedRef<Ceil> = computed(() => {
+  if (props.selectedType === 'id') {
+    return ceils.value[String(partnerPos.value.pos)]
+  } else {
+    return selectedPartner.value ?? ceils.value[String(partnerPos.value.pos)]
+  }
+})
 
 const getCeilCumulative: ComputedRef<boolean> = computed(() =>
     !!getCeil.value.fillRevard.find(reward => reward.event === 'freeze')

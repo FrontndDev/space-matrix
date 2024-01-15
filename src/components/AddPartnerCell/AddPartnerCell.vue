@@ -19,7 +19,7 @@
 
     <div v-if="props.type == 'disable3'" class="add-partner-cell__title add-partner-cell__title_mt-8">Недоступно</div>
     <div v-else-if="props.type == 'loading'" class="add-partner-cell__title add-partner-cell__title_mt-8">Ожидайте</div>
-    <div v-else class="add-partner-cell__title add-partner-cell__title_mt-8">Выставить партнера</div>
+    <div v-else class="add-partner-cell__title add-partner-cell__title_mt-8">{{ subtitle }}</div>
 
     <div v-if="props.type == 'disable3'" class="add-partner-cell__subtitle">На этой матрице нет накопительных ячеек</div>
     <div v-else-if="props.type == 'loading'" class="add-partner-cell__subtitle">Идет загрузка...</div>
@@ -63,6 +63,10 @@ const props = defineProps({
   size: {
     type: String,
     default: '',
+  },
+  subtitle: {
+    type: String,
+    default: 'Выставить партнера',
   }
 });
 

@@ -22,6 +22,7 @@
               :selected-type="selectedType"
               @close-modal="$emit('close-modal')"
               @open-partner-waiting="$emit('open-partner-waiting')"
+              @open-m-matrix-partner="$emit('open-m-matrix-partner')"
               v-else-if="props.openModalPartners === 3"
           />
           <MAddpartnerInfinity
