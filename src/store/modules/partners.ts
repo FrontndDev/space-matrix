@@ -46,6 +46,8 @@ export default {
         filter: { level: filter }
       }
     ).then(response => {
+        if (response.data?.count === 0 && state.bigTabID === 1) commit('CHANGE_LITTLE_TAB', 1)
+
         console.log(response.data)
         // commit('CHANGE_BIG_TAB', 1)
         commit('SET_EXPOSED_PARTNERS', response.data)
