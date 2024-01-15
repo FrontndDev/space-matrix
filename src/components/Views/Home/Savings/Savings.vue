@@ -152,7 +152,7 @@ const getPosition = (depth: number, pos: number): IPosition => {
 
 const openMAddPartner = (pos: IPosition) => {
   const ceil: Ceil = ceils.value[String(pos.pos)]
-  if (!thisIsDreamTon9.value && (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone)) {
+  if (!thisIsDreamTon9.value && !ceil.queueId && (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone)) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
   }

@@ -66,6 +66,12 @@ const buyBooster = (bool: boolean) => {
   emit('buy-booster', bool)
 }
 
+
+
+// const cancel = () => {
+//   confirmPaymentType.value = ''
+// }
+
 const openPartnerWaitingChains = () => {
   buyBooster(false)
   emit('open-partner-waiting-chains')
