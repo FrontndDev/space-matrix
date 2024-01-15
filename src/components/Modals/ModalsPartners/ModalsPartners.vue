@@ -56,7 +56,6 @@ import { Ceil } from "../../../interfaces/store.interface.ts";
 import {
   inject,
   Ref,
-  ref
 } from "vue";
 
 const props = defineProps({

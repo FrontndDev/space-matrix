@@ -1,7 +1,9 @@
 <template>
   <div class="bonus-item" :class="[props.type, getWidth]">
     <div class="bonus-item__icon">
-      <img :src="getIconPath" :alt="props.type">
+      <TonIcon v-if="props.type === 'cashout'"/>
+      <BoostIcon v-if="props.type === 'boost'"/>
+      <AutoIcon v-if="props.type === 'custom'"/>
     </div>
     <div class="bonus-item__values" v-if="values.length > 1">
       <div
@@ -22,9 +24,12 @@
 </template>
 
 <script setup lang="ts">
-import TonIcon from '../../../assets/svg/bonuses/ton.svg';
-import BoostIcon from '../../../assets/svg/bonuses/boost.svg';
-import AutoIcon from '../../../assets/svg/bonuses/auto.svg';
+// @ts-ignore
+import TonIcon from '../../../assets/svg/bonuses/ton.svg?component';
+// @ts-ignore
+import BoostIcon from '../../../assets/svg/bonuses/boost.svg?component';
+// @ts-ignore
+import AutoIcon from '../../../assets/svg/bonuses/auto.svg?component';
 
 import {
   computed,
@@ -53,19 +58,6 @@ const getWidth: Ref<string> = computed(() => {
     return 'width-third'
   }
 })
-
-const getIconPath: Ref<string> = computed(() => {
-  switch (props.type) {
-    case 'cashout':
-      return TonIcon;
-    case 'boost':
-      return BoostIcon;
-    case 'custom':
-      return AutoIcon;
-    default:
-      return TonIcon;
-  }
-});
 </script>
 
 <style scoped lang="scss">

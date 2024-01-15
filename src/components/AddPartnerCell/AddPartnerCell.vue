@@ -13,7 +13,7 @@
       <Reward
           :freeze="fillReward.freeze"
           :custom="fillReward.custom"
-          v-if="!['disable2', 'disable3', 'infinity', 'loading'].includes(props.type)"
+          v-if="!['disable2', 'disable3', 'infinity', 'loading'].includes(props.type) && props.cellType !== 'infinity'"
       />
     </div>
 
