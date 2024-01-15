@@ -5,6 +5,7 @@ import {
 } from "vuex";
 
 import {
+    IBalance,
     IBuyBoosterParams,
     IMatrix,
     ListOfTypes,
@@ -31,7 +32,8 @@ export default createStore({
         listOfTypes: {} as ListOfTypes,
         matrixByType: {} as IMatrix,
         matrixById: {} as IMatrix,
-        paymentForm: null as string | null
+        paymentForm: null as string | null,
+        balance: {} as IBalance,
     },
     actions: {
         getListOfTypes({ commit }: { commit: Commit }, category = 'dream-ton') {
@@ -69,6 +71,12 @@ export default createStore({
             }
 
             return response
+        },
+        async getWallets({ commit }: { commit: Commit }) {
+            const response = await API.getBalance()
+            commit('SET_WALLETS', response.data)
+
+            return response
         }
     },
     mutations: {
@@ -89,6 +97,10 @@ export default createStore({
         },
         SET_NEW_TYPE_MATRIX(state: any, type: string) {
             state.newTypeMatrix = type
+        },
+        SET_WALLETS(state: any, wallets: IBalance) {
+            console.log('wallets', wallets)
+            state.balance = wallets
         }
     },
     getters: {

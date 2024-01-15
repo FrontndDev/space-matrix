@@ -106,3 +106,31 @@ export interface IBuyBoosterParams extends IPosition {
     matrix_id: number;
     chainMode: string;
 }
+
+export interface IWallet {
+    id: string;
+    currency: string;
+    amount: number;
+    amount_string: string;
+    address: string | null;
+    type: string;
+}
+
+export interface IFeePercent {
+    USD: Record<string, never>;
+    TON: Record<string, never>;
+    JETON: Record<string, never>;
+    USDT: Record<string, never>;
+}
+
+export interface IMinWithdrawal {
+    USD: number;
+    TON: number;
+    USDT: number;
+}
+
+export interface IBalance {
+    wallets: IWallet[];
+    min_withdrawal: IMinWithdrawal;
+    fee_percent: IFeePercent;
+}

@@ -1,22 +1,32 @@
 <template>
   <div class="modal-add-partner">
-    <ModalHeader @close-modal="getEmitForModalHeader">
-      {{ !getCeil?.allowSniper && !partnersCount && getCeil?.allowBuyClone ? 'Купить BOOST' : 'Выставить партнера' }}
-    </ModalHeader>
-    <div class="modal-add-partner__container">
-      <BuyBoostCell
-          :price="getPrice"
-          @click="buyBooster"
-          v-if="getCeil.allowBuyClone"
-      />
-      <AddPartnerCell
-          :type="getCeilCumulative ? 'cumulative' : 'profitable'"
-          :ceil="getCeil"
-          :partners-count="partnersCount"
-          @click="$emit('open-partner-waiting')"
-          v-if="getCeil.allowSniper && partnersCount"
-      />
-    </div>
+    <template v-if="!confirmPaymentType">
+      <ModalHeader @close-modal="getEmitForModalHeader">
+        {{ !getCeil?.allowSniper && !partnersCount && getCeil?.allowBuyClone ? 'Купить BOOST' : 'Выставить партнера' }}
+      </ModalHeader>
+      <div class="modal-add-partner__container">
+        <BuyBoostCell
+            :price="getPrice"
+            @click="buyBooster"
+            v-if="getCeil.allowBuyClone"
+        />
+        <AddPartnerCell
+            :type="getCeilCumulative ? 'cumulative' : 'profitable'"
+            :ceil="getCeil"
+            :partners-count="partnersCount"
+            @click="$emit('open-partner-waiting')"
+            v-if="getCeil.allowSniper && partnersCount"
+        />
+      </div>
+    </template>
+    <MConfirmPayment
+        :result="confirmPaymentType"
+        v-if="confirmPaymentType"
+        @cancel="cancel"
+        @confirm="confirm"
+        @close-modal="confirmPaymentType = ''"
+        @back="confirmPaymentType = ''"
+    />
   </div>
 </template>
 
@@ -30,15 +40,20 @@ import {
   ComputedRef,
   inject,
   onMounted,
+  ref,
   Ref
 } from "vue";
 import {
   Ceil,
   Ceils,
+  IBalance,
   IBuyBoosterParams,
-  IMatrix
+  IMatrix,
+  IWallet,
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
+import MConfirmPayment from "../../ModalConfirmPayment/MConfirmPayment/MConfirmPayment.vue";
+import router from "../../../../router";
 
 const props = defineProps({
   selectedType: {
@@ -53,11 +68,20 @@ const emit = defineEmits([
   'open-m-matrix-partner',
 ])
 
+const confirmPaymentType: Ref<string> = ref('')
+// failure, success
+
 const getEmitForModalHeader = () => {
   props.selectedType === 'id' ? emit('open-m-matrix-partner') : emit('close-modal')
 }
 
+// const mConfirmPayment = () => {
+//
+// }
+
 const store = useStore()
+
+const balance: ComputedRef<IBalance> = computed(() => store.state.balance)
 
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
@@ -102,24 +126,55 @@ const partnersCount: ComputedRef<number> = computed(() => {
 })
 
 const buyBooster = async () => {
+  await store.dispatch('getWallets')
   const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
 
-  if (matrix?.matrix?.id) {
-    // @ts-ignore
-    const data: IBuyBoosterParams = {
-      matrix_id: +matrix.matrix.id,
-      pos: partnerPos.value.pos,
-      depth: partnerPos.value.depth
-    }
-    await store.dispatch('buyBooster', data)
+  const wallet = balance.value.wallets
+      .filter(wallet => wallet.type === '0')
+      .find(wallet => wallet.currency === matrix.matrixConfig.currency) as IWallet
 
-    if (props.selectedType === 'id') {
-      await store.dispatch('getMatrixById', matrixById.value.matrix?.id)
-    } else {
-      await store.dispatch('getMatrixByType', store.state.selectedType.type)
-    }
-    emit('close-modal')
+  if (wallet.amount <= getPrice.value) {
+    confirmPaymentType.value = 'success'
+  } else {
+    confirmPaymentType.value = 'failure'
   }
+}
+
+const confirm = async () => {
+  switch (confirmPaymentType.value) {
+    case 'success':
+      const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
+
+      if (matrix?.matrix?.id) {
+        // @ts-ignore
+        const data: IBuyBoosterParams = {
+          matrix_id: +matrix.matrix.id,
+          pos: partnerPos.value.pos,
+          depth: partnerPos.value.depth
+        }
+        await store.dispatch('buyBooster', data)
+
+        if (props.selectedType === 'id') {
+          await store.dispatch('getMatrixById', matrixById.value.matrix?.id)
+        } else {
+          await store.dispatch('getMatrixByType', store.state.selectedType.type)
+        }
+        emit('close-modal')
+      }
+      break;
+    case 'failure':
+      await router.push('/app/wallet')
+      emit('close-modal')
+      break;
+    default:
+      break;
+  }
+
+  confirmPaymentType.value = ''
+}
+
+const cancel = () => {
+  confirmPaymentType.value = ''
 }
 
 onMounted(() => {

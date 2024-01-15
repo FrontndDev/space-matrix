@@ -45,6 +45,10 @@ export async function getChainDetail(id: number) {
   return getAsync(`/api/matrix/chain-details/${id}`)
 }
 
+export async function getBalance() {
+  return getAsync('/api/wallet/balance')
+}
+
 // POST
 
 export async function filterOfActivatedMatrix({ matrixType, matrixFilterUserId, matrixFilterPageId, filter }: any) {

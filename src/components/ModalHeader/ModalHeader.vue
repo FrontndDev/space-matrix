@@ -60,7 +60,8 @@ const emit = defineEmits([
   'open-m-replace-partner',
   'open-change-partner',
   'close-modal',
-  'open-m-add-partner'
+  'open-m-add-partner',
+  'back',
 ])
 
 const openHeader = () => {
@@ -68,6 +69,7 @@ const openHeader = () => {
   emit('open-general-chains')
   emit('open-m-replace-partner')
   emit('open-change-partner')
+  emit('back')
 }
 
 const closeModal = () => {
