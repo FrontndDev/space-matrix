@@ -36,7 +36,10 @@
               v-else-if="props.openModalPartners === 5"
           />
         </div>
-        <div @click="$emit('close-modal')" class="modal__overlay"/>
+        <div
+            class="modal__overlay"
+            @click="getEmitForModalOverlay"
+        />
       </div>
     </transition>
   </Teleport>
@@ -51,6 +54,7 @@ import MAddpartnerInfinity from "./MAddPartnerInfinity/MAddpartnerInfinity.vue";
 import { IPosition } from "../../../interfaces/partners.interface.ts";
 import { Ceil } from "../../../interfaces/store.interface.ts";
 import {
+  inject,
   Ref,
   ref
 } from "vue";
@@ -73,10 +77,15 @@ const emit = defineEmits([
   'set-position-for-partner',
   'open-partner-waiting',
   'select-partner',
+  'set-partner-by',
   'close-modal',
 ])
 
-const selectedType: Ref<string> = ref('type')
+const selectedType = inject('selectedType') as Ref<string>
+
+const getEmitForModalOverlay = () => {
+  props.openModalPartners === 3 && selectedType.value === 'id' ? emit('open-m-matrix-partner') : emit('close-modal')
+}
 
 const selectPartner = (selectedCeil: Ceil) => {
   emit('select-partner', selectedCeil)
@@ -84,7 +93,7 @@ const selectPartner = (selectedCeil: Ceil) => {
 
 const setPartnerBy = (type: string) => {
   // type, id
-  selectedType.value = type
+  emit('set-partner-by', type)
 }
 
 const openMAddPartner = (pos: IPosition) => {
@@ -93,6 +102,6 @@ const openMAddPartner = (pos: IPosition) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 @import "modalsPartners";
 </style>

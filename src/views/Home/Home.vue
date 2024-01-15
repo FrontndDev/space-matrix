@@ -82,6 +82,7 @@
         @open-partner-waiting="openModalPartner(5)"
         @close-modal="closeModal"
 
+        @set-partner-by="setPartnerBy"
         @select-partner="selectPartner"
         @set-position-for-partner="setPositionForPartner"
     />
@@ -170,6 +171,11 @@ const route = useRoute()
 const interval: Ref<number | null> = ref(null)
 
 const selectedChain: Ref<IChains | null> = ref(null)
+const selectedType: Ref<string> = ref('type')
+
+const setPartnerBy = (type: string) => {
+  selectedType.value = type
+}
 
 const selectChain = (chain: IChains) => {
   selectedChain.value = chain
@@ -221,6 +227,7 @@ const selectedPartner: Ref<Ceil | null> = ref(null)
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
 provide('selectedChain', selectedChain)
+provide('selectedType', selectedType)
 
 const openChainViaLink = () => {
   const chain = store.state.chains.chainsList.list.find((chain: IChains) => chain.id === +(route.query.chainId ?? 0))
@@ -256,6 +263,7 @@ const openModalTeleport = () => {
 const closeModal = () => {
   store.commit('SET_MATRIX_BY_ID', {})
   selectedPartner.value = null
+  selectedType.value = 'type'
 
   toggleModalPartners.value = false
   toggleModalChains.value = false

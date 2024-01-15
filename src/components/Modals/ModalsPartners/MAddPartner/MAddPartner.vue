@@ -1,6 +1,6 @@
 <template>
   <div class="modal-add-partner">
-    <ModalHeader @close-modal="$emit('open-m-matrix-partner')">
+    <ModalHeader @close-modal="getEmitForModalHeader">
       {{ !getCeil?.allowSniper && !partnersCount && getCeil?.allowBuyClone ? 'Купить BOOST' : 'Выставить партнера' }}
     </ModalHeader>
     <div class="modal-add-partner__container">
@@ -52,6 +52,10 @@ const emit = defineEmits([
   'open-partner-waiting',
   'open-m-matrix-partner',
 ])
+
+const getEmitForModalHeader = () => {
+  props.selectedType === 'id' ? emit('open-m-matrix-partner') : emit('close-modal')
+}
 
 const store = useStore()
 
