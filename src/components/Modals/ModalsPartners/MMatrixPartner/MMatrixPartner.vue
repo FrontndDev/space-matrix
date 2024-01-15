@@ -180,6 +180,10 @@ const getTypeForSelectedCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
+  if (thisIsDreamTon9.value) {
+    return 'disable3'
+  }
+
   if (!matrixById.value?.matrix || firstCeil.value?.queueId) {
     return 'loading'
   }
@@ -206,6 +210,10 @@ const getCellTypeFirstCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
+  if (thisIsDreamTon9.value) {
+    return 'disable3'
+  }
+
   if (!matrixById.value?.matrix || secondCeil.value?.queueId) {
     return 'loading'
   }
