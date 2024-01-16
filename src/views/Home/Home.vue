@@ -215,7 +215,8 @@ const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfT
 
 const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
   const teamOpened = listOfTypes.value.teamOpened
-  return teamOpened ? Object.keys(teamOpened).includes(route.params.type as string) : false
+  const key: string | undefined = Object.keys(teamOpened)?.find(type => route.params.type === type)
+  return key ? !!teamOpened?.[key] : false
 })
 
 
