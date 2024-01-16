@@ -21,8 +21,18 @@
       </svg>
     </template>
     <template v-if="!['boost', 'chains-boost'].includes(props.type) && props.cellType !== 'circle-avatar'">
-      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus?.['1'] === 1, 'dashed-red': props.binstatus?.['1'] === 2 }"><span></span></div>
-      <div class="partner-type__circle" :class="{ 'fill-blue': props.binstatus?.['2'] === 1, 'dashed-red': props.binstatus?.['2'] === 2 }"><span></span></div>
+      <div
+          class="partner-type__circle"
+          :class="[getCircleFill(props.binstatus?.['1']), getCircleFill(props.binstatus?.['1'])]"
+      >
+        <span></span>
+      </div>
+      <div
+          class="partner-type__circle"
+          :class="[getCircleFill(props.binstatus?.['2']), getCircleFill(props.binstatus?.['2'])]"
+      >
+        <span></span>
+      </div>
 <!--      классы => ( fill-green, fill-orange, fill-blue, dashed-red, dashed-brown, dashed-mint  )  -->
 <!--      В span передовать цифру при необходимости-->
     </template>
@@ -45,9 +55,22 @@ const props = defineProps({
     default: ''
     //chains-boost,
   }
-
-
 });
+
+const getCircleFill = (binstatus) => {
+  switch (binstatus) {
+    case 1:
+      switch (props.type) {
+        case 'cumulative':
+          return 'fill-blue'
+        case 'profitable':
+          return 'fill-green'
+      }
+      break;
+    case 2:
+      return 'dashed-red'
+  }
+}
 </script>
 
 <style scoped lang="scss">
