@@ -39,5 +39,8 @@ export default {
     SET_CHAIN_DETAIL(state: any, chainDetails: any) {
       state.chainDetails = chainDetails
     },
+    SET_PAGE_ID_CHAINS(state: any, pageIdChains: number) {
+      state.pageIdChains = pageIdChains
+    }
   },
 }

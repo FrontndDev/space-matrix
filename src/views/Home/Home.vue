@@ -324,9 +324,6 @@ onMounted(async () => {
   if (query.chainId && store.state.chains.chainsList?.list?.length) {
     openChainViaLink()
   }
-
-  // TODO УДАЛИТЬ ПРИ ЗАЛИВКЕ НА ПРОД!!!
-  // await store.dispatch('getWallets')
 })
 </script>
 

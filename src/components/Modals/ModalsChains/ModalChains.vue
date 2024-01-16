@@ -48,7 +48,7 @@
               @buy-booster="buyBooster"
           />
         </div>
-        <div @click="emit('close-modal')" class="modal__overlay" />
+        <div class="modal__overlay" @click="emit('close-modal')"/>
       </div>
     </transition>
   </Teleport>
