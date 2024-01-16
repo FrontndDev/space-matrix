@@ -1,7 +1,8 @@
 <template>
   <Teleport to="body">
     <transition name="modal" class="modal">
-      <div v-if="props.toggleModalConfirmPayment" class="modal__container">
+      <div  class="modal__container">\
+<!--        v-if="props.toggleModalConfirmPayment"-->
         <div class="modal__content">
           <MConfirmPayment :result="props.result"/>
           <div @click="$emit('close-modal')" class="modal__overlay"></div>
