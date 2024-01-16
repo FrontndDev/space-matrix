@@ -49,7 +49,7 @@
                   :cell-type="getCellTypeFirstCeil"
                   :ceil="firstCeil"
                   :partners-count="partnersCount"
-                  :subtitle="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
+                  :title="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   v-if="!firstCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
               />
@@ -68,7 +68,7 @@
                   :cell-type="getCellTypeSecondCeil"
                   :ceil="secondCeil"
                   :partners-count="partnersCount"
-                  :subtitle="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
+                  :title="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   v-if="!secondCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
               />
@@ -193,10 +193,6 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     if (!firstCeil.value?.allowBuyClone && !firstCeil.value?.allowSniper) {
       return 'disable3'
     }
-
-    if (!firstCeil.value.allowBuyClone && !firstCeil.value?.allowSniper || !firstCeil.value?.allowBuyClone && !partnersCount.value) {
-      return 'disable'
-    }
   }
 
   if (firstCeil.value.matrix?.is_booster) {
@@ -226,10 +222,6 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
   if (!secondCeil.value?.matrix) {
     if (!secondCeil.value?.allowBuyClone && !secondCeil.value?.allowSniper) {
       return 'disable3'
-    }
-
-    if (!secondCeil.value?.allowSniper && !secondCeil.value.allowBuyClone || !secondCeil.value?.allowBuyClone && !partnersCount.value) {
-      return 'disable'
     }
   }
 

@@ -22,18 +22,19 @@
     <div v-else-if="props.type === 'disable'" class="add-partner-cell__title add-partner-cell__title_mt-8">Недоступно</div>
     <div
         class="add-partner-cell__title add-partner-cell__title_mt-8"
-        v-html="subtitle"
+        v-html="props.title"
         v-else
     />
 
     <div v-if="props.type === 'disable3'" class="add-partner-cell__subtitle">На этой матрице нет накопительных ячеек</div>
     <div v-else-if="props.type === 'loading'" class="add-partner-cell__subtitle">Идет загрузка...</div>
-    <div v-else-if="props.type === 'disable'" class="add-partner-cell__subtitle">Заполните левую ячейку</div>
+    <div v-else-if="props.type === 'disable'" class="add-partner-cell__subtitle">{{ props.subtitle }}</div>
     <div v-else class="add-partner-cell__subtitle">Доступно ({{ props.partnersCount }})</div>
 
     <CellType
         :size="props.size"
         :cell-type="props.cellType"
+        :type="props.type"
         v-if="!['disable2', 'disable3'].includes(props.type) && props.cellType"
     />
   </div>
@@ -70,9 +71,13 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  subtitle: {
+  title: {
     type: String,
     default: 'Выставить партнера',
+  },
+  subtitle: {
+    type: String,
+    default: 'Заполните левую ячейку'
   }
 });
 
