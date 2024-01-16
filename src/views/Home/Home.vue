@@ -6,7 +6,7 @@
           <MatrixHeader style="grid-area: header;"/>
 
           <template v-if="Object.keys(matrixByType).length">
-            <div class="home__matrices-inner" v-if="!matrixByType?.ctaText">
+            <div class="home__matrices-inner" v-if="!matrixByType?.ctaText && !matrixIsTemporarilyUnavailable">
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
                   @open-m-add-partner="openModalPartner(3)"
