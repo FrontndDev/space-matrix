@@ -130,10 +130,10 @@ const buyBooster = async () => {
   const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
 
   const wallet = balance.value.wallets
-      .filter(wallet => wallet.type === '0')
+      .filter(wallet => wallet.type === 0)
       .find(wallet => wallet.currency === matrix.matrixConfig.currency) as IWallet
 
-  if (wallet.amount <= getPrice.value) {
+  if (wallet.amount >= getPrice.value) {
     confirmPaymentType.value = 'success'
   } else {
     confirmPaymentType.value = 'failure'

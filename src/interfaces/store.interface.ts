@@ -113,7 +113,7 @@ export interface IWallet {
     amount: number;
     amount_string: string;
     address: string | null;
-    type: string;
+    type: string | number;
 }
 
 export interface IFeePercent {

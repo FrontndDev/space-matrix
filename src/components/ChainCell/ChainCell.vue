@@ -28,6 +28,7 @@
       />
     </div>
     <SmallCellType
+        v-if="countLinks && countLinks > 1"
         :cellType="props.type"
         :countLinks="countLinks"
     />
