@@ -3,8 +3,10 @@ import {
 } from "./store.interface.ts";
 
 export interface IPartners {
-    count: number;
+    currentPage: number;
     list: Matrix[];
+    totalCount: number;
+    totalPages: number;
 }
 
 export interface IGetPendingBoostersParams {

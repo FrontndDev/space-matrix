@@ -81,12 +81,12 @@ const tabs = reactive([
   {
     id: 3,
     name: 'В ожидании',
-    value: computed(() => boostersPending.value.count)
+    value: computed(() => boostersPending.value.totalCount)
   },
   {
     id: 4,
     name: 'Выставленные',
-    value: computed(() => boostersExposed.value.count)
+    value: computed(() => boostersExposed.value.totalCount)
   },
 ]);
 

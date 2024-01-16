@@ -41,7 +41,7 @@ const store = useStore()
 
 const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisIsDreamTon9)
 
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 
 const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection['1'])
 const thirdCeil: Ref<Ceil> = computed(() =>

@@ -131,7 +131,7 @@ const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisI
 
 const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
 
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.count ?? 0)
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.totalCount ?? 0)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
 

@@ -45,7 +45,7 @@ const emit = defineEmits([
 const store = useStore()
 
 const chainsDetails: ComputedRef<IChainDetails> = computed(() => store.state.chains.chainDetails)
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 const boostPrice: ComputedRef<number> = computed(() => chainsDetails.value.price.amount)
 
 const getCeil: ComputedRef<Ceil> = computed(() => {

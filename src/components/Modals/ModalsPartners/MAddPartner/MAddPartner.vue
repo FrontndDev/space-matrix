@@ -137,9 +137,9 @@ const getCeilCumulative: ComputedRef<boolean> = computed(() =>
 
 const partnersCount: ComputedRef<number> = computed(() => {
   if (selectedPartner.value) {
-    return store.state.partners.partnersPendingSecond.count
+    return store.state.partners.partnersPendingSecond.totalCount
   } else {
-    return store.state.partners.partnersPending.count
+    return store.state.partners.partnersPending.totalCount
   }
 })
 

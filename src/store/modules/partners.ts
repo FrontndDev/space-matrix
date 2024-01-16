@@ -46,7 +46,7 @@ export default {
         filter: { level: filter }
       }
     ).then(response => {
-        if (response.data?.count === 0 && state.bigTabID === 1) commit('CHANGE_LITTLE_TAB', 1)
+        if (response.data?.totalCount === 0 && state.bigTabID === 1) commit('CHANGE_LITTLE_TAB', 1)
 
         console.log(response.data)
         // commit('CHANGE_BIG_TAB', 1)
@@ -68,7 +68,7 @@ export default {
           filter: { pending: 1, level: filter }
         }
       ).then(response => {
-        if (response.data?.count === 0 && state.bigTabID === 1) commit('CHANGE_LITTLE_TAB', 2)
+        if (response.data?.totalCount === 0 && state.bigTabID === 1) commit('CHANGE_LITTLE_TAB', 2)
 
         if (!isPartnerMatrix) {
           commit('SET_PENDING_PARTNERS', response.data)
@@ -114,7 +114,7 @@ export default {
       state.bigTabID = id
       switch (id) {
         case 1:
-          state.partnersPending.count === 0 ? state.littleTabID = 2 : state.littleTabID = 1
+          state.partnersPending.totalCount === 0 ? state.littleTabID = 2 : state.littleTabID = 1
           break;
         case 2:
           state.countPendingBoosters === 0 ? state.littleTabID = 4 : state.littleTabID = 3

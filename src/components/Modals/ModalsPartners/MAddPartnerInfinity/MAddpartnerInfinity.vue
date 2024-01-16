@@ -48,7 +48,7 @@ const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixByType?.ceils
 const thirdCeil: ComputedRef<Ceil> = computed(() =>
     thisIsDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['3']
 )
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 
 const buyBooster = async () => {
   if (matrixByType.value?.matrix?.id) {
