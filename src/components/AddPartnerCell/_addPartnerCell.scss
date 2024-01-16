@@ -109,9 +109,9 @@
     text-align: center;
   }
 
-  &.disable .add-partner-cell__title {
-    color: $text-base-secondary;
-  }
+  //&.disable .add-partner-cell__title {
+  //  color: $text-base-secondary;
+  //}
 
   &.loading {
     .cell-type {
