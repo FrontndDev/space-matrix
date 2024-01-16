@@ -102,11 +102,11 @@
         :toggleModalPaymentForm="toggleModalPaymentForm"
         @close-modal="closeModal"
     />
-    <ModalConfirmPayment
-        :toggleModalConfirmPayment="toggleModalConfirmPayment"
-        :result="resultModalConfirmPayment"
-        @close-modal="closeModal"
-    />
+<!--    <ModalConfirmPayment-->
+<!--        :toggleModalConfirmPayment="toggleModalConfirmPayment"-->
+<!--        :result="resultModalConfirmPayment"-->
+<!--        @close-modal="closeModal"-->
+<!--    />-->
   </div>
 </template>
 
@@ -146,7 +146,7 @@ import {
 import { useRoute } from "vue-router";
 import { useCopyLink } from "../../use/useCopyLink.ts";
 import MatrixActivationInProgress from "../../components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
-import ModalConfirmPayment from "../../components/Modals/ModalConfirmPayment/ModalConfirmPayment.vue";
+// import ModalConfirmPayment from "../../components/Modals/ModalConfirmPayment/ModalConfirmPayment.vue";
 import { IChains } from "../../interfaces/chains.interface.ts";
 
 const isCells = ref(1)
@@ -162,7 +162,7 @@ const toggleModalNotification = ref(false)
 const toggleModalPaymentForm = ref(false)
 
 const toggleModalConfirmPayment = ref(false)
-const resultModalConfirmPayment = ref('failure')
+// const resultModalConfirmPayment = ref('failure')
 
 const store = useStore()
 const route = useRoute()
