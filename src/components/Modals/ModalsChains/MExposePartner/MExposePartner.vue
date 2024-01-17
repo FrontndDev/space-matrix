@@ -14,12 +14,16 @@
             <SmallCell
                 type="profitable"
                 :show-cell-type="false"
+                :show-partner-type="false"
                 :cell="ceil"
             />
           </div>
         </div>
         <div class="expose-partner__info">
-          <h4 class="expose-partner__info__title">Партнер переходит к вам в матрицу {{ selectedChain.end }}</h4>
+          <div class="expose-partner__info-text">
+            <div class="expose-partner__info-title">Партнер переходит к вам в матрицу {{ selectedChain.end }}</div>
+            <div class="expose-partner__info-subtitle">Куда выставить партнера?</div>
+          </div>
           <div class="expose-partner__choice">
             <div class="expose-partner__tabs">
               <Tabs
@@ -36,7 +40,7 @@
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M7.08838 12.4279C7.69782 13.5452 9.30215 13.5452 9.91159 12.4279L13.6347 5.60218C14.2192 4.53069 13.4436 3.22428 12.2231 3.22428H4.77687C3.55635 3.22428 2.78082 4.53069 3.36526 5.60218L7.08838 12.4279ZM9.20578 12.0429L12.9289 5.2172C13.2211 4.68146 12.8334 4.02825 12.2231 4.02825H8.90197V12.3558C9.02376 12.2859 9.13011 12.1816 9.20578 12.0429ZM7.79418 12.0429C7.86985 12.1816 7.9762 12.2859 8.098 12.3558V4.02825H4.77687C4.16661 4.02825 3.77884 4.68146 4.07107 5.2172L7.79418 12.0429Z" fill="#29A352"/>
                 </svg>
               </div>
-              <div class="expose-partner__bonus">
+              <div class="expose-partner__bonus" :class="{ 'without-lb': !lineBonus }">
                 <ExposeBonusItem
                     type="auto"
                     :rewards="[lineBonus]"

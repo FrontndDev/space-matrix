@@ -35,8 +35,17 @@
     gap: 16px;
     width: 100%;
 
-    &__title {
+    &-text {
+      @include flexbox(column, center, center);
+      row-gap: 8px;
+    }
+
+    &-title {
       @include get-font(16px, 700, 150%);
+    }
+
+    &-subtitle {
+      @include get-font(14px, 500, 20px, $text-base-secondary)
     }
 
     & button {
@@ -77,6 +86,10 @@
     @include flexbox(row);
     gap: 8px;
     width: 360px;
+
+    &.without-lb {
+      width: fit-content;
+    }
   }
 
   &__wait-list {
@@ -111,7 +124,7 @@
     &__info {
       gap: 12px;
 
-      &__title {
+      &-title {
         @include get-font(16px, 700, 150%);
       }
 

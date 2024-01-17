@@ -37,13 +37,13 @@
           :cellType="props.cellType"
           :type="props.type"
           @click="$emit('open-m-matrix-partner')"
-          v-if="props.cellType && props.type"
+          v-if="props.cellType && props.type && props.showPartnerType"
       />
     </div>
     <SmallCellType
         :cellType="props.type"
         :state="props.state"
-        v-if="props.type && showCellType"
+        v-if="props.type && props.showCellType"
     />
   </div>
 </template>
@@ -82,6 +82,10 @@ const props = defineProps({
   state: {
     type: String,
     default: 'exhibited'
+  },
+  showPartnerType: {
+    type: Boolean,
+    default: true,
   },
   showCellType: {
     type: Boolean,
