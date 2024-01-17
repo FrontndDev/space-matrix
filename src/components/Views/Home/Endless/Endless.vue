@@ -72,7 +72,7 @@ const getTypeForThirdCeil: ComputedRef<string> = computed(() => {
 
   if (!thirdCeil.value?.matrix) {
     if (!thirdCeil.value?.allowBuyClone && !thirdCeil.value?.allowSniper) {
-      return 'disable3'
+      return 'disable'
     }
   }
 

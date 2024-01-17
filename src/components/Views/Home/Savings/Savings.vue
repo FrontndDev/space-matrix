@@ -95,12 +95,6 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (!firstCeil.value?.matrix) {
-    if (!firstCeil.value?.allowBuyClone && !firstCeil.value?.allowSniper) {
-      return 'disable3'
-    }
-  }
-
   if (firstCeil.value?.matrix?.is_booster) {
     return 'boost'
   }
@@ -125,14 +119,8 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (!secondCeil.value?.matrix) {
-    if (!firstCeil.value?.matrix) {
-      return 'disable'
-    }
-
-    if (!secondCeil.value?.allowBuyClone && !secondCeil.value?.allowSniper) {
-      return 'disable3'
-    }
+  if (!secondCeil.value?.matrix && !firstCeil.value?.matrix) {
+    return 'disable'
   }
 
   if (secondCeil.value?.matrix?.is_booster) {

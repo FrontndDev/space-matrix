@@ -5,6 +5,7 @@
           type="little"
           :cells="true"
           :tabs="tabs"
+          @toggle-expose-tabs="selectTab"
       />
     </div>
     <div class="partners-cells__container">
@@ -105,9 +106,9 @@ const selectPage = (page: number) => {
   }
 }
 
-watch(() => littleTabID.value, () => {
+const selectTab = () => {
   selectPage(1)
-})
+}
 
 const openMMatrixPartner = (cell: Matrix) => {
   const selectedPartner = {
