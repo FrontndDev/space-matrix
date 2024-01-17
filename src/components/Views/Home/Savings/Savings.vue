@@ -126,12 +126,12 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
   }
 
   if (!secondCeil.value?.matrix) {
-    if (!secondCeil.value?.allowBuyClone && !secondCeil.value?.allowSniper) {
-      return 'disable3'
-    }
-
     if (!firstCeil.value?.matrix) {
       return 'disable'
+    }
+
+    if (!secondCeil.value?.allowBuyClone && !secondCeil.value?.allowSniper) {
+      return 'disable3'
     }
   }
 
