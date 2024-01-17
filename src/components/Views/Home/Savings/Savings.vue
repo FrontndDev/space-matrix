@@ -68,7 +68,7 @@ const emit = defineEmits([
 
 const store = useStore()
 
-const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisIsDreamTon9)
+const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.onlyInfinityCell)
 
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 
@@ -76,7 +76,7 @@ const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixByType?.ceils
 
 const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() =>
-    thisIsDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['2']
+    onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['2']
 )
 
 const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
@@ -87,7 +87,7 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
 )
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
-  if (thisIsDreamTon9.value) {
+  if (onlyInfinityCell.value) {
     return 'disable3'
   }
 
@@ -111,7 +111,7 @@ const getCellTypeFirstCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
-  if (thisIsDreamTon9.value) {
+  if (onlyInfinityCell.value) {
     return 'disable3'
   }
 
@@ -144,7 +144,7 @@ const getPosition = (depth: number, pos: number): IPosition => {
 
 const openMAddPartner = (pos: IPosition) => {
   const ceil: Ceil = ceils.value[String(pos.pos)]
-  if (!thisIsDreamTon9.value && !ceil.queueId && (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone)) {
+  if (!onlyInfinityCell.value && !ceil.queueId && (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone)) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
   }

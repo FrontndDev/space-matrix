@@ -106,6 +106,11 @@ export default createStore({
     getters: {
         thisIsDreamTon9(state): boolean {
             return state.selectedType.type === 'dream-ton_9'
+        },
+        onlyInfinityCell(state) {
+            const objCells = state.matrixByType?.ceilsCollection?.['1']
+            const cells = objCells ? Object.values(objCells) : []
+            return cells.length === 1 && cells[0]?.isInfinity
         }
     }
 });

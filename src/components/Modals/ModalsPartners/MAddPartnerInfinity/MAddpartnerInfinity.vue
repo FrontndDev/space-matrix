@@ -39,14 +39,14 @@ const emit = defineEmits(['close-modal', 'open-partner-waiting'])
 
 const store = useStore()
 
-const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisIsDreamTon9)
+const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.onlyInfinityCell)
 
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
 
 const thirdCeil: ComputedRef<Ceil> = computed(() =>
-    thisIsDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['3']
+    onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['3']
 )
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 
@@ -61,7 +61,7 @@ const buyBooster = async () => {
     const response = await store.dispatch('buyBooster', data)
     console.log('response', response)
     const ceilsCollectionDepth = store.state.matrixByType.ceilsCollection['1']
-    const ceilsCollectionPos = thisIsDreamTon9.value ? ceilsCollectionDepth['1'] : ceilsCollectionDepth['3']
+    const ceilsCollectionPos = onlyInfinityCell.value ? ceilsCollectionDepth['1'] : ceilsCollectionDepth['3']
     ceilsCollectionPos.queueId = response.queueId
     emit('close-modal')
   }
