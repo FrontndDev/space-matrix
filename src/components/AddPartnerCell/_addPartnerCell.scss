@@ -28,7 +28,8 @@
 
     &.disable,
     &.disable2,
-    &.disable3 {
+    &.disable3,
+    &.loading {
       background: $bg-base-light;
       cursor: auto;
 
@@ -43,12 +44,8 @@
       }
     }
 
-    &.loading {
-      background: $bg-base-light;
-
-      & .reward {
-        display: none;
-      }
+    &.loading .reward {
+      display: none;
     }
 
     &.profitable {

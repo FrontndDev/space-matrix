@@ -87,6 +87,7 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
 )
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
+  return 'loading'
   if (onlyInfinityCell.value) {
     return 'disable3'
   }
