@@ -62,6 +62,7 @@ const getCircleFill = (binstatus: number) => {
     case 1:
       switch (props.type) {
         case 'cumulative':
+        case 'infinity':
           return 'fill-blue'
         case 'profitable':
           return 'fill-green'
