@@ -49,7 +49,7 @@
                   :cell-type="getCellTypeFirstCeil"
                   :ceil="firstCeil"
                   :partners-count="partnersCount"
-                  :subtitle="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone ? 'Купить BOOST' : 'Выставить партнера'"
+                  :title="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   v-if="!firstCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
               />
@@ -68,6 +68,7 @@
                   :cell-type="getCellTypeSecondCeil"
                   :ceil="secondCeil"
                   :partners-count="partnersCount"
+                  :title="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   v-if="!secondCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
               />
@@ -130,7 +131,7 @@ const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisI
 
 const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
 
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.count ?? 0)
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.totalCount ?? 0)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
 
@@ -189,8 +190,8 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
   }
 
   if (!firstCeil.value?.matrix) {
-    if (!firstCeil.value.allowBuyClone && !firstCeil.value?.allowSniper || !firstCeil.value?.allowBuyClone && !partnersCount.value) {
-      return 'disable'
+    if (!firstCeil.value?.allowBuyClone && !firstCeil.value?.allowSniper) {
+      return 'disable3'
     }
   }
 
@@ -219,8 +220,8 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
   }
 
   if (!secondCeil.value?.matrix) {
-    if (!secondCeil.value?.allowSniper && !secondCeil.value.allowBuyClone || !secondCeil.value?.allowBuyClone && !partnersCount.value) {
-      return 'disable'
+    if (!secondCeil.value?.allowBuyClone && !secondCeil.value?.allowSniper) {
+      return 'disable3'
     }
   }
 

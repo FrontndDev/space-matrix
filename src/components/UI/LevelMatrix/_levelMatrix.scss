@@ -26,6 +26,12 @@
     border-radius: 0 8px 8px 0;
   }
 
+  &.without-level {
+    & > div:first-child {
+      border-radius: 8px
+    }
+  }
+
   & > div span {
     color: $text-base-disable;
   }

@@ -69,7 +69,7 @@ const chainDetails: ComputedRef<IChainDetails> = computed(() => store.state.chai
 const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.partnersPending)
 
 const activateTheChain = () => {
-  if (!partnersPending.value.count) {
+  if (!partnersPending.value.totalCount) {
     emit('buy-booster', true)
     emit('open-expose-partner')
   } else {

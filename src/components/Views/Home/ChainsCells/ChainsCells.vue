@@ -28,7 +28,12 @@
       cellsType="chains"
       v-if="chainsList.totalCount === 0"
   />
-<!--  <Pagination v-if="cells.length !== 0"/>-->
+  <Pagination
+      :count="chainsList.totalPages"
+      :selected-page="selectedPage"
+      v-if="chainsList.totalPages > 1"
+      @select-page="selectPage"
+  />
 </template>
 
 <script setup lang="ts">
@@ -36,10 +41,10 @@ import Tabs from "../../../UI/Tabs/Tabs.vue";
 import {
   computed,
   ComputedRef,
-  reactive
+  reactive,
 } from "vue";
 import ChainCell from "../../../ChainCell/ChainCell.vue";
-// import Pagination from "../../../Pagination/Pagination.vue";
+import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 import { IChainsList } from "../../../../interfaces/chains.interface.ts";
 import { useStore } from "vuex";
@@ -49,9 +54,20 @@ const tabs = reactive([
 ]);
 
 const store = useStore()
-const emit = defineEmits(['open-general-chains', 'open-m-teleport', 'select-chain'])
+const emit = defineEmits([
+  'open-general-chains',
+  'open-m-teleport',
+  'select-chain',
+])
 
+const selectedPage: ComputedRef<number> = computed(() => store.state.chains.pageIdChains)
 const chainsList: ComputedRef<IChainsList> = computed(() => store.state.chains.chainsList)
+
+const selectPage = (page: number) => {
+  store.commit('chains/SET_PAGE_ID_CHAINS', page)
+  store.dispatch('chains/getChainsList')
+}
+
 
 const openGeneralChains = (id: number) => {
   store.dispatch('chains/getChainDetail', id)
@@ -59,9 +75,8 @@ const openGeneralChains = (id: number) => {
   emit('open-general-chains')
 }
 
-
 </script>
 
-<style scoped>
-@import "_chainsCells.scss";
+<style scoped lang="scss">
+@import "chainsCells";
 </style>

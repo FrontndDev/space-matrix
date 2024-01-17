@@ -17,7 +17,9 @@ export type Type = {
 export interface ListOfTypes {
     types: Type[];
     opened: string[];
-    teamOpened: string[];
+    teamOpened: {
+        [key: string]: number
+    };
 }
 
 export interface IOwner {

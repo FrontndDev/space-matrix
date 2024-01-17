@@ -32,19 +32,25 @@
       v-if="boostersPending.list?.length === 0 && littleTabID === 3 || boostersExposed.list?.length === 0 && littleTabID === 4"
       :cellsType="'boosters'"
   />
-<!--  <Pagination v-if="boostersPending.count !== 0" />-->
+  <Pagination
+      v-if="tabs.find(tab => tab.id === littleTabID)?.value !== 0"
+      :selected-page="selectedPage"
+      @select-page="selectPage"
+  />
 </template>
 
 <script setup lang="ts">
 import {
   computed,
   ComputedRef,
-  reactive
+  reactive,
+  ref,
+  watch
 } from "vue";
 
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 import Tabs from "../../../UI/Tabs/Tabs.vue";
-// import Pagination from "../../../Pagination/Pagination.vue";
+import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 import { useStore } from "vuex";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
@@ -58,16 +64,29 @@ const boostersExposed: ComputedRef<IPartners> = computed(() => store.state.boost
 
 const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
 
+const selectedPage = ref(1)
+
+const selectPage = (page: number) => {
+  selectedPage.value = page
+  store.dispatch('boosters/getPendingBoosters')
+
+  store.dispatch('boosters/getExposedBoosters')
+}
+
+watch(() => littleTabID.value, () => {
+  selectPage(1)
+})
+
 const tabs = reactive([
   {
     id: 3,
     name: 'В ожидании',
-    value: computed(() => boostersPending.value.count)
+    value: computed(() => boostersPending.value.totalCount)
   },
   {
     id: 4,
     name: 'Выставленные',
-    value: computed(() => boostersExposed.value.count)
+    value: computed(() => boostersExposed.value.totalCount)
   },
 ]);
 

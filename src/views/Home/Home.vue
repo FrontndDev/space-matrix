@@ -6,7 +6,7 @@
           <MatrixHeader style="grid-area: header;"/>
 
           <template v-if="Object.keys(matrixByType).length">
-            <div class="home__matrices-inner" v-if="!matrixByType?.ctaText">
+            <div class="home__matrices-inner" v-if="!matrixByType?.ctaText && !matrixIsTemporarilyUnavailable">
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
                   @open-m-add-partner="openModalPartner(3)"
@@ -102,11 +102,11 @@
         :toggleModalPaymentForm="toggleModalPaymentForm"
         @close-modal="closeModal"
     />
-    <ModalConfirmPayment
-        :toggleModalConfirmPayment="toggleModalConfirmPayment"
-        :result="resultModalConfirmPayment"
-        @close-modal="closeModal"
-    />
+<!--    <ModalConfirmPayment-->
+<!--        :toggleModalConfirmPayment="toggleModalConfirmPayment"-->
+<!--        :result="resultModalConfirmPayment"-->
+<!--        @close-modal="closeModal"-->
+<!--    />-->
   </div>
 </template>
 
@@ -146,7 +146,7 @@ import {
 import { useRoute } from "vue-router";
 import { useCopyLink } from "../../use/useCopyLink.ts";
 import MatrixActivationInProgress from "../../components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
-import ModalConfirmPayment from "../../components/Modals/ModalConfirmPayment/ModalConfirmPayment.vue";
+// import ModalConfirmPayment from "../../components/Modals/ModalConfirmPayment/ModalConfirmPayment.vue";
 import { IChains } from "../../interfaces/chains.interface.ts";
 
 const isCells = ref(1)
@@ -162,7 +162,7 @@ const toggleModalNotification = ref(false)
 const toggleModalPaymentForm = ref(false)
 
 const toggleModalConfirmPayment = ref(false)
-const resultModalConfirmPayment = ref('failure')
+// const resultModalConfirmPayment = ref('failure')
 
 const store = useStore()
 const route = useRoute()
@@ -215,7 +215,11 @@ const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfT
 
 const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
   const teamOpened = listOfTypes.value.teamOpened
-  return teamOpened ? Object.keys(teamOpened).includes(route.params.type as string) : false
+  if (teamOpened) {
+    const key: string | undefined = Object.keys(teamOpened)?.find(type => route.params.type === type)
+    return key ? !!teamOpened?.[key] : false
+  }
+  return false
 })
 
 
@@ -320,9 +324,6 @@ onMounted(async () => {
   if (query.chainId && store.state.chains.chainsList?.list?.length) {
     openChainViaLink()
   }
-
-  // TODO УДАЛИТЬ ПРИ ЗАЛИВКЕ НА ПРОД!!!
-  // await store.dispatch('getWallets')
 })
 </script>
 

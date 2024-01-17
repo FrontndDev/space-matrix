@@ -70,7 +70,7 @@ const store = useStore()
 
 const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisIsDreamTon9)
 
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
 
@@ -96,8 +96,8 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
   }
 
   if (!firstCeil.value?.matrix) {
-    if (!firstCeil.value?.allowBuyClone && !firstCeil.value?.allowSniper || !firstCeil.value?.allowBuyClone && !partnersCount.value) {
-      return 'disable'
+    if (!firstCeil.value?.allowBuyClone && !firstCeil.value?.allowSniper) {
+      return 'disable3'
     }
   }
 
@@ -126,7 +126,11 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
   }
 
   if (!secondCeil.value?.matrix) {
-    if (!secondCeil.value?.allowSniper && !secondCeil.value.allowBuyClone || !secondCeil.value?.allowBuyClone && !partnersCount.value) {
+    if (!secondCeil.value?.allowBuyClone && !secondCeil.value?.allowSniper) {
+      return 'disable3'
+    }
+
+    if (!firstCeil.value?.matrix) {
       return 'disable'
     }
   }

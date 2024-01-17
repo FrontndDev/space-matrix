@@ -5,10 +5,10 @@
       <DButton
           :class="{
             disabled: !listOfTypes.opened.includes(type.type),
-            time: Object.keys(listOfTypes.teamOpened).includes(type.type),
+            time: isTime(type),
             active: selectedType?.type === type.type,
           }"
-          :is-time="Object.keys(listOfTypes.teamOpened).includes(type.type)"
+          :is-time="isTime(type)"
           v-for="type in listOfTypes?.types"
           :key="type.title"
           :type="type"
@@ -69,6 +69,11 @@ const selectDButton = (type: Type) => {
     store.commit('SET_MATRIX_BY_TYPE', {})
   }
   selectType(type)
+}
+
+const isTime = (type: Type) => {
+  const key = Object.keys(listOfTypes.value.teamOpened).find(listType => listType === type.type)
+  return key ? !!listOfTypes.value.teamOpened[key] : false
 }
 
 watch(() => listOfTypes.value?.types?.length, () => {

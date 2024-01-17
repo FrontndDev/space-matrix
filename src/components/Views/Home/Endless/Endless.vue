@@ -5,6 +5,7 @@
     <div class="endless__menu endless__menu_mt-16">
       <AddPartnerCell
           cell-type="infinity"
+          subtitle="Заполните ячейки накопления"
           :type="getTypeForThirdCeil"
           :ceil="thirdCeil"
           :partners-count="partnersCount"
@@ -42,7 +43,7 @@ const store = useStore()
 
 const thisIsDreamTon9: ComputedRef<boolean> = computed(() => store.getters.thisIsDreamTon9)
 
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.count)
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 
 const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection['1'])
 const thirdCeil: Ref<Ceil> = computed(() =>
@@ -70,6 +71,10 @@ const getTypeForThirdCeil: ComputedRef<string> = computed(() => {
   }
 
   if (!thirdCeil.value?.matrix) {
+    if (!thirdCeil.value?.allowBuyClone && !thirdCeil.value?.allowSniper) {
+      return 'disable3'
+    }
+
     if (!thirdCeil.value?.allowSniper && !thirdCeil.value.allowBuyClone || !thirdCeil.value?.allowBuyClone && !partnersCount.value) {
       return 'disable'
     }

@@ -21,6 +21,7 @@
     </template>
     <MConfirmPayment
         :result="confirmPaymentType"
+        :price="getPaymentPrice"
         v-if="confirmPaymentType"
         @cancel="cancel"
         @confirm="confirm"
@@ -71,6 +72,23 @@ const emit = defineEmits([
 const confirmPaymentType: Ref<string> = ref('')
 // failure, success
 
+const getPaymentPrice: ComputedRef<number> = computed(() => {
+  const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
+  const wallet = balance.value.wallets
+      .filter(wallet => wallet.type === 0)
+      .find(wallet => wallet.currency === matrix.matrixConfig.currency) as IWallet
+
+  switch (confirmPaymentType.value) {
+    case 'failure':
+      return (wallet.amount - getPrice.value) * -1
+    case 'success':
+      return getPrice.value
+    default:
+      return 0
+  }
+})
+
+
 const getEmitForModalHeader = () => {
   props.selectedType === 'id' ? emit('open-m-matrix-partner') : emit('close-modal')
 }
@@ -119,9 +137,9 @@ const getCeilCumulative: ComputedRef<boolean> = computed(() =>
 
 const partnersCount: ComputedRef<number> = computed(() => {
   if (selectedPartner.value) {
-    return store.state.partners.partnersPendingSecond.count
+    return store.state.partners.partnersPendingSecond.totalCount
   } else {
-    return store.state.partners.partnersPending.count
+    return store.state.partners.partnersPending.totalCount
   }
 })
 

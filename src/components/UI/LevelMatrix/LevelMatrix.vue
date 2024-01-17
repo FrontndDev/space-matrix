@@ -1,5 +1,5 @@
 <template>
-  <div class="level-matrix">
+  <div class="level-matrix" :class="{ 'without-level': props.level <= 0 }">
     <div>{{ typeTitle }}</div>
     <div v-if="props.level > 0">
       {{ props.level }}

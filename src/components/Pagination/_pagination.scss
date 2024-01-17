@@ -43,6 +43,7 @@
     height: 24px;
     border-radius: 50%;
     @include get-font(12px, 500, 16px, $text-base-secondary);
+    transition: .25s all ease;
     cursor: pointer;
 
     &.active {
