@@ -67,14 +67,15 @@ const tabs = reactive([
   {
     id: 1,
     name: 'В ожидании',
-    value: computed(() => partnersPending.value.totalCount)
+    value: computed(() => partnersPending.value?.totalCount)
   },
   {
     id: 2,
     name: 'Выставленные',
-    value: computed(() => partnersExposed.value.totalCount)
+    value: computed(() => partnersExposed.value?.totalCount)
   },
 ]);
+
 
 const data = reactive([
   {
@@ -89,6 +90,8 @@ const data = reactive([
   },
 ])
 
+const levelIDOfPartners = computed(() => store.state.partners.levelID)
+
 const selectPage = (page: number) => {
   store.commit('partners/SET_PAGE_ID_PARTNERS', page)
 
@@ -97,7 +100,7 @@ const selectPage = (page: number) => {
       store.dispatch('partners/getPendingPartners')
       break
     case 2:
-      store.dispatch('partners/getExposedPartners')
+      store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value || 1 })
       break
   }
 }
