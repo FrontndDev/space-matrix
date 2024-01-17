@@ -2,7 +2,7 @@
   <div class="modal-add-partner">
     <template v-if="!confirmPaymentType">
       <ModalHeader @close-modal="getEmitForModalHeader">
-        {{ !getCeil?.allowBuyClone && getCeil?.allowSniper && partnersCount ? 'Купить BOOST' : 'Выставить партнера' }}
+        {{ !getCeil?.allowBuyClone && getCeil?.allowSniper && partnersCount ? 'Выставить партнера' : 'Купить BOOST' }}
       </ModalHeader>
       <div class="modal-add-partner__container">
         <BuyBoostCell
