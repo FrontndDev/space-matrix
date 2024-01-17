@@ -254,7 +254,7 @@ const openMInfinityCell = () => {
 
 const openMAddPartner = (pos: IPosition) => {
   const ceil: Ceil = ceils.value[String(pos.pos)]
-  if (!thisIsDreamTon9.value && !ceil.queueId && (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone)) {
+  if (!thisIsDreamTon9.value && !ceil.queueId && (partnersCount.value && ceil?.allowSniper || ceil?.allowBuyClone)) {
     // emit('select-partner', null)
     emit('set-partner-by', 'id')
     emit('open-m-add-partner', pos)

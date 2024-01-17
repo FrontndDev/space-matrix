@@ -14,9 +14,9 @@
       <InfinityPartnerCard
           :ceil="thirdCeil"
           :partners-count="matrixByType.countInInfinity"
-<!--          :loading="true"-->
           @open-m-infinity-cell="openMInfinityCell"
       />
+      <!--          :loading="true"-->
     </div>
   </div>
 </template>
