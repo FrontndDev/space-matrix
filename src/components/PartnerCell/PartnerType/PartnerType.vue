@@ -28,7 +28,7 @@
         <span></span>
       </div>
       <div
-          class="partner-type__circle dashed-red"
+          class="partner-type__circle"
           :class="[getCircleFill(props.binstatus?.['2']), getCircleFill(props.binstatus?.['2'])]"
       >
         <span></span>
