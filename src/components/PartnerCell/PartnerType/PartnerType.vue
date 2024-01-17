@@ -57,7 +57,7 @@ const props = defineProps({
   }
 });
 
-const getCircleFill = (binstatus) => {
+const getCircleFill = (binstatus: number) => {
   switch (binstatus) {
     case 1:
       switch (props.type) {

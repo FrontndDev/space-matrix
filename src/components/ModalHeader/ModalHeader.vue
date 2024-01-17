@@ -25,10 +25,10 @@
       <span>Наверх</span>
     </button>
 
-    <div v-else/>
+    <div v-else />
 
     <div class="matrix-modal-header__title">
-      <slot/>
+      <slot />
     </div>
     <button
         @click="closeModal"
