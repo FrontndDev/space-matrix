@@ -24,7 +24,7 @@ export default {
       countPendingBoosters: null,
       levelID: 1 as number,
 
-      matrixFilterPageId: 1,
+      pageIdPartners: 1,
 
       // Матрица партнёра
       partnersPendingSecond: {} as IPartners,
@@ -40,7 +40,7 @@ export default {
 
       API.filterOfActivatedMatrix({
         matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
-        matrixFilterPageId: state.matrixFilterPageId,
+        matrixFilterPageId: state.pageIdPartners,
         //@ts-ignore
         matrixFilterUserId: window.UserData.id,
         filter: { level: filter }
@@ -62,7 +62,7 @@ export default {
 
       API.filterOfActivatedMatrix({
           matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
-          matrixFilterPageId: state.matrixFilterPageId,
+          matrixFilterPageId: state.pageIdPartners,
           //@ts-ignore
           matrixFilterUserId: window.UserData.id,
           filter: { pending: 1, level: filter }
@@ -132,6 +132,9 @@ export default {
     },
     SET_COUNT_PENDING_BOOSTERS(state: any, count: number) {
       state.countPendingBoosters = count
+    },
+    SET_PAGE_ID_PARTNERS(state: any, pageIdPartners: number) {
+      state.pageIdPartners = pageIdPartners
     }
   },
   getters: {}

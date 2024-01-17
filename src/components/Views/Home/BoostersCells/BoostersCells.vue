@@ -33,8 +33,9 @@
       :cellsType="'boosters'"
   />
   <Pagination
-      v-if="tabs.find(tab => tab.id === littleTabID)?.value !== 0"
+      :count="data.find(tab => tab.id === littleTabID)?.value.totalPages"
       :selected-page="selectedPage"
+      v-if="data.find(tab => tab.id === littleTabID)?.value.totalPages ?? 0 > 1"
       @select-page="selectPage"
   />
 </template>
@@ -44,7 +45,6 @@ import {
   computed,
   ComputedRef,
   reactive,
-  ref,
   watch
 } from "vue";
 
@@ -64,10 +64,10 @@ const boostersExposed: ComputedRef<IPartners> = computed(() => store.state.boost
 
 const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
 
-const selectedPage = ref(1)
+const selectedPage: ComputedRef<number> = computed(() => store.state.boosters.pageIdBooster)
 
 const selectPage = (page: number) => {
-  selectedPage.value = page
+  store.commit('boosters/SET_PAGE_ID_BOOSTERS', page)
   store.dispatch('boosters/getPendingBoosters')
 
   store.dispatch('boosters/getExposedBoosters')
@@ -89,6 +89,17 @@ const tabs = reactive([
     value: computed(() => boostersExposed.value.totalCount)
   },
 ]);
+
+const data = reactive([
+  {
+    id: 3,
+    value: computed(() => boostersPending.value)
+  },
+  {
+    id: 4,
+    value: computed(() => boostersExposed.value)
+  },
+])
 
 const openMMatrixPartner = (cell: Matrix) => {
   const selectedPartner = {

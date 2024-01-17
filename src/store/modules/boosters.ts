@@ -50,6 +50,9 @@ export default {
     },
     SET_EXPOSED_BOOSTERS(state: any, boostersExposed: any) {
       state.boostersExposed = boostersExposed
+    },
+    SET_PAGE_ID_BOOSTERS(state: any, pageIdBooster: any) {
+      state.pageIdBooster = pageIdBooster
     }
   },
 }

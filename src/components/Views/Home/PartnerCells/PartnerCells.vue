@@ -29,7 +29,12 @@
       v-if="partnersPending.list?.length === 0 && littleTabID === 1 || partnersExposed.list?.length === 0 && littleTabID === 2"
   />
 
-<!--  <Pagination v-if="partnersExposed.count !== 0" />-->
+  <Pagination
+      :count="data.find(tab => tab.id === littleTabID)?.value.totalPages"
+      :selected-page="selectedPage"
+      v-if="data.find(tab => tab.id === littleTabID)?.value.totalPages ?? 0 > 1"
+      @select-page="selectPage"
+  />
 </template>
 
 <script setup lang="ts">
@@ -38,9 +43,10 @@ import {
   reactive,
   computed,
   ComputedRef,
+  watch,
 } from "vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
-// import Pagination from "../../../Pagination/Pagination.vue";
+import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 import { useStore } from "vuex";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
@@ -55,6 +61,8 @@ const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partn
 
 const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
 
+const selectedPage: ComputedRef<number> = computed(() => store.state.partners.pageIdPartners)
+
 const tabs = reactive([
   {
     id: 1,
@@ -67,6 +75,36 @@ const tabs = reactive([
     value: computed(() => partnersExposed.value.totalCount)
   },
 ]);
+
+const data = reactive([
+  {
+    id: 1,
+    name: 'В ожидании',
+    value: computed(() => partnersPending.value)
+  },
+  {
+    id: 2,
+    name: 'Выставленные',
+    value: computed(() => partnersExposed.value)
+  },
+])
+
+const selectPage = (page: number) => {
+  store.commit('partners/SET_PAGE_ID_PARTNERS', page)
+
+  switch (littleTabID.value) {
+    case 1:
+      store.dispatch('partners/getPendingPartners')
+      break
+    case 2:
+      store.dispatch('partners/getExposedPartners')
+      break
+  }
+}
+
+watch(() => littleTabID.value, () => {
+  selectPage(1)
+})
 
 const openMMatrixPartner = (cell: Matrix) => {
   const selectedPartner = {

@@ -68,7 +68,6 @@ const selectPage = (page: number) => {
   store.dispatch('chains/getChainsList')
 }
 
-
 const openGeneralChains = (id: number) => {
   store.dispatch('chains/getChainDetail', id)
   emit('select-chain', chainsList.value?.list.find(chain => chain.id === id))

@@ -32,6 +32,12 @@
         </ChainsButton>
       </template>
     </div>
+    <Pagination
+        :count="store.state.partners.partnersPending.totalPages"
+        :selected-page="selectedPage"
+        v-if="store.state.partners.partnersPending.totalPages > 1"
+        @select-page="selectPage"
+    />
   </div>
 </template>
 
@@ -57,6 +63,7 @@ import {
   Ceil,
   Matrix
 } from "../../../../interfaces/store.interface.ts";
+import Pagination from "../../../Pagination/Pagination.vue";
 
 const emit = defineEmits(['close-modal', 'open-m-add-partner'])
 
@@ -66,6 +73,13 @@ const cells: ComputedRef<Matrix[]> = computed(() => store.state.partners.partner
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 const partnerPos = inject('partnerPos') as Ref<IPosition>
 let selectedCell: Ref<Matrix | null> = ref(null)
+
+const selectedPage: ComputedRef<number> = computed(() => store.state.partners.pageIdPartners)
+
+const selectPage = (page: number) => {
+  store.commit('partners/SET_PAGE_ID_PARTNERS', page)
+  store.dispatch('partners/getPendingPartners')
+}
 
 const selectCell = (cell: Matrix) => {
   selectedCell.value = cell
