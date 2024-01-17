@@ -97,7 +97,7 @@ const selectPage = (page: number) => {
 
   switch (littleTabID.value) {
     case 1:
-      store.dispatch('partners/getPendingPartners')
+      store.dispatch('partners/getPendingPartners', { filter: levelIDOfPartners.value || 1 })
       break
     case 2:
       store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value || 1 })
