@@ -50,7 +50,8 @@
       position: relative;
       width: 16px;
       height: 16px;
-      border: 1px dashed $border-red;
+      border: 1px dashed $border-red !important;
+      background: transparent;
 
       &:after {
         content: '';
@@ -70,7 +71,8 @@
       position: relative;
       width: 16px;
       height: 16px;
-      border: 1px dashed #A2855E;
+      border: 1px dashed #A2855E !important;
+      background: transparent;
 
       &:after {
         content: '';
@@ -90,7 +92,8 @@
       position: relative;
       width: 16px;
       height: 16px;
-      border: 1px dashed #00C7BD;
+      border: 1px dashed #00C7BD !important;
+      background: transparent;
 
       &:after {
         content: '';
