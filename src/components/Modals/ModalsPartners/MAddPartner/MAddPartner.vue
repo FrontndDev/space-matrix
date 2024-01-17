@@ -2,13 +2,13 @@
   <div class="modal-add-partner">
     <template v-if="!confirmPaymentType">
       <ModalHeader @close-modal="getEmitForModalHeader">
-        {{ !getCeil?.allowSniper && !partnersCount && getCeil?.allowBuyClone ? 'Купить BOOST' : 'Выставить партнера' }}
+        {{ !getCeil?.allowBuyClone && getCeil?.allowSniper && partnersCount ? 'Купить BOOST' : 'Выставить партнера' }}
       </ModalHeader>
       <div class="modal-add-partner__container">
         <BuyBoostCell
             :price="getPrice"
             @click="buyBooster"
-            v-if="getCeil.allowBuyClone"
+            v-if="getCeil?.allowBuyClone"
         />
         <AddPartnerCell
             :type="getCeilCumulative ? 'cumulative' : 'profitable'"
@@ -196,7 +196,7 @@ const cancel = () => {
 }
 
 onMounted(() => {
-  if (!getCeil.value.allowBuyClone && getCeil.value.allowSniper && partnersCount.value) {
+  if (!getCeil.value?.allowBuyClone && getCeil.value?.allowSniper && partnersCount.value) {
     emit('open-partner-waiting')
   }
 })

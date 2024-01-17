@@ -1,11 +1,11 @@
 <template>
   <div class="modal-add-partner">
     <ModalHeader @close-modal="emit('close-modal')">
-      Выставить партнера
+      {{ !thirdCeil?.allowBuyClone && thirdCeil?.allowSniper && partnersCount ? 'Выставить партнёра' : 'Купить BOOST' }}
     </ModalHeader>
     <div class="modal-add-partner__container">
       <BuyBoostCell
-          v-if="thirdCeil.allowBuyClone"
+          v-if="thirdCeil?.allowBuyClone"
           @click="buyBooster"
       />
       <AddPartnerCell
@@ -68,7 +68,7 @@ const buyBooster = async () => {
 }
 
 onMounted(() => {
-  if (!thirdCeil.value.allowBuyClone && thirdCeil.value.allowSniper && partnersCount.value) {
+  if (!thirdCeil.value?.allowBuyClone && thirdCeil.value?.allowSniper && partnersCount.value) {
     emit('open-partner-waiting')
   }
 })
