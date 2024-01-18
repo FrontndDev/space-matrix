@@ -279,6 +279,7 @@ const closeModal = () => {
 }
 
 const setPositionForPartner = (pos: IPosition) => {
+  store.dispatch('getWallets')
   partnerPos.value = pos
 }
 

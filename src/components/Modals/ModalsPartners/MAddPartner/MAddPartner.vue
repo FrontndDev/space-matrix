@@ -42,7 +42,8 @@ import {
   inject,
   onMounted,
   ref,
-  Ref
+  Ref,
+  watch
 } from "vue";
 import {
   Ceil,
@@ -72,6 +73,9 @@ const confirmPaymentType: Ref<string> = ref('')
 // failure, success
 
 const getPaymentPrice: ComputedRef<number> = computed(() => {
+  if (!balanceArray.value.length) {
+    return 0
+  }
   const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
   const wallet = balance.value.wallets
       .filter(wallet => wallet.type === 0)
@@ -111,6 +115,7 @@ const getEmitForModalHeader = () => {
 const store = useStore()
 
 const balance: ComputedRef<IBalance> = computed(() => store.state.balance)
+const balanceArray = computed(() => Object.values(balance.value))
 
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
@@ -128,6 +133,12 @@ const ceils: ComputedRef<Ceils> = computed(() => {
     return matrixById.value?.ceilsCollection?.['1']
   } else {
     return matrixByType.value?.ceilsCollection?.['1']
+  }
+})
+
+watch(() => balanceArray.value, () => {
+  if (balanceArray.value.length && confirmPaymentType.value === 'loading') {
+    buyBooster()
   }
 })
 
@@ -155,7 +166,10 @@ const partnersCount: ComputedRef<number> = computed(() => {
 })
 
 const buyBooster = async () => {
-  await store.dispatch('getWallets')
+  if (!balanceArray.value.length) {
+    confirmPaymentType.value = 'loading'
+    return
+  }
   const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
 
   const wallet = balance.value.wallets
@@ -185,6 +199,7 @@ const confirm = async () => {
           matrix.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = 1
         }
 
+        confirmPaymentType.value = ''
         await store.dispatch('buyBooster', data)
 
         if (props.selectedType === 'id') {
