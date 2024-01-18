@@ -18,12 +18,12 @@
             v-if="getCeil.allowSniper && partnersCount"
         />
       </div>
+      <EmptyCells
+          class="modal-add-partner__empty"
+          cellsType="partners"
+          v-else
+      />
     </template>
-    <EmptyCells
-        class="modal-add-partner__empty"
-        cellsType="partners"
-        v-else
-    />
     <MConfirmPayment
         :currency="getMatrix.matrixConfig.currency"
         :price="getPrice"
