@@ -102,6 +102,7 @@ import {
   computed,
   ComputedRef,
   inject,
+  onMounted,
   ref,
   Ref,
   watch,
@@ -158,14 +159,25 @@ const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
 
 const interval: Ref<number | null> = ref(null)
 
-watch(() => matrixById.value?.in_queue, () => {
-  if (matrixById.value?.in_queue) {
+const matrixIsInQueueForPublication: ComputedRef<boolean> = computed(() => {
+  const ceilsCollection = store.state.matrixById?.ceilsCollection?.['1']
+  return ceilsCollection ? Object.values(ceilsCollection).map(ceil => !!(ceil as Ceil).queueId).includes(true) : false
+})
+
+const loadMatrix = () => {
+  if (matrixIsInQueueForPublication.value) {
+    console.log('interval')
     interval.value = setInterval(() => {
       store.dispatch('getMatrixById', matrixById.value.matrix?.id);
     }, 3000);
-  } else if (!matrixById.value?.in_queue && interval.value) {
+  } else if (!matrixIsInQueueForPublication.value && interval.value) {
+    console.log('clear interval')
     clearInterval(interval.value);
   }
+}
+
+watch(() => matrixIsInQueueForPublication.value, () => {
+  loadMatrix()
 })
 
 const getTypeForSelectedCeil: ComputedRef<string> = computed(() => {
@@ -291,6 +303,10 @@ const parentMatrix = async () => {
     }
   }
 }
+
+onMounted(() => {
+  loadMatrix()
+})
 </script>
 
 <style scoped lang="scss">
