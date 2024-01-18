@@ -44,7 +44,6 @@ import {
   reactive,
   computed,
   ComputedRef,
-  watch,
 } from "vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 import Pagination from "../../../Pagination/Pagination.vue";
