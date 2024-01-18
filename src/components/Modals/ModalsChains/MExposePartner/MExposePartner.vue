@@ -159,7 +159,6 @@ const ceil: ComputedRef<Matrix> = computed(() => {
 const exposePartner = async () => {
   const matrixId = chainsDetails.value[0].id
   if (isBoosterForChain.value) {
-    console.log('buyBooster')
     const data: IBuyBoosterParams = {
       matrix_id: matrixId,
       depth: 1,
@@ -168,7 +167,6 @@ const exposePartner = async () => {
     }
     await store.dispatch('buyBooster', data)
   } else {
-    console.log('exposePartner')
     const data: IExposePartnerParams = {
       matrix_id: matrixId,
       child_id: ceil.value.id,

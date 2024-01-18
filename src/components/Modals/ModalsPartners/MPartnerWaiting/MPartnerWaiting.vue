@@ -97,6 +97,10 @@ const exposePartner = async () => {
       depth: partnerPos.value.depth,
       pos: partnerPos.value.pos
     }
+    if (!partnerMatrix) {
+      store.state.matrixByType.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = 1
+    }
+
     await store.dispatch('partners/exposePartner', data)
 
     if (!partnerMatrix && myMatrix) {

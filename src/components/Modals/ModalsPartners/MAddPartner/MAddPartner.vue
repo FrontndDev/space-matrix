@@ -54,7 +54,6 @@ import {
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 import MConfirmPayment from "../../ModalConfirmPayment/MConfirmPayment/MConfirmPayment.vue";
-import router from "../../../../router";
 
 const props = defineProps({
   selectedType: {
@@ -182,6 +181,10 @@ const confirm = async () => {
           pos: partnerPos.value.pos,
           depth: partnerPos.value.depth
         }
+        if (matrix?.ceilsCollection) {
+          matrix.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = 1
+        }
+
         await store.dispatch('buyBooster', data)
 
         if (props.selectedType === 'id') {
