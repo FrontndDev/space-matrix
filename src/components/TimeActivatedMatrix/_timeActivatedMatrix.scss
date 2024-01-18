@@ -16,7 +16,7 @@
     @include get-font(14px, 500, 142%);
 
     & > h3 {
-      @include get-font(20px, 500, 160%, $text-base);
+      @include get-font(20px, 500 !important, 160%, $text-base);
     }
   }
 
@@ -30,8 +30,8 @@
       height: 80px;
       padding: 12px;
       border-radius: 16px;
-      background: $bg-red-light;
-      @include get-font(32px, 700, 150%, $text-red);
+      background: $bg-base-light;
+      @include get-font(32px, 700, 150%, #7b869d);
     }
 
     &__dots {
