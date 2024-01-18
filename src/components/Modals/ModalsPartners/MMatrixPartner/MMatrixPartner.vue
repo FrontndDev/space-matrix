@@ -45,6 +45,7 @@
               />
               <AddPartnerCell
                   size="small"
+                  subtitle="Доходная ячейка"
                   :type="getTypeForFirstCeil"
                   :cell-type="getCellTypeFirstCeil"
                   :ceil="firstCeil"
@@ -69,6 +70,7 @@
                   :ceil="secondCeil"
                   :partners-count="partnersCount"
                   :title="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
+                  :subtitle="!firstCeil?.matrix ? 'Заполните левую ячейку' : 'Доходная ячейка'"
                   v-if="!secondCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
               />
@@ -151,10 +153,10 @@ const selectedCeilIsCumulative: ComputedRef<boolean> = computed(() =>
 )
 
 const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
-    !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
+    !!firstCeil.value?.fillRevard.find(reward => reward.event === 'freeze')
 )
 const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
-    !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
+    !!firstCeil.value?.fillRevard.find(reward => reward.event === 'freeze')
 )
 
 const interval: Ref<number | null> = ref(null)
@@ -201,6 +203,10 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
+  if (!firstCeil.value?.matrix && !firstCeil.value?.allowBuyClone && !firstCeil.value?.allowSniper) {
+    return 'disable'
+  }
+
   if (firstCeil.value?.matrix?.is_booster) {
     return 'boost'
   }
@@ -225,7 +231,10 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (!secondCeil.value?.matrix && !firstCeil.value?.matrix) {
+  if (
+      !secondCeil.value?.matrix &&
+      (!firstCeil.value?.matrix || !secondCeil.value?.allowBuyClone && !secondCeil.value?.allowSniper)
+  ) {
     return 'disable'
   }
 
