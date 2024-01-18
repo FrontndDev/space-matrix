@@ -95,6 +95,8 @@
         @open-expose-partner="openModalChain(4)"
         @open-add-partner-chains="openModalChain(6)"
         @open-partner-waiting-chains="openModalChain(7)"
+        @open-m-matrix-partner="openModalPartner(2)"
+        @select-partner="selectPartner"
 
         @close-modal="closeModal"
     />

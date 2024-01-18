@@ -9,12 +9,13 @@
             class="general-chains__overflow "
             :class="{'less-four': chainDetails?.list?.length < 4}"
         >
-          <div v-for="(cell, idx) in chainDetails?.list"
+          <div v-for="(matrix, idx) in chainDetails?.list"
                class="general-chains__block"
           >
             <SmallCell
                 :key="idx"
-                :cell="cell"
+                :cell="matrix"
+                @click="openMMatrixModal(matrix)"
             />
           </div>
         </div>
@@ -52,11 +53,16 @@ import {
 } from "../../../../interfaces/chains.interface.ts";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
 import { useCopyLink } from "../../../../use/useCopyLink.ts";
+import {
+  Matrix
+} from "../../../../interfaces/store.interface.ts";
 
 const emit = defineEmits([
   'close-modal',
   'open-expose-partner',
   'open-add-partner-chains',
+  'open-m-matrix-partner',
+  'select-partner',
   'buy-booster',
 ])
 
@@ -75,6 +81,22 @@ const activateTheChain = () => {
   } else {
     emit('open-add-partner-chains')
   }
+}
+
+const openMMatrixModal = (matrix: Matrix) => {
+  const cell = {
+    depth: 0,
+    pos: 0,
+    queueId: null,
+    matrix: matrix,
+    allowBuyClone: false,
+    allowSniper: false,
+    fillRevard: [],
+    isInfinity: false,
+  }
+  emit('select-partner', cell)
+  emit('close-modal')
+  emit('open-m-matrix-partner')
 }
 </script>
 
