@@ -3,10 +3,11 @@
     <ModalHeader @close-modal="emit('close-modal')">
       {{ getTitle }}
     </ModalHeader>
-    <div class="modal-add-partner__container">
+    <div class="modal-add-partner__container" v-if="getTitle">
       <BuyBoostCell
+          :price="matrixByType.matrixConfig.price"
           v-if="thirdCeil?.allowBuyClone"
-          @click="buyBooster"
+          @click="showConfirmPayment = true"
       />
       <AddPartnerCell
           type="profitable"
@@ -16,6 +17,22 @@
           @click="emit('open-partner-waiting')"
       />
     </div>
+    <EmptyCells
+        class="modal-add-partner__empty"
+        cellsType="partners"
+        v-else
+    />
+    <MConfirmPayment
+        :currency="matrixByType.matrixConfig.currency"
+        :price="matrixByType.matrixConfig.price"
+        v-if="showConfirmPayment"
+        @cancel="closeConfirmPayment"
+        @confirm="confirm"
+        @close-modal="showConfirmPayment = false"
+        @back="showConfirmPayment = false"
+
+        @set-payment-type="setPaymentType"
+    />
   </div>
 </template>
 
@@ -28,6 +45,8 @@ import {
   computed,
   ComputedRef,
   onMounted,
+  ref,
+  Ref,
 } from "vue";
 import {
   Ceil,
@@ -35,10 +54,16 @@ import {
   IBuyBoosterParams,
   IMatrix,
 } from "../../../../interfaces/store.interface.ts";
+import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
+import MConfirmPayment from "../../ModalConfirmPayment/MConfirmPayment/MConfirmPayment.vue";
 
 const emit = defineEmits(['close-modal', 'open-partner-waiting'])
 
 const store = useStore()
+
+const showConfirmPayment: Ref<boolean> = ref(false)
+const confirmPaymentType = ref('')
+// failure, success, loading
 
 const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.onlyInfinityCell)
 
@@ -57,28 +82,47 @@ const getTitle = computed(() => {
       return 'Выставить партнера'
     case thirdCeil.value?.allowBuyClone:
       return 'Купить BOOST'
-    case !partnersCount.value:
-      return 'Список партнеров пуст'
     default:
       return ''
   }
 })
 
+const setPaymentType = (result: string) => confirmPaymentType.value = result
+
+const closeConfirmPayment = () => {
+  showConfirmPayment.value = false
+  confirmPaymentType.value = ''
+}
+
 const buyBooster = async () => {
   if (matrixByType.value?.matrix?.id) {
-    // @ts-ignore
     const data: IBuyBoosterParams = {
       matrix_id: +matrixByType.value.matrix.id,
       pos: 3,
       depth: 1
     }
     const response = await store.dispatch('buyBooster', data)
-    console.log('response', response)
     const ceilsCollectionDepth = store.state.matrixByType.ceilsCollection['1']
     const ceilsCollectionPos = onlyInfinityCell.value ? ceilsCollectionDepth['1'] : ceilsCollectionDepth['3']
     ceilsCollectionPos.queueId = response.queueId
     emit('close-modal')
   }
+}
+
+const confirm = () => {
+  switch (confirmPaymentType.value) {
+    case 'success':
+      buyBooster()
+      break;
+    case 'failure':
+      window.location.href = window.location.origin + '/app/wallet'
+      emit('close-modal')
+      break;
+    default:
+      break;
+  }
+
+  closeConfirmPayment()
 }
 
 onMounted(() => {

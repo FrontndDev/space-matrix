@@ -4,7 +4,7 @@
       <ModalHeader @close-modal="getEmitForModalHeader">
         {{ getTitle }}
       </ModalHeader>
-      <div class="modal-add-partner__container">
+      <div class="modal-add-partner__container" v-if="getTitle">
         <BuyBoostCell
             :price="getPrice"
             v-if="getCeil?.allowBuyClone"
@@ -19,11 +19,16 @@
         />
       </div>
     </template>
+    <EmptyCells
+        class="modal-add-partner__empty"
+        cellsType="partners"
+        v-else
+    />
     <MConfirmPayment
         :currency="getMatrix.matrixConfig.currency"
         :price="getPrice"
         v-if="showConfirmPayment"
-        @cancel="closeMonfirmPayment"
+        @cancel="closeConfirmPayment"
         @confirm="confirm"
         @close-modal="showConfirmPayment = false"
         @back="showConfirmPayment = false"
@@ -54,6 +59,7 @@ import {
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 import MConfirmPayment from "../../ModalConfirmPayment/MConfirmPayment/MConfirmPayment.vue";
+import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 
 const props = defineProps({
   selectedType: {
@@ -82,8 +88,6 @@ const getTitle = computed(() => {
       return 'Выставить партнера'
     case getCeil.value?.allowBuyClone:
       return 'Купить BOOST'
-    case !partnersCount.value:
-      return 'Список партнеров пуст'
     default:
       return ''
   }
@@ -95,7 +99,7 @@ const getEmitForModalHeader = () => {
 
 const setPaymentType = (result: string) => confirmPaymentType.value = result
 
-const closeMonfirmPayment = () => {
+const closeConfirmPayment = () => {
   showConfirmPayment.value = false
   confirmPaymentType.value = ''
 }
@@ -155,7 +159,7 @@ const buyBooster = async () => {
       matrix.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = 1
     }
 
-    closeMonfirmPayment()
+    closeConfirmPayment()
     getEmitForModalHeader()
 
     await store.dispatch('buyBooster', data)
@@ -181,7 +185,7 @@ const confirm = () => {
       break;
   }
 
-  closeMonfirmPayment()
+  closeConfirmPayment()
 }
 
 onMounted(() => {
