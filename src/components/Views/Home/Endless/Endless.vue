@@ -75,7 +75,7 @@ const getTypeForThirdCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (!thirdCeil.value?.matrix) {
+  if (!thirdCeil.value?.matrix && !onlyInfinityCell.value) {
     if (!firstCeil.value?.matrix && !secondCeil.value?.matrix) {
       return 'disable'
     }
