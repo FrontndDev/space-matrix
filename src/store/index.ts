@@ -17,8 +17,8 @@ import * as API from '../api/index.ts'
 import partners from "./modules/partners.ts";
 import boosters from "./modules/boosters.ts";
 import chains from "./modules/chains.ts";
-import { useMyOverlay } from "../use/useMyOverlay.ts";
-import { useShowMessage } from "../use/useShowMessage.ts";
+import { useMyOverlay } from "../composables/useMyOverlay.ts";
+import { useShowMessage } from "../composables/useShowMessage.ts";
 
 export default createStore({
     modules: {

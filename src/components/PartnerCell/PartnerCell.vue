@@ -62,10 +62,10 @@ import {
   Matrix,
   Type
 } from "../../interfaces/store.interface.ts";
-import { useGetLevel } from "../../use/useGetLevel.ts";
+import { useGetLevel } from "../../composables/useGetLevel.ts";
 import CellType from "../UI/CellType/CellType.vue";
 import { useStore } from "vuex";
-import { useCopy } from "../../use/useCopy.ts";
+import { useCopy } from "../../composables/useCopy.ts";
 
 const props = defineProps({
   ceil: {

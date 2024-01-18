@@ -103,7 +103,7 @@ import {
   Type
 } from "../../../../interfaces/store.interface.ts";
 import { IExposePartnerParams } from "../../../../interfaces/partners.interface.ts";
-import { useCopyLink } from "../../../../use/useCopyLink.ts";
+import { useCopyLink } from "../../../../composables/useCopyLink.ts";
 import { IChains } from "../../../../interfaces/chains.interface.ts";
 
 const selectedChain = inject('selectedChain') as Ref<IChains>

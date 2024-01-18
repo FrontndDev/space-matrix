@@ -114,7 +114,7 @@ import {
 import {
   IPosition
 } from "../../../../interfaces/partners.interface.ts";
-import { useCopyLink } from "../../../../use/useCopyLink.ts";
+import { useCopyLink } from "../../../../composables/useCopyLink.ts";
 
 const emit = defineEmits([
   'open-m-add-partner',

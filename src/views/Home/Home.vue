@@ -146,7 +146,7 @@ import {
   ListOfTypes,
 } from "../../interfaces/store.interface.ts";
 import { useRoute } from "vue-router";
-import { useCopyLink } from "../../use/useCopyLink.ts";
+import { useCopyLink } from "../../composables/useCopyLink.ts";
 import MatrixActivationInProgress from "../../components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
 // import ModalConfirmPayment from "../../components/Modals/ModalConfirmPayment/ModalConfirmPayment.vue";
 import { IChains } from "../../interfaces/chains.interface.ts";
