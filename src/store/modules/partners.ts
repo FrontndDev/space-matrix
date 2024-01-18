@@ -10,7 +10,7 @@ import {
   Commit
 } from "vuex";
 import { Matrix } from "../../interfaces/store.interface.ts";
-import { useShowMessage } from "../../use/useShowMessage.ts";
+import { useShowMessage } from "../../composables/useShowMessage.ts";
 
 export default {
   namespaced: true,
