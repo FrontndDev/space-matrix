@@ -31,7 +31,7 @@
       padding: 12px;
       border-radius: 16px;
       background: $bg-base-light;
-      @include get-font(32px, 700, 150%, #7b869d);
+      @include get-font(32px, 700, 150%, $text-base-light);
     }
 
     &__dots {
