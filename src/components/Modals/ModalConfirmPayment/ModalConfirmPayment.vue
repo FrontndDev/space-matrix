@@ -5,7 +5,7 @@
 
         <div class="modal__content">
           <MConfirmPayment
-              currency=""
+              currency="currency"
               :result="props.result"
               :price="-1"
           />
