@@ -177,5 +177,9 @@
     &__title {
       @include get-font(12px, 500, 130%, $text-base);
     }
+
+    &.disable3 {
+      padding: 12px 2px;
+    }
   }
 }
