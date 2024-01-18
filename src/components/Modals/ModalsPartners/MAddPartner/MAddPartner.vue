@@ -28,7 +28,7 @@
         @close-modal="showConfirmPayment = false"
         @back="showConfirmPayment = false"
 
-        @change-result="changeResult"
+        @set-payment-type="setPaymentType"
     />
   </div>
 </template>
@@ -93,7 +93,7 @@ const getEmitForModalHeader = () => {
   props.selectedType === 'id' ? emit('open-m-matrix-partner') : emit('close-modal')
 }
 
-const changeResult = (result: string) => confirmPaymentType.value = result
+const setPaymentType = (result: string) => confirmPaymentType.value = result
 
 const closeMonfirmPayment = () => {
   showConfirmPayment.value = false
@@ -142,33 +142,36 @@ const partnersCount: ComputedRef<number> = computed(() => {
   }
 })
 
-const confirm = async () => {
+const buyBooster = async () => {
+  const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
+
+  if (matrix?.matrix?.id) {
+    const data: IBuyBoosterParams = {
+      matrix_id: +matrix.matrix.id,
+      pos: partnerPos.value.pos,
+      depth: partnerPos.value.depth
+    }
+    if (matrix?.ceilsCollection) {
+      matrix.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = 1
+    }
+
+    closeMonfirmPayment()
+    getEmitForModalHeader()
+
+    await store.dispatch('buyBooster', data)
+
+    if (props.selectedType === 'id') {
+      await store.dispatch('getMatrixById', matrixById.value.matrix?.id)
+    } else {
+      await store.dispatch('getMatrixByType', store.state.selectedType.type)
+    }
+  }
+}
+
+const confirm = () => {
   switch (confirmPaymentType.value) {
     case 'success':
-      const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
-
-      if (matrix?.matrix?.id) {
-        // @ts-ignore
-        const data: IBuyBoosterParams = {
-          matrix_id: +matrix.matrix.id,
-          pos: partnerPos.value.pos,
-          depth: partnerPos.value.depth
-        }
-        if (matrix?.ceilsCollection) {
-          matrix.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = 1
-        }
-
-        closeMonfirmPayment()
-        getEmitForModalHeader()
-
-        await store.dispatch('buyBooster', data)
-
-        if (props.selectedType === 'id') {
-          await store.dispatch('getMatrixById', matrixById.value.matrix?.id)
-        } else {
-          await store.dispatch('getMatrixByType', store.state.selectedType.type)
-        }
-      }
+      buyBooster()
       break;
     case 'failure':
       window.location.href = window.location.origin + '/app/wallet'
