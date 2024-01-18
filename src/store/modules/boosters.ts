@@ -14,6 +14,7 @@ export default {
   actions: {
     getPendingBoosters(
       { commit, rootState, state }: { commit: Commit; rootState: any, state: any },
+      changeTab = true
     ) {
       API.filterOfActivatedMatrix({
           matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
@@ -23,7 +24,9 @@ export default {
           filter: { pending: 1, is_booster: true }
         }
       ).then(response => {
-        if (response.data?.totalCount === 0 && rootState.partners.bigTabID === 2) commit('partners/CHANGE_LITTLE_TAB', 4, { root: true })
+        if (response.data?.totalCount === 0 && rootState.partners.bigTabID === 2 && changeTab) {
+          commit('partners/CHANGE_LITTLE_TAB', 4, { root: true })
+        }
         console.log(response.data)
         commit('SET_PENDING_BOOSTERS', response.data)
         commit('partners/SET_COUNT_PENDING_BOOSTERS', response.data?.totalCount, { root: true })
