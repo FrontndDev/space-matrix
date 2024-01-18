@@ -144,7 +144,7 @@ const getPosition = (depth: number, pos: number): IPosition => {
 
 const openMAddPartner = (pos: IPosition) => {
   const ceil: Ceil = ceils.value[String(pos.pos)]
-  if (!onlyInfinityCell.value && !ceil.queueId && (partnersCount.value && ceil.allowSniper || ceil.allowBuyClone)) {
+  if (!onlyInfinityCell.value && !ceil.queueId && (ceil.allowSniper || ceil.allowBuyClone)) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="modal-add-partner">
     <ModalHeader @close-modal="emit('close-modal')">
-      {{ !thirdCeil?.allowBuyClone && thirdCeil?.allowSniper && partnersCount ? 'Выставить партнёра' : 'Купить BOOST' }}
+      {{ getTitle }}
     </ModalHeader>
     <div class="modal-add-partner__container">
       <BuyBoostCell
@@ -12,6 +12,7 @@
           type="profitable"
           :ceil="thirdCeil"
           :partners-count="partnersCount"
+          v-if="thirdCeil.allowSniper && partnersCount"
           @click="emit('open-partner-waiting')"
       />
     </div>
@@ -49,6 +50,19 @@ const thirdCeil: ComputedRef<Ceil> = computed(() =>
     onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['3']
 )
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
+
+const getTitle = computed(() => {
+  switch (true) {
+    case !thirdCeil.value?.allowBuyClone && thirdCeil.value?.allowSniper && !!partnersCount.value:
+      return 'Выставить партнера'
+    case thirdCeil.value?.allowBuyClone:
+      return 'Купить BOOST'
+    case !partnersCount.value:
+      return 'Список партнеров пуст'
+    default:
+      return ''
+  }
+})
 
 const buyBooster = async () => {
   if (matrixByType.value?.matrix?.id) {

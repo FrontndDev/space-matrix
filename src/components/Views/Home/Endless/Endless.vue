@@ -85,7 +85,7 @@ const getTypeForThirdCeil: ComputedRef<string> = computed(() => {
 })
 
 const openMAddPartner = (pos: IPosition) => {
-  if (partnersCount.value && thirdCeil.value.allowSniper || thirdCeil.value.allowBuyClone) {
+  if (thirdCeil.value.allowSniper || thirdCeil.value.allowBuyClone) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
   }

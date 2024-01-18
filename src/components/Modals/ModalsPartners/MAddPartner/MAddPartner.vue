@@ -2,13 +2,13 @@
   <div class="modal-add-partner">
     <template v-if="!confirmPaymentType">
       <ModalHeader @close-modal="getEmitForModalHeader">
-        {{ !getCeil?.allowBuyClone && getCeil?.allowSniper && partnersCount ? 'Выставить партнера' : 'Купить BOOST' }}
+        {{ getTitle }}
       </ModalHeader>
       <div class="modal-add-partner__container">
         <BuyBoostCell
             :price="getPrice"
-            @click="buyBooster"
             v-if="getCeil?.allowBuyClone"
+            @click="buyBooster"
         />
         <AddPartnerCell
             :type="getCeilCumulative ? 'cumulative' : 'profitable'"
@@ -88,6 +88,18 @@ const getPaymentPrice: ComputedRef<number> = computed(() => {
   }
 })
 
+const getTitle = computed(() => {
+  switch (true) {
+    case !getCeil.value?.allowBuyClone && getCeil.value?.allowSniper && !!partnersCount.value:
+      return 'Выставить партнера'
+    case getCeil.value?.allowBuyClone:
+      return 'Купить BOOST'
+    case !partnersCount.value:
+      return 'Список партнеров пуст'
+    default:
+      return ''
+  }
+})
 
 const getEmitForModalHeader = () => {
   props.selectedType === 'id' ? emit('open-m-matrix-partner') : emit('close-modal')
@@ -181,7 +193,7 @@ const confirm = async () => {
       }
       break;
     case 'failure':
-      await router.push('/app/wallet')
+      window.location.href = window.location.origin + '/app/wallet'
       emit('close-modal')
       break;
     default:
