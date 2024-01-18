@@ -45,7 +45,7 @@
 import {
   computed,
   ComputedRef,
-  reactive,
+  reactive
 } from "vue";
 
 import SmallCell from "../../../SmallCell/SmallCell.vue";
