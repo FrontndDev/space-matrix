@@ -43,7 +43,7 @@ import Tabs from "../../../UI/Tabs/Tabs.vue";
 import {
   reactive,
   computed,
-  ComputedRef,
+  ComputedRef
 } from "vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 import Pagination from "../../../Pagination/Pagination.vue";
