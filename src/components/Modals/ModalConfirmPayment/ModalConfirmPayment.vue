@@ -6,7 +6,6 @@
         <div class="modal__content">
           <MConfirmPayment
               currency="currency"
-              :result="props.result"
               :price="-1"
           />
           <div @click="$emit('close-modal')" class="modal__overlay"></div>
@@ -24,10 +23,6 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  result: {
-    type: String,
-    default: 'success'
-  }
 })
 </script>
 
