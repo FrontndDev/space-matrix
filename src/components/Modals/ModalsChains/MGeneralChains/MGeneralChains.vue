@@ -52,7 +52,7 @@ import {
   IChains
 } from "../../../../interfaces/chains.interface.ts";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
-import { useCopyLink } from "../../../../use/useCopyLink.ts";
+import { useCopyLink } from "../../../../composables/useCopyLink.ts";
 import {
   Matrix
 } from "../../../../interfaces/store.interface.ts";
@@ -100,6 +100,6 @@ const openMMatrixModal = (matrix: Matrix) => {
 }
 </script>
 
-<style scoped>
-@import "_mGeneralChains.scss";
+<style scoped lang="scss">
+@import "mGeneralChains";
 </style>

@@ -11,6 +11,7 @@ export interface IPartners {
 
 export interface IGetPendingBoostersParams {
     filter?: number;
+    changeTab?: boolean;
     isPartnerMatrix?: boolean;
     newTypeMatrix?: null | string;
 }

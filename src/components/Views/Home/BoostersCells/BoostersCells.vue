@@ -5,6 +5,7 @@
           type="little"
           :tabs="tabs"
           :cells="true"
+          @toggle-expose-tabs="selectTab"
       />
     </div>
     <div class="boosters-cells__container">
@@ -44,8 +45,7 @@
 import {
   computed,
   ComputedRef,
-  reactive,
-  watch
+  reactive
 } from "vue";
 
 import SmallCell from "../../../SmallCell/SmallCell.vue";
@@ -68,14 +68,14 @@ const selectedPage: ComputedRef<number> = computed(() => store.state.boosters.pa
 
 const selectPage = (page: number) => {
   store.commit('boosters/SET_PAGE_ID_BOOSTERS', page)
-  store.dispatch('boosters/getPendingBoosters')
 
+  store.dispatch('boosters/getPendingBoosters', false)
   store.dispatch('boosters/getExposedBoosters')
 }
 
-watch(() => littleTabID.value, () => {
+const selectTab = () => {
   selectPage(1)
-})
+}
 
 const tabs = reactive([
   {

@@ -10,7 +10,7 @@ import {
   Commit
 } from "vuex";
 import { Matrix } from "../../interfaces/store.interface.ts";
-import { useShowMessage } from "../../use/useShowMessage.ts";
+import { useShowMessage } from "../../composables/useShowMessage.ts";
 
 export default {
   namespaced: true,
@@ -34,7 +34,7 @@ export default {
   actions: {
     getExposedPartners(
       { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
-      { filter } : IGetPendingBoostersParams,
+      { filter, changeTab = true } : IGetPendingBoostersParams,
     ) {
       state.levelID = filter
 
@@ -46,7 +46,7 @@ export default {
         filter: { level: filter }
       }
     ).then(response => {
-        if (response.data?.totalCount === 0 && state.bigTabID === 1) commit('CHANGE_LITTLE_TAB', 1)
+        if (response.data?.totalCount === 0 && state.bigTabID === 1 && changeTab) commit('CHANGE_LITTLE_TAB', 1)
 
         console.log(response.data)
         // commit('CHANGE_BIG_TAB', 1)
@@ -56,7 +56,7 @@ export default {
 
     getPendingPartners(
       { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
-      { filter, isPartnerMatrix = false }: IGetPendingBoostersParams
+      { filter, isPartnerMatrix = false, changeTab = true }: IGetPendingBoostersParams
     ) {
       state.levelID = filter
 
@@ -68,7 +68,7 @@ export default {
           filter: { pending: 1, level: filter }
         }
       ).then(response => {
-        if (response.data?.totalCount === 0 && state.bigTabID === 1) commit('CHANGE_LITTLE_TAB', 2)
+        if (response.data?.totalCount === 0 && state.bigTabID === 1 && changeTab) commit('CHANGE_LITTLE_TAB', 2)
 
         if (!isPartnerMatrix) {
           commit('SET_PENDING_PARTNERS', response.data)

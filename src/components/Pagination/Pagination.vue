@@ -56,7 +56,7 @@ const props = defineProps({
   },
   count: {
     type: Number,
-    default: 10,
+    default: 1,
   }
 })
 

@@ -46,6 +46,11 @@ const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.only
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 
 const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection['1'])
+const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
+const secondCeil: ComputedRef<Ceil> = computed(() =>
+    onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['2']
+)
+
 const thirdCeil: Ref<Ceil> = computed(() =>
     onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['3']
 )
@@ -70,8 +75,8 @@ const getTypeForThirdCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (!thirdCeil.value?.matrix) {
-    if (!thirdCeil.value?.allowBuyClone && !thirdCeil.value?.allowSniper) {
+  if (!thirdCeil.value?.matrix && !onlyInfinityCell.value) {
+    if (!firstCeil.value?.matrix && !secondCeil.value?.matrix) {
       return 'disable'
     }
   }
@@ -80,7 +85,7 @@ const getTypeForThirdCeil: ComputedRef<string> = computed(() => {
 })
 
 const openMAddPartner = (pos: IPosition) => {
-  if (partnersCount.value && thirdCeil.value.allowSniper || thirdCeil.value.allowBuyClone) {
+  if (thirdCeil.value.allowSniper || thirdCeil.value.allowBuyClone) {
     emit('open-m-add-partner')
     emit('set-position-for-partner', pos)
   }

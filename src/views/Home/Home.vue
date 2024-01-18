@@ -41,11 +41,7 @@
 
           <CopyLink
               style="grid-area: copy-link;"
-              v-if="
-                !matrixByType?.in_queue &&
-                !matrixIsTemporarilyUnavailable &&
-                Object.keys(matrixByType).length
-              "
+              v-if="!matrixByType?.ctaText && !matrixIsTemporarilyUnavailable && Object.keys(matrixByType).length"
               @click="useCopyLink(matrixByType.matrix?.id ?? 0, matrixByType.matrix?.type ?? '')"
           />
         </div>
@@ -146,7 +142,7 @@ import {
   ListOfTypes,
 } from "../../interfaces/store.interface.ts";
 import { useRoute } from "vue-router";
-import { useCopyLink } from "../../use/useCopyLink.ts";
+import { useCopyLink } from "../../composables/useCopyLink.ts";
 import MatrixActivationInProgress from "../../components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
 // import ModalConfirmPayment from "../../components/Modals/ModalConfirmPayment/ModalConfirmPayment.vue";
 import { IChains } from "../../interfaces/chains.interface.ts";
@@ -179,6 +175,7 @@ const setPartnerBy = (type: string) => {
 }
 
 const selectChain = (chain: IChains) => {
+  store.dispatch('getWallets')
   selectedChain.value = chain
 }
 
@@ -283,6 +280,7 @@ const closeModal = () => {
 }
 
 const setPositionForPartner = (pos: IPosition) => {
+  store.dispatch('getWallets')
   partnerPos.value = pos
 }
 

@@ -43,8 +43,7 @@ import Tabs from "../../../UI/Tabs/Tabs.vue";
 import {
   reactive,
   computed,
-  ComputedRef,
-  watch,
+  ComputedRef
 } from "vue";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
 import Pagination from "../../../Pagination/Pagination.vue";
@@ -98,10 +97,10 @@ const selectPage = (page: number) => {
 
   switch (littleTabID.value) {
     case 1:
-      store.dispatch('partners/getPendingPartners', { filter: levelIDOfPartners.value || 1 })
+      store.dispatch('partners/getPendingPartners', { filter: levelIDOfPartners.value || 1, changeTab: false })
       break
     case 2:
-      store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value || 1 })
+      store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value || 1, changeTab: false })
       break
   }
 }

@@ -66,8 +66,9 @@ const getCircleFill = (binstatus: number) => {
           return 'fill-blue'
         case 'profitable':
           return 'fill-green'
+        default:
+          return 'fill-blue'
       }
-      break;
     case 2:
       return 'dashed-red'
   }
