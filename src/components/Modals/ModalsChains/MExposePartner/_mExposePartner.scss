@@ -6,6 +6,10 @@
   border-radius: 16px;
   background: $bg-base;
 
+  &.w-fit-content {
+    width: fit-content;
+  }
+
   &__content {
     @include flexbox(column);
     border-bottom: 1px solid $border-base-light;

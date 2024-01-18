@@ -1,6 +1,6 @@
 <template>
   <div class="modal-add-partner">
-    <template v-if="!confirmPaymentType">
+    <template v-if="!showConfirmPayment">
       <ModalHeader @close-modal="getEmitForModalHeader">
         {{ getTitle }}
       </ModalHeader>
@@ -8,7 +8,7 @@
         <BuyBoostCell
             :price="getPrice"
             v-if="getCeil?.allowBuyClone"
-            @click="buyBooster"
+            @click="showConfirmPayment = true"
         />
         <AddPartnerCell
             :type="getCeilCumulative ? 'cumulative' : 'profitable'"
@@ -20,13 +20,15 @@
       </div>
     </template>
     <MConfirmPayment
-        :result="confirmPaymentType"
-        :price="getPaymentPrice"
-        v-if="confirmPaymentType"
-        @cancel="cancel"
+        :currency="getMatrix.matrixConfig.currency"
+        :price="getPrice"
+        v-if="showConfirmPayment"
+        @cancel="closeMonfirmPayment"
         @confirm="confirm"
-        @close-modal="confirmPaymentType = ''"
-        @back="confirmPaymentType = ''"
+        @close-modal="showConfirmPayment = false"
+        @back="showConfirmPayment = false"
+
+        @change-result="changeResult"
     />
   </div>
 </template>
@@ -43,15 +45,12 @@ import {
   onMounted,
   ref,
   Ref,
-  watch
 } from "vue";
 import {
   Ceil,
   Ceils,
-  IBalance,
   IBuyBoosterParams,
   IMatrix,
-  IWallet,
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 import MConfirmPayment from "../../ModalConfirmPayment/MConfirmPayment/MConfirmPayment.vue";
@@ -69,27 +68,13 @@ const emit = defineEmits([
   'open-m-matrix-partner',
 ])
 
-const confirmPaymentType: Ref<string> = ref('')
-// failure, success
+const store = useStore()
 
-const getPaymentPrice: ComputedRef<number> = computed(() => {
-  if (!balanceArray.value.length) {
-    return 0
-  }
-  const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
-  const wallet = balance.value.wallets
-      .filter(wallet => wallet.type === 0)
-      .find(wallet => wallet.currency === matrix.matrixConfig.currency) as IWallet
+const showConfirmPayment: Ref<boolean> = ref(false)
+const confirmPaymentType = ref('')
+// failure, success, loading
 
-  switch (confirmPaymentType.value) {
-    case 'failure':
-      return (wallet.amount - getPrice.value) * -1
-    case 'success':
-      return getPrice.value
-    default:
-      return 0
-  }
-})
+const getMatrix: ComputedRef<IMatrix> = computed(() => props.selectedType === 'id' ? matrixById.value : matrixByType.value)
 
 const getTitle = computed(() => {
   switch (true) {
@@ -108,14 +93,12 @@ const getEmitForModalHeader = () => {
   props.selectedType === 'id' ? emit('open-m-matrix-partner') : emit('close-modal')
 }
 
-// const mConfirmPayment = () => {
-//
-// }
+const changeResult = (result: string) => confirmPaymentType.value = result
 
-const store = useStore()
-
-const balance: ComputedRef<IBalance> = computed(() => store.state.balance)
-const balanceArray = computed(() => Object.values(balance.value))
+const closeMonfirmPayment = () => {
+  showConfirmPayment.value = false
+  confirmPaymentType.value = ''
+}
 
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
@@ -133,12 +116,6 @@ const ceils: ComputedRef<Ceils> = computed(() => {
     return matrixById.value?.ceilsCollection?.['1']
   } else {
     return matrixByType.value?.ceilsCollection?.['1']
-  }
-})
-
-watch(() => balanceArray.value, () => {
-  if (balanceArray.value.length && confirmPaymentType.value === 'loading') {
-    buyBooster()
   }
 })
 
@@ -165,24 +142,6 @@ const partnersCount: ComputedRef<number> = computed(() => {
   }
 })
 
-const buyBooster = async () => {
-  if (!balanceArray.value.length) {
-    confirmPaymentType.value = 'loading'
-    return
-  }
-  const matrix: IMatrix = props.selectedType === 'id' ? matrixById.value : matrixByType.value
-
-  const wallet = balance.value.wallets
-      .filter(wallet => wallet.type === 0)
-      .find(wallet => wallet.currency === matrix.matrixConfig.currency) as IWallet
-
-  if (wallet.amount >= getPrice.value) {
-    confirmPaymentType.value = 'success'
-  } else {
-    confirmPaymentType.value = 'failure'
-  }
-}
-
 const confirm = async () => {
   switch (confirmPaymentType.value) {
     case 'success':
@@ -199,7 +158,9 @@ const confirm = async () => {
           matrix.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = 1
         }
 
-        confirmPaymentType.value = ''
+        closeMonfirmPayment()
+        getEmitForModalHeader()
+
         await store.dispatch('buyBooster', data)
 
         if (props.selectedType === 'id') {
@@ -207,7 +168,6 @@ const confirm = async () => {
         } else {
           await store.dispatch('getMatrixByType', store.state.selectedType.type)
         }
-        emit('close-modal')
       }
       break;
     case 'failure':
@@ -218,11 +178,7 @@ const confirm = async () => {
       break;
   }
 
-  confirmPaymentType.value = ''
-}
-
-const cancel = () => {
-  confirmPaymentType.value = ''
+  closeMonfirmPayment()
 }
 
 onMounted(() => {
