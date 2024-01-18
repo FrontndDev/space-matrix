@@ -247,12 +247,14 @@ const openModalPartner = (num: number) => {
   toggleModalPartners.value = true
   openModalPartners.value = num
   document.body.style.overflow = 'hidden'
+  document.documentElement.style.overflow = 'hidden'
 }
 
 const openModalChain = (num: number) => {
   toggleModalChains.value = true
   openModalChains.value = num
   document.body.style.overflow = 'hidden'
+  document.documentElement.style.overflow = 'hidden'
 }
 
 const openCells = (id: number) => {
@@ -263,6 +265,7 @@ const openModalTeleport = () => {
   toggleModalChains.value = true
   openModalChains.value = 5
   document.body.style.overflow = 'hidden'
+  document.documentElement.style.overflow = 'hidden'
 }
 
 const closeModal = () => {
@@ -276,6 +279,7 @@ const closeModal = () => {
   toggleModalPaymentForm.value = false
   toggleModalConfirmPayment.value = false
   document.body.style.overflow = 'auto'
+  document.documentElement.style.overflow = 'auto'
 }
 
 const setPositionForPartner = (pos: IPosition) => {
