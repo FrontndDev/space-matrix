@@ -100,6 +100,6 @@ const openMMatrixModal = (matrix: Matrix) => {
 }
 </script>
 
-<style scoped>
-@import "_mGeneralChains.scss";
+<style scoped lang="scss">
+@import "mGeneralChains";
 </style>
