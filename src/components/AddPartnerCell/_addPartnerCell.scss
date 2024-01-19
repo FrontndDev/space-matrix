@@ -8,13 +8,25 @@
   padding: 16px;
   position: relative;
 
+  &:not(.disable),
+  &:not(.disable2),
+  &:not(.disable3),
+  &:not(.loading) {
+    & .add-partner-cell {
+      &__plus,
+      &__title,
+      &__subtitle {
+        cursor: pointer;
+      }
+    }
+  }
+
   &__plus {
     @include flex-center;
     padding: 4px;
     width: 160px;
     height: 160px;
     border-radius: 28px;
-    cursor: pointer;
     position: relative;
 
     &.cumulative,

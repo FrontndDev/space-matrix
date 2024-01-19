@@ -14,9 +14,9 @@
     width: 160px;
     height: 160px;
     border-radius: 28px;
+    background: $bg-base-light;
     cursor: pointer;
     position: relative;
-    background: $bg-base-light;
 
     & svg {
       transform: rotate(45deg);

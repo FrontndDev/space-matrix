@@ -3,11 +3,11 @@
     <div class="matrix-header__buttons">
       <Preloader v-if="!listOfTypes?.types?.length"/>
       <DButton
-          :class="{
+          :class="[{
             disabled: !listOfTypes.opened.includes(type.type),
             time: isTime(type),
             active: selectedType?.type === type.type,
-          }"
+          }, type.type]"
           :is-time="isTime(type)"
           v-for="type in listOfTypes?.types"
           :key="type.title"
@@ -64,16 +64,25 @@ const selectType = (type: Type) => {
   router.push(`${baseUrl}/${type.type}` + queryId())
 }
 
+const isTime = (type: Type) => {
+  const key = Object.keys(listOfTypes.value.teamOpened).find(listType => listType === type.type)
+  return key ? !!listOfTypes.value.teamOpened[key] : false
+}
+
 const selectDButton = (type: Type) => {
   if (selectedType.value.type !== type.type) {
     store.commit('SET_MATRIX_BY_TYPE', {})
   }
   selectType(type)
-}
 
-const isTime = (type: Type) => {
-  const key = Object.keys(listOfTypes.value.teamOpened).find(listType => listType === type.type)
-  return key ? !!listOfTypes.value.teamOpened[key] : false
+  const buttons = listOfTypes.value.types
+      .filter(type => isTime(type))
+      .map(type => document.querySelector('.' + type.type)) as HTMLDivElement[]
+
+  buttons.forEach(button => {
+    button.classList.remove('time')
+    setTimeout(() => button.classList.add('time'), 0)
+  })
 }
 
 watch(() => listOfTypes.value?.types?.length, () => {

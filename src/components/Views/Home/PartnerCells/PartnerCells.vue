@@ -50,7 +50,10 @@ import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 import { useStore } from "vuex";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
-import { Matrix } from "../../../../interfaces/store.interface.ts";
+import {
+  Ceil,
+  Matrix
+} from "../../../../interfaces/store.interface.ts";
 
 const emit = defineEmits(['open-m-matrix-partner', 'select-partner'])
 
@@ -91,6 +94,18 @@ const data = reactive([
 ])
 
 const levelIDOfPartners = computed(() => store.state.partners.levelID)
+
+const ceilIsCumulative = (cell: Ceil) => {
+  return !!cell?.fillRevard.find(reward => reward.event === 'freeze')
+}
+
+const getTypeForSelectedCeil = (cell: Ceil) => {
+  if (cell?.matrix?.is_booster) {
+    return 'boost'
+  }
+
+  return ceilIsCumulative(cell) ? 'cumulative' : 'profitable'
+}
 
 const selectPage = (page: number) => {
   store.commit('partners/SET_PAGE_ID_PARTNERS', page)
