@@ -5,7 +5,7 @@
     <div class="endless__menu endless__menu_mt-16">
       <AddPartnerCell
           cell-type="infinity"
-          subtitle="Заполните ячейки накопления"
+          disabled-subtitle="Заполните ячейки накопления"
           :type="getTypeForThirdCeil"
           :ceil="thirdCeil"
           :partners-count="partnersCount"

@@ -26,10 +26,14 @@
         v-else
     />
 
-    <div v-if="props.type === 'disable3'" class="add-partner-cell__subtitle">На этой матрице нет накопительных ячеек</div>
-    <div v-else-if="props.type === 'loading'" class="add-partner-cell__subtitle">Идет обновление</div>
-    <div v-else-if="props.type === 'disable'" class="add-partner-cell__subtitle">{{ props.subtitle }}</div>
-    <div v-else class="add-partner-cell__subtitle">Доступно ({{ props.partnersCount }})</div>
+
+    <div class="add-partner-cell__subtitle">
+      <div v-if="props.type === 'disable3'">На этой матрице нет накопительных ячеек</div>
+      <div v-else-if="props.type === 'loading'">Идет обновление</div>
+      <div v-else-if="props.type === 'disable'">{{ props.disabledSubtitle }}</div>
+      <div v-else>{{ props.subtitle ?? `Доступно (${props.partnersCount})` }}</div>
+      <slot name="subtitleIcon"/>
+    </div>
 
     <CellType
         :size="props.size"
@@ -75,9 +79,12 @@ const props = defineProps({
     type: String,
     default: 'Выставить партнера',
   },
-  subtitle: {
+  disabledSubtitle: {
     type: String,
     default: 'Заполните левую ячейку'
+  },
+  subtitle: {
+    type: String,
   }
 });
 
