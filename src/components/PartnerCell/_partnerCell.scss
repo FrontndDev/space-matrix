@@ -7,6 +7,9 @@
   width: 192px;
   height: fit-content;
   padding: 16px;
+  border-radius: 16px;
+  background: $bg-base;
+  transition: .25s all ease;
   text-align: center;
   position: relative;
 
@@ -80,6 +83,10 @@
 
   &.small .partner-cell__name {
     font-size: 12px;
+  }
+
+  &:hover {
+    background: $bg-base-secondary;
   }
 }
 

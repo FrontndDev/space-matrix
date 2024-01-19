@@ -6,20 +6,10 @@
   row-gap: 8px;
   width: 192px;
   padding: 16px;
+  border-radius: 16px;
+  background: $bg-base;
+  transition: .25s all ease;
   position: relative;
-
-  &:not(.disable),
-  &:not(.disable2),
-  &:not(.disable3),
-  &:not(.loading) {
-    & .add-partner-cell {
-      &__plus,
-      &__title,
-      &__subtitle {
-        cursor: pointer;
-      }
-    }
-  }
 
   &__plus {
     @include flex-center;
@@ -43,7 +33,14 @@
     &.disable3,
     &.loading {
       background: $bg-base-light;
-      cursor: auto;
+
+      &.add-partner-cell {
+        &__plus,
+        &__title,
+        &__subtitle {
+          cursor: auto;
+        }
+      }
 
       & path {
         fill: $text-base-light;
@@ -118,10 +115,6 @@
     text-align: center;
   }
 
-  //&.disable .add-partner-cell__title {
-  //  color: $text-base-secondary;
-  //}
-
   &.loading {
     .cell-type {
       display: none;
@@ -160,6 +153,38 @@
 
       &__subtitle {
         font-size: 10px;
+      }
+    }
+  }
+
+
+  &__plus,
+  &__title,
+  &__subtitle {
+    &:not(.disable, .disable2, .disable3, .loading) {
+      cursor: pointer;
+    }
+  }
+
+
+  &:hover {
+    &:not(.disable, .disable2, .disable3, .loading) {
+      background: $bg-base-secondary;
+
+      & .add-partner-cell__plus {
+
+        &.cumulative,
+        &.boost {
+          background: $bg-blue-light;
+
+          & path {
+            fill: $bg-blue-dark;
+          }
+        }
+      }
+
+      & ::v-deep(.cell-type) {
+        border-color: $border-base-secondary;
       }
     }
   }
