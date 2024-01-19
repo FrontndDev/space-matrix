@@ -24,10 +24,11 @@
         class="add-partner-cell__title add-partner-cell__title_mt-8"
         v-html="props.title"
         v-else
+        @click="openMAddPartner"
     />
 
 
-    <div class="add-partner-cell__subtitle">
+    <div class="add-partner-cell__subtitle" @click="openMAddPartner">
       <div v-if="props.type === 'disable3'">На этой матрице нет накопительных ячеек</div>
       <div v-else-if="props.type === 'loading'">Идет обновление</div>
       <div v-else-if="props.type === 'disable'">{{ props.disabledSubtitle }}</div>
