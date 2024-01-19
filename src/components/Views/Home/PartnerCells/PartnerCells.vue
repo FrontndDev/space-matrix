@@ -51,7 +51,6 @@ import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
 import { useStore } from "vuex";
 import { IPartners } from "../../../../interfaces/partners.interface.ts";
 import {
-  Ceil,
   Matrix
 } from "../../../../interfaces/store.interface.ts";
 
@@ -95,9 +94,9 @@ const data = reactive([
 
 const levelIDOfPartners = computed(() => store.state.partners.levelID)
 
-const ceilIsCumulative = (cell: Ceil) => {
-  return !!cell?.fillRevard.find(reward => reward.event === 'freeze')
-}
+// const ceilIsCumulative = (cell: Ceil) => {
+//   return !!cell?.fillRevard.find(reward => reward.event === 'freeze')
+// }
 
 // const getTypeForSelectedCeil = (cell: Ceil) => {
 //   if (cell?.matrix?.is_booster) {
