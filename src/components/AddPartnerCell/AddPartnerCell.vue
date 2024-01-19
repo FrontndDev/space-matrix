@@ -34,7 +34,7 @@
     <CellType
         :size="props.size"
         :cell-type="props.cellType"
-        :type="props.type"
+        :type="props.cellType"
         v-if="!['disable2', 'disable3'].includes(props.type) && props.cellType"
     />
   </div>

@@ -35,7 +35,7 @@
       <PartnerType
           :binstatus="cell.binstatus?.[1]"
           :cellType="props.cellType"
-          :type="props.type"
+          :type="props.cellType"
           @click="$emit('open-m-matrix-partner')"
           v-if="props.cellType && props.type && props.showPartnerType"
       />
@@ -79,6 +79,7 @@ const props = defineProps({
     default: 'partners'
     // partners, boost, chains-boost, chain-partner, teleport, profitable
   },
+
   state: {
     type: String,
     default: 'exhibited'
