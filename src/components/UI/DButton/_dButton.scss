@@ -42,6 +42,10 @@
   &.disabled {
     border: 1px solid $border-base-contrast;
 
+    & * {
+      transition: .25s all ease;
+    }
+
     & .d-button {
       &__name,
       &__price {
@@ -52,12 +56,63 @@
         fill: $text-base-disable;
       }
     }
+
+    &:hover,
+    &:active {
+      & .d-button {
+        &__name {
+          color: $text-base-light;
+        }
+
+        &__price {
+          color: $text-base-secondary;
+        }
+
+        &__price path {
+          fill: $text-base-secondary;
+        }
+      }
+    }
+
+    &:active {
+      & .d-button__name {
+        color: $text-base-secondary;
+      }
+    }
   }
 
   &:not(.active) {
     &.time {
       border: 1px solid $border-red;
       animation: time 2s linear infinite;
+
+      & * {
+        transition: .25s all ease;
+      }
+
+      &:hover,
+      &:active {
+        & .d-button {
+          background: $bg-red-light;
+
+          &__name {
+            color: $text-base-secondary;
+          }
+
+          &__time {
+            color: $text-base-light;
+          }
+        }
+      }
+
+      &:active {
+        & .d-button {
+          &__name,
+          &__time {
+            color: $text-base;
+          }
+        }
+      }
     }
   }
 }
