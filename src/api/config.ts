@@ -3,6 +3,17 @@ import { useShowMessage } from "../composables/useShowMessage.ts";
 
 const BASE_URL = 'https://dev.halk.ai'
 
+const checkUserIsModer = (error: AxiosError) => {
+    //@ts-ignore
+    if (window.UserData.moder && error.status === 500) {
+        useShowMessage('red', error.message, 'Ошибка:')
+    } else if (error.status !== 500) {
+        useShowMessage('red', error.message, 'Ошибка:')
+    }
+
+    console.error(error)
+}
+
 function setGlobalConfig(token: string | null) {
 
   function getCookie(name: string) {
@@ -44,8 +55,7 @@ export async function putAsync(url: string, data: unknown, checkError = true) {
         if (checkError && error.response) {
             return error.response
         }
-        console.error(error)
-        useShowMessage('red', error.message, 'Ошибка:')
+        checkUserIsModer(error)
     }
 
     return undefined
@@ -71,8 +81,7 @@ export async function postAsync(url: string, data = {}, checkError = true) {
         if (checkError && error.response) {
             return error.response
         }
-        useShowMessage('red', error.message, 'Ошибка:')
-        console.error(error)
+        checkUserIsModer(error)
     }
 
     return undefined
@@ -90,9 +99,9 @@ export async function getAsync(url: string) {
         if (response.status === 200) {
             return response?.data
         }
+
     } catch (e) {
         const error = e as AxiosError
-        useShowMessage('red', error.message, 'Ошибка:')
-        console.error(error)
+        checkUserIsModer(error)
     }
 }
