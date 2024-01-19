@@ -19,9 +19,17 @@
           :cell-type="getCellTypeFirstCeil"
           :ceil="firstCeil"
           :partners-count="partnersCount"
+          :title="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
+          :subtitle="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone ? `${matrixByType.matrixConfig.price}` : ''"
           v-if="!firstCeil?.matrix || firstCeil.queueId"
           @open-m-add-partner="openMAddPartner(getPosition(firstCeil.depth, firstCeil.pos))"
-      />
+      >
+        <template #subtitleIcon v-if="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.08823 12.4278C7.69766 13.5451 9.302 13.5451 9.91143 12.4278L13.6345 5.60209C14.219 4.5306 13.4435 3.22419 12.2229 3.22419H4.77671C3.55619 3.22419 2.78066 4.5306 3.36511 5.60209L7.08823 12.4278ZM9.20563 12.0428L12.9287 5.21711C13.221 4.68137 12.8332 4.02816 12.2229 4.02816H8.90181V12.3557C9.02361 12.2858 9.12996 12.1816 9.20563 12.0428ZM7.79403 12.0428C7.8697 12.1816 7.97605 12.2858 8.09784 12.3557V4.02816H4.77671C4.16645 4.02816 3.77869 4.68137 4.07091 5.21711L7.79403 12.0428Z" fill="#7B879D"/>
+          </svg>
+        </template>
+      </AddPartnerCell>
 
       <!--   SECOND CEIL    -->
       <PartnerCell
@@ -37,9 +45,18 @@
           :cell-type="getCellTypeSecondCeil"
           :ceil="secondCeil"
           :partners-count="partnersCount"
+          :title="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
+          :subtitle="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone ? `${matrixByType.matrixConfig.price}` : ''"
+          :disabled-subtitle="!firstCeil?.matrix ? 'Заполните левую ячейку' : 'Доходная ячейка'"
           v-if="!secondCeil?.matrix || secondCeil.queueId"
           @open-m-add-partner="openMAddPartner(getPosition(secondCeil.depth, secondCeil.pos))"
-      />
+      >
+        <template #subtitleIcon v-if="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.08823 12.4278C7.69766 13.5451 9.302 13.5451 9.91143 12.4278L13.6345 5.60209C14.219 4.5306 13.4435 3.22419 12.2229 3.22419H4.77671C3.55619 3.22419 2.78066 4.5306 3.36511 5.60209L7.08823 12.4278ZM9.20563 12.0428L12.9287 5.21711C13.221 4.68137 12.8332 4.02816 12.2229 4.02816H8.90181V12.3557C9.02361 12.2858 9.12996 12.1816 9.20563 12.0428ZM7.79403 12.0428C7.8697 12.1816 7.97605 12.2858 8.09784 12.3557V4.02816H4.77671C4.16645 4.02816 3.77869 4.68137 4.07091 5.21711L7.79403 12.0428Z" fill="#7B879D"/>
+          </svg>
+        </template>
+      </AddPartnerCell>
     </div>
   </div>
 </template>
@@ -56,6 +73,7 @@ import {
 import {
   Ceil,
   Ceils,
+  IMatrix,
 } from "../../../../interfaces/store.interface.ts";
 import { IPosition } from "../../../../interfaces/partners.interface.ts";
 
@@ -67,6 +85,8 @@ const emit = defineEmits([
 ])
 
 const store = useStore()
+
+const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
 const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.onlyInfinityCell)
 

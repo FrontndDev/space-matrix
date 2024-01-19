@@ -91,6 +91,8 @@ watch(() => store.state.selectedType, () => {
   store.dispatch('boosters/getExposedBoosters')
 
   store.dispatch('chains/getChainsList')
+
+  store.dispatch('chains/getTeleportList')
 })
 
 const tabs = reactive([
