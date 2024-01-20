@@ -30,7 +30,7 @@
 
     <div class="add-partner-cell__subtitle" @click="openMAddPartner">
       <div v-if="props.type === 'disable3'">На этой матрице нет накопительных ячеек</div>
-      <div v-else-if="props.type === 'loading'">Идет обновление</div>
+      <div v-else-if="props.type === 'loading'">Идет активация</div>
       <div v-else-if="props.type === 'disable'">{{ props.disabledSubtitle }}</div>
       <div v-else>{{ props.subtitle ? props.subtitle : `Доступно (${props.partnersCount})` }}</div>
       <slot name="subtitleIcon"/>
