@@ -36,6 +36,7 @@
           :binstatus="cell.binstatus?.[1]"
           :cellType="props.cellType"
           :type="props.cellType"
+          :circles="cell.ceils['1']"
           @click="$emit('open-m-matrix-partner')"
           v-if="props.cellType && props.type && props.showPartnerType"
       />

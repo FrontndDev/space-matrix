@@ -1,5 +1,9 @@
 import { IPosition } from "./partners.interface.ts";
 
+export interface IObject {
+    [key: string]: string
+}
+
 export type Type = {
     currency: string;
     price: number;
@@ -45,6 +49,11 @@ export interface Matrix {
     is_bonus: boolean;
     is_booster: boolean;
     number: number;
+    ceils: {
+        [key: string]: {
+            [key: string]: string;
+        };
+    };
     binstatus: IBinStatus[];
     immutable?: boolean;
 }

@@ -23,13 +23,13 @@
     <template v-if="!['boost', 'chains-boost'].includes(props.type) && props.cellType !== 'circle-avatar'">
       <div
           class="partner-type__circle"
-          :class="[getCircleFill(props.binstatus?.['1']), getCircleFill(props.binstatus?.['1'])]"
+          :class="[getCircleFill(props.binstatus?.['1'], props.circles?.['1']), props.circles?.['1']]"
       >
         <span></span>
       </div>
       <div
           class="partner-type__circle"
-          :class="[getCircleFill(props.binstatus?.['2']), getCircleFill(props.binstatus?.['2'])]"
+          :class="[getCircleFill(props.binstatus?.['2'], props.circles?.['2']), props.circles?.['2']]"
       >
         <span></span>
       </div>
@@ -40,6 +40,9 @@
 </template>
 
 <script setup lang="ts">
+import { PropType } from "vue/dist/vue";
+import { IObject } from "../../../interfaces/store.interface.ts";
+
 const props = defineProps({
   binstatus: {
     type: Object,
@@ -50,6 +53,10 @@ const props = defineProps({
     default: 'cumulative'
     //cumulative, profitable, boost, infinity, circle-avatar
   },
+  circles: {
+    type: Object as PropType<IObject>,
+    //freeze, profitable
+  },
   type: {
     type: String,
     default: ''
@@ -57,12 +64,11 @@ const props = defineProps({
   }
 });
 
-const getCircleFill = (binstatus: number) => {
+const getCircleFill = (binstatus: number, circleType?: string) => {
   switch (binstatus) {
     case 1:
-      switch (props.type) {
-        case 'cumulative':
-        case 'infinity':
+      switch (circleType) {
+        case 'freeze':
           return 'fill-blue'
         case 'profitable':
           return 'fill-green'

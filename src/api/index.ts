@@ -42,7 +42,7 @@ export async function getListOfChains(pageID: number) {
 }
 
 export async function getListOfPartnersForTeleport(pageID: number) {
-  return getAsync(`/api/matrix/chains/profit?page=${pageID}`)
+  return getAsync(`/api/matrix/teleport/list?page=${pageID}`)
 }
 
 export async function getChainDetail(id: number) {

@@ -33,6 +33,7 @@
         :binstatus="props.ceil.binstatus[1]"
         :cellType="props.cellType"
         :type="props.type"
+        :circles="ceil.ceils['1']"
         v-if="props.ceil"
         @click="$emit('open-m-matrix-partner')"
         @circle-avatar="$emit('circle-avatar')"
