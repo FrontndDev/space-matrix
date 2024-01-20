@@ -5,7 +5,7 @@
     <div class="endless__menu endless__menu_mt-16">
       <AddPartnerCell
           cell-type="infinity"
-          disabled-subtitle="Заполните ячейки накопления"
+          disabled-subtitle="Бесконечная ячейка"
           :type="getTypeForThirdCeil"
           :ceil="thirdCeil"
           :partners-count="partnersCount"
@@ -46,10 +46,10 @@ const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.only
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 
 const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection['1'])
-const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
-const secondCeil: ComputedRef<Ceil> = computed(() =>
-    onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['2']
-)
+// const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
+// const secondCeil: ComputedRef<Ceil> = computed(() =>
+//     onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['2']
+// )
 
 const thirdCeil: Ref<Ceil> = computed(() =>
     onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['3']
@@ -75,11 +75,15 @@ const getTypeForThirdCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (!thirdCeil.value?.matrix && !onlyInfinityCell.value) {
-    if (!firstCeil.value?.matrix && !secondCeil.value?.matrix) {
-      return 'disable'
-    }
+  if (!thirdCeil.value?.allowSniper && !thirdCeil.value?.allowBuyClone) {
+    return 'disable'
   }
+
+  // if (!thirdCeil.value?.matrix && !onlyInfinityCell.value) {
+  //   if (!firstCeil.value?.matrix && !secondCeil.value?.matrix) {
+  //     return 'disable'
+  //   }
+  // }
 
   return 'infinity'
 })

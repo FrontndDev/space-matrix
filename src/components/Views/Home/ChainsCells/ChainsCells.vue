@@ -24,21 +24,21 @@
           @open-m-teleport="$emit('open-m-teleport')"
           v-if="littleTabID === 5"
       />
-      <ChainCell
-          v-for="cell in chainsList?.list"
-          :key="cell?.id"
-          :id="cell?.id"
-          :type="'default'"
-          :cost="cell.price?.amount"
-          :reward="cell.profit?.amount"
-          :matrixStart="cell?.start"
-          :matrixEnd="cell?.end"
-          :countLinks="cell?.count_links"
-          :avatar="cell?.initiator.photo"
-          @open-general-chains="openGeneralChains"
-          @open-m-teleport="$emit('open-m-teleport')"
-          v-if="littleTabID === 6"
-      />
+<!--      <ChainCell-->
+<!--          v-for="cell in chainsList"-->
+<!--          :key="cell?.id"-->
+<!--          :id="cell?.id"-->
+<!--          :type="'default'"-->
+<!--          :cost="cell.price?.amount"-->
+<!--          :reward="cell.profit?.amount"-->
+<!--          :matrixStart="cell?.start"-->
+<!--          :matrixEnd="cell?.end"-->
+<!--          :countLinks="cell?.count_links"-->
+<!--          :avatar="cell?.initiator.photo"-->
+<!--          @open-general-chains="openGeneralChains"-->
+<!--          @open-m-teleport="$emit('open-m-teleport')"-->
+<!--          v-if="littleTabID === 6"-->
+<!--      />-->
     </div>
   </div>
   <EmptyCells
