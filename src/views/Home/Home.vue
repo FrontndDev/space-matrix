@@ -141,7 +141,10 @@ import {
   IMatrix,
   ListOfTypes,
 } from "../../interfaces/store.interface.ts";
-import { useRoute } from "vue-router";
+import {
+  useRoute,
+  useRouter
+} from "vue-router";
 import { useCopyLink } from "../../composables/useCopyLink.ts";
 import MatrixActivationInProgress from "../../components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
 // import ModalConfirmPayment from "../../components/Modals/ModalConfirmPayment/ModalConfirmPayment.vue";
@@ -163,6 +166,7 @@ const toggleModalConfirmPayment = ref(false)
 // const resultModalConfirmPayment = ref('failure')
 
 const store = useStore()
+const router = useRouter()
 const route = useRoute()
 
 const interval: Ref<number | null> = ref(null)
@@ -266,6 +270,7 @@ const openModalTeleport = () => {
 }
 
 const closeModal = () => {
+  router.push(route.path)
   store.commit('SET_MATRIX_BY_ID', {})
   selectedPartner.value = null
   selectedType.value = 'type'
@@ -286,6 +291,8 @@ const setPositionForPartner = (pos: IPosition) => {
 
 const selectPartner = async (ceil: Ceil) => {
   if (ceil?.matrix) {
+    const matrixId = ceil?.matrix.id
+    await router.push(route.path + `?id=${matrixId}`)
     // Получаем Матрицу партнёра
     store.commit('SET_MATRIX_BY_ID', {})
     const response = await store.dispatch('getMatrixById', ceil.matrix.id)

@@ -2,8 +2,8 @@
   <div class="modal-matrix-partner">
     <ModalHeader
         modal-header="MMatrixPartner"
-        @open-m-matrix-partner="parentMatrix"
         :allowTop="matrixById?.allowTop"
+        @open-m-matrix-partner="parentMatrix"
         @close-modal="$emit('close-modal')"
     >
       Матрица партнера
@@ -132,6 +132,10 @@ import {
   IPosition
 } from "../../../../interfaces/partners.interface.ts";
 import { useCopyLink } from "../../../../composables/useCopyLink.ts";
+import {
+  useRoute,
+  useRouter
+} from "vue-router";
 
 const emit = defineEmits([
   'open-m-add-partner',
@@ -141,6 +145,9 @@ const emit = defineEmits([
   'set-partner-by',
   'close-modal',
 ])
+
+const router = useRouter()
+const route = useRoute()
 
 const store = useStore()
 
@@ -303,6 +310,7 @@ const getUser = () => {
 const parentMatrix = async () => {
   const parentMatrixId = selectedPartner.value?.matrix?.parent_matrix_id
   if (parentMatrixId) {
+    await router.push(route.path + `?id=${parentMatrixId}`)
     emit('select-partner', {})
     store.commit('SET_MATRIX_BY_ID', {})
 
