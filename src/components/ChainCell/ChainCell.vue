@@ -28,7 +28,7 @@
       />
     </div>
     <SmallCellType
-        v-if="countLinks && countLinks > 1"
+        v-if="countLinks && countLinks > 1 || props.type === 'teleport'"
         :cellType="props.type"
         :countLinks="countLinks"
     />

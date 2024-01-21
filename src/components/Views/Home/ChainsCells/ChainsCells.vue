@@ -10,10 +10,10 @@
     </div>
     <div class="chains-cells__container">
       <ChainCell
+          type="default"
           v-for="cell in chainsList?.list"
           :key="cell?.id"
           :id="cell?.id"
-          :type="'default'"
           :cost="cell.price?.amount"
           :reward="cell.profit?.amount"
           :matrixStart="cell?.start"
@@ -25,16 +25,15 @@
           v-if="littleTabID === 5"
       />
       <ChainCell
+          type="teleport"
           v-for="cell in teleportList?.list"
           :key="cell?.id"
           :id="cell?.id"
-          :type="'default'"
-          :cost="cell.price?.amount"
-          :reward="cell.profit?.amount"
+          :reward="1234"
           :matrixStart="cell?.start"
           :matrixEnd="cell?.end"
           :countLinks="cell?.count_links"
-          :avatar="cell?.initiator.photo"
+          :avatar="cell?.owner.photo"
           @open-general-chains="openGeneralChains"
           @open-m-teleport="$emit('open-m-teleport')"
           v-if="littleTabID === 6"
@@ -63,13 +62,16 @@ import {
 import ChainCell from "../../../ChainCell/ChainCell.vue";
 import Pagination from "../../../Pagination/Pagination.vue";
 import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
-import { IChainsList } from "../../../../interfaces/chains.interface.ts";
+import {
+  IChainsList,
+  ITeleportList
+} from "../../../../interfaces/chains.interface.ts";
 import { useStore } from "vuex";
 
 const store = useStore()
 
 const chainsList: ComputedRef<IChainsList> = computed(() => store.state.chains.chainsList)
-const teleportList: ComputedRef<IChainsList> = computed(() => store.state.chains.teleportList)
+const teleportList: ComputedRef<ITeleportList> = computed(() => store.state.chains.teleportList)
 
 const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
 

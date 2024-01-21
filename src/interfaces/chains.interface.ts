@@ -43,3 +43,10 @@ export interface IChainDetails {
   };
   rewards: FillReward[];
 }
+
+export interface ITeleportList {
+  currentPage: number;
+  list: Matrix[];
+  totalCount: number;
+  totalPages: number;
+}
