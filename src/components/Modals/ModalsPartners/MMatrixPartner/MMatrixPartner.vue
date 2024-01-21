@@ -49,13 +49,13 @@
                   :cell-type="getCellTypeFirstCeil"
                   :ceil="firstCeil"
                   :partners-count="partnersCount"
-                  :title="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
-                  :subtitle="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
+                  :title="!firstCeil?.allowSniper && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
+                  :subtitle="!firstCeil?.allowSniper && firstCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
                   :disabled-subtitle="getCellTypeFirstCeil === 'cumulative' ? 'Накопительная ячейка' : 'Доходная ячейка'"
                   v-if="!firstCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
               >
-                <template #subtitleIcon v-if="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone">
+                <template #subtitleIcon v-if="!firstCeil?.allowSniper && firstCeil?.allowBuyClone">
                   <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7.08823 12.4278C7.69766 13.5451 9.302 13.5451 9.91143 12.4278L13.6345 5.60209C14.219 4.5306 13.4435 3.22419 12.2229 3.22419H4.77671C3.55619 3.22419 2.78066 4.5306 3.36511 5.60209L7.08823 12.4278ZM9.20563 12.0428L12.9287 5.21711C13.221 4.68137 12.8332 4.02816 12.2229 4.02816H8.90181V12.3557C9.02361 12.2858 9.12996 12.1816 9.20563 12.0428ZM7.79403 12.0428C7.8697 12.1816 7.97605 12.2858 8.09784 12.3557V4.02816H4.77671C4.16645 4.02816 3.77869 4.68137 4.07091 5.21711L7.79403 12.0428Z" fill="#7B879D"/>
                   </svg>
@@ -76,13 +76,13 @@
                   :cell-type="getCellTypeSecondCeil"
                   :ceil="secondCeil"
                   :partners-count="partnersCount"
-                  :title="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
-                  :subtitle="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
+                  :title="!secondCeil?.allowSniper && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
+                  :subtitle="!secondCeil?.allowSniper && secondCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
                   :disabled-subtitle="getCellTypeSecondCeil === 'cumulative' ? 'Накопительная ячейка' : 'Доходная ячейка'"
                   v-if="!secondCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
               >
-                <template #subtitleIcon v-if="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone">
+                <template #subtitleIcon v-if="!secondCeil?.allowSniper && secondCeil?.allowBuyClone">
                   <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7.08823 12.4278C7.69766 13.5451 9.302 13.5451 9.91143 12.4278L13.6345 5.60209C14.219 4.5306 13.4435 3.22419 12.2229 3.22419H4.77671C3.55619 3.22419 2.78066 4.5306 3.36511 5.60209L7.08823 12.4278ZM9.20563 12.0428L12.9287 5.21711C13.221 4.68137 12.8332 4.02816 12.2229 4.02816H8.90181V12.3557C9.02361 12.2858 9.12996 12.1816 9.20563 12.0428ZM7.79403 12.0428C7.8697 12.1816 7.97605 12.2858 8.09784 12.3557V4.02816H4.77671C4.16645 4.02816 3.77869 4.68137 4.07091 5.21711L7.79403 12.0428Z" fill="#7B879D"/>
                   </svg>

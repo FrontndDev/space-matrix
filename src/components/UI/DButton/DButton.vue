@@ -29,7 +29,6 @@ import {
   computed,
   ComputedRef,
   onBeforeMount,
-  onMounted,
   PropType,
   ref,
   Ref,
@@ -79,7 +78,7 @@ const hours = computed(() => Math.floor(time.value / 3600))
 const remainingSeconds = computed(() => time.value % 3600)
 const minutes = computed(() => Math.floor(remainingSeconds.value / 60))
 
-onMounted(() => {
+onBeforeMount(() => {
   if (time.value) {
     timeInterval.value = setInterval(() => {
       store.state.listOfTypes.teamOpened[props.type?.type]--
