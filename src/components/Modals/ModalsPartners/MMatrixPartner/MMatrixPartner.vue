@@ -45,13 +45,13 @@
               />
               <AddPartnerCell
                   size="small"
-                  disabled-subtitle="Доходная ячейка"
                   :type="getTypeForFirstCeil"
                   :cell-type="getCellTypeFirstCeil"
                   :ceil="firstCeil"
                   :partners-count="partnersCount"
                   :title="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   :subtitle="!firstCeil?.allowSniper && !partnersCount && firstCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
+                  :disabled-subtitle="getTypeForFirstCeil === 'cumulative' ? 'Накопительная ячейка' : 'Доходная ячейка'"
                   v-if="!firstCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
               >
@@ -78,7 +78,7 @@
                   :partners-count="partnersCount"
                   :title="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   :subtitle="!secondCeil?.allowSniper && !partnersCount && secondCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
-                  :disabled-subtitle="!firstCeil?.matrix ? 'Заполните левую ячейку' : 'Доходная ячейка'"
+                  :disabled-subtitle="getTypeForSecondCeil === 'cumulative' ? 'Накопительная ячейка' : 'Доходная ячейка'"
                   v-if="!secondCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
               >
