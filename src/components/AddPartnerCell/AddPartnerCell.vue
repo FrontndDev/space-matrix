@@ -82,7 +82,7 @@ const props = defineProps({
   },
   disabledSubtitle: {
     type: String,
-    default: 'Заполните левую ячейку'
+    default: 'Доходная ячейка'
   },
   subtitle: {
     type: String,
