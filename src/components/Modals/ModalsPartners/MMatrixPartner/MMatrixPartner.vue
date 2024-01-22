@@ -127,6 +127,7 @@ import {
   Ceil,
   Ceils,
   IMatrix,
+  Type,
 } from "../../../../interfaces/store.interface.ts";
 import {
   IPosition
@@ -212,7 +213,7 @@ const getTypeForSelectedCeil: ComputedRef<string> = computed(() => {
     return 'boost'
   }
 
-  return selectedCeilIsCumulative.value ? 'cumulative' : 'profitable'
+  return store.state.listOfTypes.types.find((type: Type) => type.type === matrixById.value.matrixConfig?.type)
 })
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
@@ -232,12 +233,12 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     return 'boost'
   }
 
-  return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
+  return matrixById.value.matrix.ceils['1']['1']
 })
 
 const getCellTypeFirstCeil: ComputedRef<string> = computed(() => {
   if (getTypeForFirstCeil.value === 'disable') {
-    return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
+    return matrixById.value.matrix?.ceils['1']['1'] ?? ''
   } else {
     return getTypeForFirstCeil.value
   }
@@ -263,12 +264,12 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
     return 'boost'
   }
 
-  return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
+  return matrixById.value.matrix.ceils['1']['2']
 })
 
 const getCellTypeSecondCeil: ComputedRef<string> = computed(() => {
   if (getTypeForSecondCeil.value === 'disable') {
-    return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
+    return matrixById.value.matrix?.ceils['1']['2'] ?? ''
   } else {
     return getTypeForSecondCeil.value
   }

@@ -297,9 +297,26 @@ const selectPartner = async (ceil: Ceil) => {
   if (ceil?.matrix) {
     const matrixId = ceil?.matrix.id
     await router.push(route.path + `?id=${matrixId}`)
-    // Получаем Матрицу партнёра
+  //   // Получаем Матрицу партнёра
+  //   store.commit('SET_MATRIX_BY_ID', {})
+  //   const response = await store.dispatch('getMatrixById', ceil.matrix.id)
+  //
+  //   if (response?.error_code) {
+  //     closeModal()
+  //   }
+  //
+  //   // Получаем партнеров в ожидании "Матрицы партнёра"
+  //   store.dispatch('partners/getPendingPartners', { isPartnerMatrix: true })
+  } else {
+    selectedPartner.value = ceil
+  }
+}
+
+const loadMMatrixPartnerModal = async () => {
+  const query = route.query
+  if (query.id) {
     store.commit('SET_MATRIX_BY_ID', {})
-    const response = await store.dispatch('getMatrixById', ceil.matrix.id)
+    const response = await store.dispatch('getMatrixById', route.query.id)
 
     if (response?.error_code) {
       closeModal()
@@ -307,24 +324,13 @@ const selectPartner = async (ceil: Ceil) => {
 
     // Получаем партнеров в ожидании "Матрицы партнёра"
     store.dispatch('partners/getPendingPartners', { isPartnerMatrix: true })
-  }
-  selectedPartner.value = ceil
-}
 
-const loadMMatrixPartnerModal = async () => {
-  const query = route.query
-  if (query.id) {
-    const { data } = await store.dispatch('getMatrixById', route.query.id)
-
-    // Получаем партнеров в ожидании "Матрицы партнёра"
-    store.dispatch('partners/getPendingPartners', { isPartnerMatrix: true })
-
-    if (data?.matrix && !data.matrix.is_booster) {
+    if (response.data?.matrix && !response.data.matrix.is_booster) {
       selectedPartner.value = {
         depth: 0,
         pos: 0,
         queueId: null,
-        matrix: data.matrix,
+        matrix: response.data.matrix,
         allowBuyClone: false,
         allowSniper: false,
         fillRevard: [],

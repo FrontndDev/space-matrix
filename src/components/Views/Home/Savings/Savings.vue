@@ -100,13 +100,6 @@ const secondCeil: ComputedRef<Ceil> = computed(() =>
     onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['2']
 )
 
-const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
-    !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
-)
-const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
-    !!firstCeil.value.fillRevard.find(reward => reward.event === 'freeze')
-)
-
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
   if (onlyInfinityCell.value) {
     return 'disable3'
@@ -120,12 +113,12 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     return 'boost'
   }
 
-  return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
+  return matrixByType.value.matrix?.ceils['1']['1'] ?? ''
 })
 
 const getCellTypeFirstCeil: ComputedRef<string> = computed(() => {
   if (getTypeForFirstCeil.value === 'disable') {
-    return firstCeilIsCumulative.value ? 'cumulative' : 'profitable'
+    return matrixByType.value.matrix?.ceils['1']['1'] ?? ''
   } else {
     return getTypeForFirstCeil.value
   }
@@ -148,12 +141,12 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
     return 'boost'
   }
 
-  return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
+  return matrixByType.value.matrix?.ceils['1']['2'] ?? ''
 })
 
 const getCellTypeSecondCeil: ComputedRef<string> = computed(() => {
   if (getTypeForSecondCeil.value === 'disable') {
-    return secondCeilIsCumulative.value ? 'cumulative' : 'profitable'
+    return matrixByType.value.matrix?.ceils['1']['2'] ?? ''
   } else {
     return getTypeForSecondCeil.value
   }

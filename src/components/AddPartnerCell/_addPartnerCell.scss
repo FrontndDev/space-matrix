@@ -19,7 +19,7 @@
     border-radius: 28px;
     position: relative;
 
-    &.cumulative,
+    &.freeze,
     &.boost {
       background: $bg-blue-light;
 
@@ -57,7 +57,7 @@
       display: none;
     }
 
-    &.profitable {
+    &.profit {
       background: $bg-green-light;
 
       & path {
@@ -173,7 +173,7 @@
 
       & .add-partner-cell__plus {
 
-        &.cumulative,
+        &.freeze,
         &.boost {
           background: $bg-blue-light;
 

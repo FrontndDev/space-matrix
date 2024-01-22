@@ -66,7 +66,7 @@ const props = defineProps({
   type: {
     type: String,
     default: 'cumulative',
-    //cumulative, profitable, boost, infinity ,disable, disable2, loading
+    //freeze, profit, boost, infinity ,disable, disable2, loading
   },
   cellType: {
     type: String,

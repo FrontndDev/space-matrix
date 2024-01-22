@@ -28,11 +28,11 @@
       object-fit: cover;
     }
 
-    &.cumulative {
+    &.freeze {
       border-color: $border-blue;
     }
 
-    &.profitable {
+    &.profit {
       border-color: $border-green;
     }
 
