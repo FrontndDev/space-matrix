@@ -140,6 +140,7 @@ import {
   Ceil,
   IMatrix,
   ListOfTypes,
+  Matrix,
 } from "../../interfaces/store.interface.ts";
 import {
   useRoute,
@@ -229,11 +230,13 @@ const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
 const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 
 const selectedPartner: Ref<Ceil | null> = ref(null)
+const selectedPartnerForTeleport: Ref<Matrix | null> = ref(null)
 
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
 provide('selectedChain', selectedChain)
 provide('selectedType', selectedType)
+provide('selectedPartnerForTeleport', selectedPartnerForTeleport)
 
 const openChainViaLink = () => {
   const chain = store.state.chains.chainsList.list.find((chain: IChains) => chain.id === +(route.query.chainId ?? 0))
@@ -262,7 +265,8 @@ const openCells = (id: number) => {
   isCells.value = id
 }
 
-const openModalTeleport = () => {
+const openModalTeleport = (cell: Matrix) => {
+  selectedPartnerForTeleport.value = cell
   toggleModalChains.value = true
   openModalChains.value = 5
   document.body.style.overflow = 'hidden'
@@ -307,7 +311,7 @@ const selectPartner = async (ceil: Ceil) => {
   selectedPartner.value = ceil
 }
 
-onMounted(async () => {
+const loadMMatrixPartnerModal = async () => {
   const query = route.query
   if (query.id) {
     const { data } = await store.dispatch('getMatrixById', route.query.id)
@@ -330,7 +334,16 @@ onMounted(async () => {
       openModalPartner(2)
     }
   }
+}
 
+watch(() => route.query?.id, () => {
+  loadMMatrixPartnerModal()
+})
+
+onMounted(async () => {
+  const query = route.query
+
+  loadMMatrixPartnerModal()
 
   if (query.chainId && store.state.chains.chainsList?.list?.length) {
     openChainViaLink()

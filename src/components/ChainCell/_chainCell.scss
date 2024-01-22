@@ -18,6 +18,12 @@
     }
   }
 
+  &.teleport {
+    & .chain-cell__avatar {
+      cursor: auto;
+    }
+  }
+
   &__info {
     @include flexbox(column, flex-start, center);
     width: 100%;

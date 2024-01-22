@@ -50,3 +50,7 @@ export interface ITeleportList {
   totalCount: number;
   totalPages: number;
 }
+
+export interface ITeleportPartnerParams {
+  partnerId: number;
+}

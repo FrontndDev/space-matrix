@@ -28,14 +28,13 @@
           type="teleport"
           v-for="cell in teleportList?.list"
           :key="cell?.id"
-          :id="cell?.id"
+          :id="cell?.owner.id"
           :reward="1234"
           :matrixStart="'D0'"
           :matrixEnd="'D0'"
           :countLinks="0"
           :avatar="cell?.owner.photo"
-          @open-general-chains="openGeneralChains"
-          @open-m-teleport="$emit('open-m-teleport')"
+          @open-m-teleport="$emit('open-m-teleport', cell)"
           v-if="littleTabID === 6"
       />
     </div>

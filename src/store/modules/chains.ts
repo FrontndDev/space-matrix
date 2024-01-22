@@ -1,8 +1,12 @@
 import * as API from '../../api/index'
-import { Commit } from "vuex";
+import {
+  ActionContext,
+  Commit
+} from "vuex";
 import {
   IChainDetails,
-  IChainsList
+  IChainsList,
+  ITeleportPartnerParams
 } from "../../interfaces/chains.interface.ts";
 
 export default {
@@ -31,14 +35,18 @@ export default {
       })
     },
     getChainDetail(
-      { commit }: { commit: Commit; state: any },
+      { commit }: { commit: Commit; },
       id: number
     ) {
       API.getChainDetail(id).then(response => {
         commit('SET_CHAIN_DETAIL', response.data)
       })
+    },
+    teleportPartner(_: ActionContext<any, any>, data: ITeleportPartnerParams) {
+      API.activatePartnerTeleport(data).then(response => {
+        console.log('teleportPartner', response)
+      })
     }
-
   },
   mutations: {
     SET_CHAINS_LIST(state: any, chainsList: any) {

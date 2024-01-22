@@ -6,7 +6,7 @@
     <div
         class="small-cell__avatar"
         :class="props.type"
-        @click="$emit('open-m-matrix-partner')"
+        @click="emit('open-m-matrix-partner')"
     >
       <div>
         <img alt="avatar" :src="props.cell?.owner?.photo">
@@ -15,12 +15,13 @@
       <LevelMatrix
           :type-title="selectedTypeTitle"
           :level="useGetLevel(props.cell?.owner?.lvl_insystem)"
+          v-if="showLevelMatrix"
       />
     </div>
     <div class="small-cell__info">
       <span
           class="small-cell__name"
-          @click="$emit('open-m-matrix-partner')"
+          @click="emit('open-m-matrix-partner')"
       >{{ props.cell?.owner?.fio }}</span>
       <div
           class="small-cell__id"
@@ -37,7 +38,7 @@
           :cellType="props.cellType"
           :type="props.cellType"
           :circles="cell.ceils['1']"
-          @click="$emit('open-m-matrix-partner')"
+          @click="emit('open-m-matrix-partner')"
           v-if="props.cellType && props.type && props.showPartnerType"
       />
     </div>
@@ -92,8 +93,14 @@ const props = defineProps({
   showCellType: {
     type: Boolean,
     default: true,
+  },
+  showLevelMatrix: {
+    type: Boolean,
+    default: true,
   }
 })
+
+const emit = defineEmits(['open-m-matrix-partner'])
 
 const store = useStore()
 

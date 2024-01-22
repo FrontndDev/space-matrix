@@ -7,6 +7,7 @@ import {
   IExposePartnerParams
 } from "../interfaces/partners.interface.ts";
 import { IBuyBoosterParams } from "../interfaces/store.interface.ts";
+import { ITeleportPartnerParams } from "../interfaces/chains.interface.ts";
 
 
 export function setDataToLS(key: string, data: any) {
@@ -63,12 +64,15 @@ export async function buyClone(data: IBuyBoosterParams) {
   return postAsync('/api/matrix/placement/buyClone', data)
 }
 
+export async function activatePartnerTeleport(data: ITeleportPartnerParams) {
+  return postAsync('/api/matrix/teleport/activate', data)
+}
+
 // PUT
 
 export async function placementExistMatrix(data: IExposePartnerParams) {
   return putAsync('/api/matrix/placement/exist', data)
 }
-
 
 
 
