@@ -76,7 +76,9 @@ const cancel = () => {
 }
 
 const teleport = () => {
-  store.dispatch('chains/teleportPartner', { partnerId: selectedPartnerForTeleport.value.owner.id })
+  store.dispatch('chains/teleportPartner', {
+    partnerId: selectedPartnerForTeleport.value.owner.id
+  })
   emit('close-modal')
 }
 </script>

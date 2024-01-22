@@ -8,6 +8,7 @@ import {
   IChainsList,
   ITeleportPartnerParams
 } from "../../interfaces/chains.interface.ts";
+import { useShowMessage } from "../../composables/useShowMessage.ts";
 
 export default {
   namespaced: true,
@@ -45,6 +46,9 @@ export default {
     teleportPartner(_: ActionContext<any, any>, data: ITeleportPartnerParams) {
       API.activatePartnerTeleport(data).then(response => {
         console.log('teleportPartner', response)
+        if (!response?.error_code) {
+          useShowMessage('green', 'Телепорт успешно активирован')
+        }
       })
     }
   },
