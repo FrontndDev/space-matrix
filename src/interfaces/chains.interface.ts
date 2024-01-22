@@ -1,5 +1,6 @@
 import {
   FillReward,
+  IOwner,
   Matrix
 } from "./store.interface.ts";
 
@@ -46,7 +47,14 @@ export interface IChainDetails {
 
 export interface ITeleportList {
   currentPage: number;
-  list: Matrix[];
+  list: {
+    owner: IOwner;
+    profit: {
+      amount: number;
+      currency: string;
+    };
+    startMatrix: string;
+  }[];
   totalCount: number;
   totalPages: number;
 }

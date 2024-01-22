@@ -26,14 +26,13 @@
       />
       <ChainCell
           type="teleport"
+          matrix-end="D4"
           v-for="cell in teleportList?.list"
-          :key="cell?.id"
-          :id="cell?.owner.id"
-          :reward="1234"
-          :matrixStart="'D0'"
-          :matrixEnd="'D0'"
-          :countLinks="0"
-          :avatar="cell?.owner.photo"
+          :key="cell.owner.id"
+          :id="cell.owner.id"
+          :reward="cell.profit.amount"
+          :matrixStart="cell.startMatrix"
+          :avatar="cell.owner.photo"
           @open-m-teleport="$emit('open-m-teleport', cell)"
           v-if="littleTabID === 6"
       />
