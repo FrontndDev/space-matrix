@@ -49,7 +49,7 @@
                   :cell-type="getCellTypeFirstCeil"
                   :ceil="firstCeil"
                   :partners-count="partnersCount"
-                  :title="!firstCeil?.allowSniper && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
+                  :title="(!firstCeil?.allowSniper || !partnersCount) && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   :subtitle="!firstCeil?.allowSniper && firstCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
                   :disabled-subtitle="getCellTypeFirstCeil === 'cumulative' ? 'Накопительная ячейка' : 'Доходная ячейка'"
                   v-if="!firstCeil?.matrix"
@@ -76,7 +76,7 @@
                   :cell-type="getCellTypeSecondCeil"
                   :ceil="secondCeil"
                   :partners-count="partnersCount"
-                  :title="!secondCeil?.allowSniper && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
+                  :title="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   :subtitle="!secondCeil?.allowSniper && secondCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
                   :disabled-subtitle="getCellTypeSecondCeil === 'cumulative' ? 'Накопительная ячейка' : 'Доходная ячейка'"
                   v-if="!secondCeil?.matrix"
@@ -168,17 +168,6 @@ const secondCeil: ComputedRef<Ceil> = computed(() =>
 )
 const thirdCeil: ComputedRef<Ceil> = computed(() =>
     onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['3']
-)
-
-const selectedCeilIsCumulative: ComputedRef<boolean> = computed(() =>
-    !!selectedPartner.value.fillRevard?.find(reward => reward.event === 'freeze')
-)
-
-const firstCeilIsCumulative: ComputedRef<boolean> = computed(() =>
-    !!firstCeil.value?.fillRevard.find(reward => reward.event === 'freeze')
-)
-const secondCeilIsCumulative: ComputedRef<boolean> = computed(() =>
-    !!firstCeil.value?.fillRevard.find(reward => reward.event === 'freeze')
 )
 
 const interval: Ref<number | null> = ref(null)
