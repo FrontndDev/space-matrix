@@ -48,7 +48,7 @@ const props = defineProps({
   },
   cellType: {
     type: String,
-    default: 'cumulative'
+    default: 'freeze'
   },
   type: {
     type: String,

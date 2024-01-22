@@ -9,7 +9,7 @@
           @click="buyBooster(true)"
       />
       <AddPartnerCell
-          type="cumulative"
+          type="freeze"
           :ceil="getCeil"
           :partners-count="partnersCount"
           @click="openPartnerWaitingChains"

@@ -10,7 +10,7 @@
           @click="showConfirmPayment = true"
       />
       <AddPartnerCell
-          type="profitable"
+          type="profit"
           :ceil="thirdCeil"
           :partners-count="partnersCount"
           v-if="thirdCeil.allowSniper && partnersCount"

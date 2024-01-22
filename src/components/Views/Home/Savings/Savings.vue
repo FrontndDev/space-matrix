@@ -1,7 +1,7 @@
 <template>
   <div class="savings">
     <div class="savings__title">
-      {{ [getCellTypeFirstCeil, getTypeForSecondCeil].includes('profitable') ? 'Доходные' : 'Накопительные' }}
+      {{ [getCellTypeFirstCeil, getTypeForSecondCeil].includes('profit') ? 'Доходные' : 'Накопительные' }}
     </div>
 
     <div class="savings__partners savings__partners_mt-16">
@@ -21,7 +21,7 @@
           :partners-count="partnersCount"
           :title="(!firstCeil?.allowSniper || !partnersCount) && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
           :subtitle="!firstCeil?.allowSniper && firstCeil?.allowBuyClone ? `${matrixByType.matrixConfig.price}` : ''"
-          :disabled-subtitle="getCellTypeFirstCeil === 'cumulative' ? 'Накопительная ячейка' : 'Доходная ячейка'"
+          :disabled-subtitle="getCellTypeFirstCeil === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'"
           v-if="!firstCeil?.matrix || firstCeil.queueId"
           @open-m-add-partner="openMAddPartner(getPosition(firstCeil.depth, firstCeil.pos))"
       >
@@ -48,7 +48,7 @@
           :partners-count="partnersCount"
           :title="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
           :subtitle="!secondCeil?.allowSniper && secondCeil?.allowBuyClone ? `${matrixByType.matrixConfig.price}` : ''"
-          :disabled-subtitle="getCellTypeSecondCeil === 'cumulative' ? 'Накопительная ячейка' : 'Доходная ячейка'"
+          :disabled-subtitle="getCellTypeSecondCeil === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'"
           v-if="!secondCeil?.matrix || secondCeil.queueId"
           @open-m-add-partner="openMAddPartner(getPosition(secondCeil.depth, secondCeil.pos))"
       >

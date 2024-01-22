@@ -50,8 +50,8 @@ const props = defineProps({
   },
   cellType: {
     type: String,
-    default: 'cumulative'
-    //cumulative, profitable, boost, infinity, circle-avatar
+    default: 'freeze'
+    //freeze, profitable, boost, infinity, circle-avatar
   },
   circles: {
     type: Object as PropType<IObject>,
@@ -70,7 +70,7 @@ const getCircleFill = (binstatus: number, circleType?: string) => {
       switch (circleType) {
         case 'freeze':
           return 'fill-blue'
-        case 'profitable':
+        case 'profit':
           return 'fill-green'
         default:
           return 'fill-blue'

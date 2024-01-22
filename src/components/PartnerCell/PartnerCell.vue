@@ -86,8 +86,8 @@ const props = defineProps({
   },
   cellType: {
     type: String,
-    default: 'cumulative'
-    //cumulative, boost, circle-avatar
+    default: 'freeze'
+    //freeze, profit, boost, circle-avatar
   },
   size: {
     type: String,

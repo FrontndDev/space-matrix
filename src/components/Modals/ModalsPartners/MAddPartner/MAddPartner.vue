@@ -11,7 +11,7 @@
             @click="showConfirmPayment = true"
         />
         <AddPartnerCell
-            :type="getCeilCumulative ? 'cumulative' : 'profitable'"
+            :type="getCeilCumulative ? 'freeze' : 'profit'"
             :ceil="getCeil"
             :partners-count="partnersCount"
             @click="$emit('open-partner-waiting')"

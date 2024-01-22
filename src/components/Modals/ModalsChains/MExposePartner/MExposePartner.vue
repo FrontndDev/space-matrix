@@ -13,7 +13,7 @@
           <div class="expose-partner__cell">
             <div class="expose-partner__block">
               <SmallCell
-                  type="profitable"
+                  type="profit"
                   :show-cell-type="false"
                   :show-partner-type="false"
                   :cell="ceil"
