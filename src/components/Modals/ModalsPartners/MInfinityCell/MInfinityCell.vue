@@ -14,7 +14,7 @@
           v-for="partner in infinityPartners"
           :key="partner.id"
           :ceil="partner"
-          @click="selectPartner(partner)"
+          @open-m-matrix-partner="selectPartner(partner)"
       />
     </div>
   </div>
