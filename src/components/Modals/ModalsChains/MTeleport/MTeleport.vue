@@ -12,7 +12,7 @@
           <br>
           для выбранного партнера
         </span>
-        <button class="modal-teleport__btn">
+        <button class="modal-teleport__btn" @click="moreDetails">
           <span>Подробнее</span>
           <svg class="rotate-img" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M6.73355 12.3999C6.53829 12.5952 6.22171 12.5952 6.02645 12.3999L1.97978 8.35327C1.88601 8.25951 1.83333 8.13233 1.83333 7.99972C1.83333 7.86711 1.88601 7.73993 1.97978 7.64617L6.02645 3.5995C6.22171 3.40424 6.53829 3.40424 6.73355 3.5995C6.92881 3.79476 6.92881 4.11135 6.73355 4.30661L3.04044 7.99972L6.73355 11.6928C6.92881 11.8881 6.92881 12.2047 6.73355 12.3999Z" fill="#1A86E5"/>
@@ -69,6 +69,10 @@ const selectedPartnerForTeleport = inject('selectedPartnerForTeleport') as Ref<M
 const goToMatrix = () => {
   emit('close-modal')
   router.push(route.path + `?id=${selectedPartnerForTeleport.value.id}`)
+}
+
+const moreDetails = () => {
+  window.location.href = '/app/page/teleport'
 }
 
 const cancel = () => {

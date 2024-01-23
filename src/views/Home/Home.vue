@@ -278,6 +278,7 @@ const closeModal = () => {
   router.push(route.path)
   store.commit('SET_MATRIX_BY_ID', {})
   selectedPartner.value = null
+  selectedPartnerForTeleport.value = null
   selectedType.value = 'type'
 
   toggleModalPartners.value = false
