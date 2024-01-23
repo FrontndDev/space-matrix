@@ -180,6 +180,7 @@ const setPartnerBy = (type: string) => {
 }
 
 const selectChain = (chain: IChains) => {
+  store.commit('chains/SET_CHAIN_DETAIL', {})
   store.dispatch('getWallets')
   selectedChain.value = chain
 }

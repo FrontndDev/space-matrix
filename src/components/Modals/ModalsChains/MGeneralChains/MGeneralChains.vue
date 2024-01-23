@@ -56,6 +56,7 @@ import { useCopyLink } from "../../../../composables/useCopyLink.ts";
 import {
   Matrix
 } from "../../../../interfaces/store.interface.ts";
+import { useRouter } from "vue-router";
 
 const emit = defineEmits([
   'close-modal',
@@ -67,6 +68,7 @@ const emit = defineEmits([
 ])
 
 const store = useStore()
+const router = useRouter()
 
 const selectedChain = inject('selectedChain') as Ref<IChains>
 

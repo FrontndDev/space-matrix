@@ -45,6 +45,7 @@
           <MPartnerWaitingChains
               v-if="props.openModalChains === 7"
               @open-expose-partner="emit('open-expose-partner')"
+              @open-add-partner-chains="emit('open-add-partner-chains')"
 
               @close-modal="emit('close-modal')"
               @select-partner="selectPartner"

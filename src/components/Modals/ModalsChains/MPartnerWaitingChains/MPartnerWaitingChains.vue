@@ -3,7 +3,7 @@
     <ModalHeader
         :partnerWaiting="true"
         @close-modal="emit('close-modal')"
-        @open-m-add-partner="emit('open-m-add-partner')"
+        @open-m-add-partner="emit('open-add-partner-chains')"
     >
       Партнеры в ожидании
     </ModalHeader>
@@ -28,7 +28,7 @@
     </div>
     <div class="modal-partner-waiting-chains__buttons">
       <template v-if="selectedCell">
-        <CancelButton @click="emit('open-m-add-partner')" />
+        <CancelButton @click="emit('open-add-partner-chains')" />
         <ChainsButton @click="selectPartner">
           Выставить
         </ChainsButton>
@@ -59,7 +59,7 @@ import { useStore } from "vuex";
 
 const emit = defineEmits([
   'close-modal',
-  'open-m-add-partner',
+  'open-add-partner-chains',
   'select-partner',
   'open-expose-partner',
 ])
