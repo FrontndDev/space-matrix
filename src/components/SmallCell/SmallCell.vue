@@ -46,7 +46,7 @@
         :cellType="props.type"
         :state="props.state"
         :time="time"
-        v-if="props.type && props.showCellType"
+        v-if="['boost', 'infinity'].includes(props.type)"
     />
   </div>
 </template>
