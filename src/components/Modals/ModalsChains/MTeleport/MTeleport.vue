@@ -26,7 +26,6 @@
           type="teleport"
           :show-level-matrix="false"
           :cell="selectedPartnerForTeleport"
-          @open-m-matrix-partner="goToMatrix"
       />
     </div>
     <div class="modal-teleport__buttons">
@@ -52,24 +51,13 @@ import {
   Ref
 } from "vue";
 import { Matrix } from "../../../../interfaces/store.interface.ts";
-import {
-  useRoute,
-  useRouter
-} from "vue-router";
 import CancelButton from "../../../UI/CancelButton/CancelButton.vue";
 
 const emit = defineEmits(['close-modal'])
 
 const store = useStore()
-const router = useRouter()
-const route = useRoute()
 
 const selectedPartnerForTeleport = inject('selectedPartnerForTeleport') as Ref<Matrix>
-
-const goToMatrix = () => {
-  emit('close-modal')
-  router.push(route.path + `?id=${selectedPartnerForTeleport.value.id}`)
-}
 
 const moreDetails = () => {
   window.location.href = '/app/page/teleport'

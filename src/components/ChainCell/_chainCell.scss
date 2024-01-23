@@ -19,9 +19,7 @@
   }
 
   &.teleport {
-    & .chain-cell__avatar {
-      cursor: auto;
-    }
+    cursor: pointer;
   }
 
   &__info {

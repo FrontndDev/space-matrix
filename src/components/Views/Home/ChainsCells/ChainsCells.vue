@@ -33,7 +33,7 @@
           :reward="cell.profit.amount"
           :matrixStart="cell.startMatrix"
           :avatar="cell.owner.photo"
-          @open-m-teleport="$emit('open-m-teleport', cell)"
+          @click="$emit('open-m-teleport', cell)"
           v-if="littleTabID === 6"
       />
     </div>
