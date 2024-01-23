@@ -1,7 +1,11 @@
 <template>
   <div
-      :class="[{ active: activeClass, indicator: props.tab.indicator }, props.type]"
       class="tab-matrix"
+      :class="[{
+        active: activeClass,
+        'indicator-green': props.tab.indicator?.green,
+        'indicator-orange': props.tab.indicator?.orange,
+      }, props.type]"
       @click="emit('tab', props.tab)"
   >
     {{ props.tab.name }} {{ props.tab.value }}
@@ -11,14 +15,18 @@
 <script setup lang="ts">
 
 import { useStore } from "vuex";
-import { computed } from "vue";
+import {
+  computed,
+  PropType
+} from "vue";
+import { ITab } from "../../../interfaces/store.interface.ts";
 
 const props = defineProps(<any>{
   type: {
     type: String,
   },
   tab: {
-    type: Object as any,
+    type: Object as PropType<ITab>,
     required: true,
   },
   active: {

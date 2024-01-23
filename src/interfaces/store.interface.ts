@@ -21,6 +21,9 @@ export type Type = {
 export interface ListOfTypes {
     types: Type[];
     opened: string[];
+    pending: {
+        [key: string]: number
+    };
     teamOpened: {
         [key: string]: number
     };
@@ -151,4 +154,13 @@ export interface IBalance {
     wallets: IWallet[];
     min_withdrawal: IMinWithdrawal;
     fee_percent: IFeePercent;
+}
+
+export interface ITab {
+    id: number;
+    name: string;
+    indicator: {
+        green: boolean;
+        orange: boolean
+    }
 }

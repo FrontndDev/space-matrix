@@ -99,7 +99,10 @@ const tabs = reactive([
   {
     id: 1,
     name: 'Партнеры',
-    indicator: computed(() => store.state.partners.partnersPending.totalCount > 0),
+    indicator: {
+      green: computed(() => store.state.partners.partnersPending.totalCount > 0),
+      orange: computed(() => Object.keys(listOfTypes.value.pending).includes(store.state.selectedType.type)),
+    },
   },
   {
     id: 2,
