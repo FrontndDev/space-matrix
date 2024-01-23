@@ -13,15 +13,18 @@
   &__name {
     @include get-font(22px, 700, 36px, $text-base-secondary);
     text-align: center;
+    transition: .25s all ease;
   }
 
   &__price {
     @include flex-center;
     column-gap: 4px;
     @include get-font(12px, 500, 16px, $text-base-light);
+    transition: .25s all ease;
 
     & path {
       fill: $text-base-light;
+      transition: .25s all ease;
     }
   }
 
@@ -29,6 +32,7 @@
     @include flex-center;
     gap: 4px;
     @include get-font(12px, 500, 16px, $text-base-light);
+    transition: .25s all ease;
   }
 
   &.active {
@@ -36,6 +40,19 @@
 
     & .d-button__name {
       color: $text-base-on-color;
+    }
+  }
+
+  &:hover {
+    & .d-button {
+      &__name,
+      &__price {
+        color: $text-base;
+      }
+
+      &__price path {
+        fill: $text-base-secondary;
+      }
     }
   }
 
