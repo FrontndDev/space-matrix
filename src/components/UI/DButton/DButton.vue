@@ -29,7 +29,6 @@ import {
   computed,
   ComputedRef,
   onBeforeMount,
-  onMounted,
   PropType,
   ref,
   Ref,
