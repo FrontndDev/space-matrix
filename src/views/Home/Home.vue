@@ -297,19 +297,18 @@ const selectPartner = async (ceil: Ceil) => {
   if (ceil?.matrix) {
     const matrixId = ceil?.matrix.id
     await router.push(route.path + `?id=${matrixId}`)
-  //   // Получаем Матрицу партнёра
-  //   store.commit('SET_MATRIX_BY_ID', {})
-  //   const response = await store.dispatch('getMatrixById', ceil.matrix.id)
-  //
-  //   if (response?.error_code) {
-  //     closeModal()
-  //   }
-  //
-  //   // Получаем партнеров в ожидании "Матрицы партнёра"
-  //   store.dispatch('partners/getPendingPartners', { isPartnerMatrix: true })
-  } else {
-    selectedPartner.value = ceil
+    // Получаем Матрицу партнёра
+    store.commit('SET_MATRIX_BY_ID', {})
+    const response = await store.dispatch('getMatrixById', ceil.matrix.id)
+
+    if (response?.error_code) {
+      closeModal()
+    }
+
+    // Получаем партнеров в ожидании "Матрицы партнёра"
+    store.dispatch('partners/getPendingPartners', { isPartnerMatrix: true })
   }
+  selectedPartner.value = ceil
 }
 
 const loadMMatrixPartnerModal = async () => {
@@ -341,10 +340,6 @@ const loadMMatrixPartnerModal = async () => {
     }
   }
 }
-
-watch(() => route.query?.id, () => {
-  loadMMatrixPartnerModal()
-})
 
 onMounted(async () => {
   const query = route.query

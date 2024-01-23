@@ -179,12 +179,10 @@ const matrixIsInQueueForPublication: ComputedRef<boolean> = computed(() => {
 
 const loadMatrix = () => {
   if (matrixIsInQueueForPublication.value) {
-    console.log('interval')
     interval.value = setInterval(() => {
       store.dispatch('getMatrixById', matrixById.value.matrix?.id);
     }, 3000);
   } else if (!matrixIsInQueueForPublication.value && interval.value) {
-    console.log('clear interval')
     clearInterval(interval.value);
   }
 }
