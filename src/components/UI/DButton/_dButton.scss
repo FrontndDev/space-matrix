@@ -114,6 +114,39 @@
         }
       }
     }
+
+    &.pending {
+      border: 1px solid $border-orange;
+      animation: time 2s linear infinite;
+
+      & * {
+        transition: .25s all ease;
+      }
+
+      &:hover,
+      &:active {
+        & .d-button {
+          background: $bg-red-light;
+
+          &__name {
+            color: $text-base-secondary;
+          }
+
+          &__time {
+            color: $text-base-light;
+          }
+        }
+      }
+
+      &:active {
+        & .d-button {
+          &__name,
+          &__time {
+            color: $text-base;
+          }
+        }
+      }
+    }
   }
 }
 

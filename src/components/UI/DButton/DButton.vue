@@ -2,7 +2,7 @@
   <div class="d-button" @click="emit('click', props.type)">
     <div class="d-button__name">{{ props.type.title }}</div>
     <div
-        v-if="props.isTime"
+        v-if="props.isTime || props.isPending"
         class="d-button__time"
     >
       {{ String(hours).padStart(2, '0') }}:{{ String(minutes).padStart(2, '0') }}
@@ -29,6 +29,7 @@ import {
   computed,
   ComputedRef,
   onBeforeMount,
+  onMounted,
   PropType,
   ref,
   Ref,
@@ -49,6 +50,10 @@ const props = defineProps({
   isTime: {
     type: Boolean,
     default: false,
+  },
+  isPending: {
+    type: Boolean,
+    default: false,
   }
 })
 
@@ -58,7 +63,14 @@ const store = useStore()
 
 const timeInterval: Ref<number | null> = ref(null)
 
-const time: ComputedRef<number> = computed(() => store.state.listOfTypes.teamOpened[props.type?.type])
+const time: ComputedRef<number> = computed(() => {
+  switch (true) {
+    case props.isTime:
+      return store.state.listOfTypes.teamOpened[props.type?.type]
+    case props.isPending:
+      return store.state.listOfTypes.pending[props.type?.type]
+  }
+})
 
 const updateListOfTypes: Ref<boolean> = ref(false)
 
@@ -78,10 +90,17 @@ const hours = computed(() => Math.floor(time.value / 3600))
 const remainingSeconds = computed(() => time.value % 3600)
 const minutes = computed(() => Math.floor(remainingSeconds.value / 60))
 
-onBeforeMount(() => {
+onMounted(() => {
   if (time.value) {
     timeInterval.value = setInterval(() => {
-      store.state.listOfTypes.teamOpened[props.type?.type]--
+      switch (true) {
+        case props.isTime:
+          store.state.listOfTypes.teamOpened[props.type?.type]--
+          break;
+        case props.isPending:
+          store.state.listOfTypes.pending[props.type?.type]--
+          break;
+      }
     }, 1000)
   }
 })

@@ -6,9 +6,11 @@
           :class="[{
             disabled: !listOfTypes.opened.includes(type.type),
             time: isTime(type),
+            pending: isPending(type),
             active: selectedType?.type === type.type,
           }, type.type]"
           :is-time="isTime(type)"
+          :is-pending="isPending(type)"
           v-for="type in listOfTypes?.types"
           :key="type.title"
           :type="type"
@@ -67,6 +69,11 @@ const selectType = (type: Type) => {
 const isTime = (type: Type) => {
   const key = Object.keys(listOfTypes.value.teamOpened).find(listType => listType === type.type)
   return key ? !!listOfTypes.value.teamOpened[key] : false
+}
+
+const isPending = (type: Type) => {
+  const key = Object.keys(listOfTypes.value.pending).find(listType => listType === type.type)
+  return key ? !!listOfTypes.value.pending[key] : false
 }
 
 const selectDButton = (type: Type) => {
