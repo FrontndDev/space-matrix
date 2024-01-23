@@ -28,6 +28,7 @@ import { Type } from "../../../interfaces/store.interface.ts";
 import {
   computed,
   ComputedRef,
+  onBeforeMount,
   onMounted,
   PropType,
   ref,
@@ -89,7 +90,22 @@ const hours = computed(() => Math.floor(time.value / 3600))
 const remainingSeconds = computed(() => time.value % 3600)
 const minutes = computed(() => Math.floor(remainingSeconds.value / 60))
 
-onMounted(() => {
+watch(() => time.value, () => {
+  if (!timeInterval.value) {
+    timeInterval.value = setInterval(() => {
+      switch (true) {
+        case props.isTime:
+          store.state.listOfTypes.teamOpened[props.type?.type]--
+          break;
+        case props.isPending:
+          store.state.listOfTypes.pending[props.type?.type]--
+          break;
+      }
+    }, 1000)
+  }
+})
+
+onBeforeMount(() => {
   if (time.value) {
     timeInterval.value = setInterval(() => {
       switch (true) {
