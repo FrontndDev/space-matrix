@@ -14,6 +14,7 @@
           :key="idx"
           :cell="cell"
           :type="cell?.time_to_activate ? `time` : cell.ceils['1']['1']"
+          :show-partner-type="!onlyInfinityCell"
           @open-m-matrix-partner="openMMatrixPartner(cell)"
           v-if="littleTabID === 1"
       />
@@ -22,6 +23,7 @@
           :key="idx"
           :cell="cell"
           :type="cell?.time_to_activate ? `time` : cell.ceils['1']['2']"
+          :show-partner-type="!onlyInfinityCell"
           @open-m-matrix-partner="openMMatrixPartner(cell)"
           v-if="littleTabID === 2"
       />
@@ -59,6 +61,8 @@ import {
 const emit = defineEmits(['open-m-matrix-partner', 'select-partner'])
 
 const store = useStore()
+
+const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.onlyInfinityCell)
 
 const partnersExposed: ComputedRef<IPartners> = computed(() => store.state.partners.partnersExposed)
 const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.partnersPending)

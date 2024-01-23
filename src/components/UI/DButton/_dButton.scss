@@ -43,19 +43,6 @@
     }
   }
 
-  &:hover {
-    & .d-button {
-      &__name,
-      &__price {
-        color: $text-base;
-      }
-
-      &__price path {
-        fill: $text-base-secondary;
-      }
-    }
-  }
-
   &.disabled {
     border: 1px solid $border-base-contrast;
 
@@ -161,6 +148,20 @@
           &__time {
             color: $text-base;
           }
+        }
+      }
+    }
+  }
+  &:not(.active, .disabled) {
+    &:hover {
+      & .d-button {
+        &__name,
+        &__price {
+          color: $text-base;
+        }
+
+        &__price path {
+          fill: $text-base-secondary;
         }
       }
     }
