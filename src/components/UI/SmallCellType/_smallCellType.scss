@@ -62,4 +62,10 @@
     top: 8px;
     right: 8px;
   }
+
+  &.time {
+    background: $bg-red;
+
+    @include get-font(10px, 700, 12px, $text-base-on-color);
+  }
 }

@@ -45,6 +45,13 @@ export interface Matrix {
     parent_matrix_id: number | null;
     filled: boolean;
     prev_type_matrix_id: number | null;
+    time_to_activate?: {
+        years: number;
+        months: number;
+        days: number;
+        hours: number;
+        mins: number;
+    };
     type: string;
     is_bonus: boolean;
     is_booster: boolean;

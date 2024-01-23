@@ -45,6 +45,10 @@
     &.profit {
       border: 2px solid $border-green;
     }
+
+    &.time {
+      border: 2px solid $border-red;
+    }
   }
 
   &__info {

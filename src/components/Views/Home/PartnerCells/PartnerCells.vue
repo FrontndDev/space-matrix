@@ -13,6 +13,7 @@
           v-for="(cell, idx) in partnersPending?.list"
           :key="idx"
           :cell="cell"
+          :type="cell?.time_to_activate ? `time` : ''"
           @open-m-matrix-partner="openMMatrixPartner(cell)"
           v-if="littleTabID === 1"
       />
@@ -20,6 +21,7 @@
           v-for="(cell, idx) in partnersExposed?.list"
           :key="idx"
           :cell="cell"
+          :type="cell?.time_to_activate ? `time` : ''"
           @open-m-matrix-partner="openMMatrixPartner(cell)"
           v-if="littleTabID === 2"
       />

@@ -45,6 +45,7 @@
     <SmallCellType
         :cellType="props.type"
         :state="props.state"
+        :time="time"
         v-if="props.type && props.showCellType"
     />
   </div>
@@ -105,8 +106,27 @@ const emit = defineEmits(['open-m-matrix-partner'])
 const store = useStore()
 
 const selectedTypeTitle: ComputedRef<string> = computed(() =>
-    store.state.listOfTypes.types.find((type: Type) => props.cell.type === type.type)?.title
+    store.state.listOfTypes.types.find((type: Type) => props.cell?.type === type.type)?.title
 )
+
+const time = computed(() => {
+  const timeToActivate = props.cell?.time_to_activate
+
+  switch (true) {
+    case !!timeToActivate?.years:
+      return timeToActivate?.years + 'y'
+    case !!timeToActivate?.months:
+      return timeToActivate?.months + 'm'
+    case !!timeToActivate?.days:
+      return timeToActivate?.days + 'd'
+    case !!timeToActivate?.hours:
+      return timeToActivate?.hours + 'h'
+    case !!timeToActivate?.mins:
+      return timeToActivate?.mins + 'm'
+    default:
+      return ''
+  }
+})
 </script>
 
 <style scoped lang="scss">
