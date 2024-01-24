@@ -1,7 +1,7 @@
 <template>
   <div class="savings">
     <div class="savings__title">
-      {{ [matrixByType.matrix?.ceils['1']['1'], matrixByType.matrix?.ceils['1']['2']].includes('profit') ? 'Доходные' : 'Накопительные' }}
+      {{ getTitle }}
     </div>
 
     <div class="savings__partners savings__partners_mt-16">
@@ -94,6 +94,22 @@ const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.only
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection?.['1'])
+
+const getTitle: ComputedRef<string> = computed(() => {
+  const cells = matrixByType.value.matrix?.ceils['1']
+  const cellsTypes = [cells?.['1'], cells?.['2']]
+
+  switch (true) {
+    case cellsTypes.includes('freeze') && cellsTypes.includes('profit'):
+      return 'Основные'
+    case cellsTypes.includes('profit') && !cellsTypes.includes('freeze'):
+      return 'Доходные'
+    case cellsTypes.includes('freeze') && !cellsTypes.includes('profit'):
+      return 'Накопительные'
+    default:
+      return 'Накопительные'
+  }
+})
 
 const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() =>

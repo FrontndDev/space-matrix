@@ -32,7 +32,7 @@
 
           <div class="modal-matrix-partner__savings">
             <div class="modal-matrix-partner__block-title">
-              {{ [matrixById.matrix?.ceils['1']['1'], matrixById.matrix?.ceils['1']['2']].includes('profit') ? 'Доходные' : 'Накопительные' }}
+              {{ getTitle }}
             </div>
             <div class="savings__partners savings__partners_mt-16">
               <!--       FIRST CEIL        -->
@@ -159,6 +159,22 @@ const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.totalCount ?? 0)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
+
+const getTitle: ComputedRef<string> = computed(() => {
+  const cells = matrixById.value.matrix?.ceils['1']
+  const cellsTypes = [cells?.['1'], cells?.['2']]
+
+  switch (true) {
+    case cellsTypes.includes('freeze') && cellsTypes.includes('profit'):
+      return 'Основные'
+    case cellsTypes.includes('profit') && !cellsTypes.includes('freeze'):
+      return 'Доходные'
+    case cellsTypes.includes('freeze') && !cellsTypes.includes('profit'):
+      return 'Накопительные'
+    default:
+      return 'Накопительные'
+  }
+})
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 
