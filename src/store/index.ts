@@ -19,6 +19,9 @@ import boosters from "./modules/boosters.ts";
 import chains from "./modules/chains.ts";
 import { useMyOverlay } from "../composables/useMyOverlay.ts";
 import { useShowMessage } from "../composables/useShowMessage.ts";
+import axios from "axios";
+
+let requestMatrixByType: any = null;
 
 export default createStore({
     modules: {
@@ -47,8 +50,13 @@ export default createStore({
             })
         },
         getMatrixByType(ctx: ActionContext<any, any>, matrixType: string) {
-            API.getMatrix(matrixType).then(response => {
-                ctx.commit('SET_MATRIX_BY_TYPE', response.data)
+            console.log('requestMatrixByType', requestMatrixByType)
+            if (requestMatrixByType) {
+                requestMatrixByType.cancel();
+            }
+            requestMatrixByType = axios.CancelToken.source()
+            API.getMatrix(matrixType, { cancelTokenSource: requestMatrixByType }).then(response => {
+                ctx.commit('SET_MATRIX_BY_TYPE', response?.data ?? {})
             })
         },
         async getMatrixById(ctx: ActionContext<any, any>, matrixId: number) {

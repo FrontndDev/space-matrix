@@ -26,8 +26,8 @@ export async function getListOfTypes(category: string) {
   return getAsync(`/api/matrix/list-of-types/${category}`)
 }
 
-export async function getMatrix(matrixTypeOrId: string | number) {
-  return getAsync(`/api/matrix/${matrixTypeOrId}`)
+export async function getMatrix(matrixTypeOrId: string | number, options?: any) {
+  return getAsync(`/api/matrix/${matrixTypeOrId}`, options)
 }
 
 export async function getPaymentForm(matrixType: string) {

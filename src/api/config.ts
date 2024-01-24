@@ -87,9 +87,12 @@ export async function postAsync(url: string, data = {}, checkError = true) {
     return undefined
 }
 
-export async function getAsync(url: string) {
+export async function getAsync(url: string, options?: any) {
+    const config: any = { headers: setGlobalConfig(localStorage.getItem('token')) }
+
+    if (options?.cancelTokenSource?.token) config.cancelToken = options.cancelTokenSource.token
     try {
-        let response = await axios.get(BASE_URL + url, { headers: setGlobalConfig(localStorage.getItem('token')) })
+        let response = await axios.get(BASE_URL + url, config)
 
         if (response?.data?.error_code) {
             const error = response.data
@@ -101,7 +104,11 @@ export async function getAsync(url: string) {
         }
 
     } catch (e) {
+        const errorCodes = ['ERR_CANCELED']
         const error = e as AxiosError
-        checkUserIsModer(error)
+
+        if (!errorCodes.includes(error.code ?? '')) {
+            checkUserIsModer(error)
+        }
     }
 }
