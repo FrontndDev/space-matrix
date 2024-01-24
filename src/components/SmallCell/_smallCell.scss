@@ -15,10 +15,15 @@
     background: lightgray 50% / cover no-repeat;
     position: relative;
 
-    &  img {
+    & > div:first-child {
+      border: 3px solid $border-base;
       border-radius: 16px;
-      width: 100%;
-      object-fit: cover;
+
+      & img {
+        border-radius: 13px;
+        width: 100%;
+        object-fit: cover;
+      }
     }
 
     &.chains-boost {

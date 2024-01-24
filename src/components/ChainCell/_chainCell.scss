@@ -13,8 +13,13 @@
     position: relative;
     cursor: pointer;
 
-    & > img {
+    & > div {
+      border: 3px solid $border-base;
       border-radius: 16px;
+
+      & > img {
+        border-radius: 12px;
+      }
     }
   }
 

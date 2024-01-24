@@ -3,8 +3,10 @@
       class="chain-cell"
       :class="props.type"
   >
-    <div @click="$emit('open-general-chains', props.id)" class="chain-cell__avatar">
-      <img alt="Avatar" :src="props.avatar">
+    <div class="chain-cell__avatar" @click="$emit('open-general-chains', props.id)">
+      <div>
+        <img alt="Avatar" :src="props.avatar">
+      </div>
     </div>
     <div class="chain-cell__info">
       <div class="chain-cell__level">
