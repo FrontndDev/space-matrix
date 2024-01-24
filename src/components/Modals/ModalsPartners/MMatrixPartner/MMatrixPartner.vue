@@ -32,7 +32,7 @@
 
           <div class="modal-matrix-partner__savings">
             <div class="modal-matrix-partner__block-title">
-              {{ [getCellTypeFirstCeil, getCellTypeSecondCeil].includes('profit') ? 'Доходные' : 'Накопительные' }}
+              {{ [matrixById.matrix?.ceils['1']['1'], matrixById.matrix?.ceils['1']['2']].includes('profit') ? 'Доходные' : 'Накопительные' }}
             </div>
             <div class="savings__partners savings__partners_mt-16">
               <!--       FIRST CEIL        -->

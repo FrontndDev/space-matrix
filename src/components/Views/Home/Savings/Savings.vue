@@ -1,7 +1,7 @@
 <template>
   <div class="savings">
     <div class="savings__title">
-      {{ [getCellTypeFirstCeil, getTypeForSecondCeil].includes('profit') ? 'Доходные' : 'Накопительные' }}
+      {{ [matrixByType.matrix?.ceils['1']['1'], matrixByType.matrix?.ceils['1']['2']].includes('profit') ? 'Доходные' : 'Накопительные' }}
     </div>
 
     <div class="savings__partners savings__partners_mt-16">
