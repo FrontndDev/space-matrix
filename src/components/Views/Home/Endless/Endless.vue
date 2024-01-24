@@ -1,11 +1,10 @@
 <template>
   <div class="endless">
     <div class="endless__title">Бесконечные</div>
-
     <div class="endless__menu endless__menu_mt-16">
       <AddPartnerCell
           cell-type="infinity"
-          disabled-subtitle="Бесконечная ячейка"
+          disabled-subtitle="Заполните ячейки накопления"
           :type="getTypeForThirdCeil"
           :ceil="thirdCeil"
           :partners-count="partnersCount"

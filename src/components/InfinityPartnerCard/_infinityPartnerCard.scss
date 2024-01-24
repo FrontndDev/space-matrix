@@ -28,7 +28,10 @@
   }
 
   &__partners {
+    @include flexbox(column, center, center);
+    gap: 4px;
     padding: 18px 12px;
+    height: 120px;
 
     &-block {
       @include flexbox(column, flex-start, center);
@@ -70,20 +73,18 @@
   }
 
   &__loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    @include flexbox(column, center, center);
     gap: 4px;
     width: 160px;
+    height: 120px;
     border-radius: 16px;
-    padding: 18px 12px;
+    padding: 16px 12px;
     background: $bg-base-secondary;
 
     &-icon {
       @include flex-center;
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       border-radius: 16px;
       background: $bg-base-secondary;
 
@@ -93,17 +94,7 @@
     }
 
     &-title {
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 140%;
-      color: $text-base-secondary;
-    }
-
-    & span:last-child {
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 16px;
-      color: $text-base-light;
+      @include get-font(14px, 500, 20px, $text-base-on-color-secondary);
     }
 
     &.m-matrix-partner {
@@ -138,20 +129,35 @@
     }
 
     &__partners {
-      @include flexbox(column, flex-start, center);
+      @include flexbox(column, center, center);
       padding: 12px 8px;
+      height: 92px;
 
       &-block {
-        @include flexbox(row, flex-start, center);
-        gap: 8px;
+        & > div {
+          &:first-child {
+            @include flexbox(row, space-between, center);
+            gap: 8px;
+            height: 28px;
+
+            & > div {
+              line-height: 1;
+            }
+          }
+        }
+      }
+
+      &-title {
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      &-link {
+        font-size: 10px;
       }
 
       &-count {
         @include get-font(18px, 700, 155%, $text-base-secondary);
-      }
-
-      &-title {
-        display: none;
       }
 
       &-svg {
@@ -180,20 +186,16 @@
 
     &__loading {
       width: 120px;
-      padding: 12px;
+      height: 92px;
 
       &-icon {
         @include flex-center;
-        width: 24px;
-        height: 24px;
+        width: 32px;
+        height: 32px;
       }
 
       &-title {
-        display: none;
-      }
-
-      & span:last-child {
-        font-size: 10px;
+        @include get-font(10px, 500, 12px, $text-base-on-color-secondary);
       }
 
       &.m-matrix-partner {
@@ -208,10 +210,19 @@
         & .infinity-partner-card__loading-title {
           display: block;
         }
+      }
+    }
+  }
+}
 
-        & span:last-child {
-          font-size: 12px !important;
-        }
+@media (max-width: 757px) {
+  .infinity-partner-card {
+    &__partners {
+      gap: 0;
+      height: 64px;
+
+      &-title {
+        display: none;
       }
     }
   }
