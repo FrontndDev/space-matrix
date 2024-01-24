@@ -56,7 +56,9 @@ export default createStore({
             }
             requestMatrixByType = axios.CancelToken.source()
             API.getMatrix(matrixType, { cancelTokenSource: requestMatrixByType }).then(response => {
-                ctx.commit('SET_MATRIX_BY_TYPE', response?.data ?? {})
+                if (response?.data) {
+                    ctx.commit('SET_MATRIX_BY_TYPE', response.data)
+                }
             })
         },
         async getMatrixById(ctx: ActionContext<any, any>, matrixId: number) {
