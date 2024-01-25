@@ -2,7 +2,7 @@
   <div class="d-button" @click="emit('click', props.type)">
     <div class="d-button__name">{{ props.type.title }}</div>
     <div
-        v-if="props.isTime || props.isPending"
+        v-if="hours || minutes"
         class="d-button__time"
     >
       {{ String(hours).padStart(2, '0') }}:{{ String(minutes).padStart(2, '0') }}

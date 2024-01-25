@@ -121,7 +121,7 @@
 
     &.pending {
       border: 1px solid $border-orange;
-      animation: time 2s linear infinite;
+      animation: pending 2s linear infinite;
 
       & * {
         transition: .25s all ease;
@@ -177,6 +177,18 @@
   }
   100% {
     background: $bg-red-light;
+  }
+}
+
+@keyframes pending {
+  50% {
+    background: $bg-base;
+  }
+  51% {
+    background: $bg-orange-light;
+  }
+  100% {
+    background: $bg-orange-light;
   }
 }
 

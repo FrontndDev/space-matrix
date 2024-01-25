@@ -72,8 +72,7 @@ const isTime = (type: Type) => {
 }
 
 const isPending = (type: Type) => {
-  const key = Object.keys(listOfTypes.value.pending).find(listType => listType === type.type)
-  return key ? !!listOfTypes.value.pending[key] : false
+  return Object.keys(listOfTypes.value.pending).includes(type.type)
 }
 
 const selectDButton = (type: Type) => {
