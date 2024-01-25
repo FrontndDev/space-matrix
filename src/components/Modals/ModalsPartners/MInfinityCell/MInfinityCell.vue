@@ -7,7 +7,7 @@
     >
       Бесконечная ячейка
     </ModalHeader>
-    <div class="modal-infinity-cell__container">
+    <div class="modal-infinity-cell__container" v-if="infinityPartners?.length">
       <PartnerCell
           type="infinity"
           size="small"
@@ -17,6 +17,7 @@
           @open-m-matrix-partner="selectPartner(partner)"
       />
     </div>
+    <Preloader :with-text="true" v-if="!infinityPartners?.length"/>
   </div>
 </template>
 
@@ -34,6 +35,7 @@ import {
   Ceil,
   Matrix
 } from "../../../../interfaces/store.interface.ts";
+import Preloader from "../../../UI/Preloader/Preloader.vue";
 
 const emit = defineEmits([
   'close-modal',
