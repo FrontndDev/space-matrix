@@ -6,7 +6,7 @@
           <MatrixHeader style="grid-area: header;"/>
 
           <template v-if="Object.keys(matrixByType).length">
-            <div class="home__matrices-inner" v-if="!matrixByType?.ctaText && !matrixIsTemporarilyUnavailable">
+            <div class="home__matrices-inner" v-if="!matrixByType?.ctaText">
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
                   @open-m-add-partner="openModalPartner(3)"
@@ -24,10 +24,10 @@
               <NotActivatedMatrix
                   :matrix-by-type="matrixByType"
                   @open-payment-form="toggleModalPaymentForm = true"
-                  v-if="matrixByType?.ctaText && !matrixIsTemporarilyUnavailable"
+                  v-if="matrixByType?.ctaText"
               />
               <TimeActivatedMatrix
-                  v-if="matrixIsTemporarilyUnavailable"
+                  v-else
               />
             </template>
             <template v-else>
@@ -41,7 +41,7 @@
 
           <CopyLink
               style="grid-area: copy-link;"
-              v-if="!matrixByType?.ctaText && !matrixIsTemporarilyUnavailable && Object.keys(matrixByType).length"
+              v-if="!matrixByType?.ctaText && Object.keys(matrixByType).length"
               @click="useCopyLink(matrixByType.matrix?.id ?? 0, matrixByType.matrix?.type ?? '')"
           />
         </div>
@@ -100,11 +100,6 @@
         :toggleModalPaymentForm="toggleModalPaymentForm"
         @close-modal="closeModal"
     />
-<!--    <ModalConfirmPayment-->
-<!--        :toggleModalConfirmPayment="toggleModalConfirmPayment"-->
-<!--        :result="resultModalConfirmPayment"-->
-<!--        @close-modal="closeModal"-->
-<!--    />-->
   </div>
 </template>
 
@@ -139,7 +134,6 @@ import { IPosition } from "../../interfaces/partners.interface.ts";
 import {
   Ceil,
   IMatrix,
-  ListOfTypes,
   Matrix,
 } from "../../interfaces/store.interface.ts";
 import {
@@ -148,7 +142,6 @@ import {
 } from "vue-router";
 import { useCopyLink } from "../../composables/useCopyLink.ts";
 import MatrixActivationInProgress from "../../components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
-// import ModalConfirmPayment from "../../components/Modals/ModalConfirmPayment/ModalConfirmPayment.vue";
 import { IChains } from "../../interfaces/chains.interface.ts";
 
 const isCells = ref(1)
@@ -164,7 +157,6 @@ const toggleModalNotification = ref(false)
 const toggleModalPaymentForm = ref(false)
 
 const toggleModalConfirmPayment = ref(false)
-// const resultModalConfirmPayment = ref('failure')
 
 const store = useStore()
 const router = useRouter()
@@ -215,18 +207,6 @@ watch(() => matrixByType.value?.in_queue, () => {
 watch(() => store.state.chains.chainsList.list?.length, () => {
   openChainViaLink()
 })
-
-const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfTypes)
-
-const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
-  const teamOpened = listOfTypes.value.teamOpened
-  if (teamOpened) {
-    const key: string | undefined = Object.keys(teamOpened)?.find(type => route.params.type === type)
-    return key ? !!teamOpened?.[key] : false
-  }
-  return false
-})
-
 
 const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 
