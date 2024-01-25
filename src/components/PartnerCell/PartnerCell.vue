@@ -42,7 +42,7 @@
     <CellType
         :size="props.size"
         :cell-type="props.type"
-        v-if="['boost', 'infinity'].includes(props.type)"
+        v-if="['infinity'].includes(props.type)"
         @click="$emit('open-m-matrix-partner')"
     />
   </div>
