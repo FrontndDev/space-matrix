@@ -23,6 +23,7 @@
           <AddPartnerCell
               size="small"
               type="loading"
+              loading-subtitle="Идет загрузка"
               :ceil="selectedPartner"
               :partners-count="partnersCount"
               v-if="!selectedPartner?.matrix"
@@ -52,6 +53,7 @@
                   :title="(!firstCeil?.allowSniper || !partnersCount) && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   :subtitle="(!firstCeil?.allowSniper || !partnersCount) && firstCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
                   :disabled-subtitle="getCellTypeFirstCeil === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'"
+                  :loading-subtitle="firstCeil?.queueId ? 'Идет активация' : 'Идет загрузка'"
                   v-if="!firstCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
               >
@@ -79,6 +81,7 @@
                   :partners-count="partnersCount"
                   :title="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   :subtitle="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
+                  :loading-subtitle="secondCeil?.queueId ? 'Идет активация' : 'Идет загрузка'"
                   v-if="!secondCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
               >
