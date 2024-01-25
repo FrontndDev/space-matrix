@@ -5,7 +5,7 @@ const BASE_URL = 'https://dev.halk.ai'
 
 const checkUserIsModer = (error: AxiosError) => {
     //@ts-ignore
-    if (window.UserData.moder && error.status === 500) {
+    if (window.UserData.moder) {
         useShowMessage('red', error.message, 'Ошибка:')
     } else if (error.status !== 500) {
         useShowMessage('red', error.message, 'Ошибка:')
@@ -94,7 +94,7 @@ export async function getAsync(url: string, options?: any) {
     try {
         let response = await axios.get(BASE_URL + url, config)
 
-        if (response?.data?.error_code) {
+        if (response?.data?.error_code !== undefined) {
             const error = response.data
             useShowMessage('red', error.error_message, 'Ошибка:')
         }
