@@ -6,7 +6,7 @@
           <MatrixHeader style="grid-area: header;"/>
 
           <template v-if="Object.keys(matrixByType).length">
-            <div class="home__matrices-inner" v-if="!matrixByType?.ctaText">
+            <div class="home__matrices-inner" v-if="!matrixByType?.ctaText && !matrixIsTemporarilyUnavailable">
               <Savings
                   @open-m-matrix-partner="openModalPartner(2)"
                   @open-m-add-partner="openModalPartner(3)"
@@ -24,10 +24,10 @@
               <NotActivatedMatrix
                   :matrix-by-type="matrixByType"
                   @open-payment-form="toggleModalPaymentForm = true"
-                  v-if="matrixByType?.ctaText"
+                  v-if="matrixByType?.ctaText && !matrixIsTemporarilyUnavailable"
               />
               <TimeActivatedMatrix
-                  v-else
+                  v-if="matrixIsTemporarilyUnavailable"
               />
             </template>
             <template v-else>
@@ -41,7 +41,7 @@
 
           <CopyLink
               style="grid-area: copy-link;"
-              v-if="!matrixByType?.ctaText && Object.keys(matrixByType).length"
+              v-if="!matrixByType?.ctaText && !matrixIsTemporarilyUnavailable && Object.keys(matrixByType).length"
               @click="useCopyLink(matrixByType.matrix?.id ?? 0, matrixByType.matrix?.type ?? '')"
           />
         </div>
@@ -134,6 +134,7 @@ import { IPosition } from "../../interfaces/partners.interface.ts";
 import {
   Ceil,
   IMatrix,
+  ListOfTypes,
   Matrix,
 } from "../../interfaces/store.interface.ts";
 import {
@@ -207,6 +208,18 @@ watch(() => matrixByType.value?.in_queue, () => {
 watch(() => store.state.chains.chainsList.list?.length, () => {
   openChainViaLink()
 })
+
+const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfTypes)
+
+const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
+  const teamOpened = listOfTypes.value.teamOpened
+  if (teamOpened) {
+    const key: string | undefined = Object.keys(teamOpened)?.find(type => route.params.type === type)
+    return key ? !!teamOpened?.[key] : false
+  }
+  return false
+})
+
 
 const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 
