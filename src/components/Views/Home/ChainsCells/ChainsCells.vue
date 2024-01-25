@@ -40,7 +40,7 @@
   </div>
   <EmptyCells
       cellsType="chains"
-      v-if="chainsList.totalCount === 0"
+      v-if="littleTabID === 5 && chainsList.totalCount === 0 || littleTabID === 6 && teleportList.totalCount === 0"
   />
   <Pagination
       :count="data.find(tab => tab.id === littleTabID)?.value.totalPages"

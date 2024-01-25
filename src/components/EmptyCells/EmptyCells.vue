@@ -8,6 +8,7 @@
       <span v-if="props.cellsType == 'partners'"> партнеров </span>
       <span v-if="props.cellsType == 'boosters'"> Boost </span>
       <span v-if="props.cellsType == 'chains'"> цепочек </span>
+      <span v-if="props.cellsType == 'teleport'"> телепортов </span>
       пуст
     </span>
   </div>
@@ -34,8 +35,8 @@ const getIconPath: Ref<string> = computed(() => {
     case 'boosters':
       return BoostEmptyIcon;
     case 'chains':
+    case 'teleport':
       return ChainsEmptyIcon;
-
     default:
       return ProfileEmptyIcon;
   }
