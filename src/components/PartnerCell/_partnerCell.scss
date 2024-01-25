@@ -15,7 +15,6 @@
 
   &__avatar {
     padding: 2px;
-    border: 2px solid;
     border-radius: 32px;
     width: 160px;
     height: 160px;
@@ -29,19 +28,19 @@
     }
 
     &.freeze {
-      border-color: $border-blue;
+      border: 2px solid $border-blue;
     }
 
     &.profit {
-      border-color: $border-green;
+      border: 2px solid $border-green;
     }
 
     &.boost {
-      border-color: $border-violet;
+      border: 2px solid $border-violet;
     }
 
     &.infinity {
-      border-color: $border-orange;
+      border: 2px solid $border-orange;
     }
   }
 

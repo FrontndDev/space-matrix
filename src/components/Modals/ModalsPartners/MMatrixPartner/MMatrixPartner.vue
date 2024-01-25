@@ -13,9 +13,9 @@
         <div class="modal-matrix-partner__cell">
           <!--     PARTNER CEIL      -->
           <PartnerCell
+              type=""
               size="small"
               cellType="circle-avatar"
-              :type="getTypeForSelectedCeil"
               :ceil="selectedPartner?.matrix"
               v-if="selectedPartner?.matrix"
               @circle-avatar="getUser"
@@ -208,18 +208,6 @@ const loadMatrix = () => {
 
 watch(() => matrixIsInQueueForPublication.value, () => {
   loadMatrix()
-})
-
-const getTypeForSelectedCeil: ComputedRef<string> = computed(() => {
-  if (!selectedPartner.value || matrixById.value?.in_queue) {
-    return 'loading'
-  }
-
-  if (selectedPartner.value?.matrix?.is_booster) {
-    return 'boost'
-  }
-
-  return store.state.listOfTypes.types.find((type: Type) => type.type === matrixById.value.matrixConfig?.type)
 })
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
