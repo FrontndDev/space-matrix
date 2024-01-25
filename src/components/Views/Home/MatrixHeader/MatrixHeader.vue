@@ -81,14 +81,19 @@ const selectDButton = (type: Type) => {
   }
   selectType(type)
 
-  const buttons = listOfTypes.value.types
-      .filter(type => isTime(type))
-      .map(type => document.querySelector('.' + type.type)) as HTMLDivElement[]
+  function reset(callback = isTime, buttonClass = 'time') {
+    const buttons = listOfTypes.value.types
+        .filter(type => callback(type))
+        .map(type => document.querySelector('.' + type.type)) as HTMLDivElement[]
 
-  buttons.forEach(button => {
-    button.classList.remove('time')
-    setTimeout(() => button.classList.add('time'), 0)
-  })
+    buttons.forEach(button => {
+      button.classList.remove(buttonClass)
+      setTimeout(() => button.classList.add(buttonClass), 0)
+    })
+  }
+
+  reset()
+  reset(isPending, 'pending')
 }
 
 watch(() => listOfTypes.value?.types?.length, () => {
