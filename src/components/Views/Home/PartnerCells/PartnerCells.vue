@@ -65,7 +65,7 @@ const store = useStore()
 const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.onlyInfinityCell)
 
 const partnersExposed: ComputedRef<IPartners> = computed(() => store.state.partners.partnersExposed)
-const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.partnersPending)
+const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.newPartnersPending)
 
 const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
 
@@ -117,7 +117,7 @@ const selectPage = (page: number) => {
 
   switch (littleTabID.value) {
     case 1:
-      store.dispatch('partners/getPendingPartners', { filter: levelIDOfPartners.value || 1, changeTab: false })
+      store.dispatch('partners/getNewPendingPartners', { filter: levelIDOfPartners.value || 1, changeTab: false })
       break
     case 2:
       store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value || 1, changeTab: false })

@@ -64,17 +64,16 @@ const levelIDOfBoosters = computed(() => store.state.boosters.levelID)
 
 const changeLineOfPartners = (item: ILineOfPartners) => {
   store.dispatch('partners/getExposedPartners', { filter: item.id })
-  store.dispatch('partners/getPendingPartners', { filter: item.id })
+  store.dispatch('partners/getNewPendingPartners', { filter: item.id })
 }
 
 const changeMatrixType = (item: Type) => {
   store.commit('SET_NEW_TYPE_MATRIX', item.type)
   store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value })
-  store.dispatch('partners/getPendingPartners', { isPartnerMatrix: false })
+  store.dispatch('partners/getNewPendingPartners', { filter: levelIDOfPartners.value })
 
   store.dispatch('boosters/getPendingBoosters')
   store.dispatch('boosters/getExposedBoosters', { filter:  levelIDOfBoosters.value })
-
 }
 
 const openCells = (id: number) => {
@@ -84,7 +83,7 @@ const openCells = (id: number) => {
 watch(() => store.state.selectedType, () => {
   store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value || 1 })
 
-  store.dispatch('partners/getPendingPartners', { matrixFilterUserId: 2969585, matrixFilterPageId: 1 })
+  store.dispatch('partners/getNewPendingPartners', { filter: levelIDOfPartners.value || 1 })
 
   store.dispatch('boosters/getPendingBoosters')
 
@@ -100,7 +99,7 @@ const tabs = reactive([
     id: 1,
     name: 'Партнеры',
     indicator: {
-      green: computed(() => store.state.partners.partnersPending.totalCount > 0),
+      green: computed(() => store.state.partners.newPartnersPending.totalCount > 0),
       orange: computed(() => listOfTypes.value.pending ? Object.keys(listOfTypes.value.pending).includes(store.state.selectedType.type) : false),
     },
   },

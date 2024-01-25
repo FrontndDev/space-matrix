@@ -52,6 +52,7 @@ const route = useRoute()
 const selectType = (type: Type) => {
   store.commit('SET_SELECTED_TYPE', type)
   store.dispatch('getMatrixByType', type.type)
+  store.dispatch('partners/getPendingPartners', { isPartnerMatrix: false })
   const queryId = () => {
     const query = route.query
     switch (true) {

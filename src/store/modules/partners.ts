@@ -18,6 +18,7 @@ export default {
     return {
       partnersExposed: {} as IPartners,
       partnersPending: {} as IPartners,
+      newPartnersPending: {} as IPartners,
       littleTabID: 1 as number,
       bigTabID: 1 as number,
       infinityPartners: null as Matrix[] | null,
@@ -42,7 +43,7 @@ export default {
         matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
         matrixFilterPageId: state.pageIdPartners,
         //@ts-ignore
-        matrixFilterUserId: 2984609,
+        matrixFilterUserId: window.UserData.id,
         filter: { level: filter }
       }
     ).then(response => {
@@ -54,22 +55,39 @@ export default {
       })
     },
 
+    getNewPendingPartners(
+        { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
+        { filter, changeTab = true }: IGetPendingBoostersParams
+    ) {
+      console.log('filter', filter)
+      state.levelID = filter
+
+      API.filterOfActivatedMatrix({
+            matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
+            matrixFilterPageId: state.pageIdPartners,
+            //@ts-ignore
+            matrixFilterUserId: window.UserData.id,
+            filter: { pending: 1, level: filter }
+          }
+      ).then(response => {
+        if (response.data?.totalCount === 0 && state.bigTabID === 1 && changeTab) commit('CHANGE_LITTLE_TAB', 2)
+
+        commit('SET_NEW_PENDING_PARTNERS', response.data)
+      })
+    },
     getPendingPartners(
       { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
-      { filter, isPartnerMatrix = false, changeTab = true }: IGetPendingBoostersParams
+      { isPartnerMatrix = false }: IGetPendingBoostersParams
     ) {
-      state.levelID = filter
 
       API.filterOfActivatedMatrix({
           matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
           matrixFilterPageId: state.pageIdPartners,
           //@ts-ignore
-          matrixFilterUserId: 2984609,
-          filter: { pending: 1, level: filter }
+          matrixFilterUserId: window.UserData.id,
+          filter: { pending: 1 }
         }
       ).then(response => {
-        if (response.data?.totalCount === 0 && state.bigTabID === 1 && changeTab) commit('CHANGE_LITTLE_TAB', 2)
-
         if (!isPartnerMatrix) {
           commit('SET_PENDING_PARTNERS', response.data)
         } else {
@@ -106,6 +124,9 @@ export default {
     },
     SET_PENDING_PARTNERS_SECOND(state: any, partnersPending: Object) {
       state.partnersPendingSecond = partnersPending
+    },
+    SET_NEW_PENDING_PARTNERS(state: any, newPartnersPending: Object) {
+      state.newPartnersPending = newPartnersPending
     },
     CHANGE_LITTLE_TAB(state: any, id: number) {
       state.littleTabID = id
