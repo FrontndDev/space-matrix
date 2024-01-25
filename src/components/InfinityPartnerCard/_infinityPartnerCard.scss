@@ -32,6 +32,12 @@
     gap: 4px;
     padding: 18px 12px;
     height: 120px;
+    transition: .25s all ease;
+
+    &.active {
+      background: $bg-base-secondary;
+      border-color: $bg-base-secondary;
+    }
 
     &-block {
       @include flexbox(column, flex-start, center);

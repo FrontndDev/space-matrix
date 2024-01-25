@@ -2,6 +2,7 @@
   <div class="infinity-partner-card" :class="props.modal">
     <div
         v-if="!props.loading"
+        ref="partners"
         class="infinity-partner-card__partners"
     >
       <div class="infinity-partner-card__partners-block">
@@ -19,6 +20,8 @@
       <div
           class="infinity-partner-card__partners-link"
           v-if="partnersCount"
+          @mouseleave="blurPartnersCard($refs.partners)"
+          @mouseover="focusPartnersCard($refs.partners)"
           @click="$emit('open-m-infinity-cell')"
       >
         Просмотр
@@ -94,6 +97,14 @@ const fillReward = computed(() => {
     'custom': getFilteredRewards('custom').map(reward => reward.value.title) as string[],
   }
 })
+
+const focusPartnersCard = (ref: any) => {
+  ref.classList.add('active')
+}
+
+const blurPartnersCard = (ref: any) => {
+  ref.classList.remove('active')
+}
 </script>
 
 <style scoped lang="scss">
