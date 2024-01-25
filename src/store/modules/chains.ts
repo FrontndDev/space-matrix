@@ -6,7 +6,9 @@ import {
 import {
   IChainDetails,
   IChainsList,
-  ITeleportPartnerParams
+  ITeleportList,
+  ITeleportPartnerParams,
+  ITeleports
 } from "../../interfaces/chains.interface.ts";
 import { useShowMessage } from "../../composables/useShowMessage.ts";
 
@@ -15,7 +17,7 @@ export default {
   state() {
     return {
       chainsList: {} as IChainsList,
-      teleportList: {} as IChainsList,
+      teleportList: {} as ITeleportList,
       chainDetails: {} as IChainDetails,
       pageIdChains: 1
     }
@@ -43,11 +45,16 @@ export default {
         commit('SET_CHAIN_DETAIL', response.data)
       })
     },
-    teleportPartner(_: ActionContext<any, any>, data: ITeleportPartnerParams) {
+    teleportPartner({ state }: ActionContext<any, any>, data: ITeleportPartnerParams) {
       API.activatePartnerTeleport(data).then(response => {
         console.log('teleportPartner', response)
-        if (!response?.error_code) {
+        if (response?.error_code !== undefined) {
           useShowMessage('green', 'Телепорт успешно активирован')
+          const index = state.teleportList.list
+              .map((chain: ITeleports) => chain.owner.id)
+              .indexOf(data.partnerId)
+          state.teleportList.list.splice(index, 1)
+          state.teleportList.totalCount--
         }
       })
     }

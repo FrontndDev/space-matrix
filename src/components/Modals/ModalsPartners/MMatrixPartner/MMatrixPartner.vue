@@ -320,7 +320,7 @@ const parentMatrix = async () => {
 
     const response = await store.dispatch('getMatrixById', parentMatrixId)
 
-    if (response?.error_code) {
+    if (response?.error_code !== undefined) {
       emit('close-modal')
     }
 

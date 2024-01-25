@@ -296,7 +296,7 @@ const selectPartner = async (ceil: Ceil) => {
     store.commit('SET_MATRIX_BY_ID', {})
     const response = await store.dispatch('getMatrixById', ceil.matrix.id)
 
-    if (response?.error_code) {
+    if (response?.error_code !== undefined) {
       closeModal()
     }
 
@@ -312,7 +312,7 @@ const loadMMatrixPartnerModal = async () => {
     store.commit('SET_MATRIX_BY_ID', {})
     const response = await store.dispatch('getMatrixById', route.query.id)
 
-    if (response?.error_code) {
+    if (response?.error_code !== undefined) {
       closeModal()
     }
 

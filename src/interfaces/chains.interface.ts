@@ -45,16 +45,18 @@ export interface IChainDetails {
   rewards: FillReward[];
 }
 
+export interface ITeleports {
+  owner: IOwner;
+  profit: {
+    amount: number;
+    currency: string;
+  };
+  startMatrix: string;
+}
+
 export interface ITeleportList {
   currentPage: number;
-  list: {
-    owner: IOwner;
-    profit: {
-      amount: number;
-      currency: string;
-    };
-    startMatrix: string;
-  }[];
+  list: ITeleports[];
   totalCount: number;
   totalPages: number;
 }

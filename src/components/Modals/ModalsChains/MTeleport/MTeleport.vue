@@ -50,8 +50,8 @@ import {
   inject,
   Ref
 } from "vue";
-import { Matrix } from "../../../../interfaces/store.interface.ts";
 import CancelButton from "../../../UI/CancelButton/CancelButton.vue";
+import { Matrix } from "../../../../interfaces/store.interface.ts";
 
 const emit = defineEmits(['close-modal'])
 

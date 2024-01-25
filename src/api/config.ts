@@ -40,7 +40,7 @@ export async function putAsync(url: string, data: unknown, checkError = true) {
     try {
         let response = await axios.put(BASE_URL + url, data, { headers: setGlobalConfig(localStorage.getItem('token')) })
 
-        if (response?.data?.error_code) {
+        if (response?.data?.error_code !== undefined) {
             const error = response.data
             useShowMessage('red', error.error_message, 'Ошибка:')
         }
@@ -65,7 +65,7 @@ export async function postAsync(url: string, data = {}, checkError = true) {
     try {
         let response = await axios.post(BASE_URL + url, data, { headers: setGlobalConfig(localStorage.getItem('token')) })
 
-        if (response?.data?.error_code) {
+        if (response?.data?.error_code !== undefined) {
             const error = response.data
             useShowMessage('red', error.error_message, 'Ошибка:')
         }

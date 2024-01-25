@@ -189,7 +189,7 @@ const ceil: ComputedRef<Matrix> = computed(() => {
 
 const matrix: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
-const buyBooster = () => {
+const buyBooster = async () => {
   const matrixId = chainsDetails.value[0].id
 
   const data: IBuyBoosterParams = {
@@ -199,13 +199,16 @@ const buyBooster = () => {
     chainMode: chainModes[isExposeTabs.value - 1],
   }
   emit('close-modal')
-  store.dispatch('buyBooster', data)
+  const response = await store.dispatch('buyBooster', data)
+  if (response?.data?.error_code !== undefined) {
+    deleteItemFromState()
+  }
 }
 
 const confirm = async () => {
   switch (confirmPaymentType.value) {
     case 'success':
-      buyBooster()
+      await buyBooster()
       break;
     case 'failure':
       window.location.href = window.location.origin + '/app/wallet'
@@ -214,6 +217,13 @@ const confirm = async () => {
     default:
       break;
   }
+}
+
+const deleteItemFromState = () => {
+  const chainsList = store.state.chains.chainsList
+  const index = chainsList.list.map((chain: IChains) => chain.id).indexOf(selectedChain.value.id)
+  chainsList.list.splice(index, 1)
+  chainsList.totalCount--
 }
 
 const exposePartner = async () => {
@@ -228,7 +238,11 @@ const exposePartner = async () => {
       pos: 2,
       chainMode: chainModes[isExposeTabs.value - 1],
     }
-    await store.dispatch('partners/exposePartner', data)
+    const response = await store.dispatch('partners/exposePartner', data)
+    if (response?.data?.error_code !== undefined) {
+      deleteItemFromState()
+    }
+    emit('close-modal')
   }
 }
 </script>
