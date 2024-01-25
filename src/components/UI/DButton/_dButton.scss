@@ -86,9 +86,9 @@
   }
 
   &:not(.active) {
-    &.time {
-      border: 1px solid $border-red;
-      animation: time 2s linear infinite;
+    &.pending {
+      border: 1px solid $border-orange;
+      animation: pending 2s linear infinite;
 
       & * {
         transition: .25s all ease;
@@ -119,9 +119,9 @@
       }
     }
 
-    &.pending {
-      border: 1px solid $border-orange;
-      animation: pending 2s linear infinite;
+    &.time {
+      border: 1px solid $border-red;
+      animation: time 2s linear infinite;
 
       & * {
         transition: .25s all ease;
