@@ -18,6 +18,7 @@
         >
           <SmallCell
               :cell="cell"
+              :show-partner-type="!onlyInfinityCell"
               @click="selectCell(cell)"
           />
         </div>
@@ -69,6 +70,8 @@ const emit = defineEmits(['close-modal', 'open-m-add-partner'])
 
 const store = useStore()
 const cells: ComputedRef<Matrix[]> = computed(() => store.state.partners.partnersPending?.list)
+
+const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.onlyInfinityCell)
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 const partnerPos = inject('partnerPos') as Ref<IPosition>
