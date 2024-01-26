@@ -21,7 +21,6 @@
           :countLinks="cell?.count_links"
           :avatar="cell?.initiator.photo"
           @open-general-chains="openGeneralChains"
-          @open-m-teleport="$emit('open-m-teleport')"
           v-if="littleTabID === 5"
       />
       <ChainCell
