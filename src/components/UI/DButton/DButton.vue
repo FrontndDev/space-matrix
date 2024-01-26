@@ -73,7 +73,7 @@ const time: ComputedRef<number> = computed(() => {
 
 const updateListOfTypes: Ref<boolean> = ref(false)
 
-watch(() => time.value === 0, () => {
+watch(() => time.value <= 0, () => {
   updateListOfTypes.value = true
 })
 
@@ -82,7 +82,6 @@ watch(() => updateListOfTypes.value, () => {
     clearInterval(timeInterval.value)
   }
   store.dispatch('getMatrixByType', props.type?.type)
-  store.dispatch('getListOfTypes')
 })
 
 const hours = computed(() => Math.floor(time.value / 3600))
