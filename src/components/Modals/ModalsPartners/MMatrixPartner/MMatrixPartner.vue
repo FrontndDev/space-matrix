@@ -74,13 +74,13 @@
               />
               <AddPartnerCell
                   size="small"
-                  disabled-subtitle="Заполните левую ячейку"
                   :type="getTypeForSecondCeil"
                   :cell-type="getCellTypeSecondCeil"
                   :ceil="secondCeil"
                   :partners-count="partnersCount"
                   :title="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   :subtitle="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
+                  :disabled-subtitle="!firstCeil?.matrix ? 'Заполните левую ячейку' : getCellTypeSecondCeil === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'"
                   :loading-subtitle="secondCeil?.queueId ? 'Идет активация' : 'Идет загрузка'"
                   v-if="!secondCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 2))"

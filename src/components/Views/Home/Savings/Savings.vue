@@ -42,13 +42,13 @@
           @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
       />
       <AddPartnerCell
-          disabled-subtitle="Заполните левую ячейку"
           :type="getTypeForSecondCeil"
           :cell-type="getCellTypeSecondCeil"
           :ceil="secondCeil"
           :partners-count="partnersCount"
           :title="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
           :subtitle="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? `${matrixByType.matrixConfig.price}` : ''"
+          :disabled-subtitle="!firstCeil?.matrix ? 'Заполните левую ячейку' : getCellTypeSecondCeil === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'"
           v-if="!secondCeil?.matrix || secondCeil.queueId"
           @open-m-add-partner="openMAddPartner(getPosition(secondCeil.depth, secondCeil.pos))"
       >
