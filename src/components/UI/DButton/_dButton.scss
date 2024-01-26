@@ -9,6 +9,7 @@
   border: 1px solid $border-base-dark;
   transition: .25s all ease;
   cursor: pointer;
+  position: relative;
 
   &__name {
     @include get-font(22px, 700, 36px, $text-base-secondary);

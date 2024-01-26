@@ -1,5 +1,10 @@
 <template>
-  <div class="d-button" @click="emit('click', props.type)">
+  <div
+      class="d-button"
+      @mouseover="showTooltip"
+      @mouseleave="hideTooltip"
+      @click="emit('click', props.type)"
+  >
     <div class="d-button__name">{{ props.type.title }}</div>
     <div
         v-if="hours || minutes"
@@ -20,6 +25,11 @@
         <path fill-rule="evenodd" clip-rule="evenodd" d="M7.08841 12.4278C7.69785 13.5451 9.30218 13.5451 9.91162 12.4278L13.6347 5.60212C14.2192 4.53063 13.4436 3.22422 12.2231 3.22422H4.7769C3.55638 3.22422 2.78085 4.53063 3.3653 5.60212L7.08841 12.4278ZM9.20581 12.0429L12.9289 5.21714C13.2212 4.6814 12.8334 4.02819 12.2231 4.02819H8.902V12.3557C9.02379 12.2859 9.13014 12.1816 9.20581 12.0429ZM7.79421 12.0429C7.86988 12.1816 7.97623 12.2859 8.09803 12.3557V4.02819H4.7769C4.16664 4.02819 3.77887 4.6814 4.0711 5.21714L7.79421 12.0429Z"/>
       </svg>
     </div>
+
+    <MyTooltip
+        :text="getTextForTooltip"
+        v-if="showMyTooltip && getTextForTooltip"
+    />
   </div>
 </template>
 
@@ -35,6 +45,7 @@ import {
   watch
 } from "vue";
 import { useStore } from "vuex";
+import MyTooltip from "../MyTooltip/MyTooltip.vue";
 
 const props = defineProps({
   type: {
@@ -61,6 +72,8 @@ const emit = defineEmits(['click']);
 const store = useStore()
 
 const timeInterval: Ref<number | null> = ref(null)
+
+const showMyTooltip: Ref<boolean> = ref(false)
 
 const time: ComputedRef<number> = computed(() => {
   switch (true) {
@@ -117,6 +130,25 @@ onBeforeMount(() => {
     }, 1000)
   }
 })
+
+const getTextForTooltip: ComputedRef<string> = computed(() => {
+  switch (true) {
+    case props.isTime:
+      return 'Активируйте матрицу, <br> чтобы не упустить <br> прибыль'
+    case props.isPending:
+      return 'Новый партнер в <br> ожидании с ограничением <br> по времени'
+    default:
+      return ''
+  }
+})
+
+const showTooltip = () => {
+  showMyTooltip.value = true
+}
+
+const hideTooltip = () => {
+  showMyTooltip.value = false
+}
 </script>
 
 <style scoped lang="scss">
