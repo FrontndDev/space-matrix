@@ -4,7 +4,9 @@
 .small-cell {
   @include flexbox(column, flex-start, center);
   gap: 12px;
+  margin: 0 auto;
   padding: 12px;
+  width: 151px;
   cursor: pointer;
   position: relative;
 
