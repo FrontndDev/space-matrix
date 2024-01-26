@@ -122,7 +122,7 @@ const data = reactive([
 
 const openGeneralChains = (id: number) => {
   store.dispatch('chains/getChainDetail', id)
-  emit('select-chain', chainsList.value?.list.find(chain => chain.id === id))
+  emit('select-chain', chainsList.value?.list?.find(chain => chain.id === id))
   emit('open-general-chains')
 }
 
