@@ -100,18 +100,6 @@ const data = reactive([
 
 const levelIDOfPartners = computed(() => store.state.partners.levelID)
 
-// const ceilIsCumulative = (cell: Ceil) => {
-//   return !!cell?.fillRevard.find(reward => reward.event === 'freeze')
-// }
-
-// const getTypeForSelectedCeil = (cell: Ceil) => {
-//   if (cell?.matrix?.is_booster) {
-//     return 'boost'
-//   }
-//
-//   return ceilIsCumulative(cell) ? 'cumulative' : 'profitable'
-// }
-
 const selectPage = (page: number) => {
   store.commit('partners/SET_PAGE_ID_PARTNERS', page)
 
