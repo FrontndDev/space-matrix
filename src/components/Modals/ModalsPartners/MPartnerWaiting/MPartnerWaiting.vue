@@ -88,6 +88,21 @@ const selectCell = (cell: Matrix) => {
   selectedCell.value = cell
 }
 
+const removePartnerFromList = () => {
+  if (selectedCell.value) {
+    const partnersPending = store.state.partners.partnersPending
+    const index = partnersPending.list.map((partner: Matrix) => partner.id).indexOf(+selectedCell.value?.id)
+    partnersPending.list.splice(index, 1)
+    partnersPending.totalCount--
+
+    const newPartnersPending = store.state.partners.newPartnersPending
+    if (newPartnersPending.list?.[0]?.type === store.state.selectedType.type) {
+      newPartnersPending.list.splice(index, 1)
+      newPartnersPending.totalCount--
+    }
+  }
+}
+
 const exposePartner = async () => {
   const myMatrix = store.state.matrixByType?.matrix
   const partnerMatrix = selectedPartner.value?.matrix
@@ -114,6 +129,7 @@ const exposePartner = async () => {
         await store.dispatch('getListOfTypes')
       }
     }
+    removePartnerFromList()
     emit('close-modal')
   }
 }
