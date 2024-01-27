@@ -232,7 +232,7 @@ const selectItemsBoosters = reactive([
 const setItems = () => {
   itemInfoHeaderFirst.value = selectItemsPartners[0]
   itemInfoHeaderSecond.value = selectItemsBoosters[0]
-  itemInfoHeaderThird.value = listOfTypes.value.types[0]
+  itemInfoHeaderThird.value = store.state.selectedType
 }
 
 watch(() => store.state.selectedType, () => {
