@@ -8,20 +8,22 @@ export default {
       boostersPending: [],
       boostersExposed: [],
       pageIdBooster: 1,
-      levelID: 0 as number
+      levelID: -1 as number
     }
   },
   actions: {
     getPendingBoosters(
       { commit, rootState, state }: { commit: Commit; rootState: any, state: any },
-      changeTab = true
+      { changeTab = true, filter }: any = {}
     ) {
+      state.levelID = filter
+
       API.filterOfActivatedMatrix({
           matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
           //@ts-ignore
           matrixFilterUserId: window.UserData.id,
           matrixFilterPageId: state.pageIdBooster,
-          filter: { pending: 1, is_booster: true }
+          filter: { pending: 1, is_booster: true, filter }
         }
       ).then(response => {
         if (response.data?.totalCount === 0 && rootState.partners.bigTabID === 2 && changeTab) {
@@ -33,14 +35,17 @@ export default {
       })
     },
     getExposedBoosters(
-      { commit, rootState, state }: { commit: Commit; rootState: any, state: any }
+      { commit, rootState, state }: { commit: Commit; rootState: any, state: any },
+      { filter }: any
     ) {
+      state.levelID = filter
+
       API.filterOfActivatedMatrix({
           matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
           //@ts-ignore
           matrixFilterUserId: window.UserData.id,
           matrixFilterPageId: state.pageIdBooster,
-          filter: { is_booster: true }
+          filter: { is_booster: true, filter }
         }
       ).then(response => {
         commit('SET_EXPOSED_BOOSTERS', response.data)

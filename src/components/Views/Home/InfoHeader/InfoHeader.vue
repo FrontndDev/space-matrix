@@ -9,8 +9,14 @@
         <Select
             data="static"
             :items="selectItemsPartners"
-            v-show="props.infoHeader === 1"
             @select="changeLineOfPartners"
+        />
+      </div>
+      <div v-show="props.infoHeader === 2">
+        <Select
+            data="static"
+            :items="selectItemsBoosters"
+            @select="changeLineOfBoosters"
         />
       </div>
       <div v-show="props.infoHeader !== 3">
@@ -67,12 +73,18 @@ const changeLineOfPartners = (item: ILineOfPartners) => {
   store.dispatch('partners/getNewPendingPartners', { filter: item.id })
 }
 
+const changeLineOfBoosters = (item: ILineOfPartners) => {
+  store.dispatch('boosters/getPendingBoosters', { filter: item.id })
+  store.dispatch('boosters/getExposedBoosters', { filter: item.id })
+}
+
 const changeMatrixType = (item: Type) => {
   store.commit('SET_NEW_TYPE_MATRIX', item.type)
+
   store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value })
   store.dispatch('partners/getNewPendingPartners', { filter: levelIDOfPartners.value })
 
-  store.dispatch('boosters/getPendingBoosters')
+  store.dispatch('boosters/getPendingBoosters', { filter:  levelIDOfBoosters.value })
   store.dispatch('boosters/getExposedBoosters', { filter:  levelIDOfBoosters.value })
 }
 
@@ -85,9 +97,9 @@ watch(() => store.state.selectedType, () => {
 
   store.dispatch('partners/getNewPendingPartners', { filter: levelIDOfPartners.value || 1 })
 
-  store.dispatch('boosters/getPendingBoosters')
+  store.dispatch('boosters/getPendingBoosters', { filter: levelIDOfBoosters.value || -1 })
 
-  store.dispatch('boosters/getExposedBoosters')
+  store.dispatch('boosters/getExposedBoosters', { filter: levelIDOfBoosters.value || -1 })
 
   store.dispatch('chains/getChainsList')
 
@@ -116,6 +128,57 @@ const tabs = reactive([
 ]);
 
 const selectItemsPartners = reactive([
+  {
+    id: -1,
+    name: 'Вся структура'
+  },
+  {
+    id: 1,
+    name: '1 линия'
+  },
+  {
+    id: 2,
+    name: '2 линия'
+  },
+  {
+    id: 3,
+    name: '3 линия'
+  },
+  {
+    id: 4,
+    name: '4 линия'
+  },
+  {
+    id: 5,
+    name: '5 линия'
+  },
+  {
+    id: 6,
+    name: '6 линия'
+  },
+  {
+    id: 7,
+    name: '7 линия'
+  },
+  {
+    id: 8,
+    name: '8 линия'
+  },
+  {
+    id: 9,
+    name: '9 линия'
+  },
+]);
+
+const selectItemsBoosters = reactive([
+  {
+    id: -1,
+    name: 'Все бустеры команды'
+  },
+  {
+    id: 0,
+    name: 'Мои бустеры'
+  },
   {
     id: 1,
     name: '1 линия'
