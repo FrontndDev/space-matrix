@@ -9,6 +9,7 @@
         <Select
             data="static"
             :items="selectItemsPartners"
+            :selected-item="itemInfoHeaderFirst"
             @select="changeLineOfPartners"
         />
       </div>
@@ -16,6 +17,7 @@
         <Select
             data="static"
             :items="selectItemsBoosters"
+            :selected-item="itemInfoHeaderSecond"
             @select="changeLineOfBoosters"
         />
       </div>
@@ -25,6 +27,7 @@
             keyOfID="type"
             route="types"
             :items="listOfTypes?.types"
+            :selected-item="itemInfoHeaderThird"
             @select="changeMatrixType"
         />
       </div>
@@ -43,7 +46,9 @@
 import Tabs from "../../../UI/Tabs/Tabs.vue";
 import {
   computed,
+  onMounted,
   reactive,
+  ref,
   Ref,
   watch
 } from "vue";
@@ -68,17 +73,24 @@ const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
 const levelIDOfPartners = computed(() => store.state.partners.levelID)
 const levelIDOfBoosters = computed(() => store.state.boosters.levelID)
 
+const itemInfoHeaderFirst: Ref<any> = ref(null)
+const itemInfoHeaderSecond: Ref<any> = ref(null)
+const itemInfoHeaderThird: Ref<any> = ref(null)
+
 const changeLineOfPartners = (item: ILineOfPartners) => {
+  itemInfoHeaderFirst.value = item
   store.dispatch('partners/getExposedPartners', { filter: item.id })
   store.dispatch('partners/getNewPendingPartners', { filter: item.id })
 }
 
 const changeLineOfBoosters = (item: ILineOfPartners) => {
+  itemInfoHeaderSecond.value = item
   store.dispatch('boosters/getPendingBoosters', { filter: item.id })
   store.dispatch('boosters/getExposedBoosters', { filter: item.id })
 }
 
 const changeMatrixType = (item: Type) => {
+  itemInfoHeaderThird.value = item
   store.commit('SET_NEW_TYPE_MATRIX', item.type)
 
   store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value })
@@ -216,6 +228,20 @@ const selectItemsBoosters = reactive([
     name: '9 линия'
   },
 ]);
+
+const setItems = () => {
+  itemInfoHeaderFirst.value = selectItemsPartners[0]
+  itemInfoHeaderSecond.value = selectItemsBoosters[0]
+  itemInfoHeaderThird.value = listOfTypes.value.types[0]
+}
+
+watch(() => store.state.selectedType, () => {
+  setItems()
+})
+
+onMounted(() => {
+  setItems()
+})
 </script>
 
 <style scoped lang="scss">

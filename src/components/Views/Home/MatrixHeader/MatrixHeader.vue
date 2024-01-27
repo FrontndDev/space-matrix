@@ -53,7 +53,7 @@ const setDependencies = (type: Type) => {
   store.state.partners.bigTabID = 1
   store.state.partners.littleTabID = 1
   store.state.partners.pageIdPartners = 1
-  store.state.partners.levelID = 1
+  store.state.partners.levelID = -1
 
   store.state.boosters.pageIdBooster = 1
   store.state.boosters.levelID = -1

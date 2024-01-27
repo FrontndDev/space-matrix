@@ -2,7 +2,7 @@
   <div class="select-matrix" :tabindex="1" @blur="showDropdown = false">
     <div class="select-matrix__up" :class="{ opened: showDropdown }" @click="showDropdown = !showDropdown">
       <div class="select-matrix__text">
-        {{ selectedItem?.[props.keyObj] }}
+        {{ props.selectedItem?.[props.keyObj] }}
       </div>
 
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -14,7 +14,7 @@
     <div class="select-matrix__down" v-if="showDropdown">
       <div
           class="select-matrix__item"
-          :class="{ active: item?.[props.keyOfID] === selectedItem?.[props.keyOfID] }"
+          :class="{ active: item?.[props.keyOfID] === props.selectedItem?.[props.keyOfID] }"
           v-for="item in props.items"
           :key="item[props.keyOfID]"
           @click="selectItem(item)"
@@ -29,8 +29,8 @@
 import {
   onMounted,
   PropType,
-  Ref,
-  ref, watch
+  ref,
+  watch
 } from "vue";
 import { useStore } from "vuex";
 
@@ -50,6 +50,10 @@ const props = defineProps({
     type: Array as PropType<any>,
     required: true
   },
+  selectedItem: {
+    type: Object,
+    default: null
+  },
   defaultValue: {
     type: Object as PropType<any>,
   },
@@ -61,39 +65,35 @@ const props = defineProps({
 const emit = defineEmits(['select']);
 const store = useStore()
 
-const selectedItem: Ref<any> = ref(null);
-
 const showDropdown = ref(false);
 
-
 const selectItem = (item: any) => {
-  selectedItem.value = item;
   emit('select', item);
   showDropdown.value = false
 }
 
-onMounted(() => {
-  if (props.data === 'static') {
-    selectedItem.value = props.defaultValue ?? props.items[0]
-  }
-})
+// onMounted(() => {
+//   if (props.data === 'static') {
+//     emit('select', props.defaultValue ?? props.items[0])
+//   } else {
+//     emit('select', props.items[0])
+//   }
+// })
 
-const changeSelectedItem = () => {
-  if (props.route === 'types') {
-    selectedItem.value = store.state.selectedType
-  }
-}
+// const changeSelectedItem = () => {
+//   if (props.route === 'types') {
+//     emit('select', store.state.selectedType)
+//   }
+// }
 
-watch(() => props.items?.length, () => {
-  selectedItem.value = props.defaultValue ?? props.items[0]
-  changeSelectedItem()
-})
+// watch(() => props.items?.length, () => {
+//   emit('select', props.defaultValue ?? props.items[0])
+//   changeSelectedItem()
+// })
 
-watch(() => store.state.selectedType, () => {
-  changeSelectedItem()
-})
-
-
+// watch(() => store.state.selectedType, () => {
+//   changeSelectedItem()
+// })
 </script>
 
 <style scoped lang="scss">
