@@ -49,10 +49,21 @@ const store = useStore()
 const router = useRouter()
 const route = useRoute()
 
-const selectType = (type: Type) => {
+const setDependencies = (type: Type) => {
+  store.state.partners.bigTabID = 1
+  store.state.partners.littleTabID = 1
+  store.state.partners.pageIdPartners = 1
+  store.state.partners.levelID = 1
+
+  store.state.boosters.pageIdBooster = 1
+  store.state.boosters.levelID = -1
   store.commit('SET_SELECTED_TYPE', type)
   store.dispatch('getMatrixByType', type.type)
   store.commit('SET_NEW_TYPE_MATRIX', type.type)
+}
+
+const selectType = (type: Type) => {
+  setDependencies(type)
   store.dispatch('partners/getPendingPartners', { isPartnerMatrix: false })
 
   const queryId = () => {
