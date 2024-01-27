@@ -23,7 +23,7 @@ export default {
       bigTabID: 1 as number,
       infinityPartners: null as Matrix[] | null,
       countPendingBoosters: null,
-      levelID: -1 as number,
+      levelID: 1 as number,
 
       pageIdPartners: 1,
 
@@ -59,7 +59,6 @@ export default {
         { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
         { filter, changeTab = true }: IGetPendingBoostersParams
     ) {
-      console.log('filter', filter)
       state.levelID = filter
 
       API.filterOfActivatedMatrix({

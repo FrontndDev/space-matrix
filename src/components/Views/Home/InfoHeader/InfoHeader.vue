@@ -97,9 +97,9 @@ watch(() => store.state.selectedType, () => {
 
   store.dispatch('partners/getNewPendingPartners', { filter: levelIDOfPartners.value || 1 })
 
-  store.dispatch('boosters/getPendingBoosters', { filter: levelIDOfBoosters.value || -1 })
+  store.dispatch('boosters/getPendingBoosters', { filter: levelIDOfBoosters.value || 1 })
 
-  store.dispatch('boosters/getExposedBoosters', { filter: levelIDOfBoosters.value || -1 })
+  store.dispatch('boosters/getExposedBoosters', { filter: levelIDOfBoosters.value || 1 })
 
   store.dispatch('chains/getChainsList')
 
