@@ -21,7 +21,6 @@ import {
   onBeforeMount,
   Ref,
   ref,
-  watch,
 } from "vue";
 import { useStore } from "vuex";
 
