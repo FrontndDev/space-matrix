@@ -4,7 +4,9 @@
 .chain-cell {
   @include flexbox(column);
   gap: 4px;
+  margin: 0 auto;
   padding: 12px;
+  width: 153px;
   position: relative;
 
   &__avatar {
