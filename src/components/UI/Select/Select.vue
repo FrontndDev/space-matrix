@@ -27,12 +27,9 @@
 
 <script setup lang="ts">
 import {
-  onMounted,
   PropType,
   ref,
-  watch
 } from "vue";
-import { useStore } from "vuex";
 
 const props = defineProps({
   keyObj: {
@@ -63,7 +60,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['select']);
-const store = useStore()
 
 const showDropdown = ref(false);
 
