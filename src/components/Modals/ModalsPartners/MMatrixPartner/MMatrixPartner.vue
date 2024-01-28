@@ -156,7 +156,7 @@ const route = useRoute()
 
 const store = useStore()
 
-const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.onlyInfinityCell)
+const isDreamTon9: ComputedRef<boolean> = computed(() => matrixById.value.matrix?.type === 'dream-ton_9')
 
 const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
 
@@ -184,10 +184,10 @@ const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 
 const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() =>
-    onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['2']
+    isDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['2']
 )
 const thirdCeil: ComputedRef<Ceil> = computed(() =>
-    onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['3']
+    isDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['3']
 )
 
 const interval: Ref<number | null> = ref(null)
@@ -212,7 +212,7 @@ watch(() => matrixIsInQueueForPublication.value, () => {
 })
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
-  if (matrixById.value.matrix?.type === 'dream-ton_9') {
+  if (isDreamTon9.value) {
     return 'disable3'
   }
 
@@ -236,7 +236,7 @@ const getCellTypeFirstCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
-  if (matrixById.value.matrix?.type === 'dream-ton_9') {
+  if (isDreamTon9.value) {
     return 'disable3'
   }
 
@@ -276,7 +276,7 @@ const openMInfinityCell = () => {
 
 const openMAddPartner = (pos: IPosition) => {
   const ceil: Ceil = ceils.value[String(pos.pos)]
-  if (!onlyInfinityCell.value && !ceil.queueId && (ceil?.allowSniper || ceil?.allowBuyClone)) {
+  if (!isDreamTon9.value && !ceil.queueId && (ceil?.allowSniper || ceil?.allowBuyClone)) {
     // emit('select-partner', null)
     emit('set-partner-by', 'id')
     emit('open-m-add-partner', pos)
