@@ -4,11 +4,14 @@
 .my-tooltip {
   margin: auto;
   padding: 12px;
+  max-width: 500px;
+  width: fit-content;
   height: fit-content;
   border-bottom: 1px solid $border-base-dark-light;
   border-radius: 16px;
   background: $bg-base-dark;
   @include get-font(12px, 500, 16px, $text-base-on-color);
+  white-space: nowrap;
   position: absolute;
   top: 0;
   bottom: 0;
