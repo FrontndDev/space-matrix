@@ -50,7 +50,7 @@
           :partners-count="partnersCount"
           :title="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
           :subtitle="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? `${matrixByType.matrixConfig.price}` : ''"
-          :disabled-subtitle="!firstCeil?.matrix ? 'Заполните левую ячейку' : getCellTypeSecondCeil === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'"
+          :disabled-subtitle="!firstCeil?.matrix && (firstCeil?.allowSniper || firstCeil?.allowBuyClone) ? 'Заполните левую ячейку' : getCellTypeSecondCeil === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'"
           v-if="!secondCeil?.matrix || secondCeil.queueId"
           @open-m-add-partner="openMAddPartner(getPosition(secondCeil.depth, secondCeil.pos))"
       >
