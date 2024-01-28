@@ -14,7 +14,7 @@
           :key="idx"
           :cell="cell"
           :type="cell?.time_to_activate ? `time` : ''"
-          :show-partner-type="!onlyInfinityCell"
+          :show-partner-type="!isDreamTon9"
           @open-m-matrix-partner="openMMatrixPartner(cell)"
           v-if="littleTabID === 1"
       />
@@ -23,7 +23,7 @@
           :key="idx"
           :cell="cell"
           :type="cell?.time_to_activate ? `time` : ''"
-          :show-partner-type="!onlyInfinityCell"
+          :show-partner-type="!isDreamTon9"
           @open-m-matrix-partner="openMMatrixPartner(cell)"
           v-if="littleTabID === 2"
       />
@@ -62,7 +62,7 @@ const emit = defineEmits(['open-m-matrix-partner', 'select-partner'])
 
 const store = useStore()
 
-const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.onlyInfinityCell)
+const isDreamTon9: ComputedRef<boolean> = computed(() => store.state.newTypeMatrix === 'dream-ton_9')
 
 const partnersExposed: ComputedRef<IPartners> = computed(() => store.state.partners.partnersExposed)
 const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.newPartnersPending)
