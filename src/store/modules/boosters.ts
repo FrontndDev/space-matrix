@@ -23,7 +23,7 @@ export default {
           //@ts-ignore
           matrixFilterUserId: window.UserData.id,
           matrixFilterPageId: state.pageIdBooster,
-          filter: { pending: 1, is_booster: true, filter }
+          filter: { pending: 1, is_booster: true, level: filter }
         }
       ).then(response => {
         if (response.data?.totalCount === 0 && rootState.partners.bigTabID === 2 && changeTab) {
@@ -45,7 +45,7 @@ export default {
           //@ts-ignore
           matrixFilterUserId: window.UserData.id,
           matrixFilterPageId: state.pageIdBooster,
-          filter: { is_booster: true, filter }
+          filter: { is_booster: true, level: filter }
         }
       ).then(response => {
         commit('SET_EXPOSED_BOOSTERS', response.data)
