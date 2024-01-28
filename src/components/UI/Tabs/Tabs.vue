@@ -57,11 +57,6 @@ const clickTab = (id: number) => {
   emit('toggle-expose-tabs', id)
 }
 
-watch(() => store.state.newTypeMatrix, () => {
-  tab.value = props.tabs[0]
-  clickTab(props.tabs[0].id)
-})
-
 onBeforeMount(() => tab.value = props.tabs[0])
 </script>
 
