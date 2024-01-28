@@ -109,9 +109,9 @@ watch(() => store.state.selectedType, () => {
 
   store.dispatch('partners/getNewPendingPartners', { filter: levelIDOfPartners.value || 1 })
 
-  store.dispatch('boosters/getPendingBoosters', { filter: levelIDOfBoosters.value || -1 })
+  store.dispatch('boosters/getPendingBoosters', { filter: levelIDOfBoosters.value || 0 })
 
-  store.dispatch('boosters/getExposedBoosters', { filter: levelIDOfBoosters.value || -1 })
+  store.dispatch('boosters/getExposedBoosters', { filter: levelIDOfBoosters.value || 0 })
 
   store.dispatch('chains/getChainsList')
 
@@ -185,7 +185,7 @@ const selectItemsPartners = reactive([
 const selectItemsBoosters = reactive([
   {
     id: -1,
-    name: 'Все бустеры команды'
+    name: 'Вся структура'
   },
   {
     id: 0,
@@ -230,8 +230,8 @@ const selectItemsBoosters = reactive([
 ]);
 
 const setItems = () => {
-  itemInfoHeaderFirst.value = selectItemsPartners[0]
-  itemInfoHeaderSecond.value = selectItemsBoosters[0]
+  itemInfoHeaderFirst.value = selectItemsPartners[1]
+  itemInfoHeaderSecond.value = selectItemsBoosters[1]
   itemInfoHeaderThird.value = store.state.selectedType
 }
 

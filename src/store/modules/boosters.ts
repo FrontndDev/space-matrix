@@ -8,7 +8,7 @@ export default {
       boostersPending: [],
       boostersExposed: [],
       pageIdBooster: 1,
-      levelID: -1 as number
+      levelID: 0 as number
     }
   },
   actions: {
