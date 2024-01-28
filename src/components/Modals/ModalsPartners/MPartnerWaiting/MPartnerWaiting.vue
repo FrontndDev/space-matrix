@@ -68,7 +68,7 @@ const emit = defineEmits(['close-modal', 'open-m-add-partner'])
 
 const store = useStore()
 const cells: ComputedRef<Matrix[]> = computed(() =>
-    selectedType.value === 'id' ? store.state.partners.newPartnersPending.list : store.state.partners.partnersPending?.list
+    selectedType.value === 'id' ? store.state.partners.partnersPendingSecond.list : store.state.partners.partnersPending?.list
 )
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>

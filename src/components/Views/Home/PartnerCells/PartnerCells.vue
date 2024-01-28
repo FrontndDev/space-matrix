@@ -128,7 +128,7 @@ const openMMatrixPartner = (cell: Matrix) => {
     isInfinity: false,
   }
   emit('open-m-matrix-partner')
-  emit('select-partner', selectedPartner)
+  emit('select-partner', selectedPartner, store.state.newTypeMatrix)
 }
 </script>
 

@@ -76,11 +76,15 @@ export default {
     },
     getPendingPartners(
       { commit, rootState }: { commit: Commit; rootState: any; state: any },
-      //@ts-ignore
-      { isPartnerMatrix = false, userId = window.UserData.id }: IGetPendingBoostersParams
+      {
+        isPartnerMatrix = false,
+        //@ts-ignore
+        userId = window.UserData.id,
+        matrixType = rootState.selectedType.type
+      }: IGetPendingBoostersParams
     ) {
       API.filterOfActivatedMatrix({
-          matrixType: rootState.selectedType.type,
+          matrixType,
           matrixFilterPageId: 1,
           matrixFilterUserId: userId,
           filter: { pending: 1 }

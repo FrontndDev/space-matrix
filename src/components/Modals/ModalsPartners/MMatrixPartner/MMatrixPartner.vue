@@ -160,7 +160,7 @@ const isDreamTon9: ComputedRef<boolean> = computed(() => matrixById.value.matrix
 
 const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
 
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.totalCount ?? 0)
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.totalCount)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
 
@@ -286,7 +286,7 @@ const openMAddPartner = (pos: IPosition) => {
 const openMMatrixPartner = (ceil: Ceil) => {
   if (!ceil?.matrix?.is_booster) {
     emit('open-m-matrix-partner')
-    emit('select-partner', ceil)
+    emit('select-partner', ceil, ceil?.matrix?.type)
   }
 }
 

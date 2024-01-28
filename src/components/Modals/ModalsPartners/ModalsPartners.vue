@@ -86,8 +86,8 @@ const getEmitForModalOverlay = () => {
   props.openModalPartners === 3 && selectedType.value === 'id' ? emit('open-m-matrix-partner') : emit('close-modal')
 }
 
-const selectPartner = (selectedCeil: Ceil) => {
-  emit('select-partner', selectedCeil)
+const selectPartner = (selectedCeil: Ceil, matrixType?: string) => {
+  emit('select-partner', selectedCeil, matrixType)
 }
 
 const setPartnerBy = (type: string) => {

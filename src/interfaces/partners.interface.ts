@@ -15,6 +15,7 @@ export interface IGetPendingBoostersParams {
     isPartnerMatrix?: boolean;
     newTypeMatrix?: null | string;
     userId?: number;
+    matrixType?: string;
 }
 
 export interface IPosition {
