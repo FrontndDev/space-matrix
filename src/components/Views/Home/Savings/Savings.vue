@@ -11,6 +11,7 @@
           :cell-type="getTypeForFirstCeil"
           :ceil="firstCeil.matrix"
           :fill-reward="firstCeil.fillRevard"
+          :is-booster="firstCeil?.matrix.is_booster"
           v-if="firstCeil?.matrix && !firstCeil.queueId"
           @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
       />
@@ -38,6 +39,7 @@
           :cell-type="getTypeForSecondCeil"
           :ceil="secondCeil.matrix"
           :fill-reward="secondCeil.fillRevard"
+          :is-booster="secondCeil?.matrix.is_booster"
           v-if="secondCeil?.matrix && !secondCeil.queueId"
           @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
       />
@@ -125,10 +127,6 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     return 'loading'
   }
 
-  if (firstCeil.value?.matrix?.is_booster) {
-    return 'boost'
-  }
-
   return matrixByType.value.matrix?.ceils['1']['1'] ?? ''
 })
 
@@ -151,10 +149,6 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
 
   if (!secondCeil.value?.matrix && !firstCeil.value?.matrix) {
     return 'disable'
-  }
-
-  if (secondCeil.value?.matrix?.is_booster) {
-    return 'boost'
   }
 
   return matrixByType.value.matrix?.ceils['1']['2'] ?? ''

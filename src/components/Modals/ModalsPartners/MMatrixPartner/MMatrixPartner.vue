@@ -41,6 +41,7 @@
                   size="small"
                   :type="getTypeForFirstCeil"
                   :ceil="firstCeil.matrix"
+                  :is-booster="firstCeil?.matrix.is_booster"
                   v-if="firstCeil?.matrix"
                   @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
               />
@@ -69,6 +70,7 @@
                   size="small"
                   :type="getTypeForSecondCeil"
                   :ceil="secondCeil.matrix"
+                  :is-booster="secondCeil?.matrix.is_booster"
                   v-if="secondCeil?.matrix"
                   @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
               />
@@ -222,10 +224,6 @@ const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
     return 'disable'
   }
 
-  if (firstCeil.value?.matrix?.is_booster) {
-    return 'boost'
-  }
-
   return matrixById.value.matrix.ceils['1']['1']
 })
 
@@ -251,10 +249,6 @@ const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
       (!firstCeil.value?.matrix || !secondCeil.value?.allowBuyClone && !secondCeil.value?.allowSniper)
   ) {
     return 'disable'
-  }
-
-  if (secondCeil.value?.matrix?.is_booster) {
-    return 'boost'
   }
 
   return matrixById.value.matrix.ceils['1']['2']

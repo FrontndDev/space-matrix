@@ -34,6 +34,7 @@
         :cellType="props.cellType"
         :type="props.type"
         :circles="ceil.ceils['1']"
+        :is-booster="props.isBooster"
         v-if="props.ceil"
         @click="$emit('open-m-matrix-partner')"
         @circle-avatar="$emit('circle-avatar')"
@@ -88,6 +89,10 @@ const props = defineProps({
     type: String,
     default: 'freeze'
     //freeze, profit, boost, circle-avatar
+  },
+  isBooster: {
+    type: Boolean,
+    default: false,
   },
   size: {
     type: String,
