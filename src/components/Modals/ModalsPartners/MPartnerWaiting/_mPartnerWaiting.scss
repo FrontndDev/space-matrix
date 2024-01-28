@@ -3,6 +3,7 @@
 
 .modal-partner-waiting {
   @include flexbox(column);
+  max-height: 90vh;
   border-radius: 16px;
   background: $bg-base;
 
