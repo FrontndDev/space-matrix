@@ -212,7 +212,7 @@ watch(() => matrixIsInQueueForPublication.value, () => {
 })
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
-  if (onlyInfinityCell.value) {
+  if (matrixById.value.matrix?.type === 'dream-ton_9') {
     return 'disable3'
   }
 
@@ -236,7 +236,7 @@ const getCellTypeFirstCeil: ComputedRef<string> = computed(() => {
 })
 
 const getTypeForSecondCeil: ComputedRef<string> = computed(() => {
-  if (onlyInfinityCell.value) {
+  if (matrixById.value.matrix?.type === 'dream-ton_9') {
     return 'disable3'
   }
 
