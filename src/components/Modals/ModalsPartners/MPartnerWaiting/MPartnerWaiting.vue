@@ -25,13 +25,11 @@
       </template>
       <Preloader :with-text="true" v-if="!cells"/>
     </div>
-    <div class="modal-partner-waiting__buttons">
-      <template v-if="selectedCell">
-        <CancelButton @click="emit('open-m-add-partner')" />
-        <ChainsButton @click="exposePartner">
-          Выставить
-        </ChainsButton>
-      </template>
+    <div class="modal-partner-waiting__buttons" v-if="selectedCell">
+      <CancelButton @click="emit('open-m-add-partner')" />
+      <ChainsButton @click="exposePartner">
+        Выставить
+      </ChainsButton>
     </div>
     <Pagination
         :count="store.state.partners.partnersPending.totalPages"
