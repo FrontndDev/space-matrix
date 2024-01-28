@@ -67,12 +67,19 @@ import Pagination from "../../../Pagination/Pagination.vue";
 const emit = defineEmits(['close-modal', 'open-m-add-partner'])
 
 const store = useStore()
-const cells: ComputedRef<Matrix[]> = computed(() => store.state.partners.partnersPending?.list)
-
-const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.onlyInfinityCell)
+const cells: ComputedRef<Matrix[]> = computed(() =>
+    selectedType.value === 'id' ? store.state.partners.newPartnersPending.list : store.state.partners.partnersPending?.list
+)
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 const partnerPos = inject('partnerPos') as Ref<IPosition>
+const selectedType = inject('selectedType') as Ref<string>
+
+
+const onlyInfinityCell: ComputedRef<boolean> = computed(() =>
+    selectedType.value === 'id' ? store.state.matrixById.matrix?.type === 'dream-ton_9' : store.getters.onlyInfinityCell
+)
+
 let selectedCell: Ref<Matrix | null> = ref(null)
 
 const selectedPage: ComputedRef<number> = computed(() => store.state.partners.pageIdPartners)
