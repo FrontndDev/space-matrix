@@ -1,9 +1,8 @@
 <template>
   <div class="infinity-partner-card" :class="props.modal">
     <div
-        v-if="!props.loading"
-        ref="partners"
         class="infinity-partner-card__partners"
+        v-if="!props.loading"
     >
       <div class="infinity-partner-card__partners-block">
         <div>
@@ -20,17 +19,15 @@
       <div
           class="infinity-partner-card__partners-link"
           v-if="partnersCount"
-          @mouseleave="blurPartnersCard($refs.partners)"
-          @mouseover="focusPartnersCard($refs.partners)"
           @click="$emit('open-m-infinity-cell')"
       >
         Просмотр
       </div>
     </div>
     <div
-        v-if="props.loading"
-        :class="props.modal"
         class="infinity-partner-card__loading"
+        :class="props.modal"
+        v-if="props.loading"
     >
       <div class="infinity-partner-card__loading-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -40,7 +37,7 @@
       </div>
       <span class="infinity-partner-card__loading-title">Обновление</span>
     </div>
-    <div v-if="props.modal !== 'm-matrix-partner'" class="infinity-partner-card__awards">
+    <div class="infinity-partner-card__awards" v-if="props.modal !== 'm-matrix-partner'">
       <div class="infinity-partner-card__awards-title">Награды</div>
       <div class="infinity-partner-card__awards-bonuses infinity-partner-card__awards-bonuses_mt-8">
         <BonusItem type="cashout" :values="fillReward.cashout" v-if="fillReward.cashout.length"/>
@@ -97,14 +94,6 @@ const fillReward = computed(() => {
     'custom': getFilteredRewards('custom').map(reward => reward.value.title) as string[],
   }
 })
-
-const focusPartnersCard = (ref: any) => {
-  ref.classList.add('active')
-}
-
-const blurPartnersCard = (ref: any) => {
-  ref.classList.remove('active')
-}
 </script>
 
 <style scoped lang="scss">

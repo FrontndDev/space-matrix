@@ -6,6 +6,13 @@
   row-gap: 4px;
   padding: 16px;
 
+  &:hover {
+    & .infinity-partner-card__partners {
+      background: $bg-base-secondary;
+      border-color: $bg-base-secondary;
+    }
+  }
+
   &__partners,
   &__awards {
     width: 160px;
@@ -33,11 +40,6 @@
     padding: 18px 12px;
     height: 120px;
     transition: .25s all ease;
-
-    &.active {
-      background: $bg-base-secondary;
-      border-color: $bg-base-secondary;
-    }
 
     &-block {
       @include flexbox(column, flex-start, center);
