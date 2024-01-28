@@ -3,7 +3,7 @@
 
 .modal-partner-waiting {
   @include flexbox(column);
-  max-height: 90vh;
+  max-height: 80vh;
   border-radius: 16px;
   background: $bg-base;
 
@@ -51,7 +51,7 @@
     &__container {
       gap: 24px;
       padding: 0 16px 16px;
-      height: calc(90vh - 125px);
+      height: calc(80vh - 125px);
     }
   }
 }
