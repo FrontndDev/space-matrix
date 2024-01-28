@@ -21,6 +21,7 @@ import {
   onBeforeMount,
   Ref,
   ref,
+  watch,
 } from "vue";
 import { useStore } from "vuex";
 
@@ -39,15 +40,13 @@ const props = defineProps({
   }
 });
 
+const emit = defineEmits(['open-cells', 'toggle-expose-tabs'])
+
 let tab: Ref<any> = ref(null);
 
 const store = useStore()
 
-onBeforeMount(() => tab.value = props.tabs[0])
-
-const emit = defineEmits(['open-cells', 'toggle-expose-tabs'])
 const clickTab = (id: number) => {
-
   if (props.type === 'little') {
     store.commit('partners/CHANGE_LITTLE_TAB', id)
   } else if (props.type === 'big') {
@@ -57,6 +56,13 @@ const clickTab = (id: number) => {
   emit('open-cells', id)
   emit('toggle-expose-tabs', id)
 }
+
+watch(() => store.state.newTypeMatrix, () => {
+  tab.value = props.tabs[0]
+  clickTab(props.tabs[0].id)
+})
+
+onBeforeMount(() => tab.value = props.tabs[0])
 </script>
 
 <style scoped lang="scss">
