@@ -23,7 +23,7 @@ export default {
       bigTabID: 1 as number,
       infinityPartners: null as Matrix[] | null,
       countPendingBoosters: null,
-      levelID: -1 as number,
+      levelID: 1 as number,
 
       pageIdPartners: 1,
 
