@@ -53,7 +53,7 @@
                   :partners-count="partnersCount"
                   :title="(!firstCeil?.allowSniper || !partnersCount) && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   :subtitle="(!firstCeil?.allowSniper || !partnersCount) && firstCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
-                  :disabled-subtitle="getCellTypeFirstCeil === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'"
+                  :disabled-subtitle="getCellTypeFirstCeil === 'freeze' ? 'Накопительная ячейка партнера' : 'Доходная ячейка партнера'"
                   :loading-subtitle="firstCeil?.queueId ? 'Идет активация' : 'Идет загрузка'"
                   v-if="!firstCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 1))"
@@ -82,7 +82,11 @@
                   :partners-count="partnersCount"
                   :title="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
                   :subtitle="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? `${matrixById.matrixConfig.price}` : ''"
-                  :disabled-subtitle="!firstCeil?.matrix && (firstCeil?.allowSniper || firstCeil?.allowBuyClone) ? 'Заполните левую ячейку' : getCellTypeSecondCeil === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'"
+                  :disabled-subtitle="!firstCeil?.matrix && (firstCeil?.allowSniper || firstCeil?.allowBuyClone) ?
+                    'Заполните левую ячейку' : getCellTypeSecondCeil === 'freeze' ?
+                    'Накопительная ячейка партнера' :
+                    'Доходная ячейка партнера'
+                  "
                   :loading-subtitle="secondCeil?.queueId ? 'Идет активация' : 'Идет загрузка'"
                   v-if="!secondCeil?.matrix"
                   @open-m-add-partner="openMAddPartner(getPosition(1, 2))"
