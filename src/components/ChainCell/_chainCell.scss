@@ -10,6 +10,8 @@
   position: relative;
 
   &__avatar {
+    width: 125px;
+    height: 125px;
     border-radius: 16px;
     background: lightgray 50% / cover no-repeat;
     position: relative;
@@ -20,7 +22,9 @@
       border-radius: 16px;
 
       & > img {
-        border-radius: 12px;
+        border-radius: 13px;
+        width: 100%;
+        object-fit: cover;
       }
     }
   }

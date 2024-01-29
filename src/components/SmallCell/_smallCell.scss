@@ -11,6 +11,8 @@
   position: relative;
 
   &__avatar {
+    width: 120px;
+    height: 120px;
     border-radius: 16px;
     background: lightgray 50% / cover no-repeat;
     position: relative;
@@ -20,9 +22,8 @@
       border-radius: 16px;
 
       & img {
-        max-width: 120px;
-        max-height: 120px;
         border-radius: 13px;
+        width: 100%;
         object-fit: cover;
       }
     }
