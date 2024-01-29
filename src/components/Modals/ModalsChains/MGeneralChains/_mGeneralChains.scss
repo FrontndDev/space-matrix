@@ -32,11 +32,6 @@
     box-sizing: border-box;
     overflow-y: auto;
     overflow-x: hidden;
-
-    &.less-four {
-      @include flexbox(row, center);
-      padding: 24px 8px;
-    }
   }
 
   &__block {
@@ -69,10 +64,6 @@
       height: fit-content;
       overflow-y: hidden;
       overflow-x: auto;
-
-      &.less-four {
-        @include flexbox(row, flex-start);
-      }
     }
 
     &__block {

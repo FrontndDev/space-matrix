@@ -31,11 +31,6 @@
     box-sizing: border-box;
     overflow-y: auto;
     overflow-x: hidden;
-
-    &.less-four {
-      @include flex-center;
-      padding: 24px 8px;
-    }
   }
 
   &__block {
@@ -71,11 +66,6 @@
       padding: 24px;
       width: 100%;
       height: calc(80vh - 166px);
-
-      &.less-four {
-        @include flex-center;
-        padding: 24px 8px;
-      }
     }
   }
 }
