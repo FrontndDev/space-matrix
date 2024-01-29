@@ -14,7 +14,6 @@ export interface IGetPendingBoostersParams {
     changeTab?: boolean;
     isPartnerMatrix?: boolean;
     newTypeMatrix?: null | string;
-    userId?: number;
     matrixType?: string;
 }
 

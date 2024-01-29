@@ -49,6 +49,7 @@ import {
   ComputedRef,
   inject,
   Ref,
+  watch,
 } from "vue";
 import { useStore } from "vuex";
 import SmallCell from "../../../SmallCell/SmallCell.vue";
@@ -78,7 +79,7 @@ const selectedChain = inject('selectedChain') as Ref<IChains>
 
 const chainDetails: ComputedRef<IChainDetails> = computed(() => store.state.chains.chainDetails)
 
-const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.partnersPending)
+const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.partnersPendingSecond)
 
 const activateTheChain = () => {
   if (!partnersPending.value.totalCount) {
@@ -104,6 +105,13 @@ const openMMatrixModal = (matrix: Matrix) => {
   emit('close-modal')
   emit('open-m-matrix-partner')
 }
+
+watch(() => chainDetails.value?.list?.length, () => {
+  store.dispatch('partners/getPendingPartners', {
+    isPartnerMatrix: true,
+    matrixType: chainDetails.value?.list[0].type
+  })
+})
 </script>
 
 <style scoped lang="scss">

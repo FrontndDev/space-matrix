@@ -65,7 +65,7 @@ const emit = defineEmits([
 ])
 
 const store = useStore()
-const cells: ComputedRef<Matrix[]> = computed(() => store.state.partners.partnersPending?.list)
+const cells: ComputedRef<Matrix[]> = computed(() => store.state.partners.partnersPendingSecond?.list)
 
 // const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 //
