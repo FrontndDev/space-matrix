@@ -79,7 +79,7 @@ export default createStore({
         },
         async buyBooster(_: ActionContext<any, any>, data: IBuyBoosterParams) {
             const response = await API.buyClone(data)
-            if (response?.error_code !== undefined) {
+            if (response?.error_code === undefined) {
                 useShowMessage('green', 'Буст успешно отправлен на активацию')
             }
 

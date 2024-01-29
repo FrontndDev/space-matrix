@@ -200,7 +200,8 @@ const buyBooster = async () => {
   }
   emit('close-modal')
   const response = await store.dispatch('buyBooster', data)
-  if (response?.data?.error_code !== undefined) {
+  console.log('buyBooster', response)
+  if (response?.error_code === undefined) {
     deleteItemFromState()
   }
 }
@@ -239,7 +240,7 @@ const exposePartner = async () => {
       chainMode: chainModes[isExposeTabs.value - 1],
     }
     const response = await store.dispatch('partners/exposePartner', data)
-    if (response?.data?.error_code !== undefined) {
+    if (response?.error_code === undefined) {
       deleteItemFromState()
     }
     emit('close-modal')
