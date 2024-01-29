@@ -14,12 +14,53 @@
       <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1665 7.99951C14.1665 8.27565 13.9426 8.49951 13.6665 8.49951H2.44646C2.17032 8.49951 1.94646 8.27565 1.94646 7.99951C1.94646 7.72337 2.17032 7.49951 2.44646 7.49951H13.6665C13.9426 7.49951 14.1665 7.72337 14.1665 7.99951Z" fill="#C4CAD4"/>
     </svg>
     <div class="pagination-matrix__container">
+<!--      <div class="pagination__numbers">-->
+<!--        <div-->
+<!--            class="pagination__number"-->
+<!--            :class="{ 'active': selectedNum === num }"-->
+<!--            v-for="(num, idx) in count < 6 ? count : getNumbers"-->
+<!--            :key="idx"-->
+<!--            @click="selectedNum = num"-->
+<!--        >-->
+<!--          {{ num }}-->
+<!--        </div>-->
+<!--        <template v-if="count > 5">-->
+<!--          <span v-if="getNumbers.length >= 5 && !getNumbers.includes(count)">...</span>-->
+<!--          <div-->
+<!--              class="pagination__number"-->
+<!--              :class="{ 'active': selectedNum === count }"-->
+<!--              @click="selectedNum = count"-->
+<!--              v-if="!getNumbers.includes(count)"-->
+<!--          >{{ count }}</div>-->
+<!--        </template>-->
+<!--      </div>-->
+
+
       <div
           class="pagination-matrix__tab"
           :class="{ 'active': num === props.selectedPage }"
-          v-for="num in count"
+          v-for="num in getNumbers"
+          :key="num"
           @click="selectPage(num)"
       >{{ num }}</div>
+      <div class="pagination-matrix__tab">...</div>
+      <div
+          class="pagination-matrix__tab"
+          :class="{ 'active': num === props.selectedPage }"
+          v-for="num in getNumbers2"
+          :key="num"
+          @click="selectPage(num)"
+      >{{ num }}</div>
+<!--      <template v-if="count > 5">-->
+<!--        <div class="pagination-matrix__tab" v-if="getNumbers.length >= 5 && !getNumbers.includes(count)">...</div>-->
+<!--        <div-->
+<!--            class="pagination-matrix__tab"-->
+<!--            :class="{ 'active': num === props.selectedPage }"-->
+<!--            v-for="num in count"-->
+<!--            v-if="!getNumbers.includes(count)"-->
+<!--            @click="selectPage(num)"-->
+<!--        >{{ num }}</div>-->
+<!--      </template>-->
 <!--      <div class="pagination-matrix__tab">1</div>-->
 <!--      <div class="pagination-matrix__tab">2</div>-->
 <!--      <div class="pagination-matrix__tab">3</div>-->
@@ -49,6 +90,11 @@
 </template>
 
 <script setup lang="ts">
+import {
+  computed,
+  ComputedRef
+} from "vue";
+
 const props = defineProps({
   selectedPage: {
     type: Number,
@@ -67,6 +113,25 @@ const selectPage = (page: number) => {
     emit('select-page', page)
   }
 }
+
+const getNumbers: ComputedRef<number[]> = computed(() => {
+  let count = []
+
+  for (let i = 0; i < props.count; i++) count.push(i + 1)
+  const idx = count.indexOf(props.selectedPage)
+
+  return count.slice(idx ? idx - 1 : idx, idx ? idx + 4 : idx + 5)
+})
+
+const getNumbers2: ComputedRef<number[]> = computed(() => {
+  let numbersArray = [];
+
+  for (let i = props.count; i >= props.count - 5; i--) {
+    numbersArray.push(i);
+  }
+
+  return numbersArray.reverse()
+})
 </script>
 
 <style scoped lang="scss">
