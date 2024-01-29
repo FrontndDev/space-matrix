@@ -136,6 +136,7 @@ const tabs = reactive([
     id: 3,
     name: 'Цепочки',
     indicator: false,
+    disabled: computed(() => import.meta.env.VITE_MATRIX_VERSION === 'no_chains')
   },
 ]);
 

@@ -7,6 +7,7 @@
         'indicator-orange': props.tab.indicator?.orange,
       }, props.type]"
       @click="emit('tab', props.tab)"
+      v-if="!props.tab.disabled"
   >
     {{ props.tab.name }} {{ props.tab.value }}
   </div>
