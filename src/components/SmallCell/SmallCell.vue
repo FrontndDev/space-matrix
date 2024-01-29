@@ -39,7 +39,7 @@
           :type="props.cellType"
           :circles="cell.ceils['1']"
           @click="emit('open-m-matrix-partner')"
-          v-if="props.cellType && props.showPartnerType && cell?.binstatus"
+          v-if="props.cellType && props.showPartnerType && cell?.binstatus && !matrixTypeIsDreamTon9"
       />
     </div>
     <SmallCellType
@@ -108,6 +108,8 @@ const store = useStore()
 const selectedTypeTitle: ComputedRef<string> = computed(() =>
     store.state.listOfTypes.types.find((type: Type) => props.cell?.type === type.type)?.title
 )
+
+const matrixTypeIsDreamTon9: ComputedRef<boolean> = computed(() => props.cell?.type === 'dream-ton_9')
 
 const time = computed(() => {
   const timeToActivate = props.cell?.time_to_activate
