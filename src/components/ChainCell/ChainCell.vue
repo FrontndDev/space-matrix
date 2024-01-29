@@ -27,6 +27,7 @@
           :type="props.type"
           :cost="props.cost"
           @open-m-teleport="$emit('open-m-teleport')"
+          @open-general-chains="$emit('open-general-chains', props.id)"
       />
     </div>
     <SmallCellType
