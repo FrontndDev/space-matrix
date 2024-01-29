@@ -15,7 +15,7 @@
           :key="cell?.id"
           :id="cell?.id"
           :cost="cell.price?.amount"
-          :reward="cell.profit?.amount"
+          :reward="cell.profit?.amount ?? 0"
           :matrixStart="cell?.start"
           :matrixEnd="cell?.end"
           :countLinks="cell?.count_links"
