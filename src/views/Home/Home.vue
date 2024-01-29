@@ -303,7 +303,6 @@ const selectPartner = async (ceil: Ceil, matrixType?: string) => {
     // Получаем партнеров в ожидании "Матрицы партнёра"
     await store.dispatch('partners/getPendingPartners', {
       isPartnerMatrix: true,
-      userId: response.data.matrix.owner.id,
       matrixType,
     })
   }
