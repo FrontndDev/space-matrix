@@ -69,8 +69,8 @@ const selectedPage: ComputedRef<number> = computed(() => store.state.boosters.pa
 const selectPage = (page: number) => {
   store.commit('boosters/SET_PAGE_ID_BOOSTERS', page)
 
-  store.dispatch('boosters/getPendingBoosters', { changeTab: false })
-  store.dispatch('boosters/getExposedBoosters')
+  store.dispatch('boosters/getPendingBoosters', { changeTab: false, filter: 0 })
+  store.dispatch('boosters/getExposedBoosters', { filter: 0 })
 }
 
 const selectTab = () => {
