@@ -107,10 +107,12 @@ export default {
       })
     },
     async exposePartner(ctx: ActionContext<any, any>, data: IExposePartnerParams) {
+      const notificationText = data?.notificationText
+      delete data.notificationText
       const response = await API.placementExistMatrix(data)
       console.log('exposePartner', response)
       if (response?.error_code === undefined) {
-        useShowMessage('green', 'Партнёр успешно отправлен на расстановку')
+        useShowMessage('green', notificationText ?? 'Партнёр успешно отправлен на расстановку')
       }
       await ctx.dispatch('getMatrixByType', ctx.rootState.selectedType.type, { root: true })
 

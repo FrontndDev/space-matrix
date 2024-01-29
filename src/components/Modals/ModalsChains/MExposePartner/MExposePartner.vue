@@ -197,10 +197,10 @@ const buyBooster = async () => {
     depth: 1,
     pos: 2,
     chainMode: chainModes[isExposeTabs.value - 1],
+    notificationText: 'Цепочка успешно активировалась'
   }
   emit('close-modal')
   const response = await store.dispatch('buyBooster', data)
-  console.log('buyBooster', response)
   if (response?.error_code === undefined) {
     deleteItemFromState()
   }
@@ -238,6 +238,7 @@ const exposePartner = async () => {
       depth: 1,
       pos: 2,
       chainMode: chainModes[isExposeTabs.value - 1],
+      notificationText: 'Цепочка успешно активировалась',
     }
     const response = await store.dispatch('partners/exposePartner', data)
     if (response?.error_code === undefined) {

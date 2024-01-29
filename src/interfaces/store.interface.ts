@@ -126,6 +126,7 @@ export interface IMatrix {
 export interface IBuyBoosterParams extends IPosition {
     matrix_id: number;
     chainMode?: string;
+    notificationText?: string;
 }
 
 export interface IWallet {
