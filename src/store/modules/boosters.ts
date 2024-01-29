@@ -21,7 +21,7 @@ export default {
       API.filterOfActivatedMatrix({
           matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
           //@ts-ignore
-          matrixFilterUserId: 2302441,
+          matrixFilterUserId: window.userData.id,
           matrixFilterPageId: state.pageIdBooster,
           filter: { pending: 1, is_booster: true, level: filter }
         }
@@ -43,7 +43,7 @@ export default {
       API.filterOfActivatedMatrix({
           matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
           //@ts-ignore
-          matrixFilterUserId: 2302441,
+          matrixFilterUserId: window.userData.id,
           matrixFilterPageId: state.pageIdBooster,
           filter: { is_booster: true, level: filter }
         }
