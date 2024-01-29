@@ -288,7 +288,7 @@ const setPositionForPartner = (pos: IPosition) => {
   partnerPos.value = pos
 }
 
-const selectPartner = async (ceil: Ceil, matrixType?: string) => {
+const selectPartner = async (ceil: Ceil) => {
   if (ceil?.matrix) {
     const matrixId = ceil?.matrix.id
     await router.push(route.path + `?id=${matrixId}`)
@@ -303,7 +303,7 @@ const selectPartner = async (ceil: Ceil, matrixType?: string) => {
     // Получаем партнеров в ожидании "Матрицы партнёра"
     await store.dispatch('partners/getPendingPartners', {
       isPartnerMatrix: true,
-      matrixType,
+      matrixType: ceil.matrix.type,
     })
   }
   selectedPartner.value = ceil
