@@ -1,7 +1,7 @@
 <template>
   <div class="modal-partner-waiting">
     <ModalHeader
-        @close-modal="emit('close-modal')"
+        @close-modal="$emit('close-modal')"
     >
       Партнеры в ожидании
     </ModalHeader>
@@ -68,16 +68,19 @@ const emit = defineEmits(['close-modal', 'open-m-add-partner'])
 
 const store = useStore()
 const cells: ComputedRef<Matrix[]> = computed(() =>
-    selectedType.value === 'id' ? store.state.partners.partnersPendingSecond.list : store.state.partners.partnersPending?.list
+    selectedType.value === 'id' ?
+        store.state.partners.partnersPendingSecond.list :
+        store.state.partners.partnersPending?.list
 )
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 const partnerPos = inject('partnerPos') as Ref<IPosition>
 const selectedType = inject('selectedType') as Ref<string>
 
-
 const onlyInfinityCell: ComputedRef<boolean> = computed(() =>
-    selectedType.value === 'id' ? store.state.matrixById.matrix?.type === 'dream-ton_9' : store.getters.onlyInfinityCell
+    selectedType.value === 'id' ?
+        store.state.matrixById.matrix?.type === 'dream-ton_9' :
+        store.getters.onlyInfinityCell
 )
 
 let selectedCell: Ref<Matrix | null> = ref(null)
@@ -113,7 +116,6 @@ const exposePartner = async () => {
   const partnerMatrix = selectedPartner.value?.matrix
 
   if ((partnerMatrix || myMatrix) && selectedCell.value) {
-    // @ts-ignore
     const data: IExposePartnerParams = {
       matrix_id: partnerMatrix ? +partnerMatrix.id : +myMatrix?.id,
       child_id: +selectedCell.value?.id,

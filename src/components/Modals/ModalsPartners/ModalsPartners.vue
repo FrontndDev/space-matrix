@@ -20,9 +20,8 @@
           />
           <MAddPartner
               :selected-type="selectedType"
-              @close-modal="$emit('close-modal')"
+              @close-modal="closeAddPartnerModal"
               @open-partner-waiting="$emit('open-partner-waiting')"
-              @open-m-matrix-partner="$emit('open-m-matrix-partner')"
               v-else-if="props.openModalPartners === 3"
           />
           <MAddpartnerInfinity
@@ -31,7 +30,7 @@
               v-else-if="props.openModalPartners === 4"
           />
           <MPartnerWaiting
-              @close-modal="$emit('close-modal')"
+              @close-modal="closePartnerWaitingModal"
               @open-m-add-partner="$emit('open-m-add-partner')"
               v-else-if="props.openModalPartners === 5"
           />
@@ -52,11 +51,18 @@ import MAddPartner from "./MAddPartner/MAddPartner.vue";
 import MPartnerWaiting from "./MPartnerWaiting/MPartnerWaiting.vue";
 import MAddpartnerInfinity from "./MAddPartnerInfinity/MAddpartnerInfinity.vue";
 import { IPosition } from "../../../interfaces/partners.interface.ts";
-import { Ceil } from "../../../interfaces/store.interface.ts";
 import {
+  Ceil,
+  Ceils,
+  IMatrix
+} from "../../../interfaces/store.interface.ts";
+import {
+  computed,
+  ComputedRef,
   inject,
   Ref,
 } from "vue";
+import { useStore } from "vuex";
 
 const props = defineProps({
   toggleModalPartners: {
@@ -81,9 +87,53 @@ const emit = defineEmits([
 ])
 
 const selectedType = inject('selectedType') as Ref<string>
+const selectedPartner = inject('selectedPartner') as Ref<Ceil>
+const partnerPos = inject('partnerPos') as Ref<IPosition>
+
+const store = useStore();
+
+const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
+const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
+
+const ceils: ComputedRef<Ceils | undefined> = computed(() =>
+    selectedType.value === 'id' ?
+        matrixById.value?.ceilsCollection?.['1'] :
+        matrixByType.value?.ceilsCollection?.['1']
+)
+
+const getCeil: ComputedRef<Ceil | undefined> = computed(() => {
+  if (selectedType.value === 'id') {
+    return ceils.value?.[String(partnerPos.value.pos)]
+  } else {
+    return selectedPartner.value ?? ceils.value?.[String(partnerPos.value.pos)]
+  }
+})
+
+const partnersCount: ComputedRef<number> = computed(() =>
+    selectedPartner.value ?
+        store.state.partners.partnersPendingSecond.totalCount :
+        store.state.partners.partnersPending.totalCount
+)
 
 const getEmitForModalOverlay = () => {
-  props.openModalPartners === 3 && selectedType.value === 'id' ? emit('open-m-matrix-partner') : emit('close-modal')
+  if (selectedType.value === 'id') {
+    switch (props.openModalPartners) {
+      case 3:
+        emit('open-m-matrix-partner');
+        break;
+      case 5:
+        if (!getCeil.value?.allowBuyClone && getCeil.value?.allowSniper && partnersCount.value) {
+          emit('open-m-matrix-partner');
+        } else {
+          emit('open-m-add-partner');
+        }
+        break;
+      default:
+        emit('close-modal')
+    }
+  } else {
+    emit('close-modal')
+  }
 }
 
 const selectPartner = (selectedCeil: Ceil, matrixType?: string) => {
@@ -98,6 +148,18 @@ const setPartnerBy = (type: string) => {
 const openMAddPartner = (pos: IPosition) => {
   emit('set-position-for-partner', pos)
   emit('open-m-add-partner')
+}
+
+const closeAddPartnerModal = () => {
+  selectedType.value === 'id' ? emit('open-m-matrix-partner') : emit('close-modal')
+}
+
+const closePartnerWaitingModal = () => {
+  if (selectedType.value === 'id') {
+    emit('open-m-add-partner')
+  } else {
+    emit('close-modal')
+  }
 }
 </script>
 
