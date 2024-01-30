@@ -14,7 +14,7 @@
       <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1665 7.99951C14.1665 8.27565 13.9426 8.49951 13.6665 8.49951H2.44646C2.17032 8.49951 1.94646 8.27565 1.94646 7.99951C1.94646 7.72337 2.17032 7.49951 2.44646 7.49951H13.6665C13.9426 7.49951 14.1665 7.72337 14.1665 7.99951Z" fill="#C4CAD4"/>
     </svg>
     <div class="pagination-matrix__container">
-      <template v-if="getNumbers.at(-1) ?? 0 > getNumbers2?.[0] - 2">
+      <template v-if="(getNumbers.at(-1) as number) > getNumbers2?.[0] - 2 && props.count > 11">
         <div
             class="pagination-matrix__tab"
             :class="{ 'active': num === props.selectedPage }"
@@ -31,7 +31,7 @@
           :key="num"
           @click="selectPage(num)"
       >{{ num }}</div>
-      <template v-if="getNumbers.at(-1) ?? 0 < getNumbers2?.[0] - 1">
+      <template v-if="(getNumbers.at(-1) as number) < getNumbers2?.[0] - 1">
         <div class="pagination-matrix__tab">...</div>
         <div
             class="pagination-matrix__tab"
@@ -89,7 +89,7 @@ const getNumbers: ComputedRef<number[]> = computed(() => {
   for (let i = 0; i < props.count; i++) count.push(i + 1)
   const idx = count.indexOf(props.selectedPage)
 
-  return count.slice(idx ? idx - 1 : idx, idx ? idx + 4 : idx + 5)
+  return props.count <= 11 ? count : count.slice(idx ? idx - 1 : idx, idx ? idx + 4 : idx + 5)
 })
 
 const getNumbers2: ComputedRef<number[]> = computed(() => {
