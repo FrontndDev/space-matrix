@@ -26,17 +26,18 @@ export default {
           filter: { pending: 1, is_booster: true, level: filter }
         }
       ).then(response => {
+        console.log(response)
         if (response.data?.totalCount === 0 && rootState.partners.bigTabID === 2 && changeTab) {
           commit('partners/CHANGE_LITTLE_TAB', 4, { root: true })
         }
-        console.log(response.data)
+
         commit('SET_PENDING_BOOSTERS', response.data)
         commit('partners/SET_COUNT_PENDING_BOOSTERS', response.data?.totalCount, { root: true })
       })
     },
     getExposedBoosters(
       { commit, rootState, state }: { commit: Commit; rootState: any, state: any },
-      { filter }: any
+      { changeTab = true, filter }: any = {}
     ) {
       state.levelID = filter
 
@@ -48,6 +49,11 @@ export default {
           filter: { is_booster: true, level: filter }
         }
       ).then(response => {
+        console.log(response)
+        if (response.data?.totalCount === 0 && rootState.partners.bigTabID === 2 && changeTab) {
+          commit('partners/CHANGE_LITTLE_TAB', 3, { root: true })
+        }
+
         commit('SET_EXPOSED_BOOSTERS', response.data)
       })
     },

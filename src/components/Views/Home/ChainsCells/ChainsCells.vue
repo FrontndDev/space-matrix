@@ -88,6 +88,7 @@ const selectPage = (page: number) => {
       break
     case 6:
       store.dispatch('chains/getTeleportList')
+      break
   }
 }
 

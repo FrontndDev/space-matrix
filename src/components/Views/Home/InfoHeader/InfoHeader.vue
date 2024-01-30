@@ -79,14 +79,14 @@ const itemInfoHeaderThird: Ref<any> = ref(null)
 
 const changeLineOfPartners = (item: ILineOfPartners) => {
   itemInfoHeaderFirst.value = item
-  store.dispatch('partners/getExposedPartners', { filter: item.id })
-  store.dispatch('partners/getNewPendingPartners', { filter: item.id })
+  store.dispatch('partners/getExposedPartners', { filter: item.id, changeTab: false })
+  store.dispatch('partners/getNewPendingPartners', { filter: item.id, changeTab: false })
 }
 
 const changeLineOfBoosters = (item: ILineOfPartners) => {
   itemInfoHeaderSecond.value = item
-  store.dispatch('boosters/getPendingBoosters', { filter: item.id })
-  store.dispatch('boosters/getExposedBoosters', { filter: item.id })
+  store.dispatch('boosters/getPendingBoosters', { filter: item.id, changeTab: false })
+  store.dispatch('boosters/getExposedBoosters', { filter: item.id, changeTab: false })
 }
 
 const changeMatrixType = (item: Type) => {

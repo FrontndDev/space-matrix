@@ -29,10 +29,12 @@
       />
     </div>
   </div>
+
   <EmptyCells
       v-if="boostersPending.list?.length === 0 && littleTabID === 3 || boostersExposed.list?.length === 0 && littleTabID === 4"
       :cellsType="'boosters'"
   />
+
   <Pagination
       :count="data.find(tab => tab.id === littleTabID)?.value.totalPages"
       :selected-page="selectedPage"
@@ -64,13 +66,15 @@ const boostersExposed: ComputedRef<IPartners> = computed(() => store.state.boost
 
 const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
 
+const levelIDOfBoosters = computed(() => store.state.boosters.levelID)
+
 const selectedPage: ComputedRef<number> = computed(() => store.state.boosters.pageIdBooster)
 
 const selectPage = (page: number) => {
   store.commit('boosters/SET_PAGE_ID_BOOSTERS', page)
 
-  store.dispatch('boosters/getPendingBoosters', { changeTab: false, filter: 0 })
-  store.dispatch('boosters/getExposedBoosters', { filter: 0 })
+  store.dispatch('boosters/getPendingBoosters', { changeTab: false, filter: levelIDOfBoosters.value })
+  store.dispatch('boosters/getExposedBoosters', { changeTab: false, filter: levelIDOfBoosters.value })
 }
 
 const selectTab = () => {
