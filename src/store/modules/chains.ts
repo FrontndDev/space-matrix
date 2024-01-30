@@ -40,8 +40,7 @@ export default {
       data: ITeleportPartnerParams
     ) {
       API.activatePartnerTeleport(data).then((response) => {
-        console.log("teleportPartner", response);
-        if (response?.error_code !== undefined) {
+        if (response?.error_code === undefined) {
           useShowMessage("green", "Телепорт успешно активирован");
           const index = state.teleportList.list
             .map((chain: ITeleports) => chain.owner.id)
