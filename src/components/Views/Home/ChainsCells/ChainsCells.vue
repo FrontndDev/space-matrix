@@ -106,7 +106,8 @@ const tabs = reactive([
     id: 6,
     name: 'Телепорт',
     value: computed(() => teleportList.value.totalCount),
-    disabled: computed(() => import.meta.env.VITE_CHAINS_TELEPORT !== 'on')
+    disabled: computed(() => import.meta.env.VITE_CHAINS_TELEPORT !== 'on'),
+    checkbox: true,
   },
 ]);
 
