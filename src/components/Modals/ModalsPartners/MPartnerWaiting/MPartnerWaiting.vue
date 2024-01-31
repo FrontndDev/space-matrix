@@ -124,6 +124,8 @@ const exposePartner = async () => {
     }
     if (!partnerMatrix) {
       store.state.matrixByType.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = 1
+    } else {
+      store.state.matrixById.ceilsCollection['1'][String(partnerPos.value.pos)].queueId = 1
     }
 
     await store.dispatch('partners/exposePartner', data)
@@ -137,7 +139,7 @@ const exposePartner = async () => {
       }
     }
     removePartnerFromList()
-    emit('close-modal')
+    emit('close-modal', 'open-m-matrix-partner')
   }
 }
 </script>

@@ -37,7 +37,7 @@
         </div>
         <div
             class="modal__overlay"
-            @click="getEmitForModalOverlay"
+            @click="getEmitForModalOverlay(undefined)"
         />
       </div>
     </transition>
@@ -63,6 +63,7 @@ import {
   Ref,
 } from "vue";
 import { useStore } from "vuex";
+import { TModalsPartners } from "../../../types/types";
 
 const props = defineProps({
   toggleModalPartners: {
@@ -115,8 +116,10 @@ const partnersCount: ComputedRef<number> = computed(() =>
         store.state.partners.partnersPending.totalCount
 )
 
-const getEmitForModalOverlay = () => {
-  if (selectedType.value === 'id') {
+const getEmitForModalOverlay = (emitName?: TModalsPartners) => {
+  if (emitName) {
+    emit(emitName)
+  } else if (selectedType.value === 'id') {
     switch (props.openModalPartners) {
       case 3:
         emit('open-m-matrix-partner');
@@ -154,12 +157,10 @@ const closeAddPartnerModal = () => {
   selectedType.value === 'id' ? emit('open-m-matrix-partner') : emit('close-modal')
 }
 
-const closePartnerWaitingModal = () => {
-  if (selectedType.value === 'id') {
-    emit('open-m-add-partner')
-  } else {
-    emit('close-modal')
-  }
+const closePartnerWaitingModal = (emitName?: TModalsPartners) => {
+  emitName ? emit(emitName) : selectedType.value === 'id' ?
+      emit('open-m-add-partner') :
+      emit('close-modal')
 }
 </script>
 

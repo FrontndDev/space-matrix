@@ -149,7 +149,7 @@ const buyBooster = async () => {
     }
 
     closeConfirmPayment()
-    emit('close-modal')
+    emit('close-modal', 'open-m-matrix-partner')
 
     await store.dispatch('buyBooster', data)
 
