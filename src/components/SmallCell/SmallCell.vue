@@ -17,6 +17,12 @@
           :level="useGetLevel(props.cell?.owner?.lvl_insystem)"
           v-if="showLevelMatrix"
       />
+
+      <CellInformation
+          class="small"
+          :ceil="cell"
+          :ceil-type="cellType"
+      />
     </div>
     <div class="small-cell__info">
       <span
@@ -67,6 +73,7 @@ import {
 import { useGetLevel } from "../../composables/useGetLevel.ts";
 import { useStore } from "vuex";
 import { useCopy } from "../../composables/useCopy.ts";
+import CellInformation from "../CellInformation/CellInformation.vue";
 
 const props = defineProps({
   cell: {
