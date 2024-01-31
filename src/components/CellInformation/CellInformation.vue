@@ -9,7 +9,7 @@
       <div class="cell-information__content">
         <div
             class="cell-information__item"
-            v-for="item in types"
+            v-for="item in Object.values(types).filter(type => type?.value)"
             :key="item?.value"
             v-show="item?.value"
         >
@@ -73,6 +73,10 @@ const props = defineProps({
   ceilType: {
     type: String,
     default: ''
+  },
+  userType: {
+    type: String,
+    required: true,
   }
 })
 
@@ -91,7 +95,7 @@ const getIconAndValueForActivationMethod: ComputedRef<[Component, string] | unde
   const ceil = props.ceil
 
   switch (true) {
-    case ceil?.prev_type_matrix_id ?? 0 > 0:
+    case (ceil?.prev_type_matrix_id ?? 0) > 0:
       return [UpgradeIcon, 'Апгрейд']
     case !ceil?.prev_type_matrix_id && !ceil?.is_bonus:
       return [PurchaseIcon, 'Покупка']
@@ -103,13 +107,15 @@ const getIconAndValueForActivationMethod: ComputedRef<[Component, string] | unde
 })
 
 const getIconAndValueForPartnerType: ComputedRef<[Component, string] | undefined> = computed(() => {
-  switch (true) {
-    case !!1:
+  switch (props.userType) {
+    case 'referal':
       return [OwnerIcon, 'Личник']
-    case !!2:
+    case 'overflow':
       return [OverflowIcon, 'Перелив']
-    case !!3:
+    case 'deep':
       return [CompressionIcon, `Компрессия <span>(${useGetLevel(props.ceil?.owner?.lvl_insystem)} lvl)</span>`]
+    case 'owner':
+      return [OwnerIcon, 'Вы']
   }
 })
 

@@ -323,6 +323,7 @@ const loadMMatrixPartnerModal = async () => {
     await store.dispatch('partners/getPendingPartners', { isPartnerMatrix: true })
 
     if (response.data?.matrix && !response.data.matrix.is_booster) {
+      console.log('response.data', response)
       selectedPartner.value = {
         depth: 0,
         pos: 0,
@@ -334,7 +335,8 @@ const loadMMatrixPartnerModal = async () => {
         isInfinity: false,
         informer: {
           activationType: '',
-          ceilType: ''
+          ceilType: '',
+          userType: ''
         }
       }
 

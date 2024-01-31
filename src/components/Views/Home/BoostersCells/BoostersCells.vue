@@ -12,6 +12,7 @@
       <SmallCell
           type="chains-boost"
           cell-type="chains-boost"
+          :show-cell-information="false"
           v-for="(cell, idx) in boostersPending?.list"
           :cell="cell"
           :key="idx"
@@ -21,6 +22,7 @@
       <SmallCell
           type="chains-boost"
           cell-type="chains-boost"
+          :show-cell-information="false"
           v-for="(cell, idx) in boostersExposed?.list"
           :cell="cell"
           :key="idx"

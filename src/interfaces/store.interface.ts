@@ -96,6 +96,7 @@ export interface FillReward {
 export interface IInformer {
     activationType: string;
     ceilType: string;
+    userType: string;
 }
 
 export interface Ceil {

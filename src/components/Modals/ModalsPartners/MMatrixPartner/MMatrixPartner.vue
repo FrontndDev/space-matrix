@@ -16,6 +16,7 @@
               type=""
               size="small"
               cellType="circle-avatar"
+              :user-type="selectedPartner?.informer.userType"
               :ceil="selectedPartner?.matrix"
               v-if="selectedPartner?.matrix"
               @circle-avatar="getUser"
@@ -42,6 +43,7 @@
                   :type="getTypeForFirstCeil"
                   :ceil="firstCeil.matrix"
                   :is-booster="firstCeil?.matrix.is_booster"
+                  :user-type="firstCeil?.informer.userType"
                   v-if="firstCeil?.matrix"
                   @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
               />
@@ -71,6 +73,7 @@
                   :type="getTypeForSecondCeil"
                   :ceil="secondCeil.matrix"
                   :is-booster="secondCeil?.matrix.is_booster"
+                  :user-type="secondCeil?.informer.userType"
                   v-if="secondCeil?.matrix"
                   @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
               />

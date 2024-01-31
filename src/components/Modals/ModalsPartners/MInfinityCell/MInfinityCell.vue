@@ -9,8 +9,8 @@
     </ModalHeader>
     <div class="modal-infinity-cell__container" v-if="infinityPartners?.length">
       <PartnerCell
-          type="infinity"
           size="small"
+          type="infinity"
           v-for="partner in infinityPartners"
           :key="partner.id"
           :ceil="partner"

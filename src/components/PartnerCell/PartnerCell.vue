@@ -18,9 +18,11 @@
       />
 
       <CellInformation
-          :class="size"
-          :ceil="ceil"
-          :ceil-type="cellType"
+          :class="props.size"
+          :ceil="props.ceil"
+          :ceil-type="props.cellType"
+          :user-type="props.userType"
+          v-if="showCellInformation"
       />
     </div>
     <div
@@ -46,12 +48,12 @@
         @circle-avatar="$emit('circle-avatar')"
     />
 
-    <CellType
-        :size="props.size"
-        :cell-type="props.type"
-        v-if="['infinity'].includes(props.type)"
-        @click="$emit('open-m-matrix-partner')"
-    />
+<!--    <CellType-->
+<!--        :size="props.size"-->
+<!--        :cell-type="props.type"-->
+<!--        v-if="['infinity'].includes(props.type)"-->
+<!--        @click="$emit('open-m-matrix-partner')"-->
+<!--    />-->
   </div>
 </template>
 
@@ -71,7 +73,7 @@ import {
   Type
 } from "../../interfaces/store.interface.ts";
 import { useGetLevel } from "../../composables/useGetLevel.ts";
-import CellType from "../UI/CellType/CellType.vue";
+// import CellType from "../UI/CellType/CellType.vue";
 import { useStore } from "vuex";
 import { useCopy } from "../../composables/useCopy.ts";
 import CellInformation from "../CellInformation/CellInformation.vue";
@@ -97,6 +99,10 @@ const props = defineProps({
     default: 'freeze'
     //freeze, profit, boost, circle-avatar
   },
+  userType: {
+    type: String,
+    default: '',
+  },
   isBooster: {
     type: Boolean,
     default: false,
@@ -105,6 +111,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  showCellInformation: {
+    type: Boolean,
+    default: true,
+  }
 });
 
 const store = useStore()

@@ -18,11 +18,11 @@
     cursor: pointer;
 
     & > div {
-      border: 3px solid $border-base;
+      border: 2px solid $border-base;
       border-radius: 16px;
 
       & > img {
-        border-radius: 13px;
+        border-radius: 16px;
         width: 100%;
         object-fit: cover;
       }

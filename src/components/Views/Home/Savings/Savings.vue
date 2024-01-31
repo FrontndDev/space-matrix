@@ -12,6 +12,7 @@
           :ceil="firstCeil.matrix"
           :fill-reward="firstCeil.fillRevard"
           :is-booster="firstCeil?.matrix.is_booster"
+          :user-type="firstCeil?.informer.userType"
           v-if="firstCeil?.matrix && !firstCeil.queueId"
           @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
       />
@@ -40,6 +41,7 @@
           :ceil="secondCeil.matrix"
           :fill-reward="secondCeil.fillRevard"
           :is-booster="secondCeil?.matrix.is_booster"
+          :user-type="secondCeil?.informer.userType"
           v-if="secondCeil?.matrix && !secondCeil.queueId"
           @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
       />

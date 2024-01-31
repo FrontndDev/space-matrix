@@ -20,8 +20,10 @@
 
       <CellInformation
           class="small"
-          :ceil="cell"
-          :ceil-type="cellType"
+          :ceil="props.cell"
+          :ceil-type="props.cellType"
+          :user-type="props.userType"
+          v-if="props.showCellInformation && !time"
       />
     </div>
     <div class="small-cell__info">
@@ -89,6 +91,10 @@ const props = defineProps({
     default: 'partners'
     // partners, boost, chains-boost, chain-partner, teleport, profitable
   },
+  userType: {
+    type: String,
+    default: ''
+  },
 
   state: {
     type: String,
@@ -103,6 +109,10 @@ const props = defineProps({
     default: true,
   },
   showLevelMatrix: {
+    type: Boolean,
+    default: true,
+  },
+  showCellInformation: {
     type: Boolean,
     default: true,
   }
