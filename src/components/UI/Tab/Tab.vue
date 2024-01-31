@@ -6,10 +6,11 @@
         'indicator-green': props.tab.indicator?.green,
         'indicator-orange': props.tab.indicator?.orange,
       }, props.type]"
-      @click="emit('tab', props.tab)"
       v-if="!props.tab.disabled"
+      @click.stop="emit('tab', props.tab)"
   >
     {{ props.tab.name }} {{ props.tab.value }}
+    <MyCheckbox v-if="props.tab?.checkbox"/>
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import {
   PropType
 } from "vue";
 import { ITab } from "../../../interfaces/store.interface.ts";
+import MyCheckbox from "../MyCheckbox/MyCheckbox.vue";
 
 const props = defineProps(<any>{
   type: {

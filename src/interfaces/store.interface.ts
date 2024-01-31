@@ -170,8 +170,9 @@ export interface ITab {
     name: string;
     indicator: {
         green: boolean;
-        orange: boolean
-    }
+        orange: boolean;
+    };
+    checkbox?: boolean;
 }
 
 export interface ICellInformation {

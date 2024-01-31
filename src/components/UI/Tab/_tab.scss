@@ -2,6 +2,8 @@
 @import '../../../assets/scss/mixins';
 
 .tab-matrix {
+  @include flex-center;
+  column-gap: 8px;
   text-align: center;
   transition: .25s all ease;
   cursor: pointer;
