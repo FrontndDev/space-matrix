@@ -1,4 +1,5 @@
 import { IPosition } from "./partners.interface.ts";
+import { type Component } from "vue";
 
 export interface IObject {
     [key: string]: string
@@ -92,6 +93,11 @@ export interface FillReward {
     } & string;
 }
 
+export interface IInformer {
+    activationType: string;
+    ceilType: string;
+}
+
 export interface Ceil {
     depth: number;
     pos: number;
@@ -101,6 +107,8 @@ export interface Ceil {
     allowSniper: boolean;
     fillRevard: FillReward[];
     isInfinity: boolean;
+    informer: IInformer;
+    uplineCeilMatrixId?: number;
 }
 
 export interface CeilsCollection {
@@ -163,5 +171,13 @@ export interface ITab {
     indicator: {
         green: boolean;
         orange: boolean
+    }
+}
+
+export interface ICellInformation {
+    [key: string]: {
+        icon: Component;
+        title: string;
+        value: string;
     }
 }

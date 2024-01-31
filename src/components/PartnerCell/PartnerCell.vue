@@ -16,6 +16,12 @@
           :level="useGetLevel(props.ceil.owner.lvl_insystem)"
           v-else
       />
+
+      <CellInformation
+          :class="size"
+          :ceil="ceil"
+          :ceil-type="cellType"
+      />
     </div>
     <div
         class="partner-cell__name partner-cell__name_mt-8"
@@ -68,6 +74,7 @@ import { useGetLevel } from "../../composables/useGetLevel.ts";
 import CellType from "../UI/CellType/CellType.vue";
 import { useStore } from "vuex";
 import { useCopy } from "../../composables/useCopy.ts";
+import CellInformation from "../CellInformation/CellInformation.vue";
 
 const props = defineProps({
   ceil: {

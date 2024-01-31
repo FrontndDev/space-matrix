@@ -114,6 +114,10 @@ const openMMatrixPartner = (cell: Matrix) => {
     allowSniper: false,
     fillRevard: [],
     isInfinity: false,
+    informer: {
+      activationType: '',
+      ceilType: ''
+    }
   }
   emit('open-m-matrix-partner')
   emit('select-partner', selectedPartner)

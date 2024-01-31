@@ -1,0 +1,80 @@
+@import '../../assets/scss/mixins';
+@import '../../assets/scss/variables';
+
+.cell-information {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 1;
+
+  &.small {
+    & .cell-information__icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 0 16px;
+    }
+  }
+
+  &__body {
+    position: relative;
+  }
+
+  &__icon {
+    @include flex-center;
+    width: 40px;
+    height: 40px;
+    border-radius: 0 28px;
+    backdrop-filter: blur(8px);
+    background: $bg-transparency-black;
+
+    &:hover {
+      & + .cell-information__content {
+        scale: 1;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__content {
+    width: 200px;
+    scale: 0;
+    opacity: 0;
+    border-radius: 16px;
+    background: $bg-base-dark;
+    transition: .25s all ease;
+    position: absolute;
+    top: 44px;
+    left: 0;
+  }
+
+  &__item {
+    @include flexbox(row, flex-start, center);
+    column-gap: 12px;
+    padding: 12px;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $border-base-dark-light;
+    }
+
+    &-icon {
+      display: flex;
+    }
+
+    &-content {
+      @include flexbox(column);
+      row-gap: 4px;
+    }
+
+    &-title {
+      @include get-font(12px, 500, 16px, $text-base-light);
+    }
+
+    &-value {
+      @include get-font(12px, 500, 16px, $text-base-on-color);
+
+      & > ::v-deep(span) {
+        color: $text-base-light;
+      }
+    }
+  }
+}

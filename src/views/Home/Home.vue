@@ -332,6 +332,10 @@ const loadMMatrixPartnerModal = async () => {
         allowSniper: false,
         fillRevard: [],
         isInfinity: false,
+        informer: {
+          activationType: '',
+          ceilType: ''
+        }
       }
 
       openModalPartner(2)

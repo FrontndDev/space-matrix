@@ -62,6 +62,10 @@ const selectPartner = (partner: Matrix) => {
     allowSniper: false,
     fillRevard: [],
     isInfinity: false,
+    informer: {
+      activationType: '',
+      ceilType: ''
+    }
   }
 
   emit('select-partner', ceil)

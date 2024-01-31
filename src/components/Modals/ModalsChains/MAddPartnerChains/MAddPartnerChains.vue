@@ -58,6 +58,10 @@ const getCeil: ComputedRef<Ceil> = computed(() => {
     allowSniper: false,
     fillRevard: [],
     isInfinity: false,
+    informer: {
+      activationType: '',
+      ceilType: ''
+    }
   }
 })
 

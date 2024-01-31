@@ -322,6 +322,10 @@ const parentMatrix = async () => {
         allowSniper: false,
         fillRevard: [],
         isInfinity: false,
+        informer: {
+          activationType: '',
+          ceilType: ''
+        }
       }
     }
   }

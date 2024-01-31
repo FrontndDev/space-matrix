@@ -100,6 +100,10 @@ const openMMatrixModal = (matrix: Matrix) => {
     allowSniper: false,
     fillRevard: [],
     isInfinity: false,
+    informer: {
+      activationType: '',
+      ceilType: ''
+    }
   }
   emit('select-partner', cell)
   emit('close-modal')
