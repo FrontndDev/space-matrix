@@ -32,7 +32,6 @@ import {
   computed,
   ComputedRef,
   PropType,
-  ref
 } from "vue";
 import {
   ICellInformation,
@@ -40,18 +39,28 @@ import {
 } from "../../interfaces/store.interface.ts";
 
 // Тип ячейки
+// @ts-ignore
 import ProfitableIcon from '../../assets/svg/cellInformation/profitable.svg?component'
+// @ts-ignore
 import CumulativeIcon from '../../assets/svg/cellInformation/cumulative.svg?component'
+// @ts-ignore
 import EndlessIcon from '../../assets/svg/cellInformation/endless.svg?component'
 // import PendingIcon from '../../assets/svg/cellInformation/pending.svg?component'
 // Способ активации
+// @ts-ignore
 import UpgradeIcon from '../../assets/svg/cellInformation/upgrade.svg?component'
+// @ts-ignore
 import PurchaseIcon from '../../assets/svg/cellInformation/purchase.svg?component'
+// @ts-ignore
 import BoosterIcon from '../../assets/svg/cellInformation/booster.svg?component'
+// @ts-ignore
 import BonusIcon from '../../assets/svg/cellInformation/bonus.svg?component'
 // Тип партнера
+// @ts-ignore
 import OwnerIcon from '../../assets/svg/cellInformation/owner.svg?component'
+// @ts-ignore
 import OverflowIcon from '../../assets/svg/cellInformation/overflow.svg?component'
+// @ts-ignore
 import CompressionIcon from '../../assets/svg/cellInformation/compression.svg?component'
 //
 import { useGetLevel } from "../../composables/useGetLevel.ts";
@@ -66,8 +75,6 @@ const props = defineProps({
     default: ''
   }
 })
-
-const showInformer = ref(false)
 
 const getIconAndValueForCeilType: ComputedRef<[Component, string] | undefined> = computed(() => {
   switch (props.ceilType) {
