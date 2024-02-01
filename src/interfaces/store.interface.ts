@@ -177,10 +177,12 @@ export interface ITab {
     tooltip?: string;
 }
 
+export interface ICellInformationItem {
+    icon: Component;
+    title: string;
+    value: string;
+}
+
 export interface ICellInformation {
-    [key: string]: {
-        icon: Component;
-        title: string;
-        value: string;
-    }
+    [key: string]: ICellInformationItem;
 }

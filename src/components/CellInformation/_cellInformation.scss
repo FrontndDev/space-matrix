@@ -46,37 +46,6 @@
     top: 44px;
     left: 0;
   }
-
-  &__item {
-    @include flexbox(row, flex-start, center);
-    column-gap: 12px;
-    padding: 12px;
-
-    &:not(:last-child) {
-      border-bottom: 1px solid $border-base-dark-light;
-    }
-
-    &-icon {
-      display: flex;
-    }
-
-    &-content {
-      @include flexbox(column);
-      row-gap: 4px;
-    }
-
-    &-title {
-      @include get-font(12px, 500, 16px, $text-base-light);
-    }
-
-    &-value {
-      @include get-font(12px, 500, 16px, $text-base-on-color);
-
-      & > ::v-deep(span) {
-        color: $text-base-light;
-      }
-    }
-  }
 }
 
 @media (max-width: 992px) {
@@ -85,6 +54,10 @@
       width: 32px;
       height: 32px;
       border-radius: 0 12px;
+    }
+
+    &__content {
+      display: none;
     }
   }
 }

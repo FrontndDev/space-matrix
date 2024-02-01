@@ -116,6 +116,7 @@
   }
 
   &.boost {
+    flex-direction: row;
     column-gap: 4px;
     @include get-font(12px, 500, 16px, $text-violet);
   }
