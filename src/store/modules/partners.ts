@@ -35,7 +35,7 @@ export default {
   actions: {
     getExposedPartners(
       { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
-      { filter, changeTab = true } : IGetPendingBoostersParams,
+      { filter, changeTab = false } : IGetPendingBoostersParams,
     ) {
       state.levelID = filter
 
@@ -57,7 +57,7 @@ export default {
 
     getNewPendingPartners(
         { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
-        { filter, changeTab = true }: IGetPendingBoostersParams
+        { filter, changeTab = false }: IGetPendingBoostersParams
     ) {
       state.levelID = filter
 
@@ -137,12 +137,13 @@ export default {
     },
     CHANGE_BIG_TAB(state: any, id: number) {
       state.bigTabID = id
+
       switch (id) {
         case 1:
-          state.partnersPending.totalCount === 0 ? state.littleTabID = 2 : state.littleTabID = 1
+          state.littleTabID = 1
           break;
         case 2:
-          state.countPendingBoosters === 0 ? state.littleTabID = 4 : state.littleTabID = 3
+          state.littleTabID = 3
           break;
         case 3:
           state.littleTabID = 5
