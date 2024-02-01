@@ -21,8 +21,6 @@ export default defineConfig({
         },
     },
     build: {
-        manifest: true,
-        cssCodeSplit: false,
     },
-    base: './'
+    base: '/app/matrix/v'
 })
