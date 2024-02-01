@@ -6,6 +6,7 @@
           :tabs="tabs"
           :cells="true"
           @toggle-expose-tabs="selectTab"
+          @set-checkbox-value="setCheckboxValue"
       />
     </div>
     <div class="chains-cells__container">
@@ -55,6 +56,7 @@ import {
   computed,
   ComputedRef,
   reactive,
+  ref,
 } from "vue";
 import ChainCell from "../../../ChainCell/ChainCell.vue";
 import Pagination from "../../../Pagination/Pagination.vue";
@@ -96,6 +98,8 @@ const selectTab = () => {
   selectPage(1)
 }
 
+const teleportCheckbox = ref(false)
+
 const tabs = reactive([
   {
     id: 5,
@@ -108,6 +112,7 @@ const tabs = reactive([
     value: computed(() => teleportList.value.totalCount),
     disabled: computed(() => import.meta.env.VITE_CHAINS_TELEPORT !== 'on'),
     checkbox: true,
+    tooltip: `Ваш куратор ${teleportCheckbox.value ? 'может' : 'не может'} <br> использовать телепорт <br> новичка на Вас`,
   },
 ]);
 
@@ -128,6 +133,14 @@ const openGeneralChains = (id: number) => {
   emit('open-general-chains')
 }
 
+const setCheckboxValue = (value: boolean, id: number) => {
+  if (id === 6) {
+    teleportCheckbox.value = value
+    store.dispatch('switchTeleport', { enable: value })
+    // @ts-ignore
+    TELEPORT_ENABLE(value)
+  }
+}
 </script>
 
 <style scoped lang="scss">

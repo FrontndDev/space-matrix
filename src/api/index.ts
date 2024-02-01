@@ -72,6 +72,10 @@ export async function activatePartnerTeleport(data: ITeleportPartnerParams) {
   return postAsync("/api/matrix/teleport/activate", data);
 }
 
+export async function switchTeleport(enable: boolean) {
+  return postAsync('/api/matrix/teleport/switch', { enable })
+}
+
 // PUT
 
 export async function placementExistMatrix(data: IExposePartnerParams) {

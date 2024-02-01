@@ -174,6 +174,7 @@ export interface ITab {
         orange: boolean;
     };
     checkbox?: boolean;
+    tooltip?: string;
 }
 
 export interface ICellInformation {

@@ -78,3 +78,13 @@
     }
   }
 }
+
+@media (max-width: 992px) {
+  .cell-information {
+    &__icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 0 12px;
+    }
+  }
+}

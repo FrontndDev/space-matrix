@@ -7,10 +7,20 @@
         'indicator-orange': props.tab.indicator?.orange,
       }, props.type]"
       v-if="!props.tab.disabled"
+      @mouseover="showTooltip"
+      @mouseleave="hideTooltip"
       @click.stop="emit('tab', props.tab)"
   >
     {{ props.tab.name }} {{ props.tab.value }}
-    <MyCheckbox v-if="props.tab?.checkbox"/>
+    <MyCheckbox
+        v-if="props.tab?.checkbox"
+        @set-value="value => emit('set-checkbox-value', value, props.tab.id)"
+    />
+
+    <MyTooltip
+        :text="props.tab?.tooltip"
+        v-if="props.tab?.tooltip && showMyTooltip"
+    />
   </div>
 </template>
 
@@ -19,10 +29,12 @@
 import { useStore } from "vuex";
 import {
   computed,
-  PropType
+  PropType,
+  ref
 } from "vue";
 import { ITab } from "../../../interfaces/store.interface.ts";
 import MyCheckbox from "../MyCheckbox/MyCheckbox.vue";
+import MyTooltip from "../MyTooltip/MyTooltip.vue";
 
 const props = defineProps(<any>{
   type: {
@@ -38,14 +50,23 @@ const props = defineProps(<any>{
   }
 });
 
-const emit = defineEmits(['tab']);
+const emit = defineEmits(['tab', 'set-checkbox-value']);
 
 const store = useStore()
+
+const showMyTooltip = ref(false)
 
 const littleTabID = computed(() => store.state.partners.littleTabID)
 
 const activeClass = computed(() => props.type === 'little' ? littleTabID.value === props.tab.id : props.active)
 
+const showTooltip = () => {
+  showMyTooltip.value = true
+}
+
+const hideTooltip = () => {
+  showMyTooltip.value = false
+}
 </script>
 
 <style scoped lang="scss">

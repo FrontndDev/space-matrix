@@ -92,6 +92,11 @@ export default createStore({
             commit('SET_WALLETS', response.data)
 
             return response
+        },
+        switchTeleport(_: ActionContext<any, any>, enable: boolean) {
+            API.switchTeleport(enable).then(response => {
+                console.log('switchTeleport', response)
+            })
         }
     },
     mutations: {
