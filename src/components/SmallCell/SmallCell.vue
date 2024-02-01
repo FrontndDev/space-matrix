@@ -60,9 +60,9 @@
 </template>
 
 <script setup lang="ts">
-import PartnerType from "../PartnerCell/PartnerType/PartnerType.vue";
-import LevelMatrix from "../UI/LevelMatrix/LevelMatrix.vue";
-import SmallCellType from "../UI/SmallCellType/SmallCellType.vue";
+import PartnerType from "@/components/PartnerCell/PartnerType/PartnerType.vue";
+import LevelMatrix from "@/components/UI/LevelMatrix/LevelMatrix.vue";
+import SmallCellType from "@/components/UI/SmallCellType/SmallCellType.vue";
 import {
   PropType,
   computed,
@@ -71,11 +71,11 @@ import {
 import {
   Matrix,
   Type
-} from "../../interfaces/store.interface.ts";
-import { useGetLevel } from "../../composables/useGetLevel.ts";
+} from "@/interfaces/store.interface.ts";
+import { useGetLevel } from "@/composables/useGetLevel.ts";
 import { useStore } from "vuex";
-import { useCopy } from "../../composables/useCopy.ts";
-import CellInformation from "../CellInformation/CellInformation.vue";
+import { useCopy } from "@/composables/useCopy.ts";
+import CellInformation from "@/components/CellInformation/CellInformation.vue";
 
 const props = defineProps({
   cell: {

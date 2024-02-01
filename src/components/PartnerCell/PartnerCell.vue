@@ -58,10 +58,10 @@
 </template>
 
 <script setup lang="ts">
-// import CellType from "../UI/CellType/CellType.vue";
-import Reward from "../UI/Reward/Reward.vue";
+// import CellType from "@/UI/CellType/CellType.vue";
+import Reward from "@/components/UI/Reward/Reward.vue";
 import PartnerType from "./PartnerType/PartnerType.vue";
-import LevelMatrix from "../UI/LevelMatrix/LevelMatrix.vue";
+import LevelMatrix from "@/components/UI/LevelMatrix/LevelMatrix.vue";
 import {
   computed,
   PropType,
@@ -71,12 +71,12 @@ import {
   FillReward,
   Matrix,
   Type
-} from "../../interfaces/store.interface.ts";
-import { useGetLevel } from "../../composables/useGetLevel.ts";
-// import CellType from "../UI/CellType/CellType.vue";
+} from "@/interfaces/store.interface.ts";
+import { useGetLevel } from "@/composables/useGetLevel.ts";
+// import CellType from "@/UI/CellType/CellType.vue";
 import { useStore } from "vuex";
-import { useCopy } from "../../composables/useCopy.ts";
-import CellInformation from "../CellInformation/CellInformation.vue";
+import { useCopy } from "@/composables/useCopy.ts";
+import CellInformation from "@/components/CellInformation/CellInformation.vue";
 
 const props = defineProps({
   ceil: {

@@ -38,11 +38,11 @@
 </template>
 
 <script setup lang="ts">
-import CancelButton from "../../../UI/CancelButton/CancelButton.vue";
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import Preloader from "../../../UI/Preloader/Preloader.vue";
-import SmallCell from "../../../SmallCell/SmallCell.vue";
-import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
+import CancelButton from "@/components/UI/CancelButton/CancelButton.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import Preloader from "@/components/UI/Preloader/Preloader.vue";
+import SmallCell from "@/components/SmallCell/SmallCell.vue";
+import ChainsButton from "@/components/UI/ChainsButton/ChainsButton.vue";
 import {
   computed,
   ComputedRef,
@@ -53,9 +53,9 @@ import {
 import {
   // Ceil,
   Matrix
-} from "../../../../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface.ts";
 import { useStore } from "vuex";
-// import { IPosition } from "../../../../interfaces/partners.interface.ts";
+// import { IPosition } from "@/interfaces/partners.interface.ts";
 
 const emit = defineEmits([
   'close-modal',

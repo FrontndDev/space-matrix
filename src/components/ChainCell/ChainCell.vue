@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import SmallCellType from "../UI/SmallCellType/SmallCellType.vue";
+import SmallCellType from "@/components/UI/SmallCellType/SmallCellType.vue";
 import ChainTypeButton from "./ChainTypeButton/ChainTypeButton.vue";
 
 const props = defineProps({

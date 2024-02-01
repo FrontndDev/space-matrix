@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import Link from "../../../UI/Link/Link.vue";
+import Link from "@/components/UI/Link/Link.vue";
 
 const props = defineProps({
   name: {

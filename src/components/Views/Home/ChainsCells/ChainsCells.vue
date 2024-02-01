@@ -51,20 +51,20 @@
 </template>
 
 <script setup lang="ts">
-import Tabs from "../../../UI/Tabs/Tabs.vue";
+import Tabs from "@/components/UI/Tabs/Tabs.vue";
 import {
   computed,
   ComputedRef,
   reactive,
   ref,
 } from "vue";
-import ChainCell from "../../../ChainCell/ChainCell.vue";
-import Pagination from "../../../Pagination/Pagination.vue";
-import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
+import ChainCell from "@/components/ChainCell/ChainCell.vue";
+import Pagination from "@/components/Pagination/Pagination.vue";
+import EmptyCells from "@/components/EmptyCells/EmptyCells.vue";
 import {
   IChainsList,
   ITeleportList
-} from "../../../../interfaces/chains.interface.ts";
+} from "@/interfaces/chains.interface.ts";
 import { useStore } from "vuex";
 
 const store = useStore()

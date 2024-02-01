@@ -25,16 +25,15 @@
 </template>
 
 <script setup lang="ts">
-
 import { useStore } from "vuex";
 import {
   computed,
   PropType,
   ref
 } from "vue";
-import { ITab } from "../../../interfaces/store.interface.ts";
-import MyCheckbox from "../MyCheckbox/MyCheckbox.vue";
-import MyTooltip from "../MyTooltip/MyTooltip.vue";
+import { ITab } from "@/interfaces/store.interface.ts";
+import MyCheckbox from "@/components/UI/MyCheckbox/MyCheckbox.vue";
+import MyTooltip from "@/components/UI/MyTooltip/MyTooltip.vue";
 
 const props = defineProps(<any>{
   type: {

@@ -1,4 +1,4 @@
-import * as API from "../../api/index";
+import * as API from "@/api/index";
 import { ActionContext, Commit } from "vuex";
 import {
   IChainDetails,
@@ -6,8 +6,8 @@ import {
   ITeleportList,
   ITeleportPartnerParams,
   ITeleports,
-} from "../../interfaces/chains.interface.ts";
-import { useShowMessage } from "../../composables/useShowMessage.ts";
+} from "@/interfaces/chains.interface";
+import { useShowMessage } from "@/composables/useShowMessage";
 
 export default {
   namespaced: true,

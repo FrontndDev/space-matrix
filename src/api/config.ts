@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import { useShowMessage } from "../composables/useShowMessage.ts";
+import { useShowMessage } from "@/composables/useShowMessage";
 
 const BASE_URL = 'https://dev.halk.ai'
 

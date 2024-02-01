@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import DButton from "../../../UI/DButton/DButton.vue";
+import DButton from "@/components/UI/DButton/DButton.vue";
 
 import {
   computed,
@@ -33,14 +33,14 @@ import {
 import {
   ListOfTypes,
   Type
-} from "../../../../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface.ts";
 import { useStore } from "vuex";
-import Preloader from "../../../UI/Preloader/Preloader.vue";
+import Preloader from "@/components/UI/Preloader/Preloader.vue";
 import {
   useRoute,
   useRouter
 } from "vue-router";
-import { baseUrl } from "../../../../router";
+import { baseUrl } from "@/router";
 
 const listOfTypes: Ref<ListOfTypes> = computed(() => store.state.listOfTypes)
 const selectedType: Ref<Type> = computed(() => store.state.selectedType)

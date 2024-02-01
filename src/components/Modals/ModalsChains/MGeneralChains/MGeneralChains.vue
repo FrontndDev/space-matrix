@@ -41,9 +41,9 @@
 </template>
 
 <script setup lang="ts">
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
-import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import CopyLink from "@/components/Views/Home/CopyLink/CopyLink.vue";
+import ChainsButton from "@/components/UI/ChainsButton/ChainsButton.vue";
 import {
   computed,
   ComputedRef,
@@ -52,17 +52,17 @@ import {
   watch,
 } from "vue";
 import { useStore } from "vuex";
-import SmallCell from "../../../SmallCell/SmallCell.vue";
+import SmallCell from "@/components/SmallCell/SmallCell.vue";
 import {
   IChainDetails,
   IChains
-} from "../../../../interfaces/chains.interface.ts";
-import { IPartners } from "../../../../interfaces/partners.interface.ts";
-import { useCopyLink } from "../../../../composables/useCopyLink.ts";
+} from "@/interfaces/chains.interface.ts";
+import { IPartners } from "@/interfaces/partners.interface.ts";
+import { useCopyLink } from "@/composables/useCopyLink.ts";
 import {
   Matrix
-} from "../../../../interfaces/store.interface.ts";
-import Preloader from "../../../UI/Preloader/Preloader.vue";
+} from "@/interfaces/store.interface.ts";
+import Preloader from "@/components/UI/Preloader/Preloader.vue";
 
 const emit = defineEmits([
   'close-modal',

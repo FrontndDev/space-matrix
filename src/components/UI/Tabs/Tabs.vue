@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import Tab from "../Tab/Tab.vue";
+import Tab from "@/components/UI/Tab/Tab.vue";
 import {
   onBeforeMount,
   Ref,

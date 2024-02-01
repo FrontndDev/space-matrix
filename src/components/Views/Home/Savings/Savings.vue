@@ -68,8 +68,8 @@
 
 <script setup lang="ts">
 
-import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
-import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
+import PartnerCell from "@/components/PartnerCell/PartnerCell.vue";
+import AddPartnerCell from "@/components/AddPartnerCell/AddPartnerCell.vue";
 import { useStore } from "vuex";
 import {
   computed,
@@ -79,8 +79,8 @@ import {
   Ceil,
   Ceils,
   IMatrix,
-} from "../../../../interfaces/store.interface.ts";
-import { IPosition } from "../../../../interfaces/partners.interface.ts";
+} from "@/interfaces/store.interface.ts";
+import { IPosition } from "@/interfaces/partners.interface.ts";
 
 const emit = defineEmits([
   'open-m-matrix-partner',

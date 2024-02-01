@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import PartnerCell from "@/components/PartnerCell/PartnerCell.vue";
 import {
   computed,
   ComputedRef,
@@ -34,8 +34,8 @@ import { useStore } from "vuex";
 import {
   Ceil,
   Matrix
-} from "../../../../interfaces/store.interface.ts";
-import Preloader from "../../../UI/Preloader/Preloader.vue";
+} from "@/interfaces/store.interface.ts";
+import Preloader from "@/components/UI/Preloader/Preloader.vue";
 
 const emit = defineEmits([
   'close-modal',

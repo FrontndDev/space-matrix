@@ -17,11 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import ActivateButton from "../UI/ActivateButton/ActivateButton.vue";
+import ActivateButton from "@/components/UI/ActivateButton/ActivateButton.vue";
 import {
   IMatrix,
   Type,
-} from "../../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface.ts";
 import {computed, PropType, Ref} from "vue";
 import { useStore } from "vuex";
 

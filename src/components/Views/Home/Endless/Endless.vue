@@ -21,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
-import InfinityPartnerCard from "../../../InfinityPartnerCard/InfinityPartnerCard.vue";
+import AddPartnerCell from "@/components/AddPartnerCell/AddPartnerCell.vue";
+import InfinityPartnerCard from "@/components/InfinityPartnerCard/InfinityPartnerCard.vue";
 import { useStore } from "vuex";
 import {
   computed,
@@ -33,8 +33,8 @@ import {
   Ceil,
   Ceils,
   IMatrix,
-} from "../../../../interfaces/store.interface.ts";
-import { IPosition } from "../../../../interfaces/partners.interface.ts";
+} from "@/interfaces/store.interface.ts";
+import { IPosition } from "@/interfaces/partners.interface.ts";
 
 const emit = defineEmits(['open-m-infinity-cell', 'open-m-add-partner', 'set-position-for-partner'])
 

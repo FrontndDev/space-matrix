@@ -104,15 +104,15 @@
 </template>
 
 <script setup lang="ts">
-import Endless from "../../components/Views/Home/Endless/Endless.vue";
-import CopyLink from "../../components/Views/Home/CopyLink/CopyLink.vue";
-import MatrixHeader from "../../components/Views/Home/MatrixHeader/MatrixHeader.vue";
-import Savings from "../../components/Views/Home/Savings/Savings.vue";
-import InfoHeader from "../../components/Views/Home/InfoHeader/InfoHeader.vue";
-import PartnerCells from "../../components/Views/Home/PartnerCells/PartnerCells.vue";
-import ModalsPartners from "../../components/Modals/ModalsPartners/ModalsPartners.vue";
+import Endless from "@/components/Views/Home/Endless/Endless.vue";
+import CopyLink from "@/components/Views/Home/CopyLink/CopyLink.vue";
+import MatrixHeader from "@/components/Views/Home/MatrixHeader/MatrixHeader.vue";
+import Savings from "@/components/Views/Home/Savings/Savings.vue";
+import InfoHeader from "@/components/Views/Home/InfoHeader/InfoHeader.vue";
+import PartnerCells from "@/components/Views/Home/PartnerCells/PartnerCells.vue";
+import ModalsPartners from "@/components/Modals/ModalsPartners/ModalsPartners.vue";
 
-import NotActivatedMatrix from "../../components/NotActivatedMatrix/NotActivatedMatrix.vue";
+import NotActivatedMatrix from "@/components/NotActivatedMatrix/NotActivatedMatrix.vue";
 
 import {
   computed,
@@ -123,27 +123,27 @@ import {
   ref,
   watch
 } from "vue";
-import TimeActivatedMatrix from "../../components/TimeActivatedMatrix/TimeActivatedMatrix.vue";
-import ChainsCells from "../../components/Views/Home/ChainsCells/ChainsCells.vue";
-import BoostersCells from "../../components/Views/Home/BoostersCells/BoostersCells.vue";
-import ModalChains from "../../components/Modals/ModalsChains/ModalChains.vue";
+import TimeActivatedMatrix from "@/components/TimeActivatedMatrix/TimeActivatedMatrix.vue";
+import ChainsCells from "@/components/Views/Home/ChainsCells/ChainsCells.vue";
+import BoostersCells from "@/components/Views/Home/BoostersCells/BoostersCells.vue";
+import ModalChains from "@/components/Modals/ModalsChains/ModalChains.vue";
 import { useStore } from "vuex";
-import Preloader from "../../components/UI/Preloader/Preloader.vue";
-import ModalPaymentForm from "../../components/Modals/ModalPaymentForm/ModalPaymentForm.vue";
-import { IPosition } from "../../interfaces/partners.interface.ts";
+import Preloader from "@/components/UI/Preloader/Preloader.vue";
+import ModalPaymentForm from "@/components/Modals/ModalPaymentForm/ModalPaymentForm.vue";
+import { IPosition } from "@/interfaces/partners.interface";
 import {
   Ceil,
   IMatrix,
   ListOfTypes,
   Matrix,
-} from "../../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface";
 import {
   useRoute,
   useRouter
 } from "vue-router";
-import { useCopyLink } from "../../composables/useCopyLink.ts";
-import MatrixActivationInProgress from "../../components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
-import { IChains } from "../../interfaces/chains.interface.ts";
+import { useCopyLink } from "@/composables/useCopyLink";
+import MatrixActivationInProgress from "@/components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
+import { IChains } from "@/interfaces/chains.interface";
 
 const isCells = ref(1)
 

@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { Type } from "../../../interfaces/store.interface.ts";
+import { Type } from "@/interfaces/store.interface.ts";
 import {
   computed,
   ComputedRef,
@@ -45,7 +45,7 @@ import {
   watch
 } from "vue";
 import { useStore } from "vuex";
-import MyTooltip from "../MyTooltip/MyTooltip.vue";
+import MyTooltip from "@/components/UI/MyTooltip/MyTooltip.vue";
 
 const props = defineProps({
   type: {

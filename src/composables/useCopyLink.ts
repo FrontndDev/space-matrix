@@ -1,5 +1,5 @@
-import { useShowMessage } from "./useShowMessage.ts";
-import { baseUrl } from "../router";
+import { useShowMessage } from "./useShowMessage";
+import { baseUrl } from "@/router";
 
 export function useCopyLink(matrixId: number, type: string, query = 'id') {
     const link = window.location.origin + baseUrl + '/' + type

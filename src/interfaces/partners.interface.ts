@@ -1,6 +1,6 @@
 import {
     Matrix
-} from "./store.interface.ts";
+} from "./store.interface";
 
 export interface IPartners {
     currentPage: number;

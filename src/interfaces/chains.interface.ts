@@ -2,7 +2,7 @@ import {
   FillReward,
   IOwner,
   Matrix
-} from "./store.interface.ts";
+} from "./store.interface";
 
 export type TInitiator = {
   id: string;

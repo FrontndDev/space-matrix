@@ -10,15 +10,15 @@ import {
     IMatrix,
     ListOfTypes,
     Type
-} from "../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface";
 
-import * as API from '../api/index.ts'
+import * as API from '@/api/index'
 
-import partners from "./modules/partners.ts";
-import boosters from "./modules/boosters.ts";
-import chains from "./modules/chains.ts";
-import { useMyOverlay } from "../composables/useMyOverlay.ts";
-import { useShowMessage } from "../composables/useShowMessage.ts";
+import partners from "./modules/partners";
+import boosters from "./modules/boosters";
+import chains from "./modules/chains";
+import { useMyOverlay } from "@/composables/useMyOverlay";
+import { useShowMessage } from "@/composables/useShowMessage";
 import axios from "axios";
 
 let requestMatrixByType: any = null;

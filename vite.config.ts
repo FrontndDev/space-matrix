@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import VueJSX from '@vitejs/plugin-vue-jsx';
 import svgLoader from 'vite-svg-loader'
 import dotenv from "dotenv";
+import path from "path";
 dotenv.config();
 
 // https://vitejs.dev/config/
@@ -14,8 +15,14 @@ export default defineConfig({
             defaultImport: 'url'
         })
     ],
+    resolve: {
+        alias: {
+            "@": path.resolve(__dirname, "./src"),
+        },
+    },
     build: {
-        manifest: true
+        manifest: true,
+        cssCodeSplit: false,
     },
     base: '/app/matrix/v'
 })

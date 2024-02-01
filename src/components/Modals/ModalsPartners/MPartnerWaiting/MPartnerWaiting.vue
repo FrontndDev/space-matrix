@@ -41,10 +41,10 @@
 </template>
 
 <script setup lang="ts">
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
-import CancelButton from "../../../UI/CancelButton/CancelButton.vue";
-import SmallCell from "../../../SmallCell/SmallCell.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import ChainsButton from "@/components/UI/ChainsButton/ChainsButton.vue";
+import CancelButton from "@/components/UI/CancelButton/CancelButton.vue";
+import SmallCell from "@/components/SmallCell/SmallCell.vue";
 import { useStore } from "vuex";
 import {
   computed,
@@ -56,13 +56,13 @@ import {
 import {
   IExposePartnerParams,
   IPosition
-} from "../../../../interfaces/partners.interface.ts";
-import Preloader from "../../../UI/Preloader/Preloader.vue";
+} from "@/interfaces/partners.interface.ts";
+import Preloader from "@/components/UI/Preloader/Preloader.vue";
 import {
   Ceil,
   Matrix
-} from "../../../../interfaces/store.interface.ts";
-import Pagination from "../../../Pagination/Pagination.vue";
+} from "@/interfaces/store.interface.ts";
+import Pagination from "@/components/Pagination/Pagination.vue";
 
 const emit = defineEmits(['close-modal', 'open-m-add-partner'])
 

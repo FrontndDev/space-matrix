@@ -16,6 +16,6 @@
 
 </script>
 
-<style scoped>
-@import "_missingCell.scss";
+<style scoped lang="scss">
+@import 'missingCell';
 </style>

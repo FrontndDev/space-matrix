@@ -1,16 +1,16 @@
-import * as API from '../../api/index'
+import * as API from '@/api/index'
 import {
   IExposePartnerParams,
   IGetPendingBoostersParams,
   IInfinityPartnersParams,
   IPartners,
-} from "../../interfaces/partners.interface.ts";
+} from "@/interfaces/partners.interface";
 import {
   ActionContext,
   Commit
 } from "vuex";
-import { Matrix } from "../../interfaces/store.interface.ts";
-import { useShowMessage } from "../../composables/useShowMessage.ts";
+import { Matrix } from "@/interfaces/store.interface";
+import { useShowMessage } from "@/composables/useShowMessage";
 
 export default {
   namespaced: true,

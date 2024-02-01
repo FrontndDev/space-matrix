@@ -15,9 +15,9 @@
 </template>
 
 <script setup lang="ts">
-import ProfileEmptyIcon from "../../assets/svg/profile-circle.svg";
-import BoostEmptyIcon from "../../assets/svg/boost-empty.svg";
-import ChainsEmptyIcon from "../../assets/svg/chains-empty.svg";
+import ProfileEmptyIcon from "@/assets/svg/profile-circle.svg";
+import BoostEmptyIcon from "@/assets/svg/boost-empty.svg";
+import ChainsEmptyIcon from "@/assets/svg/chains-empty.svg";
 
 import { computed, Ref } from "vue";
 

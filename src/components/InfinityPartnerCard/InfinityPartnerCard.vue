@@ -58,7 +58,7 @@ import {
 import {
   Ceil,
   Type
-} from "../../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface.ts";
 import { useStore } from "vuex";
 
 const props = defineProps({

@@ -37,9 +37,9 @@
 </template>
 
 <script setup lang="ts">
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import BuyBoostCell from "../../../BuyBoostCell/BuyBoostCell.vue";
-import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import BuyBoostCell from "@/components/BuyBoostCell/BuyBoostCell.vue";
+import AddPartnerCell from "@/components/AddPartnerCell/AddPartnerCell.vue";
 import { useStore } from "vuex";
 import {
   computed,
@@ -53,9 +53,9 @@ import {
   Ceils,
   IBuyBoosterParams,
   IMatrix,
-} from "../../../../interfaces/store.interface.ts";
-import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
-import MConfirmPayment from "../../ModalConfirmPayment/MConfirmPayment/MConfirmPayment.vue";
+} from "@/interfaces/store.interface.ts";
+import EmptyCells from "@/components/EmptyCells/EmptyCells.vue";
+import MConfirmPayment from "@/components/Modals/ModalConfirmPayment/MConfirmPayment/MConfirmPayment.vue";
 
 const emit = defineEmits(['close-modal', 'open-partner-waiting'])
 

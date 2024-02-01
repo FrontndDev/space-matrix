@@ -40,9 +40,8 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue/dist/vue";
-import { IObject } from "../../../interfaces/store.interface.ts";
-import { computed } from "vue";
+import { IObject } from "@/interfaces/store.interface.ts";
+import { computed, PropType } from "vue";
 
 const props = defineProps({
   binstatus: {

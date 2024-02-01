@@ -120,11 +120,11 @@
 </template>
 
 <script setup lang="ts">
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import PartnerCell from "../../../PartnerCell/PartnerCell.vue";
-import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
-import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
-import InfinityPartnerCard from "../../../InfinityPartnerCard/InfinityPartnerCard.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import PartnerCell from "@/components/PartnerCell/PartnerCell.vue";
+import CopyLink from "@/components/Views/Home/CopyLink/CopyLink.vue";
+import AddPartnerCell from "@/components/AddPartnerCell/AddPartnerCell.vue";
+import InfinityPartnerCard from "@/components/InfinityPartnerCard/InfinityPartnerCard.vue";
 import { useStore } from "vuex";
 import {
   computed,
@@ -139,11 +139,11 @@ import {
   Ceil,
   Ceils,
   IMatrix,
-} from "../../../../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface.ts";
 import {
   IPosition
-} from "../../../../interfaces/partners.interface.ts";
-import { useCopyLink } from "../../../../composables/useCopyLink.ts";
+} from "@/interfaces/partners.interface.ts";
+import { useCopyLink } from "@/composables/useCopyLink.ts";
 import {
   useRoute,
   useRouter

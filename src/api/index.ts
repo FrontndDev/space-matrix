@@ -1,7 +1,7 @@
-import { getAsync, postAsync, putAsync } from "./config.ts";
-import { IExposePartnerParams } from "../interfaces/partners.interface.ts";
-import { IBuyBoosterParams } from "../interfaces/store.interface.ts";
-import { ITeleportPartnerParams } from "../interfaces/chains.interface.ts";
+import { getAsync, postAsync, putAsync } from "./config";
+import { IExposePartnerParams } from "@/interfaces/partners.interface";
+import { IBuyBoosterParams } from "@/interfaces/store.interface";
+import { ITeleportPartnerParams } from "@/interfaces/chains.interface";
 
 export function setDataToLS(key: string, data: any) {
   localStorage.setItem(key, JSON.stringify(data));

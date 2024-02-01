@@ -50,12 +50,12 @@ import MMatrixPartner from "./MMatrixPartner/MMatrixPartner.vue";
 import MAddPartner from "./MAddPartner/MAddPartner.vue";
 import MPartnerWaiting from "./MPartnerWaiting/MPartnerWaiting.vue";
 import MAddpartnerInfinity from "./MAddPartnerInfinity/MAddpartnerInfinity.vue";
-import { IPosition } from "../../../interfaces/partners.interface.ts";
+import { IPosition } from "@/interfaces/partners.interface.ts";
 import {
   Ceil,
   Ceils,
   IMatrix
-} from "../../../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface.ts";
 import {
   computed,
   ComputedRef,
@@ -63,7 +63,7 @@ import {
   Ref,
 } from "vue";
 import { useStore } from "vuex";
-import { TModalsPartners } from "../../../types/types";
+import { TModalsPartners } from "@/types/types";
 
 const props = defineProps({
   toggleModalPartners: {
