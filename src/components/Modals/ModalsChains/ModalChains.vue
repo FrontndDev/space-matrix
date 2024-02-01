@@ -73,7 +73,7 @@ import {
 } from "vue";
 import {
   Matrix,
-} from "../../../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface.ts";
 
 const props = defineProps({
   toggleModalChains: {

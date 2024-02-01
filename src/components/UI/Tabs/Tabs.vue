@@ -8,6 +8,7 @@
         :type="props.type"
         @tab="selectedTab => tab = selectedTab"
         @click="clickTab(item.id)"
+        @set-checkbox-value="(value, id) => emit('set-checkbox-value', value, id)"
     />
 <!--    <Search-->
 <!--        v-if="cells"-->
@@ -16,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import Tab from "../Tab/Tab.vue";
+import Tab from "@/components/UI/Tab/Tab.vue";
 import {
   onBeforeMount,
   Ref,
@@ -39,7 +40,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['open-cells', 'toggle-expose-tabs'])
+const emit = defineEmits(['open-cells', 'toggle-expose-tabs', 'set-checkbox-value'])
 
 let tab: Ref<any> = ref(null);
 

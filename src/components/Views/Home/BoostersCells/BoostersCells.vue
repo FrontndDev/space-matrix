@@ -52,13 +52,13 @@ import {
   reactive
 } from "vue";
 
-import SmallCell from "../../../SmallCell/SmallCell.vue";
-import Tabs from "../../../UI/Tabs/Tabs.vue";
-import Pagination from "../../../Pagination/Pagination.vue";
-import EmptyCells from "../../../EmptyCells/EmptyCells.vue";
+import SmallCell from "@/components/SmallCell/SmallCell.vue";
+import Tabs from "@/components/UI/Tabs/Tabs.vue";
+import Pagination from "@/components/Pagination/Pagination.vue";
+import EmptyCells from "@/components/EmptyCells/EmptyCells.vue";
 import { useStore } from "vuex";
-import { IPartners } from "../../../../interfaces/partners.interface.ts";
-import { Matrix } from "../../../../interfaces/store.interface.ts";
+import { IPartners } from "@/interfaces/partners.interface.ts";
+import { Matrix } from "@/interfaces/store.interface.ts";
 
 const emit = defineEmits(['open-m-matrix-partner', 'select-partner'])
 

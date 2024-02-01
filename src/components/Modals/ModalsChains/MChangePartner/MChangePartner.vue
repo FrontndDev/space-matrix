@@ -29,17 +29,17 @@
 </template>
 
 <script setup lang="ts">
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
-import SmallCell from "../../../SmallCell/SmallCell.vue";
-import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import CopyLink from "@/components/Views/Home/CopyLink/CopyLink.vue";
+import SmallCell from "@/components/SmallCell/SmallCell.vue";
+import ChainsButton from "@/components/UI/ChainsButton/ChainsButton.vue";
 import {
   computed,
   Ref,
   ref
 } from "vue";
 import { useStore } from "vuex";
-import { Ceils } from "../../../../interfaces/store.interface.ts";
+import { Ceils } from "@/interfaces/store.interface.ts";
 
 const cells = ref([
   { type: 'chains-partner' , id: 0},

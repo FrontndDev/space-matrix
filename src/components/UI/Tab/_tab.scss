@@ -1,5 +1,5 @@
-@import '../../../assets/scss/variables';
-@import '../../../assets/scss/mixins';
+@import '@/assets/scss/variables';
+@import '@/assets/scss/mixins';
 
 .tab-matrix {
   @include flex-center;
@@ -97,6 +97,12 @@
         right: 10px;
       }
     }
+  }
+
+  & ::v-deep(.my-tooltip) {
+    top: calc(-100% - 15px);
+    bottom: calc(100% + 15px);
+    left: calc(70% + 4px);
   }
 }
 

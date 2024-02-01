@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import Preloader from "../UI/Preloader/Preloader.vue";
+import Preloader from "@/components/UI/Preloader/Preloader.vue";
 </script>
 
 <style scoped lang="scss">

@@ -1,4 +1,4 @@
-import { IPosition } from "./partners.interface.ts";
+import { IPosition } from "./partners.interface";
 import { type Component } from "vue";
 
 export interface IObject {
@@ -174,6 +174,7 @@ export interface ITab {
         orange: boolean;
     };
     checkbox?: boolean;
+    tooltip?: string;
 }
 
 export interface ICellInformation {

@@ -42,16 +42,16 @@
 </template>
 
 <script setup lang="ts">
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
-import SmallCell from "../../../SmallCell/SmallCell.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import ChainsButton from "@/components/UI/ChainsButton/ChainsButton.vue";
+import SmallCell from "@/components/SmallCell/SmallCell.vue";
 import { useStore } from "vuex";
 import {
   inject,
   Ref
 } from "vue";
-import CancelButton from "../../../UI/CancelButton/CancelButton.vue";
-import { Matrix } from "../../../../interfaces/store.interface.ts";
+import CancelButton from "@/components/UI/CancelButton/CancelButton.vue";
+import { Matrix } from "@/interfaces/store.interface.ts";
 
 const emit = defineEmits(['close-modal'])
 

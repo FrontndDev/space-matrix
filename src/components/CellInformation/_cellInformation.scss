@@ -1,5 +1,5 @@
-@import '../../assets/scss/mixins';
-@import '../../assets/scss/variables';
+@import '@/assets/scss/mixins';
+@import '@/assets/scss/variables';
 
 .cell-information {
   position: absolute;
@@ -75,6 +75,16 @@
       & > ::v-deep(span) {
         color: $text-base-light;
       }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .cell-information {
+    &__icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 0 12px;
     }
   }
 }

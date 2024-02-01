@@ -46,13 +46,13 @@
 </template>
 
 <script setup lang="ts">
-import Reward from "../UI/Reward/Reward.vue";
-import CellType from "../UI/CellType/CellType.vue";
+import Reward from "@/components/UI/Reward/Reward.vue";
+import CellType from "@/components/UI/CellType/CellType.vue";
 import {
   computed,
   PropType
 } from "vue";
-import { Ceil } from "../../interfaces/store.interface.ts";
+import { Ceil } from "@/interfaces/store.interface.ts";
 
 const props = defineProps({
   ceil: {

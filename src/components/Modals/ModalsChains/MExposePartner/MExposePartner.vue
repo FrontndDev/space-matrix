@@ -94,12 +94,12 @@
 </template>
 
 <script setup lang="ts">
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
-import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
-import Tabs from "../../../UI/Tabs/Tabs.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import CopyLink from "@/components/Views/Home/CopyLink/CopyLink.vue";
+import ChainsButton from "@/components/UI/ChainsButton/ChainsButton.vue";
+import Tabs from "@/components/UI/Tabs/Tabs.vue";
 import ExposeBonusItem from "./ExposeBonusItem/ExposeBonusItem.vue";
-import SmallCell from "../../../SmallCell/SmallCell.vue";
+import SmallCell from "@/components/SmallCell/SmallCell.vue";
 import { useStore } from "vuex";
 import {
   reactive,
@@ -115,11 +115,11 @@ import {
   IMatrix,
   Matrix,
   Type
-} from "../../../../interfaces/store.interface.ts";
-import { IExposePartnerParams } from "../../../../interfaces/partners.interface.ts";
-import { useCopyLink } from "../../../../composables/useCopyLink.ts";
-import { IChains } from "../../../../interfaces/chains.interface.ts";
-import MConfirmPayment from "../../ModalConfirmPayment/MConfirmPayment/MConfirmPayment.vue";
+} from "@/interfaces/store.interface.ts";
+import { IExposePartnerParams } from "@/interfaces/partners.interface.ts";
+import { useCopyLink } from "@/composables/useCopyLink.ts";
+import { IChains } from "@/interfaces/chains.interface.ts";
+import MConfirmPayment from "@/components/Modals/ModalConfirmPayment/MConfirmPayment/MConfirmPayment.vue";
 
 const emit = defineEmits([
   'close-modal',

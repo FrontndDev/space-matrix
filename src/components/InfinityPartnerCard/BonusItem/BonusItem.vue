@@ -25,11 +25,11 @@
 
 <script setup lang="ts">
 // @ts-ignore
-import TonIcon from '../../../assets/svg/bonuses/ton.svg?component';
+import TonIcon from '@/assets/svg/bonuses/ton.svg?component';
 // @ts-ignore
-import BoostIcon from '../../../assets/svg/bonuses/boost.svg?component';
+import BoostIcon from '@/assets/svg/bonuses/boost.svg?component';
 // @ts-ignore
-import AutoIcon from '../../../assets/svg/bonuses/auto.svg?component';
+import AutoIcon from '@/assets/svg/bonuses/auto.svg?component';
 
 import {
   computed,

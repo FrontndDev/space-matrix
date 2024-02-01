@@ -52,10 +52,10 @@
 </template>
 
 <script setup lang="ts">
-import CancelButton from "../../../UI/CancelButton/CancelButton.vue";
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
-import Preloader from "../../../UI/Preloader/Preloader.vue";
+import CancelButton from "@/components/UI/CancelButton/CancelButton.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import ChainsButton from "@/components/UI/ChainsButton/ChainsButton.vue";
+import Preloader from "@/components/UI/Preloader/Preloader.vue";
 import {
   computed,
   ComputedRef,
@@ -65,7 +65,7 @@ import {
 import {
   IBalance,
   IWallet
-} from "../../../../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface.ts";
 import { useStore } from "vuex";
 
 const props = defineProps({

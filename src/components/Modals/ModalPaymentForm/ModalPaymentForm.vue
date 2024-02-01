@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { useStore } from "vuex";
-import Preloader from "../../UI/Preloader/Preloader.vue";
+import Preloader from "@/components/UI/Preloader/Preloader.vue";
 
 const store = useStore()
 

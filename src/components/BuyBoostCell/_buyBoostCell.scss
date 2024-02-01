@@ -1,5 +1,5 @@
-@import "../../assets/scss/variables";
-@import "../../assets/scss/mixins";
+@import "@/assets/scss/variables";
+@import "@/assets/scss/mixins";
 
 .buy-boost-cell {
   @include flexbox(column, center, center);
@@ -57,7 +57,7 @@
     &__plus {
       width: 120px;
       height: 120px;
-      border-radius: 16px;
+      border-radius: 13px;
 
       & > svg {
         width: 40px;

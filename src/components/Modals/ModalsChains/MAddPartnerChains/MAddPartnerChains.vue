@@ -20,20 +20,20 @@
 </template>
 
 <script setup lang="ts">
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import AddPartnerCell from "../../../AddPartnerCell/AddPartnerCell.vue";
-import BuyBoostCell from "../../../BuyBoostCell/BuyBoostCell.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import AddPartnerCell from "@/components/AddPartnerCell/AddPartnerCell.vue";
+import BuyBoostCell from "@/components/BuyBoostCell/BuyBoostCell.vue";
 import {
   computed,
   ComputedRef
 } from "vue";
 import {
   IChainDetails,
-} from "../../../../interfaces/chains.interface.ts";
+} from "@/interfaces/chains.interface.ts";
 import { useStore } from "vuex";
 import {
   Ceil,
-} from "../../../../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface.ts";
 
 const emit = defineEmits([
     'buy-booster',
@@ -60,7 +60,8 @@ const getCeil: ComputedRef<Ceil> = computed(() => {
     isInfinity: false,
     informer: {
       activationType: '',
-      ceilType: ''
+      ceilType: '',
+      userType: '',
     }
   }
 })

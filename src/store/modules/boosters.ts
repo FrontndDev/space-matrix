@@ -1,4 +1,4 @@
-import * as API from '../../api/index'
+import * as API from '@/api/index'
 import { Commit } from "vuex";
 
 export default {

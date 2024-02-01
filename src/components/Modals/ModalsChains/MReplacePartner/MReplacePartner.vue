@@ -49,10 +49,10 @@
 </template>
 
 <script setup lang="ts">
-import ModalHeader from "../../../ModalHeader/ModalHeader.vue";
-import CopyLink from "../../../Views/Home/CopyLink/CopyLink.vue";
-import ChainsButton from "../../../UI/ChainsButton/ChainsButton.vue";
-import SmallCell from "../../../SmallCell/SmallCell.vue";
+import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
+import CopyLink from "@/components/Views/Home/CopyLink/CopyLink.vue";
+import ChainsButton from "@/components/UI/ChainsButton/ChainsButton.vue";
+import SmallCell from "@/components/SmallCell/SmallCell.vue";
 
 import {
   computed,
@@ -61,7 +61,7 @@ import {
 import { useStore } from "vuex";
 import {
   Matrix,
-} from "../../../../interfaces/store.interface.ts";
+} from "@/interfaces/store.interface.ts";
 
 const store = useStore()
 

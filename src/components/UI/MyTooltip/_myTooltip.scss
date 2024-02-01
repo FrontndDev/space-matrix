@@ -1,5 +1,5 @@
-@import "../../../assets/scss/mixins";
-@import "../../../assets/scss/variables";
+@import "@/assets/scss/mixins";
+@import "@/assets/scss/variables";
 
 .my-tooltip {
   margin: auto;
@@ -11,6 +11,7 @@
   border-radius: 16px;
   background: $bg-base-dark;
   @include get-font(12px, 500, 16px, $text-base-on-color);
+  text-align: left;
   white-space: nowrap;
   position: absolute;
   top: 0;

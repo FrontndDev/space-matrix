@@ -5,10 +5,10 @@
 </template>
 
 <script setup lang="ts">
-import CumulativeIcon from '../../../assets/svg/cumulative.svg';
-import ProfitableIcon from '../../../assets/svg/profitable.svg';
-import InfinityIcon from '../../../assets/svg/infinity.svg';
-import BoosterIcon from '../../../assets/svg/booster.svg';
+import CumulativeIcon from '@/assets/svg/cumulative.svg';
+import ProfitableIcon from '@/assets/svg/profitable.svg';
+import InfinityIcon from '@/assets/svg/infinity.svg';
+import BoosterIcon from '@/assets/svg/booster.svg';
 
 import {
   computed,
@@ -47,8 +47,8 @@ const getIconPath: Ref<string> = computed(() => {
 </script>
 
 <style scoped lang="scss">
-@import "../../../assets/scss/variables";
-@import "../../../assets/scss/mixins";
+@import "@/assets/scss/variables";
+@import "@/assets/scss/mixins";
 
 .cell-type {
   @include flex-center;

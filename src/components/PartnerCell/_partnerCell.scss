@@ -1,5 +1,5 @@
-@import "../../assets/scss/variables";
-@import "../../assets/scss/mixins";
+@import "@/assets/scss/variables";
+@import "@/assets/scss/mixins";
 
 .partner-cell {
   @include flexbox(column, center, center);
@@ -75,7 +75,7 @@
       height: 112.8px;
 
       & > img {
-        border-radius: 14px;
+        border-radius: 16px;
       }
     }
   }
@@ -100,7 +100,7 @@
       height: 120px;
 
       & > img {
-        border-radius: 14px;
+        border-radius: 13px;
       }
     }
 
