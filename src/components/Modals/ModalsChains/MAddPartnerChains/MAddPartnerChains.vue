@@ -60,7 +60,8 @@ const getCeil: ComputedRef<Ceil> = computed(() => {
     isInfinity: false,
     informer: {
       activationType: '',
-      ceilType: ''
+      ceilType: '',
+      userType: '',
     }
   }
 })

@@ -327,7 +327,8 @@ const parentMatrix = async () => {
         isInfinity: false,
         informer: {
           activationType: '',
-          ceilType: ''
+          ceilType: '',
+          userType: '',
         }
       }
     }
