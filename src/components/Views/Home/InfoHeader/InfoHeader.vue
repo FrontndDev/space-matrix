@@ -79,14 +79,14 @@ const itemInfoHeaderThird: Ref<any> = ref(null)
 
 const changeLineOfPartners = (item: ILineOfPartners) => {
   itemInfoHeaderFirst.value = item
-  store.dispatch('partners/getExposedPartners', { filter: item.id, changeTab: false })
-  store.dispatch('partners/getNewPendingPartners', { filter: item.id, changeTab: false })
+  store.dispatch('partners/getExposedPartners', { filter: item.id })
+  store.dispatch('partners/getNewPendingPartners', { filter: item.id })
 }
 
 const changeLineOfBoosters = (item: ILineOfPartners) => {
   itemInfoHeaderSecond.value = item
-  store.dispatch('boosters/getPendingBoosters', { filter: item.id, changeTab: false })
-  store.dispatch('boosters/getExposedBoosters', { filter: item.id, changeTab: false })
+  store.dispatch('boosters/getPendingBoosters', { filter: item.id })
+  store.dispatch('boosters/getExposedBoosters', { filter: item.id })
 }
 
 const changeMatrixType = (item: Type) => {
@@ -105,13 +105,13 @@ const openCells = (id: number) => {
 }
 
 watch(() => store.state.selectedType, () => {
-  store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value || 1 })
+  store.dispatch('partners/getExposedPartners', { filter: levelIDOfPartners.value || 1, changeTab: true })
 
-  store.dispatch('partners/getNewPendingPartners', { filter: levelIDOfPartners.value || 1 })
+  store.dispatch('partners/getNewPendingPartners', { filter: levelIDOfPartners.value || 1, changeTab: true })
 
-  store.dispatch('boosters/getPendingBoosters', { filter: levelIDOfBoosters.value || 0 })
+  store.dispatch('boosters/getPendingBoosters', { filter: levelIDOfBoosters.value || 0, changeTab: true })
 
-  store.dispatch('boosters/getExposedBoosters', { filter: levelIDOfBoosters.value || 0 })
+  store.dispatch('boosters/getExposedBoosters', { filter: levelIDOfBoosters.value || 0, changeTab: true })
 
   store.dispatch('chains/getChainsList')
 
