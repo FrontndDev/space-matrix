@@ -119,7 +119,6 @@ const props = defineProps({
   },
   tooltipPosition: {
     type: String,
-    default: 'right',
     // right, left
   }
 })
