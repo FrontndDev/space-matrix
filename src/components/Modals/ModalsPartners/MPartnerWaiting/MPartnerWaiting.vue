@@ -1,7 +1,9 @@
 <template>
   <div class="modal-partner-waiting">
     <ModalHeader
+        modal-header="back"
         @close-modal="$emit('close-modal')"
+        @back="$emit('close-modal')"
     >
       Партнеры в ожидании
     </ModalHeader>
