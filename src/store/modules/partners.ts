@@ -60,9 +60,10 @@ export default {
         { filter, changeTab = false }: IGetPendingBoostersParams
     ) {
       state.levelID = filter
+      const type = rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type
 
       API.filterOfActivatedMatrix({
-            matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
+            matrixType: type,
             matrixFilterPageId: state.pageIdPartners,
             //@ts-ignore
             matrixFilterUserId: window.UserData.id,
@@ -71,6 +72,9 @@ export default {
       ).then(response => {
         if (response.data?.totalCount === 0 && state.bigTabID === 1 && changeTab) commit('CHANGE_LITTLE_TAB', 2)
 
+        if (state.pageIdPartners === 1 && filter === 1 && type === rootState.selectedType.type) {
+          state.partnersPending.totalCount = response.data.totalCount
+        }
         commit('SET_NEW_PENDING_PARTNERS', response.data)
       })
     },
