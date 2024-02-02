@@ -16,6 +16,13 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(100% + 4px);
   z-index: 1;
+
+  &.right {
+    right: calc(100% + 4px);
+  }
+
+  &.left {
+    left: calc(100% + 4px);
+  }
 }

@@ -27,8 +27,10 @@
     </div>
 
     <MyTooltip
+        ref="tooltip"
+        :class="getTooltipPosition"
         :text="getTextForTooltip"
-        v-if="showMyTooltip && getTextForTooltip"
+        v-if="!showMyTooltip && getTextForTooltip"
     />
   </div>
 </template>
@@ -71,6 +73,8 @@ const emit = defineEmits(['click']);
 
 const store = useStore()
 
+const tooltip: Ref<HTMLDivElement | null> = ref(null)
+
 const timeInterval: Ref<number | null> = ref(null)
 
 const showMyTooltip: Ref<boolean> = ref(false)
@@ -82,6 +86,11 @@ const time: ComputedRef<number> = computed(() => {
     case props.isPending:
       return store.state.listOfTypes.pending[props.type?.type]
   }
+})
+
+const getTooltipPosition = computed(() => {
+  const container = document.querySelector('.home__content') as HTMLDivElement
+  return (tooltip.value?.getClientRects()[0].x ?? 0) > container.clientWidth ? 'left' : 'right'
 })
 
 const updateListOfTypes: Ref<boolean> = ref(false)
