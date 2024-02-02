@@ -13,12 +13,13 @@
         <div
             class="modal-partner-waiting__block"
             :class="{ active: selectedCell?.id === cell.id }"
-            v-for="cell in cells"
+            v-for="(cell, idx) in cells"
             :key="cell.id"
         >
           <SmallCell
               :cell="cell"
               :show-partner-type="!onlyInfinityCell"
+              :tooltip-position="(idx + 1) % 4 === 0 ? 'left' : 'right'"
               @click="selectCell(cell)"
           />
         </div>

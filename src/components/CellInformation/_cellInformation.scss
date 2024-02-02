@@ -44,7 +44,14 @@
     transition: .25s all ease;
     position: absolute;
     top: 44px;
-    left: 0;
+
+    &.right {
+      left: 0;
+    }
+
+    &.left {
+      right: 0;
+    }
   }
 }
 

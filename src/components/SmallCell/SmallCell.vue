@@ -20,6 +20,7 @@
 
       <CellInformation
           class="small"
+          :tooltip-position="props.tooltipPosition"
           :ceil="props.cell"
           :ceil-type="props.cellType"
           :user-type="props.userType"
@@ -115,6 +116,11 @@ const props = defineProps({
   showCellInformation: {
     type: Boolean,
     default: true,
+  },
+  tooltipPosition: {
+    type: String,
+    default: 'right',
+    // right, left
   }
 })
 
