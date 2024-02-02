@@ -30,7 +30,7 @@
         ref="tooltip"
         :class="getTooltipPosition"
         :text="getTextForTooltip"
-        v-if="!showMyTooltip && getTextForTooltip"
+        v-if="showMyTooltip && getTextForTooltip"
     />
   </div>
 </template>
