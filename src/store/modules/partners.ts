@@ -73,7 +73,7 @@ export default {
         if (response.data?.totalCount === 0 && state.bigTabID === 1 && changeTab) commit('CHANGE_LITTLE_TAB', 2)
 
         if (state.pageIdPartners === 1 && filter === 1 && type === rootState.selectedType.type) {
-          state.partnersPending.totalCount = response.data.totalCount
+          commit('SET_PENDING_PARTNERS', response.data)
         }
         commit('SET_NEW_PENDING_PARTNERS', response.data)
       })
