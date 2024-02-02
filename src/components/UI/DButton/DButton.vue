@@ -27,10 +27,10 @@
     </div>
 
     <MyTooltip
-        ref="tooltip"
-        :class="getTooltipPosition"
+        :id="`myTooltip${props.type?.title}`"
         :text="getTextForTooltip"
-        v-if="showMyTooltip && getTextForTooltip"
+        v-show="showMyTooltip"
+        v-if="getTextForTooltip"
     />
   </div>
 </template>
@@ -73,8 +73,6 @@ const emit = defineEmits(['click']);
 
 const store = useStore()
 
-const tooltip: Ref<HTMLDivElement | null> = ref(null)
-
 const timeInterval: Ref<number | null> = ref(null)
 
 const showMyTooltip: Ref<boolean> = ref(false)
@@ -88,12 +86,18 @@ const time: ComputedRef<number> = computed(() => {
   }
 })
 
-const getTooltipPosition = computed(() => {
-  const container = document.querySelector('.home__content') as HTMLDivElement
-  return (tooltip.value?.getClientRects()[0].x ?? 0) > container.clientWidth ? 'left' : 'right'
-})
-
 const updateListOfTypes: Ref<boolean> = ref(false)
+
+watch(() => showMyTooltip.value, () => {
+  if (showMyTooltip.value) {
+    setTimeout(() => {
+      const container = document.querySelector('.home__content') as HTMLDivElement
+      const tooltip = document.querySelector(`#myTooltip${props.type?.title}`) as HTMLDivElement
+      const position = tooltip.getClientRects()[0].x + tooltip.clientWidth > container.clientWidth ? 'right' : 'left'
+      tooltip.classList.add(position)
+    }, 0)
+  }
+})
 
 watch(() => time.value <= 0, () => {
   updateListOfTypes.value = true
@@ -152,7 +156,9 @@ const getTextForTooltip: ComputedRef<string> = computed(() => {
 })
 
 const showTooltip = () => {
-  showMyTooltip.value = true
+  if (getTextForTooltip.value) {
+    showMyTooltip.value = true
+  }
 }
 
 const hideTooltip = () => {

@@ -30,7 +30,6 @@ import {
   type Component,
   computed,
   ComputedRef,
-  onMounted,
   PropType,
   Ref,
   ref,
@@ -85,7 +84,7 @@ const tooltip: Ref<HTMLDivElement | null> = ref(null)
 
 const getTooltipPosition = computed(() => {
   const container = document.querySelector('.home__content') as HTMLDivElement
-  return (tooltip.value?.getClientRects()[0].x ?? 0) > container.clientWidth ? 'left' : 'right'
+  return (tooltip.value?.getClientRects()[0].x ?? 0) + (tooltip.value?.clientWidth ?? 0) > container.clientWidth ? 'left' : 'right'
 })
 
 const toggleMobileContent = () => {
@@ -181,10 +180,6 @@ const types: ComputedRef<ICellInformation> = computed(() => {
       },
     } as ICellInformation
   }
-})
-
-onMounted(() => {
-  console.log('tooltip.value?.getClientRects()', tooltip.value?.getClientRects()[0])
 })
 </script>
 
