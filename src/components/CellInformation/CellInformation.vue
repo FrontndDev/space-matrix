@@ -84,7 +84,7 @@ const tooltip: Ref<HTMLDivElement | null> = ref(null)
 
 const getTooltipPosition = computed(() => {
   const container = document.querySelector('.home__content') as HTMLDivElement
-  return (tooltip.value?.getClientRects()[0].x ?? 0) + (tooltip.value?.clientWidth ?? 0) > container.clientWidth ? 'left' : 'right'
+  return (tooltip.value?.getClientRects()[0]?.x ?? 0) + (tooltip.value?.clientWidth ?? 0) > container.clientWidth ? 'left' : 'right'
 })
 
 const toggleMobileContent = () => {

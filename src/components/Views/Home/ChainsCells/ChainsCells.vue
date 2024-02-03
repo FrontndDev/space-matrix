@@ -147,7 +147,7 @@ const openGeneralChains = (id: number) => {
 
 const setCheckboxValue = (value: boolean, id: number) => {
   if (id === 6) {
-    if (window.innerWidth < 992) {
+    if (window.innerWidth < 992 && !showTeleportSettingsModal.value) {
       showTeleportSettingsModal.value = true
     } else {
       teleportCheckbox.value = value
