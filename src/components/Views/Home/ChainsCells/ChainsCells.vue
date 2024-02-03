@@ -65,6 +65,7 @@ import {
   reactive,
   ref,
   provide,
+  onMounted,
 } from "vue";
 import ChainCell from "@/components/ChainCell/ChainCell.vue";
 import Pagination from "@/components/Pagination/Pagination.vue";
@@ -152,11 +153,14 @@ const setCheckboxValue = (value: boolean, id: number) => {
     } else {
       teleportCheckbox.value = value
       store.dispatch('switchTeleport', { enable: value })
-      // @ts-ignore
-      TELEPORT_ENABLE(value)
     }
   }
 }
+
+onMounted(() => {
+  // @ts-ignore
+  teleportCheckbox.value = TELEPORT_ENABLE
+})
 </script>
 
 <style scoped lang="scss">
