@@ -1,7 +1,7 @@
 <template>
   <div
       class="my-checkbox"
-      :class="{ active: active }"
+      :class="{ active: props.value }"
       @click.stop="setValue"
   >
     <div class="my-checkbox__circle"/>
@@ -9,15 +9,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+const props = defineProps({
+  value: {
+    type: Boolean,
+    default: false,
+  }
+})
 
 const emit = defineEmits(['set-value'])
 
-const active = ref(false);
-
 const setValue = () => {
-  active.value = !active.value
-  emit('set-value', active.value)
+  emit('set-value', !props.value)
 }
 </script>
 

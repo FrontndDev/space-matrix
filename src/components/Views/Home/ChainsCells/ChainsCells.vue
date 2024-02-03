@@ -48,6 +48,13 @@
       v-if="(data.find(tab => tab.id === littleTabID)?.value.totalPages ?? 0) > 1"
       @select-page="selectPage"
   />
+
+  <ModalTeleportSettings
+      :teleport-checkbox="teleportCheckbox"
+      v-if="showTeleportSettingsModal"
+      @set-teleport-checkbox-value="setCheckboxValue"
+      @close-modal="showTeleportSettingsModal = false"
+  />
 </template>
 
 <script setup lang="ts">
@@ -57,6 +64,7 @@ import {
   ComputedRef,
   reactive,
   ref,
+  provide,
 } from "vue";
 import ChainCell from "@/components/ChainCell/ChainCell.vue";
 import Pagination from "@/components/Pagination/Pagination.vue";
@@ -66,6 +74,7 @@ import {
   ITeleportList
 } from "@/interfaces/chains.interface.ts";
 import { useStore } from "vuex";
+import ModalTeleportSettings from "@/components/Modals/ModalTeleportSettings/ModalTeleportSettings.vue";
 
 const store = useStore()
 
@@ -99,6 +108,9 @@ const selectTab = () => {
 }
 
 const teleportCheckbox = ref(false)
+const showTeleportSettingsModal = ref(false)
+
+provide('teleportCheckbox', teleportCheckbox)
 
 const tabs = reactive([
   {
@@ -135,10 +147,14 @@ const openGeneralChains = (id: number) => {
 
 const setCheckboxValue = (value: boolean, id: number) => {
   if (id === 6) {
-    teleportCheckbox.value = value
-    store.dispatch('switchTeleport', { enable: value })
-    // @ts-ignore
-    TELEPORT_ENABLE(value)
+    if (window.innerWidth < 992) {
+      showTeleportSettingsModal.value = true
+    } else {
+      teleportCheckbox.value = value
+      store.dispatch('switchTeleport', { enable: value })
+      // @ts-ignore
+      TELEPORT_ENABLE(value)
+    }
   }
 }
 </script>

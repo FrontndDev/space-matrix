@@ -13,6 +13,7 @@
   >
     {{ props.tab.name }} {{ props.tab.value }}
     <MyCheckbox
+        :value="teleportCheckbox"
         v-if="props.tab?.checkbox"
         @set-value="value => emit('set-checkbox-value', value, props.tab.id)"
     />
@@ -29,7 +30,9 @@ import { useStore } from "vuex";
 import {
   computed,
   PropType,
-  ref
+  ref,
+  inject,
+  Ref,
 } from "vue";
 import { ITab } from "@/interfaces/store.interface.ts";
 import MyCheckbox from "@/components/UI/MyCheckbox/MyCheckbox.vue";
@@ -58,6 +61,8 @@ const showMyTooltip = ref(false)
 const littleTabID = computed(() => store.state.partners.littleTabID)
 
 const activeClass = computed(() => props.type === 'little' ? littleTabID.value === props.tab.id : props.active)
+
+const teleportCheckbox = inject('teleportCheckbox') as Ref<boolean>
 
 const showTooltip = () => {
   showMyTooltip.value = true

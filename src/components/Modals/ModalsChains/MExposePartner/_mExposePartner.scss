@@ -106,6 +106,7 @@
     @include get-font(12px, 500, 130%, $text-base-secondary);
 
     & svg {
+      flex-shrink: 0;
       width: 16px;
       height: 16px;
     }
