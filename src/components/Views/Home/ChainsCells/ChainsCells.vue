@@ -159,9 +159,7 @@ const setCheckboxValue = (value: boolean, id: number) => {
 
 onMounted(() => {
   // @ts-ignore
-  console.log(window.TELEPORT_ENABLE)
-  // @ts-ignore
-  teleportCheckbox.value = window.TELEPORT_ENABLE
+  teleportCheckbox.value = !!window?.TELEPORT_ENABLE
 })
 </script>
 
