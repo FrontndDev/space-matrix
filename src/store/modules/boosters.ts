@@ -8,7 +8,8 @@ export default {
       boostersPending: [],
       boostersExposed: [],
       pageIdBooster: 1,
-      levelID: 0 as number
+      levelID: 0 as number,
+      activeLittleTabID: null,
     }
   },
   actions: {
@@ -26,8 +27,9 @@ export default {
           filter: { pending: 1, is_booster: true, level: filter }
         }
       ).then(response => {
-        if (response.data?.totalCount === 0 && rootState.partners.bigTabID === 2 && changeTab) {
-          commit('partners/CHANGE_LITTLE_TAB', 4, { root: true })
+        if (response.data?.totalCount === 0 && rootState.bigTabID === 2 && changeTab) {
+          commit('CHANGE_LITTLE_TAB', 4, { root: true })
+          commit('SET_ACTIVE_LITTLE_TAB', 4)
         }
 
         commit('SET_PENDING_BOOSTERS', response.data)
@@ -48,8 +50,9 @@ export default {
           filter: { is_booster: true, level: filter }
         }
       ).then(response => {
-        if (response.data?.totalCount === 0 && rootState.partners.bigTabID === 2 && changeTab) {
-          commit('partners/CHANGE_LITTLE_TAB', 3, { root: true })
+        if (response.data?.totalCount === 0 && rootState.bigTabID === 2 && changeTab) {
+          commit('CHANGE_LITTLE_TAB', 3, { root: true })
+          commit('SET_ACTIVE_LITTLE_TAB', 3)
         }
 
         commit('SET_EXPOSED_BOOSTERS', response.data)
@@ -65,6 +68,9 @@ export default {
     },
     SET_PAGE_ID_BOOSTERS(state: any, pageIdBooster: any) {
       state.pageIdBooster = pageIdBooster
+    },
+    SET_ACTIVE_LITTLE_TAB(state: any, id: number) {
+      state.activeLittleTabID = id
     }
   },
 }

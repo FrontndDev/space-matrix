@@ -186,3 +186,12 @@ export interface ICellInformationItem {
 export interface ICellInformation {
     [key: string]: ICellInformationItem;
 }
+
+export interface ITabDefault {
+    key: 'partners' | 'boosters' | 'chains';
+    defaultTabID: number;
+}
+
+export type TabDefaults = {
+    [key: number]: ITabDefault;
+};

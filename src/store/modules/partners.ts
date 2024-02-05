@@ -19,13 +19,12 @@ export default {
       partnersExposed: {} as IPartners,
       partnersPending: {} as IPartners,
       newPartnersPending: {} as IPartners,
-      littleTabID: 1 as number,
-      bigTabID: 1 as number,
       infinityPartners: null as Matrix[] | null,
       countPendingBoosters: null,
       levelID: 1 as number,
 
       pageIdPartners: 1,
+      activeLittleTabID: null,
 
       // Матрица партнёра
       partnersPendingSecond: {} as IPartners,
@@ -47,10 +46,11 @@ export default {
         filter: { level: filter }
       }
     ).then(response => {
-        if (response.data?.totalCount === 0 && state.bigTabID === 1 && changeTab) commit('CHANGE_LITTLE_TAB', 1)
+        if (response.data?.totalCount === 0 && rootState.bigTabID === 1 && changeTab) {
+          commit('CHANGE_LITTLE_TAB', 1, { root: true })
+          commit('SET_ACTIVE_LITTLE_TAB', 1)
+        }
 
-        console.log(response.data)
-        // commit('CHANGE_BIG_TAB', 1)
         commit('SET_EXPOSED_PARTNERS', response.data)
       })
     },
@@ -70,11 +70,15 @@ export default {
             filter: { pending: 1, level: filter }
           }
       ).then(response => {
-        if (response.data?.totalCount === 0 && state.bigTabID === 1 && changeTab) commit('CHANGE_LITTLE_TAB', 2)
+        if (response.data?.totalCount === 0 && rootState.bigTabID === 1 && changeTab) {
+          commit('CHANGE_LITTLE_TAB', 2, { root: true })
+          commit('SET_ACTIVE_LITTLE_TAB', 2)
+        }
 
         if (state.pageIdPartners === 1 && filter === 1 && type === rootState.selectedType.type) {
           commit('SET_PENDING_PARTNERS', response.data)
         }
+
         commit('SET_NEW_PENDING_PARTNERS', response.data)
       })
     },
@@ -136,24 +140,6 @@ export default {
     SET_NEW_PENDING_PARTNERS(state: any, newPartnersPending: Object) {
       state.newPartnersPending = newPartnersPending
     },
-    CHANGE_LITTLE_TAB(state: any, id: number) {
-      state.littleTabID = id
-    },
-    CHANGE_BIG_TAB(state: any, id: number) {
-      state.bigTabID = id
-
-      switch (id) {
-        case 1:
-          state.littleTabID = 1
-          break;
-        case 2:
-          state.littleTabID = 3
-          break;
-        case 3:
-          state.littleTabID = 5
-          break;
-      }
-    },
     SET_INFINITY_PARTNERS(state: any, infinityPartners: any) {
       state.infinityPartners = infinityPartners
     },
@@ -165,6 +151,9 @@ export default {
     },
     SET_PAGE_ID_PARTNERS(state: any, pageIdPartners: number) {
       state.pageIdPartners = pageIdPartners
+    },
+    SET_ACTIVE_LITTLE_TAB(state: any, id: number) {
+      state.activeLittleTabID = id
     }
   },
   getters: {}

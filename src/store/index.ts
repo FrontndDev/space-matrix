@@ -37,6 +37,8 @@ export default createStore({
         matrixById: {} as IMatrix,
         paymentForm: null as string | null,
         balance: {} as IBalance,
+        littleTabID: 1 as number,
+        bigTabID: 1 as number,
     },
     actions: {
         getListOfTypes({ commit }: { commit: Commit }, category = 'dream-ton') {
@@ -50,7 +52,6 @@ export default createStore({
             })
         },
         getMatrixByType(ctx: ActionContext<any, any>, matrixType: string) {
-            console.log('requestMatrixByType', requestMatrixByType)
             if (requestMatrixByType) {
                 requestMatrixByType.cancel();
             }
@@ -119,9 +120,14 @@ export default createStore({
             state.newTypeMatrix = type
         },
         SET_WALLETS(state: any, wallets: IBalance) {
-            console.log('wallets', wallets)
             state.balance = wallets
-        }
+        },
+        CHANGE_LITTLE_TAB(state, id: number) {
+            state.littleTabID = id
+        },
+        CHANGE_BIG_TAB(state: any, id: number) {
+            state.bigTabID = id
+        },
     },
     getters: {
         onlyInfinityCell(state) {

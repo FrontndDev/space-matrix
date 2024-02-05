@@ -82,7 +82,7 @@ const store = useStore()
 const chainsList: ComputedRef<IChainsList> = computed(() => store.state.chains.chainsList)
 const teleportList: ComputedRef<ITeleportList> = computed(() => store.state.chains.teleportList)
 
-const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
+const littleTabID: ComputedRef<number> = computed(() => store.state.littleTabID)
 
 const emit = defineEmits([
   'open-general-chains',
@@ -159,7 +159,9 @@ const setCheckboxValue = (value: boolean, id: number) => {
 
 onMounted(() => {
   // @ts-ignore
-  teleportCheckbox.value = TELEPORT_ENABLE
+  console.log(window.TELEPORT_ENABLE)
+  // @ts-ignore
+  teleportCheckbox.value = window.TELEPORT_ENABLE
 })
 </script>
 
