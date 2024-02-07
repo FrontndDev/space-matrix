@@ -55,13 +55,15 @@ export default createStore({
                 requestMatrixByType.cancel();
             }
             requestMatrixByType = axios.CancelToken.source()
-            API.getMatrix(matrixType, { cancelTokenSource: requestMatrixByType }).then(response => {
-                if (response?.data) {
-                    ctx.commit('SET_LIST_OF_TYPES', response.data.tabs)
-                    delete response.data.tabs
-                    ctx.commit('SET_MATRIX_BY_TYPE', response.data)
-                }
-            })
+            if (matrixType) {
+                API.getMatrix(matrixType, { cancelTokenSource: requestMatrixByType }).then(response => {
+                    if (response?.data) {
+                        ctx.commit('SET_LIST_OF_TYPES', response.data.tabs)
+                        delete response.data.tabs
+                        ctx.commit('SET_MATRIX_BY_TYPE', response.data)
+                    }
+                })
+            }
         },
         async getMatrixById(ctx: ActionContext<any, any>, matrixId: number) {
             const response = await API.getMatrix(matrixId)
