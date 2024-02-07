@@ -71,7 +71,7 @@
   }
 
   &__value {
-    @include get-font(10px, 500, 12px, $text-base-secondary);
+    @include get-font(12px, 500, 12px, $text-base-secondary);
     width: 31.8%;
   }
 

@@ -82,7 +82,7 @@ const store = useStore()
 const chainsList: ComputedRef<IChainsList> = computed(() => store.state.chains.chainsList)
 const teleportList: ComputedRef<ITeleportList> = computed(() => store.state.chains.teleportList)
 
-const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
+const littleTabID: ComputedRef<number> = computed(() => store.state.littleTabID)
 
 const emit = defineEmits([
   'open-general-chains',

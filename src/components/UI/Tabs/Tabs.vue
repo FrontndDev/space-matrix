@@ -24,6 +24,7 @@ import {
   ref,
 } from "vue";
 import { useStore } from "vuex";
+import { TabDefaults } from "@/interfaces/store.interface.ts";
 
 const props = defineProps({
   type: {
@@ -48,9 +49,41 @@ const store = useStore()
 
 const clickTab = (id: number) => {
   if (props.type === 'little') {
-    store.commit('partners/CHANGE_LITTLE_TAB', id)
+    store.commit('CHANGE_LITTLE_TAB', id)
+
+    let namespace;
+
+    switch (true) {
+      case id === 1 || id === 2:
+        namespace = 'partners';
+        break;
+      case id === 3 || id === 4:
+        namespace = 'boosters';
+        break;
+      case id === 5 || id === 6:
+        namespace = 'chains';
+        break;
+    }
+
+    if (namespace) {
+      store.commit(`${namespace}/SET_ACTIVE_LITTLE_TAB`, id);
+    }
+
+
   } else if (props.type === 'big') {
-    store.commit('partners/CHANGE_BIG_TAB', id)
+    store.commit('CHANGE_BIG_TAB', id)
+
+    const tabDefaults: TabDefaults = {
+      1: { key: 'partners', defaultTabID: 1 },
+      2: { key: 'boosters', defaultTabID: 3 },
+      3: { key: 'chains', defaultTabID: 5 },
+    };
+
+    const { key, defaultTabID } = tabDefaults[id] || {};
+    const activeTabID = key ? store.state[key].activeLittleTabID : null;
+
+    store.commit('CHANGE_LITTLE_TAB', activeTabID || defaultTabID);
+
   }
 
   emit('open-cells', id)

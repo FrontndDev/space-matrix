@@ -66,7 +66,7 @@ const store = useStore()
 const boostersPending: ComputedRef<IPartners> = computed(() => store.state.boosters.boostersPending)
 const boostersExposed: ComputedRef<IPartners> = computed(() => store.state.boosters.boostersExposed)
 
-const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
+const littleTabID: ComputedRef<number> = computed(() => store.state.littleTabID)
 
 const levelIDOfBoosters = computed(() => store.state.boosters.levelID)
 

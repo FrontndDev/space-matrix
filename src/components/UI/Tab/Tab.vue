@@ -58,7 +58,7 @@ const store = useStore()
 
 const showMyTooltip = ref(false)
 
-const littleTabID = computed(() => store.state.partners.littleTabID)
+const littleTabID = computed(() => store.state.littleTabID)
 
 const activeClass = computed(() => props.type === 'little' ? littleTabID.value === props.tab.id : props.active)
 

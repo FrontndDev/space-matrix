@@ -17,6 +17,7 @@ export default {
       teleportList: {} as ITeleportList,
       chainDetails: {} as IChainDetails,
       pageIdChains: 1,
+      activeLittleTabID: null
     };
   },
   actions: {
@@ -64,5 +65,8 @@ export default {
     SET_PAGE_ID_CHAINS(state: any, pageIdChains: number) {
       state.pageIdChains = pageIdChains;
     },
+    SET_ACTIVE_LITTLE_TAB(state: any, id: number) {
+      state.activeLittleTabID = id
+    }
   },
 };

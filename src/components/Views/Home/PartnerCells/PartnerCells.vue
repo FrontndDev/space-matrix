@@ -67,7 +67,7 @@ const isDreamTon9: ComputedRef<boolean> = computed(() => store.state.newTypeMatr
 const partnersExposed: ComputedRef<IPartners> = computed(() => store.state.partners.partnersExposed)
 const partnersPending: ComputedRef<IPartners> = computed(() => store.state.partners.newPartnersPending)
 
-const littleTabID: ComputedRef<number> = computed(() => store.state.partners.littleTabID)
+const littleTabID: ComputedRef<number> = computed(() => store.state.littleTabID)
 
 const selectedPage: ComputedRef<number> = computed(() => store.state.partners.pageIdPartners)
 
