@@ -27,6 +27,7 @@ import DButton from "@/components/UI/DButton/DButton.vue";
 import {
   computed,
   onMounted,
+  ref,
   Ref,
   watch,
 } from "vue";
@@ -49,14 +50,58 @@ const store = useStore()
 const router = useRouter()
 const route = useRoute()
 
-const setDependencies = (type: Type) => {
+const iterationForGetMatrixByType = ref(0)
+const intervalForGetMatrixByType: Ref<number | null> = ref(null)
+const secondsForGetMatrixByType = ref(0)
+
+const setSeconds = () => {
+  // Присваиваем в переменную кол-во секунд в зависимости от итерации
+  switch (iterationForGetMatrixByType.value) {
+    case 0:
+      secondsForGetMatrixByType.value = 1
+      break;
+    case 1:
+      secondsForGetMatrixByType.value = 5
+      break;
+    case 2:
+      secondsForGetMatrixByType.value = 10
+      break;
+    default:
+      secondsForGetMatrixByType.value = 30
+      break;
+  }
+}
+
+const clearOptionsForGetMatrixByType = () => {
+  iterationForGetMatrixByType.value = 0
+  intervalForGetMatrixByType.value = null
+  secondsForGetMatrixByType.value = 0
+}
+
+const setIntervalForGetMatrixType = () => {
+  setSeconds()
+  intervalForGetMatrixByType.value = setInterval(() => {
+    secondsForGetMatrixByType.value--
+  }, 1000)
+}
+
+const setDependencies = async (type: Type) => {
   store.state.partners.pageIdPartners = 1
   store.state.partners.levelID = 1
 
   store.state.boosters.pageIdBooster = 1
   store.state.boosters.levelID = 0
   store.commit('SET_SELECTED_TYPE', type)
-  store.dispatch('getMatrixByType', type.type)
+  const response = await store.dispatch('getMatrixByType', type.type)
+
+  // Если возвращается пустой респонс/ошибка сервера,
+  // запускается обратный отсчет до отправки следующего запроса
+  if (!response) {
+    clearOptionsForGetMatrixByType()
+    setIntervalForGetMatrixType()
+  }
+
+  console.log('response', response)
   store.commit('SET_NEW_TYPE_MATRIX', type.type)
 }
 
@@ -111,6 +156,24 @@ const selectDButton = (type: Type) => {
 watch(() => listOfTypes.value?.types?.length, () => {
   const type = listOfTypes.value.types.find(type => type.type === route.params.type) ?? listOfTypes.value.types[0]
   selectType(type)
+})
+
+watch(() => secondsForGetMatrixByType.value, async () => {
+  // Когда таймер обнуляется, увеличивается время до следующего вызова запроса
+  //
+  if (!secondsForGetMatrixByType.value) {
+    // Увеличиваем итерацию
+    iterationForGetMatrixByType.value++
+
+    if (intervalForGetMatrixByType.value) {
+      clearInterval(intervalForGetMatrixByType.value)
+      const response = await store.dispatch('getMatrixByType', selectedType.value.type)
+
+      if (!response) {
+        setIntervalForGetMatrixType()
+      }
+    }
+  }
 })
 
 onMounted(() => {

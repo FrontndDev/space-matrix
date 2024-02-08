@@ -51,18 +51,20 @@ export default createStore({
                 API.setDataToLS(key, response.data)
             })
         },
-        getMatrixByType(ctx: ActionContext<any, any>, matrixType: string) {
+        async getMatrixByType(ctx: ActionContext<any, any>, matrixType: string) {
             if (requestMatrixByType) {
                 requestMatrixByType.cancel();
             }
             requestMatrixByType = axios.CancelToken.source()
             if (matrixType) {
-                API.getMatrix(matrixType, { cancelTokenSource: requestMatrixByType }).then(response => {
+                return await API.getMatrix(matrixType, { cancelTokenSource: requestMatrixByType }).then(response => {
                     if (response?.data) {
                         ctx.commit('SET_LIST_OF_TYPES', response.data.tabs)
                         delete response.data.tabs
                         ctx.commit('SET_MATRIX_BY_TYPE', response.data)
                     }
+
+                    return response
                 })
             }
         },

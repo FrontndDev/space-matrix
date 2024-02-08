@@ -64,8 +64,6 @@
 
   &:not(.boost) {
     & .bonus-item__value {
-      overflow: hidden;
-      text-overflow: ellipsis;
       text-align: start;
     }
   }
