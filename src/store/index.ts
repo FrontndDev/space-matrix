@@ -164,8 +164,11 @@ export default createStore({
                 case 2:
                     state.secondsForGetMatrixByType = 10
                     break;
-                default:
+                case 3:
                     state.secondsForGetMatrixByType = 30
+                    break;
+                default:
+                    state.secondsForGetMatrixByType = 60
                     break;
             }
         },
