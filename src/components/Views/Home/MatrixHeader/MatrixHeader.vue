@@ -50,40 +50,42 @@ const store = useStore()
 const router = useRouter()
 const route = useRoute()
 
-const iterationForGetMatrixByType = ref(0)
-const intervalForGetMatrixByType: Ref<number | null> = ref(null)
-const secondsForGetMatrixByType = ref(0)
+// const iterationForGetMatrixByType = ref(0)
+// const intervalForGetMatrixByType: Ref<number | null> = ref(null)
+// const secondsForGetMatrixByType = ref(0)
 
-const setSeconds = () => {
-  // Присваиваем в переменную кол-во секунд в зависимости от итерации
-  switch (iterationForGetMatrixByType.value) {
-    case 0:
-      secondsForGetMatrixByType.value = 1
-      break;
-    case 1:
-      secondsForGetMatrixByType.value = 5
-      break;
-    case 2:
-      secondsForGetMatrixByType.value = 10
-      break;
-    default:
-      secondsForGetMatrixByType.value = 30
-      break;
-  }
-}
+// const setSeconds = () => {
+//   // Присваиваем в переменную кол-во секунд в зависимости от итерации
+//   switch (iterationForGetMatrixByType.value) {
+//     case 0:
+//       secondsForGetMatrixByType.value = 1
+//       break;
+//     case 1:
+//       secondsForGetMatrixByType.value = 5
+//       break;
+//     case 2:
+//       secondsForGetMatrixByType.value = 10
+//       break;
+//     default:
+//       secondsForGetMatrixByType.value = 30
+//       break;
+//   }
+// }
 
-const clearOptionsForGetMatrixByType = () => {
-  iterationForGetMatrixByType.value = 0
-  intervalForGetMatrixByType.value = null
-  secondsForGetMatrixByType.value = 0
-}
+// const clearOptionsForGetMatrixByType = () => {
+//   iterationForGetMatrixByType.value = 0
+//   if (intervalForGetMatrixByType.value) {
+//     clearInterval(intervalForGetMatrixByType.value)
+//   }
+//   secondsForGetMatrixByType.value = 0
+// }
 
-const setIntervalForGetMatrixType = () => {
-  setSeconds()
-  intervalForGetMatrixByType.value = setInterval(() => {
-    secondsForGetMatrixByType.value--
-  }, 1000)
-}
+// const setIntervalForGetMatrixType = () => {
+//   setSeconds()
+//   intervalForGetMatrixByType.value = setInterval(() => {
+//     secondsForGetMatrixByType.value--
+//   }, 1000)
+// }
 
 const setDependencies = async (type: Type) => {
   store.state.partners.pageIdPartners = 1
@@ -92,16 +94,17 @@ const setDependencies = async (type: Type) => {
   store.state.boosters.pageIdBooster = 1
   store.state.boosters.levelID = 0
   store.commit('SET_SELECTED_TYPE', type)
-  const response = await store.dispatch('getMatrixByType', type.type)
+
+  await store.dispatch('getMatrixByType', type.type)
 
   // Если возвращается пустой респонс/ошибка сервера,
   // запускается обратный отсчет до отправки следующего запроса
-  if (!response) {
-    clearOptionsForGetMatrixByType()
-    setIntervalForGetMatrixType()
-  }
+  // if (!response) {
+  //   clearOptionsForGetMatrixByType()
+  //   setIntervalForGetMatrixType()
+  // }
 
-  console.log('response', response)
+  // console.log('response', response)
   store.commit('SET_NEW_TYPE_MATRIX', type.type)
 }
 
@@ -158,23 +161,23 @@ watch(() => listOfTypes.value?.types?.length, () => {
   selectType(type)
 })
 
-watch(() => secondsForGetMatrixByType.value, async () => {
-  // Когда таймер обнуляется, увеличивается время до следующего вызова запроса
-  //
-  if (!secondsForGetMatrixByType.value) {
-    // Увеличиваем итерацию
-    iterationForGetMatrixByType.value++
-
-    if (intervalForGetMatrixByType.value) {
-      clearInterval(intervalForGetMatrixByType.value)
-      const response = await store.dispatch('getMatrixByType', selectedType.value.type)
-
-      if (!response) {
-        setIntervalForGetMatrixType()
-      }
-    }
-  }
-})
+// watch(() => secondsForGetMatrixByType.value, async () => {
+//   // Когда таймер обнуляется, увеличивается время до следующего вызова запроса
+//   //
+//   if (!secondsForGetMatrixByType.value) {
+//     // Увеличиваем итерацию
+//     iterationForGetMatrixByType.value++
+//
+//     if (intervalForGetMatrixByType.value) {
+//       clearInterval(intervalForGetMatrixByType.value)
+//       const response = await store.dispatch('getMatrixByType', selectedType.value.type)
+//
+//       if (!response) {
+//         setIntervalForGetMatrixType()
+//       }
+//     }
+//   }
+// })
 
 onMounted(() => {
   store.dispatch('getListOfTypes')
