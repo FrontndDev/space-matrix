@@ -212,7 +212,7 @@ watch(() => store.state.chains.chainsList.list?.length, () => {
 const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfTypes)
 
 const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
-  const teamOpened = listOfTypes.value.teamOpened
+  const teamOpened = listOfTypes.value?.teamOpened
   if (teamOpened) {
     const key: string | undefined = Object.keys(teamOpened)?.find(type => route.params.type === type)
     return key ? !!teamOpened?.[key] : false

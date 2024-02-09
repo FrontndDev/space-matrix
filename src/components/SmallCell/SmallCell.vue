@@ -128,7 +128,7 @@ const emit = defineEmits(['open-m-matrix-partner'])
 const store = useStore()
 
 const selectedTypeTitle: ComputedRef<string> = computed(() =>
-    store.state.listOfTypes.types.find((type: Type) => props.cell?.type === type.type)?.title
+    store.state.listOfTypes?.types.find((type: Type) => props.cell?.type === type.type)?.title
 )
 
 const matrixTypeIsDreamTon9: ComputedRef<boolean> = computed(() => props.cell?.type === 'dream-ton_9')
