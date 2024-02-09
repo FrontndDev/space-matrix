@@ -20,7 +20,6 @@ import chains from "./modules/chains";
 import { useMyOverlay } from "@/composables/useMyOverlay";
 import { useShowMessage } from "@/composables/useShowMessage";
 import axios from "axios";
-import store from "@/store/index.ts";
 
 let requestMatrixByType: any = null;
 
@@ -40,10 +39,6 @@ export default createStore({
         balance: {} as IBalance,
         littleTabID: 1 as number,
         bigTabID: 1 as number,
-
-        secondsForGetMatrixByType: 0,
-        iterationForGetMatrixByType: 0,
-        intervalForGetMatrixByType: null as number | null,
     },
     actions: {
         getListOfTypes({ commit }: { commit: Commit }, category = 'dream-ton') {
@@ -57,11 +52,8 @@ export default createStore({
             })
         },
         async getMatrixByType(ctx: ActionContext<any, any>, matrixType: string) {
-            ctx.commit('CLEAR_OPTIONS_FOR_GET_MATRIX_BY_TYPE', true)
-
             if (requestMatrixByType) {
                 requestMatrixByType.cancel();
-                ctx.commit('CLEAR_OPTIONS_FOR_GET_MATRIX_BY_TYPE')
             }
             requestMatrixByType = axios.CancelToken.source()
             if (matrixType) {
@@ -70,10 +62,7 @@ export default createStore({
                         ctx.commit('SET_LIST_OF_TYPES', response.data.tabs)
                         delete response.data.tabs
                         ctx.commit('SET_MATRIX_BY_TYPE', response.data)
-                        ctx.commit('CLEAR_OPTIONS_FOR_GET_MATRIX_BY_TYPE')
                         return response
-                    } else {
-                        ctx.commit('SET_INTERVAL_FOR_GET_MATRIX_TYPE', matrixType)
                     }
                 })
             }
@@ -142,51 +131,6 @@ export default createStore({
         CHANGE_BIG_TAB(state: any, id: number) {
             state.bigTabID = id
         },
-
-        CLEAR_OPTIONS_FOR_GET_MATRIX_BY_TYPE(state, withoutIteration = false) {
-            if (!withoutIteration) {
-                state.iterationForGetMatrixByType = 0
-            }
-            if (state.intervalForGetMatrixByType) {
-                clearInterval(state.intervalForGetMatrixByType)
-            }
-            state.secondsForGetMatrixByType = 0
-        },
-        SET_SECONDS(state) {
-            // Присваиваем в переменную кол-во секунд в зависимости от итерации
-            switch (state.iterationForGetMatrixByType) {
-                case 0:
-                    state.secondsForGetMatrixByType = 1
-                    break;
-                case 1:
-                    state.secondsForGetMatrixByType = 5
-                    break;
-                case 2:
-                    state.secondsForGetMatrixByType = 10
-                    break;
-                case 3:
-                    state.secondsForGetMatrixByType = 30
-                    break;
-                default:
-                    state.secondsForGetMatrixByType = 60
-                    break;
-            }
-        },
-        SET_INTERVAL_FOR_GET_MATRIX_TYPE(state, matrixType: string) {
-            store.commit('SET_SECONDS')
-            state.intervalForGetMatrixByType = setInterval(async () => {
-                state.secondsForGetMatrixByType--
-
-                if (!state.secondsForGetMatrixByType) {
-                    if (state.intervalForGetMatrixByType) {
-                        state.iterationForGetMatrixByType++
-                        clearInterval(state.intervalForGetMatrixByType)
-                    }
-
-                    await store.dispatch('getMatrixByType', matrixType)
-                }
-            }, 1000)
-        }
     },
     getters: {
         onlyInfinityCell(state) {

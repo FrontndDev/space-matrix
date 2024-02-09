@@ -16,12 +16,12 @@ const checkUserIsModer = (error: AxiosError) => {
 
 function setGlobalConfig(token: string | null) {
 
-  function getCookie(name: string) {
-    let matches = document.cookie.match(new RegExp(
-      "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
-  }
+    function getCookie(name: string) {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
 
 
     const defaultSettings = {
@@ -88,27 +88,69 @@ export async function postAsync(url: string, data = {}, checkError = true) {
 }
 
 export async function getAsync(url: string, options?: any) {
-    const config: any = { headers: setGlobalConfig(localStorage.getItem('token')) }
+    const config: any = { headers: setGlobalConfig(localStorage.getItem('token')) };
+    let iteration = 0; // Итерация
+    let retryInterval = 0; // Интервал между повторными запросами в миллисекундах
 
-    if (options?.cancelTokenSource?.token) config.cancelToken = options.cancelTokenSource.token
-    try {
-        let response = await axios.get(BASE_URL + url, config)
+    async function fetchAsync(): Promise<any> {
+        try {
+            if (options?.cancelTokenSource?.token) config.cancelToken = options.cancelTokenSource.token;
 
-        if (response?.data?.error_code !== undefined) {
-            const error = response.data
-            useShowMessage('red', error.error_message, 'Ошибка:')
-        }
+            let response = await axios.get(BASE_URL + url, config);
 
-        if (response.status === 200) {
-            return response?.data
-        }
+            if (response?.data?.error_code !== undefined) {
+                const error = response.data;
+                useShowMessage('red', error.error_message, 'Ошибка:');
+            }
 
-    } catch (e) {
-        const errorCodes = ['ERR_CANCELED']
-        const error = e as AxiosError
+            if (response.status === 200) {
+                return response?.data;
+            }
 
-        if (!errorCodes.includes(error.code ?? '')) {
-            checkUserIsModer(error)
+        } catch (e) {
+            const setSeconds = () => {
+                // Присваиваем в переменную кол-во секунд в зависимости от итерации
+                switch (iteration) {
+                    case 0:
+                        retryInterval = 1000
+                        break;
+                    case 1:
+                        retryInterval = 5000
+                        break;
+                    case 2:
+                        retryInterval = 10000
+                        break;
+                    case 3:
+                        retryInterval = 30000
+                        break;
+                    default:
+                        retryInterval = 60000
+                        break;
+                }
+            }
+
+            setSeconds()
+
+            const errorCodes = ['ERR_CANCELED'];
+            const error = e as AxiosError;
+
+            if (!errorCodes.includes(error.code ?? '')) {
+                checkUserIsModer(error);
+            }
+
+            console.error('Ошибка при выполнении запроса:', error);
+
+            // Увеличиваем итерацию
+            if (iteration < 4) ++iteration
+
+            console.log(`Повторяем запрос через ${retryInterval / 1000} секунд...`);
+            // Ожидаем перед повторным запросом
+            await new Promise(resolve => setTimeout(resolve, retryInterval));
+            // Рекурсивно вызываем функцию fetchAsync
+            return fetchAsync();
         }
     }
+
+    // Запускаем fetchAsync
+    return fetchAsync();
 }
