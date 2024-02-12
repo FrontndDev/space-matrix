@@ -65,7 +65,9 @@ const activeClass = computed(() => props.type === 'little' ? littleTabID.value =
 const teleportCheckbox = inject('teleportCheckbox') as Ref<boolean>
 
 const showTooltip = () => {
-  showMyTooltip.value = true
+  if (window.innerWidth > 992) {
+    showMyTooltip.value = true
+  }
 }
 
 const hideTooltip = () => {
