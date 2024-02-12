@@ -156,7 +156,7 @@ const selectDButton = (type: Type) => {
 }
 
 watch(() => listOfTypes.value?.types?.length, () => {
-  const type = listOfTypes.value?.types.find(type => type.type === route.params.type) ?? listOfTypes.value.types[0]
+  const type = listOfTypes.value?.types.find(type => type.type === route.params.type) ?? listOfTypes.value?.types?.[0]
   selectType(type)
 })
 

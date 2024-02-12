@@ -7,7 +7,7 @@ const checkUserIsModer = (error: AxiosError) => {
     //@ts-ignore
     if (window.UserData.moder) {
         useShowMessage('red', error.message, 'Ошибка:')
-    } else if (error.status !== 500) {
+    } else if (error?.response?.status !== 500) {
         useShowMessage('red', error.message, 'Ошибка:')
     }
 
