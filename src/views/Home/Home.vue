@@ -291,7 +291,7 @@ const setPositionForPartner = (pos: IPosition) => {
 const selectPartner = async (ceil: Ceil) => {
   if (ceil?.matrix) {
     const matrixId = ceil?.matrix.id
-    await router.push(route.path + `?id=${matrixId}`)
+    await router.push(route.path + `?uuid=${matrixId}`)
     // Получаем Матрицу партнёра
     store.commit('SET_MATRIX_BY_ID', {})
     const response = await store.dispatch('getMatrixById', ceil.matrix.id)
@@ -311,9 +311,9 @@ const selectPartner = async (ceil: Ceil) => {
 
 const loadMMatrixPartnerModal = async () => {
   const query = route.query
-  if (query.id) {
+  if (query.uuid) {
     store.commit('SET_MATRIX_BY_ID', {})
-    const response = await store.dispatch('getMatrixById', route.query.id)
+    const response = await store.dispatch('getMatrixById', route.query.uuid)
 
     if (response?.error_code !== undefined) {
       closeModal()

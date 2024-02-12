@@ -114,8 +114,8 @@ const selectType = (type: Type) => {
   const queryId = () => {
     const query = route.query
     switch (true) {
-      case !!query.id:
-        return `?id=${route.query.id}`
+      case !!query.uuid:
+        return `?uuid=${route.query.uuid}`
       case !!query.chainId:
         return `?chainId=${route.query.chainId}`
       default:
