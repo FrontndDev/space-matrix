@@ -76,8 +76,11 @@ import {
 } from "@/interfaces/chains.interface.ts";
 import { useStore } from "vuex";
 import ModalTeleportSettings from "@/components/Modals/ModalTeleportSettings/ModalTeleportSettings.vue";
+import { ListOfTypes } from "@/interfaces/store.interface.ts";
 
 const store = useStore()
+
+const listOfTypes: ComputedRef<ListOfTypes> = computed(() => store.state.listOfTypes)
 
 const chainsList: ComputedRef<IChainsList> = computed(() => store.state.chains.chainsList)
 const teleportList: ComputedRef<ITeleportList> = computed(() => store.state.chains.teleportList)
@@ -113,6 +116,10 @@ const showTeleportSettingsModal = ref(false)
 
 provide('teleportCheckbox', teleportCheckbox)
 
+const hideCheckboxInTeleportTab = computed(() =>
+    listOfTypes.value.opened.includes('dream-ton_4') || !listOfTypes.value.opened.includes('dream-ton_5')
+)
+
 const tabs = reactive([
   {
     id: 5,
@@ -124,7 +131,7 @@ const tabs = reactive([
     name: 'Телепорт',
     value: computed(() => teleportList.value.totalCount),
     disabled: computed(() => import.meta.env.VITE_CHAINS_TELEPORT !== 'on'),
-    checkbox: true,
+    checkbox: !hideCheckboxInTeleportTab.value,
     tooltip: computed(() => `Ваш куратор ${teleportCheckbox.value ? 'может' : 'не может'} <br> использовать телепорт <br> новичка на вас`),
   },
 ]);
