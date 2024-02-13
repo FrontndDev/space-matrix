@@ -7,13 +7,13 @@
               @open-m-matrix-partner="$emit('open-m-matrix-partner')"
               @open-m-add-partner="$emit('open-m-add-partner')"
               @close-modal="$emit('close-modal')"
-              @select-partner="selectPartner"
+              @select-matrix="selectMatrix"
               v-if="props.openModalPartners === 1"
           />
           <MMatrixPartner
               @open-m-infinity-cell="$emit('open-m-infinity-cell')"
               @open-m-add-partner="openMAddPartner"
-              @select-partner="selectPartner"
+              @select-matrix="selectMatrix"
               @set-partner-by="setPartnerBy"
               @close-modal="$emit('close-modal')"
               v-else-if="props.openModalPartners === 2"
@@ -82,7 +82,7 @@ const emit = defineEmits([
   'open-m-infinity-cell',
   'set-position-for-partner',
   'open-partner-waiting',
-  'select-partner',
+  'select-matrix',
   'set-partner-by',
   'close-modal',
 ])
@@ -139,8 +139,8 @@ const getEmitForModalOverlay = (emitName?: TModalsPartners) => {
   }
 }
 
-const selectPartner = (selectedCeil: Ceil, matrixType?: string) => {
-  emit('select-partner', selectedCeil, matrixType)
+const selectMatrix = (matrixId?: number) => {
+  emit('select-matrix', matrixId)
 }
 
 const setPartnerBy = (type: string) => {

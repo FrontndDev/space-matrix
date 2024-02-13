@@ -14,7 +14,7 @@
               <SmallCell
                   :key="idx"
                   :cell="matrix"
-                  @click="openMMatrixModal(matrix)"
+                  @click="openMMatrixModal(matrix.id)"
               />
             </div>
           </div>
@@ -69,7 +69,7 @@ const emit = defineEmits([
   'open-expose-partner',
   'open-add-partner-chains',
   'open-m-matrix-partner',
-  'select-partner',
+  'select-matrix',
   'buy-booster',
 ])
 
@@ -90,23 +90,9 @@ const activateTheChain = () => {
   }
 }
 
-const openMMatrixModal = (matrix: Matrix) => {
-  const cell = {
-    depth: 0,
-    pos: 0,
-    queueId: null,
-    matrix: matrix,
-    allowBuyClone: false,
-    allowSniper: false,
-    fillRevard: [],
-    isInfinity: false,
-    informer: {
-      activationType: '',
-      ceilType: ''
-    }
-  }
-  emit('select-partner', cell)
+const openMMatrixModal = (matrixId?: number) => {
   emit('close-modal')
+  emit('select-matrix', matrixId)
   emit('open-m-matrix-partner')
 }
 

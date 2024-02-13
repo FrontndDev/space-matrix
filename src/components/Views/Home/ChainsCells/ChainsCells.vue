@@ -43,9 +43,9 @@
       v-if="littleTabID === 5 && chainsList.totalCount === 0 || littleTabID === 6 && teleportList.totalCount === 0"
   />
   <Pagination
-      :count="data.find(tab => tab.id === littleTabID)?.value.totalPages"
+      :count="data.find(tab => tab.id === littleTabID)?.value?.totalPages"
       :selected-page="selectedPage"
-      v-if="(data.find(tab => tab.id === littleTabID)?.value.totalPages ?? 0) > 1"
+      v-if="(data.find(tab => tab.id === littleTabID)?.value?.totalPages ?? 0) > 1"
       @select-page="selectPage"
   />
 

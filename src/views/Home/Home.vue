@@ -11,7 +11,7 @@
                   @open-m-matrix-partner="openModalPartner(2)"
                   @open-m-add-partner="openModalPartner(3)"
                   @set-position-for-partner="setPositionForPartner"
-                  @select-partner="selectPartner"
+                  @select-matrix="selectMatrix"
               />
               <Endless
                   @open-m-infinity-cell="openModalPartner(1)"
@@ -79,7 +79,7 @@
         @close-modal="closeModal"
 
         @set-partner-by="setPartnerBy"
-        @select-partner="selectPartner"
+        @select-matrix="selectMatrix"
         @set-position-for-partner="setPositionForPartner"
     />
     <ModalChains
@@ -92,7 +92,7 @@
         @open-add-partner-chains="openModalChain(6)"
         @open-partner-waiting-chains="openModalChain(7)"
         @open-m-matrix-partner="openModalPartner(2)"
-        @select-partner="selectPartner"
+        @select-matrix="selectMatrix"
 
         @close-modal="closeModal"
     />
@@ -172,10 +172,13 @@ const setPartnerBy = (type: string) => {
   selectedType.value = type
 }
 
-const selectChain = (chain: IChains) => {
-  store.commit('chains/SET_CHAIN_DETAIL', {})
-  store.dispatch('getWallets')
-  selectedChain.value = chain
+const selectChain = (chain: IChains, redirect = true) => {
+  // store.commit('chains/SET_CHAIN_DETAIL', {})
+  // store.dispatch('getWallets')
+  // selectedChain.value = chain
+  if (redirect) {
+    router.push(route.path + `?chainId=${chain.id}`)
+  }
 }
 
 const matrixIsInQueueForPublication: ComputedRef<boolean> = computed(() => {
@@ -232,15 +235,6 @@ provide('selectedChain', selectedChain)
 provide('selectedType', selectedType)
 provide('selectedPartnerForTeleport', selectedPartnerForTeleport)
 
-const openChainViaLink = () => {
-  const chain = store.state.chains.chainsList.list.find((chain: IChains) => chain.id === +(route.query.chainId ?? 0))
-  if (chain) {
-    store.dispatch('chains/getChainDetail', chain.id)
-    selectChain(chain)
-    openModalChain(1)
-  }
-}
-
 const openModalPartner = (num: number) => {
   toggleModalPartners.value = true
   openModalPartners.value = num
@@ -267,8 +261,8 @@ const openModalTeleport = (cell: Matrix) => {
   document.documentElement.style.overflow = 'hidden'
 }
 
-const closeModal = () => {
-  router.push(route.path)
+const closeModal = (uri = route.path) => {
+  router.push(uri)
   store.commit('SET_MATRIX_BY_ID', {})
   selectedPartner.value = null
   selectedPartnerForTeleport.value = null
@@ -309,7 +303,16 @@ const selectPartner = async (ceil: Ceil) => {
   selectedPartner.value = ceil
 }
 
+const selectMatrix = (matrixId?: number) => {
+  if (matrixId) {
+    console.log('selectMatrix', route.path + `?uuid=${matrixId}`)
+    router.push(route.path + `?uuid=${matrixId}`)
+  }
+}
+
 const loadMMatrixPartnerModal = async () => {
+  selectedPartner.value = null
+
   const query = route.query
   if (query.uuid) {
     store.commit('SET_MATRIX_BY_ID', {})
@@ -342,17 +345,38 @@ const loadMMatrixPartnerModal = async () => {
 
       openModalPartner(2)
     }
+  } else if (toggleModalPartners.value) {
+    closeModal(route.fullPath)
   }
 }
 
-onMounted(async () => {
+const openChainViaLink = () => {
   const query = route.query
 
-  loadMMatrixPartnerModal()
-
   if (query.chainId && store.state.chains.chainsList?.list?.length) {
-    openChainViaLink()
+    const chain = store.state.chains.chainsList.list.find((chain: IChains) => chain.id === +(route.query.chainId ?? 0))
+    if (chain) {
+      store.dispatch('chains/getChainDetail', chain.id)
+      selectChain(chain, false)
+      openModalChain(1)
+    }
+  } else if (toggleModalChains.value) {
+    closeModal(route.fullPath)
   }
+}
+
+const loadDependencies = () => {
+  loadMMatrixPartnerModal()
+  openChainViaLink()
+}
+
+watch(() => route.fullPath, () => {
+  console.log('changeRoute')
+  loadDependencies()
+})
+
+onMounted(() => {
+  loadDependencies()
 })
 </script>
 

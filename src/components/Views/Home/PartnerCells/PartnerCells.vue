@@ -31,13 +31,13 @@
   </div>
   <EmptyCells
       cellsType="partners"
-      v-if="partnersPending.list?.length === 0 && littleTabID === 1 || partnersExposed.list?.length === 0 && littleTabID === 2"
+      v-if="partnersPending?.list?.length === 0 && littleTabID === 1 || partnersExposed?.list?.length === 0 && littleTabID === 2"
   />
 
   <Pagination
-      :count="data.find(tab => tab.id === littleTabID)?.value.totalPages"
+      :count="data.find(tab => tab.id === littleTabID)?.value?.totalPages"
       :selected-page="selectedPage"
-      v-if="(data.find(tab => tab.id === littleTabID)?.value.totalPages ?? 0) > 1"
+      v-if="(data.find(tab => tab.id === littleTabID)?.value?.totalPages ?? 0) > 1"
       @select-page="selectPage"
   />
 </template>

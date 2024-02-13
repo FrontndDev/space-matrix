@@ -86,7 +86,7 @@ const emit = defineEmits([
   'open-m-matrix-partner',
   'open-m-add-partner',
   'set-position-for-partner',
-  'select-partner',
+  'select-matrix',
 ])
 
 const store = useStore()
@@ -179,7 +179,7 @@ const openMAddPartner = (pos: IPosition) => {
 const openMMatrixPartner = (ceil: Ceil) => {
   if (!ceil?.matrix?.is_booster) {
     emit('open-m-matrix-partner')
-    emit('select-partner', ceil)
+    emit('select-matrix', ceil?.matrix?.id)
   }
 }
 </script>

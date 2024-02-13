@@ -10,7 +10,8 @@
               @open-add-partner-chains="emit('open-add-partner-chains')"
 
               @open-m-matrix-partner="emit('open-m-matrix-partner')"
-              @select-partner="cell => emit('select-partner', cell)"
+              @select-matrix="matrixId => emit('select-matrix', matrixId)"
+
               @buy-booster="buyBooster"
           />
           <MReplacePartner
@@ -94,7 +95,7 @@ const emit = defineEmits([
   'open-m-replace-partner',
   'open-partner-waiting-chains',
   'open-m-matrix-partner',
-  'select-partner',
+  'select-matrix',
   'close-modal',
 ])
 

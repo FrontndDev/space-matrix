@@ -11,10 +11,10 @@
       <PartnerCell
           size="small"
           type="infinity"
-          v-for="partner in infinityPartners"
-          :key="partner.id"
-          :ceil="partner"
-          @open-m-matrix-partner="selectPartner(partner)"
+          v-for="matrix in infinityPartners"
+          :key="matrix.id"
+          :ceil="matrix"
+          @open-m-matrix-partner="selectMatrix(matrix)"
       />
     </div>
     <Preloader :with-text="true" v-if="!infinityPartners?.length"/>
@@ -40,7 +40,7 @@ import Preloader from "@/components/UI/Preloader/Preloader.vue";
 const emit = defineEmits([
   'close-modal',
   'open-m-matrix-partner',
-  'select-partner',
+  'select-matrix',
 ])
 
 const store = useStore()
@@ -52,24 +52,11 @@ const infinityPartners: ComputedRef<Matrix[]> = computed(() => {
   return selectedPartner.value ? partnersState.infinityPartnersSecond : partnersState.infinityPartners
 })
 
-const selectPartner = (partner: Matrix) => {
-  const ceil = {
-    depth: 0,
-    pos: 0,
-    queueId: null,
-    matrix: partner,
-    allowBuyClone: false,
-    allowSniper: false,
-    fillRevard: [],
-    isInfinity: false,
-    informer: {
-      activationType: '',
-      ceilType: ''
-    }
+const selectMatrix = (matrix: Matrix) => {
+  if (matrix?.id) {
+    emit('select-matrix', matrix.id)
+    emit('open-m-matrix-partner')
   }
-
-  emit('select-partner', ceil)
-  emit('open-m-matrix-partner')
 }
 </script>
 

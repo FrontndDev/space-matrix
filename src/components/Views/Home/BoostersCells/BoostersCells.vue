@@ -38,9 +38,9 @@
   />
 
   <Pagination
-      :count="data.find(tab => tab.id === littleTabID)?.value.totalPages"
+      :count="data.find(tab => tab.id === littleTabID)?.value?.totalPages"
       :selected-page="selectedPage"
-      v-if="(data.find(tab => tab.id === littleTabID)?.value.totalPages ?? 0) > 1"
+      v-if="(data.find(tab => tab.id === littleTabID)?.value?.totalPages ?? 0) > 1"
       @select-page="selectPage"
   />
 </template>

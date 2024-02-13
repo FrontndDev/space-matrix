@@ -153,7 +153,7 @@ const emit = defineEmits([
   'open-m-add-partner',
   'open-m-infinity-cell',
   'open-m-matrix-partner',
-  'select-partner',
+  'select-matrix',
   'set-partner-by',
   'close-modal',
 ])
@@ -293,7 +293,7 @@ const openMAddPartner = (pos: IPosition) => {
 const openMMatrixPartner = (ceil: Ceil) => {
   if (!ceil?.matrix?.is_booster) {
     emit('open-m-matrix-partner')
-    emit('select-partner', ceil, ceil?.matrix?.type)
+    emit('select-matrix', ceil.matrix?.id)
   }
 }
 
@@ -306,7 +306,7 @@ const parentMatrix = async () => {
   const parentMatrixId = selectedPartner.value?.matrix?.parent_matrix_id
   if (parentMatrixId) {
     await router.push(route.path + `?uuid=${parentMatrixId}`)
-    emit('select-partner', {})
+    emit('select-matrix', null)
     store.commit('SET_MATRIX_BY_ID', {})
 
     const response = await store.dispatch('getMatrixById', parentMatrixId)
@@ -316,21 +316,21 @@ const parentMatrix = async () => {
     }
 
     if (response?.data?.matrix) {
-      selectedPartner.value = {
-        depth: 0,
-        pos: 0,
-        queueId: null,
-        matrix: response.data.matrix,
-        allowBuyClone: false,
-        allowSniper: false,
-        fillRevard: [],
-        isInfinity: false,
-        informer: {
-          activationType: '',
-          ceilType: '',
-          userType: '',
-        }
-      }
+      // selectedPartner.value = {
+      //   depth: 0,
+      //   pos: 0,
+      //   queueId: null,
+      //   matrix: response.data.matrix,
+      //   allowBuyClone: false,
+      //   allowSniper: false,
+      //   fillRevard: [],
+      //   isInfinity: false,
+      //   informer: {
+      //     activationType: '',
+      //     ceilType: '',
+      //     userType: '',
+      //   }
+      // }
     }
   }
 }
