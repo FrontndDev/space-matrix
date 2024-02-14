@@ -104,29 +104,16 @@ export async function getAsync(url: string, options?: any) {
             }
 
             if (response.status === 200) {
+                iteration = 0
+                retryInterval = 0
                 return response?.data;
             }
 
         } catch (e) {
             const setSeconds = () => {
                 // Присваиваем в переменную кол-во секунд в зависимости от итерации
-                switch (iteration) {
-                    case 0:
-                        retryInterval = 1000
-                        break;
-                    case 1:
-                        retryInterval = 5000
-                        break;
-                    case 2:
-                        retryInterval = 10000
-                        break;
-                    case 3:
-                        retryInterval = 30000
-                        break;
-                    default:
-                        retryInterval = 60000
-                        break;
-                }
+                const iterations = [1000, 5000, 10000, 30000, 60000]
+                retryInterval = iterations[iteration]
             }
 
             setSeconds()
@@ -136,6 +123,8 @@ export async function getAsync(url: string, options?: any) {
 
             if (!errorCodes.includes(error.code ?? '')) {
                 checkUserIsModer(error);
+            } else {
+                return;
             }
 
             console.error('Ошибка при выполнении запроса:', error);
