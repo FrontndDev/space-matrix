@@ -18,9 +18,9 @@
       />
 
       <CellInformation
+          :type="props.type"
           :class="props.size"
           :ceil="props.ceil"
-          :ceil-type="props.cellType"
           :user-type="props.userType"
           v-if="showCellInformation"
       />
@@ -47,18 +47,10 @@
         @click="$emit('open-m-matrix-partner')"
         @circle-avatar="$emit('circle-avatar')"
     />
-
-<!--    <CellType-->
-<!--        :size="props.size"-->
-<!--        :cell-type="props.type"-->
-<!--        v-if="['infinity'].includes(props.type)"-->
-<!--        @click="$emit('open-m-matrix-partner')"-->
-<!--    />-->
   </div>
 </template>
 
 <script setup lang="ts">
-// import CellType from "@/UI/CellType/CellType.vue";
 import Reward from "@/components/UI/Reward/Reward.vue";
 import PartnerType from "./PartnerType/PartnerType.vue";
 import LevelMatrix from "@/components/UI/LevelMatrix/LevelMatrix.vue";
@@ -73,7 +65,6 @@ import {
   Type
 } from "@/interfaces/store.interface.ts";
 import { useGetLevel } from "@/composables/useGetLevel.ts";
-// import CellType from "@/UI/CellType/CellType.vue";
 import { useStore } from "vuex";
 import { useCopy } from "@/composables/useCopy.ts";
 import CellInformation from "@/components/CellInformation/CellInformation.vue";

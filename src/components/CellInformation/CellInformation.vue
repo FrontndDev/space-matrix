@@ -16,7 +16,7 @@
 
       <ModalCellInformation
           :ceil="props.ceil"
-          :cell-type="props.ceilType"
+          :type="props.type"
           :types="Object.values(types).filter(type => type?.value)"
           v-if="showMobileContent"
           @close-modal="hideMobileContent"
@@ -44,7 +44,6 @@ import {
 import ProfitableIcon from '@/assets/svg/cellInformation/profitable.svg?component' // @ts-ignore
 import CumulativeIcon from '@/assets/svg/cellInformation/cumulative.svg?component' // @ts-ignore
 import EndlessIcon from '@/assets/svg/cellInformation/endless.svg?component' // @ts-ignore
-// import PendingIcon from '@/assets/svg/cellInformation/pending.svg?component' // @ts-ignore
 // Способ активации
 import UpgradeIcon from '@/assets/svg/cellInformation/upgrade.svg?component' // @ts-ignore
 import PurchaseIcon from '@/assets/svg/cellInformation/purchase.svg?component' // @ts-ignore
@@ -64,7 +63,7 @@ const props = defineProps({
     type: Object as PropType<Matrix>,
     required: true,
   },
-  ceilType: {
+  type: {
     type: String,
     default: ''
   },
@@ -102,8 +101,9 @@ const hideMobileContent = () => {
 }
 
 const getIconAndValueForCeilType: ComputedRef<[Component, string] | undefined> = computed(() => {
-  switch (props.ceilType) {
+  switch (props.type) {
     case 'profit':
+    case 'booster':
       return [ProfitableIcon, 'Доходная']
     case 'freeze':
       return [CumulativeIcon, 'Накопительная']

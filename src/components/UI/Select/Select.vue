@@ -67,29 +67,6 @@ const selectItem = (item: any) => {
   emit('select', item);
   showDropdown.value = false
 }
-
-// onMounted(() => {
-//   if (props.data === 'static') {
-//     emit('select', props.defaultValue ?? props.items[0])
-//   } else {
-//     emit('select', props.items[0])
-//   }
-// })
-
-// const changeSelectedItem = () => {
-//   if (props.route === 'types') {
-//     emit('select', store.state.selectedType)
-//   }
-// }
-
-// watch(() => props.items?.length, () => {
-//   emit('select', props.defaultValue ?? props.items[0])
-//   changeSelectedItem()
-// })
-
-// watch(() => store.state.selectedType, () => {
-//   changeSelectedItem()
-// })
 </script>
 
 <style scoped lang="scss">

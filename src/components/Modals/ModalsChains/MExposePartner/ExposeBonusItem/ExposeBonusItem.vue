@@ -35,15 +35,6 @@ const props = defineProps({
     // boost, auto
   }
 });
-
-// const boost = [
-//   { name: 'D1', id: 0 },
-//   { name: 'D2', id: 1 },
-//   { name: 'D3', id: 2 },
-//   { name: 'D4', id: 3 },
-//   { name: 'D5', id: 4 },
-//   { name: 'D6', id: 5 },
-// ]
 </script>
 
 <style scoped lang="scss">

@@ -16,11 +16,6 @@ const routes = [
                 path: ':type?',
                 component: Home,
             },
-            // {
-            //     name: 'NotFound',
-            //     path: ':pathMatch(.*)*',
-            //     component: NotFound
-            // },
         ]
     },
 ]

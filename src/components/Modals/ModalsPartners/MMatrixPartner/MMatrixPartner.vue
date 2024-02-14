@@ -207,9 +207,6 @@ const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() =>
     isDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['2']
 )
-// const thirdCeil: ComputedRef<Ceil> = computed(() =>
-//     isDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['3']
-// )
 
 const interval: Ref<number | null> = ref(null)
 

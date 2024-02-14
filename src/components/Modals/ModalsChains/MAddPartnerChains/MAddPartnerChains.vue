@@ -67,15 +67,8 @@ const getCeil: ComputedRef<Ceil> = computed(() => {
 })
 
 const buyBooster = (bool: boolean) => {
-  // emit('select-partner', chainsDetails.value.list[0])
   emit('buy-booster', bool)
 }
-
-
-
-// const cancel = () => {
-//   confirmPaymentType.value = ''
-// }
 
 const openPartnerWaitingChains = () => {
   buyBooster(false)

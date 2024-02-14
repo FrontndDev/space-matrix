@@ -11,8 +11,8 @@
               <div class="modal-cell-information__container">
                 <PartnerCell
                     size="small"
-                    :type="props.cellType"
-                    :cell-type="props.cellType"
+                    :type="props.type"
+                    :cell-type="props.type"
                     :ceil="props.ceil"
                     :is-booster="props.ceil.is_booster"
                     :show-cell-information="false"
@@ -54,7 +54,7 @@ const props = defineProps({
   ceil: {
     type: Object as PropType<Matrix>,
   },
-  cellType: {
+  type: {
     type: String,
   },
   types: {

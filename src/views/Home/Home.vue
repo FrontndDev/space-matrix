@@ -175,9 +175,6 @@ const setPartnerBy = (type: string) => {
 }
 
 const selectChain = (chain: IChains, redirect = true) => {
-  // store.commit('chains/SET_CHAIN_DETAIL', {})
-  // store.dispatch('getWallets')
-  // selectedChain.value = chain
   if (redirect) {
     router.push(route.path + `?chainId=${chain.id}`)
   }

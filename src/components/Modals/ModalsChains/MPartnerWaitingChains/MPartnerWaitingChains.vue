@@ -56,7 +56,6 @@ import {
   Matrix
 } from "@/interfaces/store.interface.ts";
 import { useStore } from "vuex";
-// import { IPosition } from "@/interfaces/partners.interface.ts";
 
 const emit = defineEmits([
   'close-modal',
@@ -68,9 +67,6 @@ const emit = defineEmits([
 const store = useStore()
 const cells: ComputedRef<Matrix[]> = computed(() => store.state.partners.partnersPendingSecond?.list)
 
-// const selectedPartner = inject('selectedPartner') as Ref<Ceil>
-//
-// const partnerPos = inject('partnerPos') as Ref<IPosition>
 let selectedCell: Ref<Matrix | null> = ref(null)
 
 const selectCell = (cell: Matrix) => {

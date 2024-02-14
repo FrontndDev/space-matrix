@@ -3,16 +3,9 @@
 
 .partner-type {
   @include flex-center;
+  flex-direction: row;
   column-gap: 16px;
   cursor: pointer;
-
-  //&.cumulative .partner-type__circle {
-  //  border: 1px solid $bg-blue;
-  //}
-  //
-  //&.profitable .partner-type__circle {
-  //  border: 1px solid $bg-green;
-  //}
 
   &__circle {
     width: 12px;

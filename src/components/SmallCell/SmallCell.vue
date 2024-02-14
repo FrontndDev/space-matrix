@@ -20,9 +20,9 @@
 
       <CellInformation
           class="small"
+          :type="props.type"
           :tooltip-position="props.tooltipPosition"
           :ceil="props.cell"
-          :ceil-type="props.cellType"
           :user-type="props.userType"
           v-if="props.showCellInformation && !time"
       />
