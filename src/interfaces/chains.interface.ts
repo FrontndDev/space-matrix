@@ -30,7 +30,7 @@ export interface IChains {
 }
 
 export interface IChainsList {
-  totalCount: number;IChains
+  totalCount: number;
   currentPage: number;
   totalPages: number;
   list: IChains[];

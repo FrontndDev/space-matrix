@@ -104,12 +104,24 @@
           </div>
 
           <div class="modal-matrix-partner__endless">
-            <div class="modal-matrix-partner__block-title">Бесконечные</div>
-            <InfinityPartnerCard
-                modal="m-matrix-partner"
-                :ceil="thirdCeil"
+<!--            <div class="modal-matrix-partner__block-title">Бесконечные</div>-->
+<!--            <InfinityPartnerCard-->
+<!--                modal="m-matrix-partner"-->
+<!--                :ceil="thirdCeil"-->
+<!--                :partners-count="store.state.matrixById.countInInfinity"-->
+<!--                @open-m-infinity-cell="openMInfinityCell"-->
+<!--            />-->
+            <CountOfPartners
+                type="modal"
+                title="Бесконечная"
                 :partners-count="store.state.matrixById.countInInfinity"
-                @open-m-infinity-cell="openMInfinityCell"
+                @open-modal="openMInfinityCell"
+            />
+            <CountOfPartners
+                type="modal"
+                title="В ожидании"
+                :partners-count="partnersCount"
+                @open-modal="openMPartnersWaiting"
             />
           </div>
         </div>
@@ -124,7 +136,6 @@ import ModalHeader from "@/components/ModalHeader/ModalHeader.vue";
 import PartnerCell from "@/components/PartnerCell/PartnerCell.vue";
 import CopyLink from "@/components/Views/Home/CopyLink/CopyLink.vue";
 import AddPartnerCell from "@/components/AddPartnerCell/AddPartnerCell.vue";
-import InfinityPartnerCard from "@/components/InfinityPartnerCard/InfinityPartnerCard.vue";
 import { useStore } from "vuex";
 import {
   computed,
@@ -148,11 +159,13 @@ import {
   useRoute,
   useRouter
 } from "vue-router";
+import CountOfPartners from "@/components/UI/CountOfPartners/CountOfPartners.vue";
 
 const emit = defineEmits([
   'open-m-add-partner',
   'open-m-infinity-cell',
   'open-m-matrix-partner',
+  'open-partner-waiting',
   'select-matrix',
   'set-partner-by',
   'close-modal',
@@ -193,9 +206,9 @@ const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() =>
     isDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['2']
 )
-const thirdCeil: ComputedRef<Ceil> = computed(() =>
-    isDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['3']
-)
+// const thirdCeil: ComputedRef<Ceil> = computed(() =>
+//     isDreamTon9.value ? ceils.value?.['1'] : ceils.value?.['3']
+// )
 
 const interval: Ref<number | null> = ref(null)
 
@@ -279,6 +292,10 @@ const openMInfinityCell = () => {
       isPartnerMatrix: true
   })
   emit('open-m-infinity-cell')
+}
+
+const openMPartnersWaiting = () => {
+  emit('open-partner-waiting')
 }
 
 const openMAddPartner = (pos: IPosition) => {

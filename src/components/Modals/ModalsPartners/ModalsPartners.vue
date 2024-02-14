@@ -13,6 +13,8 @@
           <MMatrixPartner
               @open-m-infinity-cell="$emit('open-m-infinity-cell')"
               @open-m-add-partner="openMAddPartner"
+              @open-partner-waiting="$emit('open-partner-waiting')"
+
               @select-matrix="selectMatrix"
               @set-partner-by="setPartnerBy"
               @close-modal="$emit('close-modal')"
