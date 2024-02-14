@@ -13,7 +13,8 @@
           <MMatrixPartner
               @open-m-infinity-cell="$emit('open-m-infinity-cell')"
               @open-m-add-partner="openMAddPartner"
-              @open-partner-waiting="$emit('open-partner-waiting')"
+              @open-partner-waiting="openPartnerWaiting"
+              @convert-matrix-to-cell="matrix => emit('convert-matrix-to-cell', matrix)"
 
               @select-matrix="selectMatrix"
               @set-partner-by="setPartnerBy"
@@ -34,6 +35,7 @@
           <MPartnerWaiting
               @close-modal="closePartnerWaitingModal"
               @open-m-add-partner="$emit('open-m-add-partner')"
+              @open-m-matrix-partner="$emit('open-m-matrix-partner')"
               v-else-if="props.openModalPartners === 5"
           />
         </div>
@@ -83,9 +85,11 @@ const emit = defineEmits([
   'open-m-add-partner',
   'open-m-infinity-cell',
   'set-position-for-partner',
+  'set-type-waiting-modal',
   'open-partner-waiting',
   'select-matrix',
   'set-partner-by',
+  'convert-matrix-to-cell',
   'close-modal',
 ])
 
@@ -153,6 +157,11 @@ const setPartnerBy = (type: string) => {
 const openMAddPartner = (pos: IPosition) => {
   emit('set-position-for-partner', pos)
   emit('open-m-add-partner')
+}
+
+const openPartnerWaiting = (type?: 'view') => {
+  emit('open-partner-waiting')
+  emit('set-type-waiting-modal', type)
 }
 
 const closeAddPartnerModal = () => {

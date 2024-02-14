@@ -104,13 +104,6 @@
           </div>
 
           <div class="modal-matrix-partner__endless">
-<!--            <div class="modal-matrix-partner__block-title">Бесконечные</div>-->
-<!--            <InfinityPartnerCard-->
-<!--                modal="m-matrix-partner"-->
-<!--                :ceil="thirdCeil"-->
-<!--                :partners-count="store.state.matrixById.countInInfinity"-->
-<!--                @open-m-infinity-cell="openMInfinityCell"-->
-<!--            />-->
             <CountOfPartners
                 type="modal"
                 title="Бесконечная"
@@ -121,7 +114,7 @@
                 type="modal"
                 title="В ожидании"
                 :partners-count="partnersCount"
-                @open-modal="openMPartnersWaiting"
+                @open-modal="openMPartnerWaiting"
             />
           </div>
         </div>
@@ -166,6 +159,7 @@ const emit = defineEmits([
   'open-m-infinity-cell',
   'open-m-matrix-partner',
   'open-partner-waiting',
+  'convert-matrix-to-cell',
   'select-matrix',
   'set-partner-by',
   'close-modal',
@@ -291,11 +285,12 @@ const openMInfinityCell = () => {
       parentId: store.state.matrixById.matrix?.id,
       isPartnerMatrix: true
   })
+  emit('set-partner-by', 'id')
   emit('open-m-infinity-cell')
 }
 
-const openMPartnersWaiting = () => {
-  emit('open-partner-waiting')
+const openMPartnerWaiting = () => {
+  emit('open-partner-waiting', 'view')
 }
 
 const openMAddPartner = (pos: IPosition) => {
@@ -309,6 +304,7 @@ const openMAddPartner = (pos: IPosition) => {
 
 const openMMatrixPartner = (ceil: Ceil) => {
   if (!ceil?.matrix?.is_booster) {
+    emit('set-partner-by', 'id')
     emit('open-m-matrix-partner')
     emit('select-matrix', ceil.matrix?.id)
   }
@@ -333,21 +329,7 @@ const parentMatrix = async () => {
     }
 
     if (response?.data?.matrix) {
-      // selectedPartner.value = {
-      //   depth: 0,
-      //   pos: 0,
-      //   queueId: null,
-      //   matrix: response.data.matrix,
-      //   allowBuyClone: false,
-      //   allowSniper: false,
-      //   fillRevard: [],
-      //   isInfinity: false,
-      //   informer: {
-      //     activationType: '',
-      //     ceilType: '',
-      //     userType: '',
-      //   }
-      // }
+      emit('convert-matrix-to-cell', response.data.matrix)
     }
   }
 }

@@ -58,7 +58,7 @@ import {
   Matrix
 } from "@/interfaces/store.interface.ts";
 
-const emit = defineEmits(['open-m-matrix-partner', 'select-partner'])
+const emit = defineEmits(['open-m-matrix-partner', 'select-matrix'])
 
 const store = useStore()
 
@@ -117,22 +117,9 @@ const selectTab = () => {
   selectPage(1)
 }
 
-const openMMatrixPartner = (cell: Matrix) => {
-  const selectedPartner = {
-    depth: 0,
-    pos: 0,
-    matrix: cell,
-    allowBuyClone: false,
-    allowSniper: false,
-    fillRevard: [],
-    isInfinity: false,
-    informer: {
-      activationType: '',
-      ceilType: ''
-    }
-  }
+const openMMatrixPartner = (matrix: Matrix) => {
   emit('open-m-matrix-partner')
-  emit('select-partner', selectedPartner, store.state.newTypeMatrix)
+  emit('select-matrix', matrix.id)
 }
 </script>
 

@@ -53,12 +53,12 @@
           <PartnerCells
               v-if="isCells === 1"
               @open-m-matrix-partner="openModalPartner(2)"
-              @select-partner="selectPartner"
+              @select-matrix="selectMatrix"
           />
           <BoostersCells
               v-else-if="isCells === 2"
               @open-m-matrix-partner="openModalPartner(2)"
-              @select-partner="selectPartner"
+              @select-matrix="selectMatrix"
           />
           <ChainsCells
               @open-general-chains="openModalChain(1)"
@@ -78,9 +78,11 @@
         @open-partner-waiting="openModalPartner(5)"
         @close-modal="closeModal"
 
+        @convert-matrix-to-cell="matrix => selectedPartner = convertMatrixToCell(matrix)"
         @set-partner-by="setPartnerBy"
         @select-matrix="selectMatrix"
         @set-position-for-partner="setPositionForPartner"
+        @set-type-waiting-modal="setTypeWaitingModal"
     />
     <ModalChains
         :toggleModalChains="toggleModalChains"
@@ -229,11 +231,14 @@ const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 const selectedPartner: Ref<Ceil | null> = ref(null)
 const selectedPartnerForTeleport: Ref<Matrix | null> = ref(null)
 
+const typeWaitingModal: Ref<'view' | undefined> = ref()
+
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
 provide('selectedChain', selectedChain)
 provide('selectedType', selectedType)
 provide('selectedPartnerForTeleport', selectedPartnerForTeleport)
+provide('typeWaitingModal', typeWaitingModal)
 
 const openModalPartner = (num: number) => {
   toggleModalPartners.value = true
@@ -261,8 +266,8 @@ const openModalTeleport = (cell: Matrix) => {
   document.documentElement.style.overflow = 'hidden'
 }
 
-const closeModal = (uri = route.path) => {
-  router.push(uri)
+const closeModal = (url = route.path) => {
+  router.push(url)
   store.commit('SET_MATRIX_BY_ID', {})
   selectedPartner.value = null
   selectedPartnerForTeleport.value = null
@@ -282,25 +287,8 @@ const setPositionForPartner = (pos: IPosition) => {
   partnerPos.value = pos
 }
 
-const selectPartner = async (ceil: Ceil) => {
-  if (ceil?.matrix) {
-    const matrixId = ceil?.matrix.id
-    await router.push(route.path + `?uuid=${matrixId}`)
-    // Получаем Матрицу партнёра
-    store.commit('SET_MATRIX_BY_ID', {})
-    const response = await store.dispatch('getMatrixById', ceil.matrix.id)
-
-    if (response?.error_code !== undefined) {
-      closeModal()
-    }
-
-    // Получаем партнеров в ожидании "Матрицы партнёра"
-    await store.dispatch('partners/getPendingPartners', {
-      isPartnerMatrix: true,
-      matrixType: ceil.matrix.type,
-    })
-  }
-  selectedPartner.value = ceil
+const setTypeWaitingModal = (type?: 'view') => {
+  typeWaitingModal.value = type
 }
 
 const selectMatrix = (matrixId?: number) => {
@@ -309,6 +297,22 @@ const selectMatrix = (matrixId?: number) => {
     router.push(route.path + `?uuid=${matrixId}`)
   }
 }
+
+const convertMatrixToCell = (matrix: Matrix) => ({
+  depth: 0,
+  pos: 0,
+  queueId: null,
+  matrix: matrix,
+  allowBuyClone: false,
+  allowSniper: false,
+  fillRevard: [],
+  isInfinity: false,
+  informer: {
+    activationType: '',
+    ceilType: '',
+    userType: ''
+  }
+})
 
 const loadMMatrixPartnerModal = async () => {
   selectedPartner.value = null
@@ -327,21 +331,7 @@ const loadMMatrixPartnerModal = async () => {
 
     if (response.data?.matrix && !response.data.matrix.is_booster) {
       console.log('response.data', response)
-      selectedPartner.value = {
-        depth: 0,
-        pos: 0,
-        queueId: null,
-        matrix: response.data.matrix,
-        allowBuyClone: false,
-        allowSniper: false,
-        fillRevard: [],
-        isInfinity: false,
-        informer: {
-          activationType: '',
-          ceilType: '',
-          userType: ''
-        }
-      }
+      selectedPartner.value = convertMatrixToCell(response.data.matrix)
 
       openModalPartner(2)
     }

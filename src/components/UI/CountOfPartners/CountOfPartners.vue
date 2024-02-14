@@ -2,7 +2,7 @@
   <div
       class="count-of-partners"
       :class="`${props.type}-block`"
-      @click="$emit('open-modal')"
+      @click="openModal"
   >
     <div class="count-of-partners__info">
       <div>
@@ -43,6 +43,12 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['open-modal'])
+
+const openModal = () => {
+  if (props.partnersCount) {
+    emit('open-modal')
+  }
+}
 </script>
 
 <style scoped lang="scss">

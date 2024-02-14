@@ -3,7 +3,7 @@
     <ModalHeader
         @close-modal="$emit('close-modal')"
         @open-m-matrix-partner="$emit('open-m-matrix-partner')"
-        :modalHeader="'back'"
+        :modalHeader="selectedType === 'id' ? 'back' : ''"
     >
       Бесконечная ячейка
     </ModalHeader>
@@ -46,6 +46,7 @@ const emit = defineEmits([
 const store = useStore()
 
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
+const selectedType = inject('selectedType') as Ref<string>
 
 const infinityPartners: ComputedRef<Matrix[]> = computed(() => {
   const partnersState = store.state.partners

@@ -3,7 +3,7 @@
     <ModalHeader
         modal-header="back"
         @close-modal="$emit('close-modal')"
-        @back="$emit('close-modal')"
+        @back="back"
     >
       Партнеры в ожидании
     </ModalHeader>
@@ -66,13 +66,24 @@ import {
   Matrix
 } from "@/interfaces/store.interface.ts";
 import Pagination from "@/components/Pagination/Pagination.vue";
+import {
+  useRoute,
+  useRouter
+} from "vue-router";
 
-const emit = defineEmits(['close-modal', 'open-m-add-partner'])
+const emit = defineEmits([
+  'open-m-add-partner',
+  'open-m-matrix-partner',
+  'close-modal',
+])
 
 const store = useStore()
+const router = useRouter()
+const route = useRoute()
+
 const cells: ComputedRef<Matrix[]> = computed(() =>
     selectedType.value === 'id' ?
-        store.state.partners.partnersPendingSecond.list :
+        store.state.partners.partnersPendingSecond?.list :
         store.state.partners.partnersPending?.list
 )
 
@@ -90,13 +101,23 @@ let selectedCell: Ref<Matrix | null> = ref(null)
 
 const selectedPage: ComputedRef<number> = computed(() => store.state.partners.pageIdPartners)
 
+const typeWaitingModal = inject('typeWaitingModal') as Ref<'view' | undefined>
+
 const selectPage = (page: number) => {
   store.commit('partners/SET_PAGE_ID_PARTNERS', page)
   store.dispatch('partners/getPendingPartners')
 }
 
+const back = () => {
+  typeWaitingModal.value === 'view' ? emit('open-m-matrix-partner') : emit('close-modal')
+}
+
 const selectCell = (cell: Matrix) => {
-  selectedCell.value = cell
+  if (!typeWaitingModal.value) {
+    selectedCell.value = cell
+  } else {
+    router.push(route.path + `?uuid=${cell.id}`)
+  }
 }
 
 const removePartnerFromList = () => {
