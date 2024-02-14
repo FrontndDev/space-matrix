@@ -21,7 +21,7 @@
           class="infinity-partner-card__partners-link"
           v-if="props.partnersCount"
       >
-        Просмотр
+        {{ $t('hello') }}
       </div>
     </div>
     <div
