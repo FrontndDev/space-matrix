@@ -103,17 +103,23 @@
             </div>
           </div>
 
-          <div class="modal-matrix-partner__endless">
+          <div
+              class="modal-matrix-partner__endless"
+              :class="{ 'with-line': infinityPartnersCount && partnersCount }"
+              v-if="infinityPartnersCount || partnersCount"
+          >
             <CountOfPartners
                 type="modal"
                 title="Бесконечная"
-                :partners-count="store.state.matrixById.countInInfinity"
+                :partners-count="infinityPartnersCount"
+                v-if="infinityPartnersCount"
                 @open-modal="openMInfinityCell"
             />
             <CountOfPartners
                 type="modal"
                 title="В ожидании"
                 :partners-count="partnersCount"
+                v-if="partnersCount"
                 @open-modal="openMPartnerWaiting"
             />
           </div>
@@ -175,6 +181,7 @@ const isDreamTon9: ComputedRef<boolean> = computed(() => matrixById.value.matrix
 const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
 
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.totalCount)
+const infinityPartnersCount: ComputedRef<number> = computed(() => store.state.matrixById.countInInfinity)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
 
