@@ -51,7 +51,6 @@ const route = useRoute()
 
 const setDependencies = async (type: Type) => {
   clearDependencies()
-  store.commit('SET_SELECTED_TYPE', type)
 
   await store.dispatch('getMatrixByType', type.type)
 
@@ -68,7 +67,7 @@ const clearDependencies = () => {
 
 const selectType = (type: Type) => {
   setDependencies(type)
-  store.dispatch('partners/getPendingPartners', { isPartnerMatrix: false })
+  // store.dispatch('partners/getPendingPartners', { isPartnerMatrix: false })
 
   const queryId = () => {
     const query = route.query
@@ -121,9 +120,9 @@ watch(() => listOfTypes.value?.types?.length, () => {
 
 watch(() => route.path, () => {
   store.commit('SET_MATRIX_BY_TYPE', {})
-  clearDependencies()
 
   const type = listOfTypes.value?.types.find(type => type.type === route.params.type) ?? listOfTypes.value?.types?.[0]
+  console.log('type', type)
   selectType(type)
 })
 

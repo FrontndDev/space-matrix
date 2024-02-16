@@ -146,6 +146,7 @@ import {
 import { useCopyLink } from "@/composables/useCopyLink";
 import MatrixActivationInProgress from "@/components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
 import { IChains } from "@/interfaces/chains.interface";
+import { baseUrl } from "@/router";
 
 const isCells = ref(1)
 
@@ -228,7 +229,7 @@ const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 const selectedPartner: Ref<Ceil | null> = ref(null)
 const selectedPartnerForTeleport: Ref<Matrix | null> = ref(null)
 
-const typeWaitingModal: Ref<'view' | undefined> = ref()
+const typeWaitingModal: Ref<'view' | undefined> = ref(undefined)
 
 provide('partnerPos', partnerPos)
 provide('selectedPartner', selectedPartner)
@@ -357,12 +358,24 @@ const loadDependencies = () => {
   openChainViaLink()
 }
 
+const setType = () => {
+  store.commit('SET_NEW_TYPE_MATRIX', null)
+  const typeFromRoute = route.path.split(`${baseUrl}/`)?.[1]
+  const selectedType = listOfTypes.value.types.find(type => type.type === typeFromRoute)
+  store.commit('SET_SELECTED_TYPE', selectedType)
+}
+
 watch(() => route.fullPath, () => {
   console.log('changeRoute')
   loadDependencies()
 })
 
+watch(() => route.path, () => {
+  setType()
+})
+
 onMounted(() => {
+  setType()
   loadDependencies()
 })
 </script>
