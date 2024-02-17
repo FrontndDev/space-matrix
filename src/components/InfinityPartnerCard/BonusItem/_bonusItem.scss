@@ -5,9 +5,10 @@
   @include flexbox(row, flex-start, center);
   column-gap: 4px;
   padding: 4px 8px 4px 4px;
+  max-width: 99%;
   border-radius: 8px;
   background: $bg-base-secondary;
-  @include get-font(10px, 500, 12px, $text-base-secondary);
+  @include get-font(12px, 500, 12px, $text-base-secondary);
 
   &__icon {
     flex-shrink: 0;
@@ -23,6 +24,14 @@
 
   &.ton {
     padding-right: 5px;
+  }
+
+  &.cashout {
+    max-width: 67px;
+  }
+
+  &.custom {
+    max-width: 55px;
   }
 
   &.boost {
