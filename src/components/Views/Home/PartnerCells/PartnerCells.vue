@@ -119,7 +119,7 @@ const selectTab = () => {
 
 const openMMatrixPartner = (matrix: Matrix) => {
   emit('open-m-matrix-partner')
-  emit('select-matrix', matrix.id)
+  emit('select-matrix', matrix.uuid)
 }
 </script>
 

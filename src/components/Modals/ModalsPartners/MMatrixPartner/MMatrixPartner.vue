@@ -125,7 +125,7 @@
           </div>
         </div>
       </div>
-      <CopyLink @click="useCopyLink(store.state.matrixById.matrix?.id, selectedPartner?.matrix?.type ?? '')"/>
+      <CopyLink @click="useCopyLink(store.state.matrixById.matrix?.uuid, selectedPartner?.matrix?.type ?? '')"/>
     </div>
   </div>
 </template>
@@ -218,7 +218,7 @@ const matrixIsInQueueForPublication: ComputedRef<boolean> = computed(() => {
 const loadMatrix = () => {
   if (matrixIsInQueueForPublication.value) {
     interval.value = setInterval(() => {
-      store.dispatch('getMatrixById', matrixById.value.matrix?.id);
+      store.dispatch('getMatrixByUUID', matrixById.value.matrix?.uuid);
     }, 3000);
   } else if (!matrixIsInQueueForPublication.value && interval.value) {
     clearInterval(interval.value);
@@ -310,7 +310,7 @@ const openMMatrixPartner = (ceil: Ceil) => {
   if (!ceil?.matrix?.is_booster) {
     emit('set-partner-by', 'id')
     emit('open-m-matrix-partner')
-    emit('select-matrix', ceil.matrix?.id)
+    emit('select-matrix', ceil.matrix?.uuid)
   }
 }
 
@@ -320,13 +320,13 @@ const getUser = () => {
 }
 
 const parentMatrix = async () => {
-  const parentMatrixId = selectedPartner.value?.matrix?.parent_matrix_id
-  if (parentMatrixId) {
-    await router.push(route.path + `?uuid=${parentMatrixId}`)
+  const parentMatrixUUID = selectedPartner.value?.matrix?.parent_matrix_id
+  if (parentMatrixUUID) {
+    await router.push(route.path + `?uuid=${parentMatrixUUID}`)
     emit('select-matrix', null)
     store.commit('SET_MATRIX_BY_ID', {})
 
-    const response = await store.dispatch('getMatrixById', parentMatrixId)
+    const response = await store.dispatch('getMatrixByUUID', parentMatrixUUID)
 
     if (response?.error_code !== undefined) {
       emit('close-modal')

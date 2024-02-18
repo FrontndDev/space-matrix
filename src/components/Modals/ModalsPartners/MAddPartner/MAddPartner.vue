@@ -14,7 +14,7 @@
             :type="getCeilCumulative ? 'freeze' : 'profit'"
             :ceil="getCeil"
             :partners-count="partnersCount"
-            @click="$emit('open-partner-waiting')"
+            @click="$emit('open-partner-waiting', undefined)"
             v-if="getCeil?.allowSniper && partnersCount"
         />
       </div>
@@ -154,7 +154,7 @@ const buyBooster = async () => {
     await store.dispatch('buyBooster', data)
 
     props.selectedType === 'id' ?
-        await store.dispatch('getMatrixById', matrixById.value.matrix?.id) :
+        await store.dispatch('getMatrixByUUID', matrixById.value.matrix?.uuid) :
         await store.dispatch('getMatrixByType', store.state.selectedType.type)
   }
 }

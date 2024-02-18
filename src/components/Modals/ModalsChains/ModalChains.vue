@@ -10,7 +10,7 @@
               @open-add-partner-chains="emit('open-add-partner-chains')"
 
               @open-m-matrix-partner="emit('open-m-matrix-partner')"
-              @select-matrix="matrixId => emit('select-matrix', matrixId)"
+              @select-matrix="matrixUUID => emit('select-matrix', matrixUUID)"
 
               @buy-booster="buyBooster"
           />

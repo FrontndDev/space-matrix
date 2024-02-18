@@ -42,7 +42,7 @@
           <CopyLink
               style="grid-area: copy-link;"
               v-if="!matrixByType?.ctaText && !matrixIsTemporarilyUnavailable && Object.keys(matrixByType).length"
-              @click="useCopyLink(matrixByType.matrix?.id ?? 0, matrixByType.matrix?.type ?? '')"
+              @click="useCopyLink(matrixByType.matrix?.uuid ?? '', matrixByType.matrix?.type ?? '')"
           />
         </div>
         <div class="home__info">
@@ -278,6 +278,7 @@ const closeModal = (url = route.path) => {
   toggleModalConfirmPayment.value = false
   document.body.style.overflow = 'auto'
   document.documentElement.style.overflow = 'auto'
+  setTypeWaitingModal(undefined)
 }
 
 const setPositionForPartner = (pos: IPosition) => {
@@ -289,10 +290,10 @@ const setTypeWaitingModal = (type?: 'view') => {
   typeWaitingModal.value = type
 }
 
-const selectMatrix = (matrixId?: number) => {
-  if (matrixId) {
-    console.log('selectMatrix', route.path + `?uuid=${matrixId}`)
-    router.push(route.path + `?uuid=${matrixId}`)
+const selectMatrix = (matrixUUID?: string) => {
+  if (matrixUUID) {
+    console.log('selectMatrix', route.path + `?uuid=${matrixUUID}`)
+    router.push(route.path + `?uuid=${matrixUUID}`)
   }
 }
 
@@ -318,14 +319,17 @@ const loadMMatrixPartnerModal = async () => {
   const query = route.query
   if (query.uuid) {
     store.commit('SET_MATRIX_BY_ID', {})
-    const response = await store.dispatch('getMatrixById', route.query.uuid)
+    const response = await store.dispatch('getMatrixByUUID', route.query.uuid)
 
     if (response?.error_code !== undefined) {
       closeModal()
     }
 
     // Получаем партнеров в ожидании "Матрицы партнёра"
-    await store.dispatch('partners/getPendingPartners', { isPartnerMatrix: true })
+    await store.dispatch('partners/getPendingPartners', {
+      isPartnerMatrix: true,
+      matrixId: query.uuid,
+    })
 
     if (response.data?.matrix && !response.data.matrix.is_booster) {
       console.log('response.data', response)

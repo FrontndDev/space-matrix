@@ -55,7 +55,7 @@ const infinityPartners: ComputedRef<Matrix[]> = computed(() => {
 
 const selectMatrix = (matrix: Matrix) => {
   if (matrix?.id) {
-    emit('select-matrix', matrix.id)
+    emit('select-matrix', matrix.uuid)
     emit('open-m-matrix-partner')
   }
 }

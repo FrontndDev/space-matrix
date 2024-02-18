@@ -87,9 +87,9 @@ const activateTheChain = () => {
   }
 }
 
-const openMMatrixModal = (matrixId?: number) => {
+const openMMatrixModal = (matrixUUID?: string) => {
   emit('close-modal')
-  emit('select-matrix', matrixId)
+  emit('select-matrix', matrixUUID)
   emit('open-m-matrix-partner')
 }
 

@@ -116,7 +116,7 @@ const selectCell = (cell: Matrix) => {
   if (!typeWaitingModal.value) {
     selectedCell.value = cell
   } else {
-    router.push(route.path + `?uuid=${cell.id}`)
+    router.push(route.path + `?uuid=${cell.uuid}`)
   }
 }
 

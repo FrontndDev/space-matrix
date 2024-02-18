@@ -145,8 +145,8 @@ const getEmitForModalOverlay = (emitName?: TModalsPartners) => {
   }
 }
 
-const selectMatrix = (matrixId?: number) => {
-  emit('select-matrix', matrixId)
+const selectMatrix = (matrixUUID?: string) => {
+  emit('select-matrix', matrixUUID)
 }
 
 const setPartnerBy = (type: string) => {

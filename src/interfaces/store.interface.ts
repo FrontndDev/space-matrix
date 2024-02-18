@@ -45,6 +45,7 @@ export interface IBinStatus {
 
 export interface Matrix {
     id: number;
+    uuid: string;
     owner: IOwner;
     parent_matrix_id: number | null;
     filled: boolean;

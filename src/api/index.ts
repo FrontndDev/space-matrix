@@ -26,6 +26,10 @@ export async function getMatrix(
   return getAsync(`/api/matrix/${matrixTypeOrId}`, options);
 }
 
+export async function getMatrixByUUID(matrixUUID: string) {
+  return getAsync(`/api/matrix/uuid/${matrixUUID}`)
+}
+
 export async function getPaymentForm(matrixType: string) {
   return getAsync(`/api/matrix/payment-form/${matrixType}`);
 }
@@ -57,9 +61,12 @@ export async function filterOfActivatedMatrix({
   matrixFilterUserId,
   matrixFilterPageId,
   filter,
+  matrixId,
 }: any) {
+  const matrixIdParam = `${matrixId ? `/${matrixId}` : ''}`
+
   return postAsync(
-    `/api/matrix/get-clones/${matrixType}/${matrixFilterUserId}/${matrixFilterPageId}`,
+    `/api/matrix/get-clones/${matrixType}/${matrixFilterUserId}/${matrixFilterPageId}${matrixIdParam}`,
     { filter }
   );
 }

@@ -20,6 +20,7 @@ import chains from "./modules/chains";
 import { useMyOverlay } from "@/composables/useMyOverlay";
 import { useShowMessage } from "@/composables/useShowMessage";
 import axios from "axios";
+import { getMatrixByUUID } from "@/api/index";
 
 let requestMatrixByType: any = null;
 
@@ -67,8 +68,8 @@ export default createStore({
                 })
             }
         },
-        async getMatrixById(ctx: ActionContext<any, any>, matrixId: number) {
-            const response = await API.getMatrix(matrixId)
+        async getMatrixByUUID(ctx: ActionContext<any, any>, matrixUUID: string) {
+            const response = await API.getMatrixByUUID(matrixUUID)
             delete response.data.tabs
             ctx.commit('SET_MATRIX_BY_ID', response.data)
 
