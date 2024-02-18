@@ -42,7 +42,7 @@ export default {
         matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
         matrixFilterPageId: state.pageIdPartners,
         //@ts-ignore
-        matrixFilterUserId: window.UserData.id,
+        matrixFilterUserId: 2984619,
         filter: { level: filter }
       }
     ).then(response => {
@@ -66,7 +66,7 @@ export default {
             matrixType: type,
             matrixFilterPageId: state.pageIdPartners,
             //@ts-ignore
-            matrixFilterUserId: window.UserData.id,
+            matrixFilterUserId: 2984619,
             filter: { pending: 1, level: filter }
           }
       ).then(response => {
@@ -87,16 +87,16 @@ export default {
       {
         isPartnerMatrix = false,
         matrixType = rootState.selectedType.type,
-        matrixId,
+        matrixUUID,
       }: IGetPendingBoostersParams
     ) {
       API.filterOfActivatedMatrix({
           matrixType,
           matrixFilterPageId: 1,
           //@ts-ignore
-          matrixFilterUserId: window.UserData.id,
+          matrixFilterUserId: 2984619,
           filter: { pending: 1 },
-          matrixId,
+          matrixUUID,
         }
       ).then(response => {
         if (!isPartnerMatrix) {

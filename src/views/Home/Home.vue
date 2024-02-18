@@ -329,7 +329,7 @@ const loadMMatrixPartnerModal = async () => {
     // Получаем партнеров в ожидании "Матрицы партнёра"
     await store.dispatch('partners/getPendingPartners', {
       isPartnerMatrix: true,
-      matrixId: query.uuid,
+      matrixUUID: query.uuid,
     })
 
     if (response.data?.matrix && !response.data.matrix.is_booster) {

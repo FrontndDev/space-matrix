@@ -138,7 +138,7 @@ const removePartnerFromList = () => {
 }
 
 const exposePartner = async () => {
-  const query = route.query.uuid && route.query.chainId
+  const query = route.query.uuid || route.query.chainId
   const myMatrix = store.state.matrixByType?.matrix
   const partnerMatrix = selectedPartner.value?.matrix
 
@@ -165,6 +165,12 @@ const exposePartner = async () => {
       if (selectedCell.value?.time_to_activate) {
         await store.dispatch('getListOfTypes')
       }
+    } else if (partnerMatrix && !myMatrix) {
+      await store.dispatch('getMatrixByUUID', partnerMatrix.uuid)
+      await store.dispatch('partners/getPendingPartners', {
+        isPartnerMatrix: true,
+        matrixUUID: partnerMatrix.uuid,
+      })
     }
     removePartnerFromList()
   }
