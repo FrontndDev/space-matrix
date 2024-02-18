@@ -158,20 +158,25 @@ const exposePartner = async () => {
     emit('close-modal', query ? 'open-m-matrix-partner' : '')
     await store.dispatch('partners/exposePartner', data)
 
-    if (!partnerMatrix && myMatrix) {
+    if (route.query.uuid) {
+      console.log('route.query.uuid')
+
+      store.state.partners.partnersPendingSecond.totalCount--
+      await store.dispatch('getMatrixByUUID', route.query.uuid)
+      await store.dispatch('partners/getPendingPartners', {
+        isPartnerMatrix: true,
+        matrixUUID: route.query.uuid,
+      })
+    } else if (!partnerMatrix && myMatrix) {
+      console.log('!partnerMatrix && myMatrix')
       await store.dispatch('getMatrixByType', store.state.selectedType.type)
       await store.dispatch('partners/getPendingPartners', { isPartnerMatrix: false })
 
       if (selectedCell.value?.time_to_activate) {
         await store.dispatch('getListOfTypes')
       }
-    } else if (partnerMatrix && !myMatrix) {
-      await store.dispatch('getMatrixByUUID', partnerMatrix.uuid)
-      await store.dispatch('partners/getPendingPartners', {
-        isPartnerMatrix: true,
-        matrixUUID: partnerMatrix.uuid,
-      })
     }
+
     removePartnerFromList()
   }
 }
