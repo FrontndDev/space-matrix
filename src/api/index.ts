@@ -26,8 +26,8 @@ export async function getMatrix(
   return getAsync(`/api/matrix/${matrixTypeOrId}`, options);
 }
 
-export async function getMatrixByUUID(matrixUUID: string) {
-  return getAsync(`/api/matrix/uuid/${matrixUUID}`)
+export async function getMatrixByUUID(matrixUUID: string, options?: any) {
+  return getAsync(`/api/matrix/uuid/${matrixUUID}`, options)
 }
 
 export async function getPaymentForm(matrixType: string) {

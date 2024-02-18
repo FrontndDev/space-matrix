@@ -20,9 +20,9 @@ import chains from "./modules/chains";
 import { useMyOverlay } from "@/composables/useMyOverlay";
 import { useShowMessage } from "@/composables/useShowMessage";
 import axios from "axios";
-import { getMatrixByUUID } from "@/api/index";
 
 let requestMatrixByType: any = null;
+let requestMatrixByUUID: any = null;
 
 export default createStore({
     modules: {
@@ -59,7 +59,7 @@ export default createStore({
             requestMatrixByType = axios.CancelToken.source()
             if (matrixType) {
                 return await API.getMatrix(matrixType, { cancelTokenSource: requestMatrixByType }).then(response => {
-                    if (response?.data) {
+                    if (response.data) {
                         ctx.commit('SET_LIST_OF_TYPES', response.data.tabs)
                         delete response.data.tabs
                         ctx.commit('SET_MATRIX_BY_TYPE', response.data)
@@ -69,11 +69,21 @@ export default createStore({
             }
         },
         async getMatrixByUUID(ctx: ActionContext<any, any>, matrixUUID: string) {
-            const response = await API.getMatrixByUUID(matrixUUID)
-            delete response.data.tabs
-            ctx.commit('SET_MATRIX_BY_ID', response.data)
+            if (requestMatrixByUUID) {
+                requestMatrixByUUID.cancel();
+            }
+            requestMatrixByUUID = axios.CancelToken.source()
 
-            return response
+            if (matrixUUID) {
+                const response = await API.getMatrixByUUID(matrixUUID, { cancelTokenSource: requestMatrixByUUID })
+
+                if (response.data) {
+                    delete response.data.tabs
+                    ctx.commit('SET_MATRIX_BY_ID', response.data)
+
+                    return response
+                }
+            }
         },
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
             commit('SET_PAYMENT_FORM', null)
