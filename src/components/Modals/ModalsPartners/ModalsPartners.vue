@@ -34,6 +34,7 @@
           />
           <MPartnerWaiting
               @close-modal="closePartnerWaitingModal"
+              @set-type-waiting-modal="value => $emit('set-type-waiting-modal', value)"
               @open-m-add-partner="$emit('open-m-add-partner')"
               @open-m-matrix-partner="$emit('open-m-matrix-partner')"
               v-else-if="props.openModalPartners === 5"

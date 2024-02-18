@@ -74,6 +74,7 @@ import {
 const emit = defineEmits([
   'open-m-add-partner',
   'open-m-matrix-partner',
+  'set-type-waiting-modal',
   'close-modal',
 ])
 
@@ -118,6 +119,7 @@ const selectCell = (cell: Matrix) => {
   } else {
     router.push(route.path + `?uuid=${cell.uuid}`)
   }
+  emit('set-type-waiting-modal', undefined)
 }
 
 const removePartnerFromList = () => {
