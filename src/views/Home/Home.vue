@@ -176,6 +176,7 @@ const setPartnerBy = (type: string) => {
 }
 
 const selectChain = (chain: IChains, redirect = true) => {
+  selectedChain.value = chain
   if (redirect) {
     router.push(route.path + `?chainId=${chain.id}`)
   }

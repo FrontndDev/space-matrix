@@ -14,7 +14,7 @@
               <SmallCell
                   :key="idx"
                   :cell="matrix"
-                  @click="openMMatrixModal(matrix.id)"
+                  @click="openMMatrixModal(matrix.uuid)"
               />
             </div>
           </div>
@@ -87,7 +87,7 @@ const activateTheChain = () => {
   }
 }
 
-const openMMatrixModal = (matrixUUID?: string | number) => {
+const openMMatrixModal = (matrixUUID?: string) => {
   emit('close-modal')
   emit('select-matrix', matrixUUID)
   emit('open-m-matrix-partner')
