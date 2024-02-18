@@ -42,7 +42,7 @@ export default {
         matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
         matrixFilterPageId: state.pageIdPartners,
         //@ts-ignore
-        matrixFilterUserId: 2984619,
+        matrixFilterUserId: window.UserData.id,
         filter: { level: filter }
       }
     ).then(response => {
@@ -66,7 +66,7 @@ export default {
             matrixType: type,
             matrixFilterPageId: state.pageIdPartners,
             //@ts-ignore
-            matrixFilterUserId: 2984619,
+            matrixFilterUserId: window.UserData.id,
             filter: { pending: 1, level: filter }
           }
       ).then(response => {
@@ -94,7 +94,7 @@ export default {
           matrixType,
           matrixFilterPageId: 1,
           //@ts-ignore
-          matrixFilterUserId: 2984619,
+          matrixFilterUserId: window.UserData.id,
           filter: { pending: 1 },
           matrixUUID,
         }
