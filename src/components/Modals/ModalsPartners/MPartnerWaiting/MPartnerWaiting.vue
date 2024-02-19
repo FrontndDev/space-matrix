@@ -134,6 +134,13 @@ const removePartnerFromList = () => {
       newPartnersPending.list.splice(index, 1)
       newPartnersPending.totalCount--
     }
+
+    if (route.query.uuid) {
+      const partnersPendingSecond = store.state.partners.partnersPendingSecond
+      const index = partnersPendingSecond.list.map((partner: Matrix) => partner.id).indexOf(+selectedCell.value?.id)
+      partnersPendingSecond.list.splice(index, 1)
+      partnersPendingSecond.totalCount--
+    }
   }
 }
 
@@ -158,17 +165,16 @@ const exposePartner = async () => {
     emit('close-modal', query ? 'open-m-matrix-partner' : '')
     await store.dispatch('partners/exposePartner', data)
 
-    if (route.query.uuid) {
-      console.log('route.query.uuid')
 
-      store.state.partners.partnersPendingSecond.totalCount--
+    removePartnerFromList()
+
+    if (route.query.uuid) {
       await store.dispatch('getMatrixByUUID', route.query.uuid)
       await store.dispatch('partners/getPendingPartners', {
         isPartnerMatrix: true,
         matrixUUID: route.query.uuid,
       })
     } else if (!partnerMatrix && myMatrix) {
-      console.log('!partnerMatrix && myMatrix')
       await store.dispatch('getMatrixByType', store.state.selectedType.type)
       await store.dispatch('partners/getPendingPartners', { isPartnerMatrix: false })
 
@@ -176,8 +182,6 @@ const exposePartner = async () => {
         await store.dispatch('getListOfTypes')
       }
     }
-
-    removePartnerFromList()
   }
 }
 </script>
