@@ -58,6 +58,7 @@ import {
 } from "vue";
 import {
   IExposePartnerParams,
+  IPartners,
   IPosition
 } from "@/interfaces/partners.interface.ts";
 import Preloader from "@/components/UI/Preloader/Preloader.vue";
@@ -122,25 +123,28 @@ const selectCell = (cell: Matrix) => {
   emit('set-type-waiting-modal', undefined)
 }
 
-const removePartnerFromList = () => {
+const removePartnerFromList = (partners: IPartners) => {
   if (selectedCell.value) {
-    const partnersPending = store.state.partners.partnersPending
-    const index = partnersPending.list.map((partner: Matrix) => partner.id).indexOf(+selectedCell.value?.id)
-    partnersPending.list.splice(index, 1)
-    partnersPending.totalCount--
+    const index = partners.list.map((partner: Matrix) => partner.id).indexOf(+selectedCell.value?.id)
+    addPartnersToList(partners.list[index])
+    partners.list.splice(index, 1)
+    partners.totalCount--
+    //
+    // const newPartnersPending = store.state.partners.newPartnersPending
+    // if (newPartnersPending.list?.[0]?.type === store.state.selectedType.type) {
+    //   newPartnersPending.list.splice(index, 1)
+    //   newPartnersPending.totalCount--
+    // }
+  }
+}
 
-    const newPartnersPending = store.state.partners.newPartnersPending
-    if (newPartnersPending.list?.[0]?.type === store.state.selectedType.type) {
-      newPartnersPending.list.splice(index, 1)
-      newPartnersPending.totalCount--
-    }
+const addPartnersToList = (partner: Matrix) => {
+  const partners: IPartners = store.state.partners.partnersExposed
+  const presenceOfPartner = partners.list.find((exposedPartner: Matrix) => exposedPartner.uuid === partner.uuid)
 
-    if (route.query.uuid) {
-      const partnersPendingSecond = store.state.partners.partnersPendingSecond
-      const index = partnersPendingSecond.list.map((partner: Matrix) => partner.id).indexOf(+selectedCell.value?.id)
-      partnersPendingSecond.list.splice(index, 1)
-      partnersPendingSecond.totalCount--
-    }
+  if (!presenceOfPartner) {
+    partners.list.push(partner)
+    partners.totalCount++
   }
 }
 
@@ -163,25 +167,25 @@ const exposePartner = async () => {
     }
 
     emit('close-modal', query ? 'open-m-matrix-partner' : '')
-    await store.dispatch('partners/exposePartner', data)
-
-
-    removePartnerFromList()
+    store.dispatch('partners/exposePartner', data)
 
     if (route.query.uuid) {
-      await store.dispatch('getMatrixByUUID', route.query.uuid)
-      await store.dispatch('partners/getPendingPartners', {
+      removePartnerFromList(store.state.partners.partnersPendingSecond)
+      store.dispatch('getMatrixByUUID', route.query.uuid)
+      store.dispatch('partners/getPendingPartners', {
         isPartnerMatrix: true,
         matrixUUID: route.query.uuid,
       })
     } else if (!partnerMatrix && myMatrix) {
-      await store.dispatch('getMatrixByType', store.state.selectedType.type)
-      await store.dispatch('partners/getPendingPartners', { isPartnerMatrix: false })
+      store.dispatch('getMatrixByType', store.state.selectedType.type)
 
       if (selectedCell.value?.time_to_activate) {
-        await store.dispatch('getListOfTypes')
+        store.dispatch('getListOfTypes')
       }
     }
+
+    removePartnerFromList(store.state.partners.partnersPending)
+    store.dispatch('partners/getPendingPartners', { isPartnerMatrix: false })
   }
 }
 </script>
