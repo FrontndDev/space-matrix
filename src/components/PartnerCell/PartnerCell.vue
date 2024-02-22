@@ -38,12 +38,12 @@
     </div>
 
     <PartnerType
-        :binstatus="props.ceil.binstatus[1]"
+        :binstatus="'binstatus' in props.ceil ? props.ceil.binstatus[1] : []"
         :cellType="props.cellType"
         :type="props.type"
-        :circles="ceil.ceils['1']"
+        :circles="'ceils' in props.ceil ? props.ceil.ceils['1'] : {}"
         :is-booster="props.isBooster"
-        v-if="props.ceil"
+        v-if="props.ceil || props.isBooster || 'ceils' in props.ceil"
         @click="$emit('open-m-matrix-partner')"
         @circle-avatar="$emit('circle-avatar')"
     />
@@ -68,10 +68,11 @@ import { useGetLevel } from "@/composables/useGetLevel.ts";
 import { useStore } from "vuex";
 import { useCopy } from "@/composables/useCopy.ts";
 import CellInformation from "@/components/CellInformation/CellInformation.vue";
+import { ITeleports } from "@/interfaces/chains.interface.ts";
 
 const props = defineProps({
   ceil: {
-    type: Object as PropType<Matrix>,
+    type: Object as PropType<Matrix | ITeleports>,
     required: true,
   },
   id: {
@@ -120,7 +121,7 @@ const fillReward = computed(() => {
 })
 
 const selectedTypeTitle: ComputedRef<string> = computed(() =>
-    store.state.listOfTypes.types.find((type: Type) => props.ceil?.type === type.type)?.title
+    store.state.listOfTypes.types.find((type: Type) => 'type' in props.ceil && props.ceil.type === type.type)?.title
 )
 </script>
 

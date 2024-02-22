@@ -145,7 +145,10 @@ import {
 } from "vue-router";
 import { useCopyLink } from "@/composables/useCopyLink";
 import MatrixActivationInProgress from "@/components/MatrixActivationInProgress/MatrixActivationInProgress.vue";
-import { IChains } from "@/interfaces/chains.interface";
+import {
+  IChains,
+  ITeleports
+} from "@/interfaces/chains.interface";
 import { baseUrl } from "@/router";
 
 const isCells = ref(1)
@@ -228,7 +231,7 @@ const matrixIsTemporarilyUnavailable: ComputedRef<boolean> = computed(() => {
 const partnerPos: Ref<IPosition> = ref({ depth: 0, pos: 0 })
 
 const selectedPartner: Ref<Ceil | null> = ref(null)
-const selectedPartnerForTeleport: Ref<Matrix | null> = ref(null)
+const selectedPartnerForTeleport: Ref<ITeleports | null> = ref(null)
 
 const typeWaitingModal: Ref<'view' | undefined> = ref(undefined)
 
@@ -257,7 +260,7 @@ const openCells = (id: number) => {
   isCells.value = id
 }
 
-const openModalTeleport = (cell: Matrix) => {
+const openModalTeleport = (cell: ITeleports) => {
   selectedPartnerForTeleport.value = cell
   toggleModalChains.value = true
   openModalChains.value = 5

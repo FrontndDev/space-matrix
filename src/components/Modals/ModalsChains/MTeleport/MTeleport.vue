@@ -8,7 +8,13 @@
       </ModalHeader>
       <div class="modal-teleport__info">
         <span class="modal-teleport__text">
-          Мгновенно откройте матрицы D2, D3, D4
+          Мгновенно откройте матрицы
+          <span
+              v-for="(matrixTitle, idx) in selectedPartnerForTeleport.openList"
+          >
+            {{ matrixTitle }}
+            <template v-if="selectedPartnerForTeleport.openList.length !== idx + 1">,&nbsp;</template>
+          </span>
           <br>
           для выбранного партнера
         </span>
@@ -51,13 +57,13 @@ import {
   Ref
 } from "vue";
 import CancelButton from "@/components/UI/CancelButton/CancelButton.vue";
-import { Matrix } from "@/interfaces/store.interface.ts";
+import { ITeleports } from "@/interfaces/chains.interface.ts";
 
 const emit = defineEmits(['close-modal'])
 
 const store = useStore()
 
-const selectedPartnerForTeleport = inject('selectedPartnerForTeleport') as Ref<Matrix>
+const selectedPartnerForTeleport = inject('selectedPartnerForTeleport') as Ref<ITeleports>
 
 const moreDetails = () => {
   window.location.href = '/app/page/teleport'

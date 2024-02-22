@@ -14,7 +14,7 @@
                     :type="props.type"
                     :cell-type="props.type"
                     :ceil="props.ceil"
-                    :is-booster="props.ceil.is_booster"
+                    :is-booster="'is_booster' in props.ceil && props.ceil.is_booster"
                     :show-cell-information="false"
                     v-if="props.ceil"
                 />
@@ -23,7 +23,7 @@
                   <CellInformationItem
                       padding="12px 16px"
                       theme="light"
-                      v-for="item in Object.values(props.types).filter(type => type?.value)"
+                      v-for="item in Object.values(props.types).filter(type2 => type2?.value)"
                       :key="item.value"
                       :item="item"
                   />
@@ -49,10 +49,11 @@ import CellInformationItem from "@/components/CellInformation/CellInformationIte
 import {
   PropType
 } from "vue";
+import { ITeleports } from "@/interfaces/chains.interface.ts";
 
 const props = defineProps({
   ceil: {
-    type: Object as PropType<Matrix>,
+    type: Object as PropType<Matrix | ITeleports>,
   },
   type: {
     type: String,

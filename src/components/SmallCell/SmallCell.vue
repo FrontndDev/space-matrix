@@ -43,12 +43,12 @@
         <span>{{ props.cell?.owner.id }}</span>
       </div>
       <PartnerType
-          :binstatus="cell.binstatus?.[1]"
+          :binstatus="'binstatus' in props.cell ? props.cell.binstatus[1] : []"
           :cellType="props.cellType"
           :type="props.cellType"
-          :circles="cell.ceils['1']"
+          :circles="'ceils' in props.cell ? props.cell.ceils['1'] : {}"
           @click="emit('open-m-matrix-partner')"
-          v-if="props.cellType && props.showPartnerType && cell?.binstatus && !matrixTypeIsDreamTon9"
+          v-if="props.cellType && props.showPartnerType && !matrixTypeIsDreamTon9 && props.type"
       />
     </div>
     <SmallCellType
@@ -77,10 +77,11 @@ import { useGetLevel } from "@/composables/useGetLevel.ts";
 import { useStore } from "vuex";
 import { useCopy } from "@/composables/useCopy.ts";
 import CellInformation from "@/components/CellInformation/CellInformation.vue";
+import { ITeleports } from "@/interfaces/chains.interface.ts";
 
 const props = defineProps({
   cell: {
-    type: Object as PropType<Matrix>,
+    type: Object as PropType<Matrix | ITeleports>,
     required: true,
   },
   cellType: {
@@ -128,12 +129,19 @@ const emit = defineEmits(['open-m-matrix-partner'])
 const store = useStore()
 
 const selectedTypeTitle: ComputedRef<string> = computed(() =>
-    store.state.listOfTypes?.types.find((type: Type) => props.cell?.type === type.type)?.title
+    store.state.listOfTypes?.types
+        .find((type: Type) => 'type' in props.cell && props.cell.type === type.type)?.title
 )
 
-const matrixTypeIsDreamTon9: ComputedRef<boolean> = computed(() => props.cell?.type === 'dream-ton_9')
+const matrixTypeIsDreamTon9: ComputedRef<boolean> = computed(() =>
+    'type' in props.cell && props.cell.type === 'dream-ton_9'
+)
 
 const time = computed(() => {
+  if (!('time_to_activate' in props.cell)) {
+    return ''
+  }
+
   const timeToActivate = props.cell?.time_to_activate
 
   switch (true) {

@@ -8,7 +8,7 @@
       </div>
       <div class="cell-information__content" ref="tooltip" :class="props.tooltipPosition ?? getTooltipPosition">
         <CellInformationItem
-            v-for="item in Object.values(types).filter(type => type?.value)"
+            v-for="item in Object.values(types).filter(type2 => type2?.value)"
             :key="item.value"
             :item="item"
         />
@@ -17,7 +17,7 @@
       <ModalCellInformation
           :ceil="props.ceil"
           :type="props.type"
-          :types="Object.values(types).filter(type => type?.value)"
+          :types="Object.values(types).filter(type2 => type2?.value)"
           v-if="showMobileContent"
           @close-modal="hideMobileContent"
       />
@@ -57,10 +57,11 @@ import CompressionIcon from '@/assets/svg/cellInformation/compression.svg?compon
 import { useGetLevel } from "@/composables/useGetLevel.ts";
 import ModalCellInformation from "@/components/Modals/ModalCellInformation/ModalCellInformation.vue";
 import CellInformationItem from "@/components/CellInformation/CellInformationItem/CellInformationItem.vue";
+import { ITeleports } from "@/interfaces/chains.interface.ts";
 
 const props = defineProps({
   ceil: {
-    type: Object as PropType<Matrix>,
+    type: Object as PropType<Matrix | ITeleports>,
     required: true,
   },
   type: {
@@ -116,13 +117,13 @@ const getIconAndValueForActivationMethod: ComputedRef<[Component, string] | unde
   const ceil = props.ceil
 
   switch (true) {
-    case (ceil?.prev_type_matrix_id ?? 0) > 0:
+    case ('prev_type_matrix_id' in ceil && ceil.prev_type_matrix_id) ?? 0 > 0:
       return [UpgradeIcon, 'Апгрейд']
-    case !ceil?.prev_type_matrix_id && !ceil?.is_bonus:
+    case 'prev_type_matrix_id' in ceil && !ceil.prev_type_matrix_id && !ceil?.is_bonus:
       return [PurchaseIcon, 'Покупка']
-    case ceil?.is_bonus:
+    case 'is_bonus' in ceil && ceil.is_bonus:
       return [BonusIcon, 'Бонусный']
-    case ceil?.is_booster:
+    case 'is_booster' in ceil && ceil.is_booster:
       return [BoosterIcon, 'Бустер']
   }
 })
@@ -141,7 +142,7 @@ const getIconAndValueForPartnerType: ComputedRef<[Component, string] | undefined
 })
 
 const types: ComputedRef<ICellInformation> = computed(() => {
-  if (props.ceil?.is_booster) {
+  if ('is_booster' in props.ceil && props.ceil.is_booster) {
     // Информер для Бустера
     return {
       ceilType: {

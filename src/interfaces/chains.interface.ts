@@ -46,6 +46,7 @@ export interface IChainDetails {
 }
 
 export interface ITeleports {
+  openList: string[],
   owner: IOwner;
   profit: {
     amount: number;
