@@ -128,8 +128,12 @@
     gap: 0;
     height: 64px;
 
-    &__title {
-      display: none;
+    &:not(.modal-block) {
+      & .count-of-partners {
+        &__title {
+          display: none;
+        }
+      }
     }
   }
 }
