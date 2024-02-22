@@ -61,9 +61,9 @@ export async function filterOfActivatedMatrix({
   matrixFilterUserId,
   matrixFilterPageId,
   filter,
-  matrixId,
+  matrixUUID,
 }: any) {
-  const matrixIdParam = `${matrixId ? `/${matrixId}` : ''}`
+  const matrixIdParam = `${matrixUUID ? `/${matrixUUID}` : ''}`
 
   return postAsync(
     `/api/matrix/get-clones/${matrixType}/${matrixFilterUserId}/${matrixFilterPageId}${matrixIdParam}`,
