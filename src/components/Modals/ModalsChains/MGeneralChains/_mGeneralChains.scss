@@ -23,17 +23,13 @@
 
   &__overflow {
     @include flexbox(row, flex-start, flex-start, nowrap);
-    gap: 20px;
+    gap: 24px;
     margin-bottom: 24px;
-    padding: 0;
-    width: 100%;
+    padding: 0 20px;
+    width: 720px;
     height: 364px;
     box-sizing: border-box;
     overflow-x: auto;
-
-    &.less-five {
-      gap: 24px;
-    }
   }
 
   &__block {
