@@ -130,7 +130,9 @@ const tabs = reactive([
     id: 6,
     name: 'Телепорт',
     value: computed(() => teleportList.value.totalCount),
-    disabled: computed(() => import.meta.env.VITE_CHAINS_TELEPORT !== 'on'),
+    disabled: computed(() =>
+        import.meta.env.VITE_CHAINS_TELEPORT ? import.meta.env.VITE_CHAINS_TELEPORT !== 'on' : false
+    ),
     checkbox: !hideCheckboxInTeleportTab.value,
     tooltip: computed(() => `Ваш куратор ${teleportCheckbox.value ? 'может' : 'не может'} <br> использовать телепорт <br> новичка на вас`),
   },
