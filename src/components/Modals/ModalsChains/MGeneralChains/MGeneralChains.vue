@@ -38,7 +38,7 @@
     </div>
     <CopyLink
         name="Скопировать ссылку на цепочку"
-        @click="useCopyLink(selectedChain.id, store.state.selectedType.type, 'chainUUID')"
+        @click="useCopyLink(selectedChain.uuid, store.state.selectedType.type, 'chainUUID')"
     />
   </div>
 </template>
