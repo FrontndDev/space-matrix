@@ -17,6 +17,7 @@ export interface IGetPendingBoostersParams {
     matrixType?: string;
     userId: number;
     matrixUUID: number;
+    ownerID: number;
 }
 
 export interface IPosition {

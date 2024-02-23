@@ -76,7 +76,7 @@
       </div>
       <CopyLink
           name="Скопировать ссылку на цепочку"
-          @click="useCopyLink(selectedChain.id, store.state.selectedType.type, 'chainId')"
+          @click="useCopyLink(selectedChain.id, store.state.selectedType.type, 'chainUUID')"
       />
     </template>
     <MConfirmPayment

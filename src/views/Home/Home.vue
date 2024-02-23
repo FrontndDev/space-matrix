@@ -181,7 +181,7 @@ const setPartnerBy = (type: string) => {
 const selectChain = (chain: IChains, redirect = true) => {
   selectedChain.value = chain
   if (redirect) {
-    router.push(route.path + `?chainId=${chain.id}`)
+    router.push(route.path + `?chainUUID=${chain.id}`)
   }
 }
 
@@ -333,6 +333,7 @@ const loadMMatrixPartnerModal = async () => {
     await store.dispatch('partners/getPendingPartners', {
       isPartnerMatrix: true,
       matrixUUID: query.uuid,
+      ownerID: response.data.matrix.owner.id,
     })
 
     if (response.data?.matrix && !response.data.matrix.is_booster) {
@@ -349,8 +350,8 @@ const loadMMatrixPartnerModal = async () => {
 const openChainViaLink = () => {
   const query = route.query
 
-  if (query.chainId && store.state.chains.chainsList?.list?.length) {
-    const chain = store.state.chains.chainsList.list.find((chain: IChains) => chain.id === +(route.query.chainId ?? 0))
+  if (query.chainUUID && store.state.chains.chainsList?.list?.length) {
+    const chain = store.state.chains.chainsList.list.find((chain: IChains) => chain.id === +(route.query.chainUUID ?? 0))
     if (chain) {
       store.dispatch('chains/getChainDetail', chain.id)
       selectChain(chain, false)

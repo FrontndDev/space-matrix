@@ -88,13 +88,14 @@ export default {
         isPartnerMatrix = false,
         matrixType = rootState.selectedType.type,
         matrixUUID,
+        //@ts-ignore
+        ownerID = window.UserData.id,
       }: IGetPendingBoostersParams
     ) {
       API.filterOfActivatedMatrix({
           matrixType,
           matrixFilterPageId: 1,
-          //@ts-ignore
-          matrixFilterUserId: window.UserData.id,
+          matrixFilterUserId: ownerID,
           filter: { pending: 1 },
           matrixUUID,
         }

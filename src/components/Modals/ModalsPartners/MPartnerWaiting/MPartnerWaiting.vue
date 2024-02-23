@@ -106,8 +106,13 @@ const selectedPage: ComputedRef<number> = computed(() => store.state.partners.pa
 const typeWaitingModal = inject('typeWaitingModal') as Ref<'view' | undefined>
 
 const selectPage = (page: number) => {
+  const isPartnerMatrix = !!route.query?.uuid
   store.commit('partners/SET_PAGE_ID_PARTNERS', page)
-  store.dispatch('partners/getPendingPartners')
+  store.dispatch('partners/getPendingPartners', {
+    isPartnerMatrix,
+    //@ts-ignore
+    ownerID: isPartnerMatrix ? selectedPartner.value.matrix?.owner.id : window.UserData.id
+  })
 }
 
 const back = () => {
@@ -149,7 +154,7 @@ const addPartnersToList = (partner: Matrix) => {
 }
 
 const exposePartner = async () => {
-  const query = route.query.uuid || route.query.chainId
+  const query = route.query.uuid || route.query.chainUUID
   const myMatrix = store.state.matrixByType?.matrix
   const partnerMatrix = selectedPartner.value?.matrix
 
