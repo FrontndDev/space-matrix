@@ -181,7 +181,7 @@ const setPartnerBy = (type: string) => {
 const selectChain = (chain: IChains, redirect = true) => {
   selectedChain.value = chain
   if (redirect) {
-    router.push(route.path + `?chainUUID=${chain.id}`)
+    router.push(route.path + `?chainUUID=${chain.uuid}`)
   }
 }
 
@@ -352,9 +352,9 @@ const openChainViaLink = () => {
   const query = route.query
 
   if (query.chainUUID && store.state.chains.chainsList?.list?.length) {
-    const chain = store.state.chains.chainsList.list.find((chain: IChains) => chain.id === +(route.query.chainUUID ?? 0))
+    const chain = store.state.chains.chainsList.list.find((chain: IChains) => chain.uuid === route.query.chainUUID)
     if (chain) {
-      store.dispatch('chains/getChainDetail', chain.id)
+      store.dispatch('chains/getChainDetail', chain.uuid)
       selectChain(chain, false)
       openModalChain(1)
     }

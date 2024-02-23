@@ -13,8 +13,8 @@
       <ChainCell
           type="default"
           v-for="cell in chainsList?.list"
-          :key="cell?.id"
-          :id="cell?.id"
+          :key="cell?.uuid"
+          :uuid="cell?.uuid"
           :cost="cell.price?.amount"
           :reward="cell.profit?.amount ?? 0"
           :matrixStart="cell?.start"
@@ -149,8 +149,10 @@ const data = reactive([
   },
 ])
 
-const openGeneralChains = (id: number) => {
-  emit('select-chain', chainsList.value?.list?.find(chain => chain.id === id))
+const openGeneralChains = (uuid: string) => {
+  emit('select-chain', chainsList.value?.list?.find(chain => chain.uuid === uuid))
+  console.log('chainsList.value?.list?.find(chain => chain.uuid === uuid)', chainsList.value?.list?.find(chain => chain.uuid === uuid))
+  console.log('uuid', uuid)
   emit('open-general-chains')
 }
 

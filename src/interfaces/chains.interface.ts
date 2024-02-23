@@ -27,6 +27,7 @@ export interface IChains {
   count_links: number;
   is_teleport: boolean;
   initiator: TInitiator;
+  uuid: string;
 }
 
 export interface IChainsList {

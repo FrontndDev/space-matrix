@@ -3,7 +3,7 @@
       class="chain-cell"
       :class="props.type"
   >
-    <div class="chain-cell__avatar" @click="$emit('open-general-chains', props.id)">
+    <div class="chain-cell__avatar" @click="$emit('open-general-chains', props.uuid)">
       <div>
         <img alt="Avatar" :src="props.avatar">
       </div>
@@ -27,7 +27,7 @@
           :type="props.type"
           :cost="props.cost"
           @open-m-teleport="$emit('open-m-teleport')"
-          @open-general-chains="$emit('open-general-chains', props.id)"
+          @open-general-chains="$emit('open-general-chains', props.uuid)"
       />
     </div>
     <SmallCellType
@@ -43,8 +43,8 @@ import SmallCellType from "@/components/UI/SmallCellType/SmallCellType.vue";
 import ChainTypeButton from "./ChainTypeButton/ChainTypeButton.vue";
 
 const props = defineProps({
-  id: {
-    type: Number
+  uuid: {
+    type: String
   },
   countLinks: {
     type: Number
