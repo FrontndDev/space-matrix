@@ -4,7 +4,7 @@
     <div class="endless__menu endless__menu_mt-16">
       <AddPartnerCell
           cell-type="infinity"
-          disabled-subtitle="Заполните ячейки накопления"
+          :disabled-subtitle="!thirdCeil.allowBuyClone && !thirdCeil.allowSniper ? 'Недоступна ручная расстановка' : 'Заполните ячейки накопления'"
           :type="getTypeForThirdCeil"
           :ceil="thirdCeil"
           :partners-count="partnersCount"
