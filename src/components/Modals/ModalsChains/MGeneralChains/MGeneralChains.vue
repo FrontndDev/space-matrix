@@ -8,11 +8,14 @@
         <template v-if="chainDetails?.list?.length">
           <div
               class="general-chains__overflow"
-              :class="{'less-four': chainDetails?.list?.length < 4}"
+              :class="{'less-five': chainDetails?.list?.length <= 4}"
           >
-            <div class="general-chains__block" v-for="(matrix, idx) in chainDetails?.list">
+            <div
+                class="general-chains__block"
+                v-for="(matrix, idx) in chainDetails?.list"
+                :key="idx"
+            >
               <SmallCell
-                  :key="idx"
                   :cell="matrix"
                   @click="openMMatrixModal(matrix.uuid)"
               />
