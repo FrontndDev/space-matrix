@@ -12,8 +12,7 @@
           <span
               v-for="(matrixTitle, idx) in selectedPartnerForTeleport.openList"
           >
-            {{ matrixTitle }}
-            <template v-if="selectedPartnerForTeleport.openList.length !== idx + 1">,&nbsp;</template>
+            {{ matrixTitle }}<template v-if="selectedPartnerForTeleport.openList.length !== idx + 1">,&nbsp;</template>
           </span>
           <br>
           для выбранного партнера
