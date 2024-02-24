@@ -340,6 +340,7 @@ const loadMMatrixPartnerModal = async () => {
     if (response.data?.matrix && !response.data.matrix.is_booster) {
       console.log('response.data', response)
       selectedPartner.value = convertMatrixToCell(response.data.matrix)
+      selectedType.value = 'id'
 
       openModalPartner(2)
     }

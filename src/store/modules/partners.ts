@@ -60,7 +60,7 @@ export default {
         { filter, changeTab = false }: IGetPendingBoostersParams
     ) {
       state.levelID = filter
-      const type = rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type
+      const type = rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType?.type
 
       API.filterOfActivatedMatrix({
             matrixType: type,
@@ -75,7 +75,7 @@ export default {
           commit('SET_ACTIVE_LITTLE_TAB', 2)
         }
 
-        if (state.pageIdPartners === 1 && filter === 1 && type === rootState.selectedType.type) {
+        if (state.pageIdPartners === 1 && filter === 1 && type === rootState.selectedType?.type) {
           commit('SET_PENDING_PARTNERS', response.data)
         }
 
@@ -86,7 +86,7 @@ export default {
       { commit, rootState }: { commit: Commit; rootState: any; state: any },
       {
         isPartnerMatrix = false,
-        matrixType = rootState.selectedType.type,
+        matrixType = rootState.selectedType?.type,
         matrixUUID,
         //@ts-ignore
         ownerID = window.UserData.id,
@@ -125,7 +125,7 @@ export default {
       if (response?.error_code === undefined) {
         useShowMessage('green', notificationText ?? 'Партнёр успешно отправлен на расстановку')
       }
-      await ctx.dispatch('getMatrixByType', ctx.rootState.selectedType.type, { root: true })
+      await ctx.dispatch('getMatrixByType', ctx.rootState.selectedType?.type, { root: true })
 
       return response
     },

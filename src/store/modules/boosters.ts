@@ -20,7 +20,7 @@ export default {
       state.levelID = filter
 
       API.filterOfActivatedMatrix({
-          matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
+          matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType?.type,
           //@ts-ignore
           matrixFilterUserId: window.UserData.id,
           matrixFilterPageId: state.pageIdBooster,
@@ -43,7 +43,7 @@ export default {
       state.levelID = filter
 
       API.filterOfActivatedMatrix({
-          matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType.type,
+          matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType?.type,
           //@ts-ignore
           matrixFilterUserId: window.UserData.id,
           matrixFilterPageId: state.pageIdBooster,
