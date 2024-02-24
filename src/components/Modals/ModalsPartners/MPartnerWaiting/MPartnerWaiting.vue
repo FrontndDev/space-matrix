@@ -84,7 +84,7 @@ const router = useRouter()
 const route = useRoute()
 
 const cells: ComputedRef<Matrix[]> = computed(() =>
-    selectedType.value === 'id' ?
+    selectedType.value === 'id' && typeWaitingModal.value === 'view' ?
         store.state.partners.partnersPendingSecond?.list :
         store.state.partners.partnersPending?.list
 )

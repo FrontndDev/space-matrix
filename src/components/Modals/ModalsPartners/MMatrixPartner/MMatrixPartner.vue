@@ -118,8 +118,8 @@
             <CountOfPartners
                 type="modal"
                 title="В ожидании"
-                :partners-count="partnersCount"
-                v-if="partnersCount"
+                :partners-count="partnersCountOfPartner"
+                v-if="partnersCountOfPartner"
                 @open-modal="openMPartnerWaiting"
             />
           </div>
@@ -180,7 +180,8 @@ const isDreamTon9: ComputedRef<boolean> = computed(() => matrixById.value.matrix
 
 const matrixById: ComputedRef<IMatrix> = computed(() => store.state.matrixById)
 
-const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.totalCount)
+const partnersCountOfPartner: ComputedRef<number> = computed(() => store.state.partners.partnersPendingSecond.totalCount)
+const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 const infinityPartnersCount: ComputedRef<number> = computed(() => store.state.matrixById.countInInfinity)
 
 const ceils: ComputedRef<Ceils> = computed(() => store.state.matrixById?.ceilsCollection?.['1'])
