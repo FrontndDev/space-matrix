@@ -105,8 +105,8 @@
 
           <div
               class="modal-matrix-partner__endless"
-              :class="{ 'with-line': infinityPartnersCount && partnersCount }"
-              v-if="infinityPartnersCount || partnersCount"
+              :class="{ 'with-line': infinityPartnersCount && partnersCountOfPartner }"
+              v-if="infinityPartnersCount || partnersCountOfPartner"
           >
             <CountOfPartners
                 type="modal"

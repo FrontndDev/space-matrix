@@ -92,6 +92,7 @@ const cells: ComputedRef<Matrix[]> = computed(() =>
 const selectedPartner = inject('selectedPartner') as Ref<Ceil>
 const partnerPos = inject('partnerPos') as Ref<IPosition>
 const selectedType = inject('selectedType') as Ref<string>
+const typeWaitingModal = inject('typeWaitingModal') as Ref<'view' | undefined>
 
 const onlyInfinityCell: ComputedRef<boolean> = computed(() =>
     selectedType.value === 'id' ?
@@ -103,15 +104,16 @@ let selectedCell: Ref<Matrix | null> = ref(null)
 
 const selectedPage: ComputedRef<number> = computed(() => store.state.partners.pageIdPartners)
 
-const typeWaitingModal = inject('typeWaitingModal') as Ref<'view' | undefined>
 
 const selectPage = (page: number) => {
   const isPartnerMatrix = !!route.query?.uuid
   store.commit('partners/SET_PAGE_ID_PARTNERS', page)
   store.dispatch('partners/getPendingPartners', {
     isPartnerMatrix,
-    //@ts-ignore
-    ownerID: isPartnerMatrix ? selectedPartner.value.matrix?.owner.id : window.UserData.id
+    ownerID: isPartnerMatrix && typeWaitingModal.value === 'view' ?
+        selectedPartner.value.matrix?.owner.id :
+        //@ts-ignore
+        window.UserData.id
   })
 }
 

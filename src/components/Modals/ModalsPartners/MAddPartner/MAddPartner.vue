@@ -130,9 +130,10 @@ const getCeilCumulative: ComputedRef<boolean> = computed(() =>
 )
 
 const partnersCount: ComputedRef<number> = computed(() =>
-    selectedPartner.value ?
-        store.state.partners.partnersPendingSecond.totalCount :
         store.state.partners.partnersPending.totalCount
+    // selectedPartner.value ?
+    //     store.state.partners.partnersPendingSecond.totalCount :
+    //     store.state.partners.partnersPending.totalCount
 )
 
 const buyBooster = async () => {
