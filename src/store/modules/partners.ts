@@ -55,6 +55,7 @@ export default {
       })
     },
 
+    // Партнеры в ожидании для блока с табами
     getNewPendingPartners(
         { commit, rootState, state }: { commit: Commit; rootState: any; state: any },
         { filter, changeTab = false }: IGetPendingBoostersParams
@@ -100,8 +101,10 @@ export default {
           matrixUUID,
         }
       ).then(response => {
+        // Партнеры в ожидании Нашей матрицы
         if (!isPartnerMatrix) {
           commit('SET_PENDING_PARTNERS', response.data)
+          // Партнеры в ожидании Матрицы партнера
         } else {
           commit('SET_PENDING_PARTNERS_SECOND', response.data)
         }
