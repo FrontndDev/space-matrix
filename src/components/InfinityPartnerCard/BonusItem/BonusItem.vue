@@ -1,5 +1,9 @@
 <template>
-  <div class="bonus-item" :class="[props.type, getWidth]">
+  <div
+      class="bonus-item"
+      :class="[props.type, getWidth]"
+      :style="props.type === 'boost' && values.length === 1 ? 'max-width: 67px' : ''"
+  >
     <div class="bonus-item__icon">
       <TonIcon v-if="props.type === 'cashout'"/>
       <BoostIcon v-if="props.type === 'boost'"/>
@@ -8,8 +12,7 @@
     <div class="bonus-item__values" v-if="values.length > 1">
       <div
           class="bonus-item__value"
-          :class="[{ 'without-line': (idx + 1) === values.length || (idx + 1) % 3 === 0 }, getWidth]"
-          v-for="(value, idx) in values"
+          v-for="value in values"
           :key="value"
           :title="String(value)"
       >{{ value }}</div>

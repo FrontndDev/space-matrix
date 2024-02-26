@@ -50,7 +50,7 @@
         width: 31.3%;
       }
 
-      &:not(.without-line) {
+      &:not(:last-child) {
         &:after {
           content: '';
           margin: auto;
