@@ -87,8 +87,8 @@ const isAutomaticPlacement = computed(() =>
     matrixByType.value.matrix?.type === 'dream-ton_6' &&
     !thirdCeil.value.allowBuyClone &&
     !thirdCeil.value.allowSniper &&
-    ceils.value?.['1']?.matrix &&
-    ceils.value?.['2']?.matrix
+    !!ceils.value?.['1']?.matrix &&
+    !!ceils.value?.['2']?.matrix
 )
 
 const getPosition = (depth: number, pos: number): IPosition => {

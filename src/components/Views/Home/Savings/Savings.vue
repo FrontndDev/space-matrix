@@ -122,13 +122,15 @@ const secondCeil: ComputedRef<Ceil> = computed(() =>
     onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['2']
 )
 
-const isAutomaticPlacement = (cell: Ceil) => {
+const isAutomaticPlacement = (cell: Ceil): boolean => {
   const valid = matrixByType.value.matrix?.type === 'dream-ton_6' && !cell.allowBuyClone && !cell.allowSniper
   switch (cell.pos) {
     case 1:
       return valid
     case 2:
-      return valid && firstCeil.value?.matrix
+      return valid && !!firstCeil.value?.matrix
+    default:
+      return false
   }
 }
 
