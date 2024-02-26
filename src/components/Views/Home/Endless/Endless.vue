@@ -55,6 +55,14 @@ const thirdCeil: Ref<Ceil> = computed(() =>
 
 const getCells = computed(() => matrixByType.value.matrix?.ceils['1'])
 
+const isAutomaticPlacement = computed(() =>
+    matrixByType.value.matrix?.type === 'dream-ton_6' &&
+    !thirdCeil.value.allowBuyClone &&
+    !thirdCeil.value.allowSniper &&
+    !!ceils.value?.['1']?.matrix &&
+    !!ceils.value?.['2']?.matrix
+)
+
 const getDisabledSubtitle = computed(() => {
   const getText = () => {
     const cellsTypes = [getCells.value?.['1'], getCells.value?.['2']]
@@ -71,7 +79,7 @@ const getDisabledSubtitle = computed(() => {
     }
   }
 
-  return !thirdCeil.value.allowBuyClone && !thirdCeil.value.allowSniper ? '' : `Заполните ${getText()}`
+  return isAutomaticPlacement.value ? '' : `Заполните ${getText()}`
 })
 
 const openMInfinityCell = () => {
@@ -82,14 +90,6 @@ const openMInfinityCell = () => {
     emit('open-m-infinity-cell')
   }
 }
-
-const isAutomaticPlacement = computed(() =>
-    matrixByType.value.matrix?.type === 'dream-ton_6' &&
-    !thirdCeil.value.allowBuyClone &&
-    !thirdCeil.value.allowSniper &&
-    !!ceils.value?.['1']?.matrix &&
-    !!ceils.value?.['2']?.matrix
-)
 
 const getPosition = (depth: number, pos: number): IPosition => {
   return { depth, pos }
