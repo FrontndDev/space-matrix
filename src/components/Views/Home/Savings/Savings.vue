@@ -123,7 +123,13 @@ const secondCeil: ComputedRef<Ceil> = computed(() =>
 )
 
 const isAutomaticPlacement = (cell: Ceil) => {
-  return matrixByType.value.matrix?.type === 'dream-ton_6' && !cell.allowBuyClone && !cell.allowSniper
+  const valid = matrixByType.value.matrix?.type === 'dream-ton_6' && !cell.allowBuyClone && !cell.allowSniper
+  switch (cell.pos) {
+    case 1:
+      return valid
+    case 2:
+      return valid && firstCeil.value?.matrix
+  }
 }
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {

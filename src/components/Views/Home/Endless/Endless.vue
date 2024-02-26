@@ -45,18 +45,19 @@ const onlyInfinityCell: ComputedRef<boolean> = computed(() => store.getters.only
 
 const partnersCount: ComputedRef<number> = computed(() => store.state.partners.partnersPending.totalCount)
 
+const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
+
 const ceils: Ref<Ceils> = computed(() => store.state.matrixByType?.ceilsCollection['1'])
 
 const thirdCeil: Ref<Ceil> = computed(() =>
     onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['3']
 )
 
-const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
+const getCells = computed(() => matrixByType.value.matrix?.ceils['1'])
 
 const getDisabledSubtitle = computed(() => {
   const getText = () => {
-    const cells = matrixByType.value.matrix?.ceils['1']
-    const cellsTypes = [cells?.['1'], cells?.['2']]
+    const cellsTypes = [getCells.value?.['1'], getCells.value?.['2']]
 
     switch (true) {
       case cellsTypes.includes('freeze') && cellsTypes.includes('profit'):
@@ -83,7 +84,11 @@ const openMInfinityCell = () => {
 }
 
 const isAutomaticPlacement = computed(() =>
-    matrixByType.value.matrix?.type === 'dream-ton_6' && !thirdCeil.value.allowBuyClone && !thirdCeil.value.allowSniper
+    matrixByType.value.matrix?.type === 'dream-ton_6' &&
+    !thirdCeil.value.allowBuyClone &&
+    !thirdCeil.value.allowSniper &&
+    ceils.value?.['1']?.matrix &&
+    ceils.value?.['2']?.matrix
 )
 
 const getPosition = (depth: number, pos: number): IPosition => {
