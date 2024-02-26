@@ -17,6 +17,7 @@
           @open-m-matrix-partner="openMMatrixPartner(firstCeil)"
       />
       <AddPartnerCell
+          :automatic-placement="isAutomaticPlacement(firstCeil)"
           :type="getTypeForFirstCeil"
           :cell-type="getCellTypeFirstCeil"
           :ceil="firstCeil"
@@ -46,6 +47,7 @@
           @open-m-matrix-partner="openMMatrixPartner(secondCeil)"
       />
       <AddPartnerCell
+          :automatic-placement="isAutomaticPlacement(secondCeil)"
           :type="getTypeForSecondCeil"
           :cell-type="getCellTypeSecondCeil"
           :ceil="secondCeil"
@@ -119,6 +121,10 @@ const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() =>
     onlyInfinityCell.value ? ceils.value?.['1'] : ceils.value?.['2']
 )
+
+const isAutomaticPlacement = (cell: Ceil) => {
+  return matrixByType.value.matrix?.type === 'dream-ton_6' && !cell.allowBuyClone && !cell.allowSniper
+}
 
 const getTypeForFirstCeil: ComputedRef<string> = computed(() => {
   if (onlyInfinityCell.value) {

@@ -4,7 +4,8 @@
     <div class="endless__menu endless__menu_mt-16">
       <AddPartnerCell
           cell-type="infinity"
-          :disabled-subtitle="!thirdCeil.allowBuyClone && !thirdCeil.allowSniper ? 'Недоступна ручная расстановка' : 'Заполните ячейки накопления'"
+          :automatic-placement="isAutomaticPlacement"
+          :disabled-subtitle="getDisabledSubtitle"
           :type="getTypeForThirdCeil"
           :ceil="thirdCeil"
           :partners-count="partnersCount"
@@ -52,6 +53,26 @@ const thirdCeil: Ref<Ceil> = computed(() =>
 
 const matrixByType: ComputedRef<IMatrix> = computed(() => store.state.matrixByType)
 
+const getDisabledSubtitle = computed(() => {
+  const getText = () => {
+    const cells = matrixByType.value.matrix?.ceils['1']
+    const cellsTypes = [cells?.['1'], cells?.['2']]
+
+    switch (true) {
+      case cellsTypes.includes('freeze') && cellsTypes.includes('profit'):
+        return 'основные ячейки'
+      case cellsTypes.includes('profit') && !cellsTypes.includes('freeze'):
+        return 'доходные ячейки'
+      case cellsTypes.includes('freeze') && !cellsTypes.includes('profit'):
+        return 'ячейки накопления'
+      default:
+        return 'ячейки накопления'
+    }
+  }
+
+  return !thirdCeil.value.allowBuyClone && !thirdCeil.value.allowSniper ? '' : `Заполните ${getText()}`
+})
+
 const openMInfinityCell = () => {
   if (matrixByType.value?.matrix) {
     store.dispatch('partners/getInfinityPartners', {
@@ -60,6 +81,10 @@ const openMInfinityCell = () => {
     emit('open-m-infinity-cell')
   }
 }
+
+const isAutomaticPlacement = computed(() =>
+    matrixByType.value.matrix?.type === 'dream-ton_6' && !thirdCeil.value.allowBuyClone && !thirdCeil.value.allowSniper
+)
 
 const getPosition = (depth: number, pos: number): IPosition => {
   return { depth, pos }

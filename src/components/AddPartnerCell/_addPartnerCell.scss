@@ -96,7 +96,7 @@
   }
 
   &__title {
-    @include get-font(14px, 500, 130%, $text-base);
+    @include get-font(14px, 500, 20px, $text-base);
     text-align: center;
 
     & ::v-deep(> span) {
