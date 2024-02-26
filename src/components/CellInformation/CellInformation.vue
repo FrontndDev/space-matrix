@@ -125,6 +125,8 @@ const getIconAndValueForActivationMethod: ComputedRef<[Component, string] | unde
       return [BonusIcon, 'Бонусный']
     case 'is_booster' in ceil && ceil.is_booster:
       return [BoosterIcon, 'Бустер']
+    default:
+      return [PurchaseIcon, 'Покупка']
   }
 })
 
@@ -138,6 +140,8 @@ const getIconAndValueForPartnerType: ComputedRef<[Component, string] | undefined
       return [CompressionIcon, `Компрессия <span>(${useGetLevel(props.ceil?.owner?.lvl_insystem)} lvl)</span>`]
     case 'owner':
       return [OwnerIcon, 'Вы']
+    default:
+      return [OwnerIcon, 'Личник']
   }
 })
 
