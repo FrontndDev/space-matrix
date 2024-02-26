@@ -321,7 +321,7 @@ const getUser = () => {
 }
 
 const parentMatrix = async () => {
-  const parentMatrixUUID = selectedPartner.value?.matrix?.parent_matrix_id
+  const parentMatrixUUID = selectedPartner.value?.matrix?.parent_matrix_uuid
   if (parentMatrixUUID) {
     await router.push(route.path + `?uuid=${parentMatrixUUID}`)
     emit('select-matrix', null)

@@ -48,6 +48,7 @@ export interface Matrix {
     uuid: string;
     owner: IOwner;
     parent_matrix_id: number | null;
+    parent_matrix_uuid: string | null;
     filled: boolean;
     prev_type_matrix_id: number | null;
     time_to_activate?: {
