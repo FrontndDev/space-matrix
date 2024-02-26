@@ -93,22 +93,24 @@ export default {
         ownerID = window.UserData.id,
       }: IGetPendingBoostersParams
     ) {
-      API.filterOfActivatedMatrix({
-          matrixType,
-          matrixFilterPageId: 1,
-          matrixFilterUserId: ownerID,
-          filter: { pending: 1 },
-          matrixUUID,
-        }
-      ).then(response => {
-        // Партнеры в ожидании Нашей матрицы
-        if (!isPartnerMatrix) {
-          commit('SET_PENDING_PARTNERS', response.data)
-          // Партнеры в ожидании Матрицы партнера
-        } else {
-          commit('SET_PENDING_PARTNERS_SECOND', response.data)
-        }
-      })
+      if (matrixType) {
+        API.filterOfActivatedMatrix({
+              matrixType,
+              matrixFilterPageId: 1,
+              matrixFilterUserId: ownerID,
+              filter: { pending: 1 },
+              matrixUUID,
+            }
+        ).then(response => {
+          // Партнеры в ожидании Нашей матрицы
+          if (!isPartnerMatrix) {
+            commit('SET_PENDING_PARTNERS', response.data)
+            // Партнеры в ожидании Матрицы партнера
+          } else {
+            commit('SET_PENDING_PARTNERS_SECOND', response.data)
+          }
+        })
+      }
     },
 
     getInfinityPartners({ commit }: { commit: Commit }, { parentId, isPartnerMatrix = false }: IInfinityPartnersParams) {

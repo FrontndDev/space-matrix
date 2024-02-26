@@ -47,10 +47,12 @@ export default createStore({
             const data = API.getDataFromLS(key)
             if (data) commit('SET_LIST_OF_TYPES', data)
 
-            API.getListOfTypes(category).then(response => {
-                commit('SET_LIST_OF_TYPES', response.data)
-                API.setDataToLS(key, response.data)
-            })
+            if (category) {
+                API.getListOfTypes(category).then(response => {
+                    commit('SET_LIST_OF_TYPES', response.data)
+                    API.setDataToLS(key, response.data)
+                })
+            }
         },
         async getMatrixByType(ctx: ActionContext<any, any>, matrixType: string) {
             if (requestMatrixByType) {
@@ -87,10 +89,12 @@ export default createStore({
         },
         getPaymentForm({ commit }: { commit: Commit }, matrixType: string) {
             commit('SET_PAYMENT_FORM', null)
-            API.getPaymentForm(matrixType).then(response => {
-                commit('SET_PAYMENT_FORM', response.data.html)
-                useMyOverlay(response.data.html)
-            })
+            if (matrixType) {
+                API.getPaymentForm(matrixType).then(response => {
+                    commit('SET_PAYMENT_FORM', response.data.html)
+                    useMyOverlay(response.data.html)
+                })
+            }
         },
         async buyBooster(_: ActionContext<any, any>, data: IBuyBoosterParams) {
             const notificationText = data?.notificationText
