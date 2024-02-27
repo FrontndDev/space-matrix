@@ -22,8 +22,8 @@
           :cell-type="getCellTypeFirstCeil"
           :ceil="firstCeil"
           :partners-count="partnersCount"
-          :title="(!firstCeil?.allowSniper || !partnersCount) && firstCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
-          :subtitle="(!firstCeil?.allowSniper || !partnersCount) && firstCeil?.allowBuyClone ? `${matrixByType.matrixConfig.price}` : ''"
+          :title="getTitleForFirstCell"
+          :subtitle="getDisabledSubtitleForFirstCell"
           :disabled-subtitle="getCellTypeFirstCeil === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'"
           v-if="!firstCeil?.matrix || firstCeil.queueId"
           @open-m-add-partner="openMAddPartner(getPosition(firstCeil.depth, firstCeil.pos))"
@@ -52,8 +52,8 @@
           :cell-type="getCellTypeSecondCeil"
           :ceil="secondCeil"
           :partners-count="partnersCount"
-          :title="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
-          :subtitle="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? `${matrixByType.matrixConfig.price}` : ''"
+          :title="getTitleForSecondCell"
+          :subtitle="getSubtitleForSecondCell"
           :disabled-subtitle="getDisabledSubtitleForSecondCell"
           v-if="!secondCeil?.matrix || secondCeil.queueId"
           @open-m-add-partner="openMAddPartner(getPosition(secondCeil.depth, secondCeil.pos))"
@@ -116,6 +116,30 @@ const getTitle: ComputedRef<string> = computed(() => {
       return 'Накопительные'
   }
 })
+
+// FIRST AddPartnerCell
+
+const getTitleForFirstCell = computed(() =>
+    (!firstCeil.value?.allowSniper || !partnersCount) &&
+    firstCeil.value?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'
+)
+
+const getDisabledSubtitleForFirstCell = computed(() =>
+    (!firstCeil.value?.allowSniper || !partnersCount) &&
+    firstCeil.value?.allowBuyClone ? `${matrixByType.value.matrixConfig.price}` : ''
+)
+
+// SECOND AddPartnerCell
+
+const getTitleForSecondCell = computed(() =>
+    (!secondCeil.value?.allowSniper || !partnersCount) &&
+    secondCeil.value?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'
+)
+
+const getSubtitleForSecondCell = computed(() =>
+    (!secondCeil.value?.allowSniper || !partnersCount) &&
+    secondCeil.value?.allowBuyClone ? `${matrixByType.value.matrixConfig.price}` : ''
+)
 
 const getDisabledSubtitleForSecondCell = computed(() =>
     !firstCeil.value?.matrix &&
