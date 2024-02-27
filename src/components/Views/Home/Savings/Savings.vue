@@ -54,7 +54,7 @@
           :partners-count="partnersCount"
           :title="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? 'Купить <span>BOOST</span>' : 'Выставить партнера'"
           :subtitle="(!secondCeil?.allowSniper || !partnersCount) && secondCeil?.allowBuyClone ? `${matrixByType.matrixConfig.price}` : ''"
-          :disabled-subtitle="!firstCeil?.matrix && (firstCeil?.allowSniper || firstCeil?.allowBuyClone) ? 'Заполните левую ячейку' : getCellTypeSecondCeil === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'"
+          :disabled-subtitle="getDisabledSubtitleForSecondCell"
           v-if="!secondCeil?.matrix || secondCeil.queueId"
           @open-m-add-partner="openMAddPartner(getPosition(secondCeil.depth, secondCeil.pos))"
       >
@@ -116,6 +116,15 @@ const getTitle: ComputedRef<string> = computed(() => {
       return 'Накопительные'
   }
 })
+
+const getDisabledSubtitleForSecondCell = computed(() =>
+    !firstCeil.value?.matrix &&
+    (
+        firstCeil.value?.allowSniper ||
+        firstCeil.value?.allowBuyClone ||
+        isAutomaticPlacement(firstCeil.value)
+    ) ? 'Заполните левую ячейку' : getCellTypeSecondCeil.value === 'freeze' ? 'Накопительная ячейка' : 'Доходная ячейка'
+)
 
 const firstCeil: ComputedRef<Ceil> = computed(() => ceils.value?.['1'])
 const secondCeil: ComputedRef<Ceil> = computed(() =>
