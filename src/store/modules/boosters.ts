@@ -18,23 +18,26 @@ export default {
       { changeTab = false, filter }: any = {}
     ) {
       state.levelID = filter
+      const matrixType = rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType?.type
 
-      API.filterOfActivatedMatrix({
-          matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType?.type,
-          //@ts-ignore
-          matrixFilterUserId: window.UserData.id,
-          matrixFilterPageId: state.pageIdBooster,
-          filter: { pending: 1, is_booster: true, level: filter }
-        }
-      ).then(response => {
-        if (response.data?.totalCount === 0 && rootState.bigTabID === 2 && changeTab) {
-          commit('CHANGE_LITTLE_TAB', 4, { root: true })
-          commit('SET_ACTIVE_LITTLE_TAB', 4)
-        }
+      if (matrixType) {
+        API.filterOfActivatedMatrix({
+              matrixType,
+              //@ts-ignore
+              matrixFilterUserId: window.UserData.id,
+              matrixFilterPageId: state.pageIdBooster,
+              filter: { pending: 1, is_booster: true, level: filter }
+            }
+        ).then(response => {
+          if (response.data?.totalCount === 0 && rootState.bigTabID === 2 && changeTab) {
+            commit('CHANGE_LITTLE_TAB', 4, { root: true })
+            commit('SET_ACTIVE_LITTLE_TAB', 4)
+          }
 
-        commit('SET_PENDING_BOOSTERS', response.data)
-        commit('partners/SET_COUNT_PENDING_BOOSTERS', response.data?.totalCount, { root: true })
-      })
+          commit('SET_PENDING_BOOSTERS', response.data)
+          commit('partners/SET_COUNT_PENDING_BOOSTERS', response.data?.totalCount, { root: true })
+        })
+      }
     },
     getExposedBoosters(
       { commit, rootState, state }: { commit: Commit; rootState: any, state: any },
@@ -42,21 +45,24 @@ export default {
     ) {
       state.levelID = filter
 
-      API.filterOfActivatedMatrix({
-          matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType?.type,
-          //@ts-ignore
-          matrixFilterUserId: window.UserData.id,
-          matrixFilterPageId: state.pageIdBooster,
-          filter: { is_booster: true, level: filter }
-        }
-      ).then(response => {
-        if (response.data?.totalCount === 0 && rootState.bigTabID === 2 && changeTab) {
-          commit('CHANGE_LITTLE_TAB', 3, { root: true })
-          commit('SET_ACTIVE_LITTLE_TAB', 3)
-        }
+      const matrixType = rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType?.type
+      if (matrixType) {
+        API.filterOfActivatedMatrix({
+              matrixType,
+              //@ts-ignore
+              matrixFilterUserId: window.UserData.id,
+              matrixFilterPageId: state.pageIdBooster,
+              filter: { is_booster: true, level: filter }
+            }
+        ).then(response => {
+          if (response.data?.totalCount === 0 && rootState.bigTabID === 2 && changeTab) {
+            commit('CHANGE_LITTLE_TAB', 3, { root: true })
+            commit('SET_ACTIVE_LITTLE_TAB', 3)
+          }
 
-        commit('SET_EXPOSED_BOOSTERS', response.data)
-      })
+          commit('SET_EXPOSED_BOOSTERS', response.data)
+        })
+      }
     },
   },
   mutations: {

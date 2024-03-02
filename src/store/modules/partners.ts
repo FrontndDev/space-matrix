@@ -37,22 +37,25 @@ export default {
       { filter, changeTab = false } : IGetPendingBoostersParams,
     ) {
       state.levelID = filter
+      const matrixType = rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType?.type
 
-      API.filterOfActivatedMatrix({
-        matrixType: rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType?.type,
-        matrixFilterPageId: state.pageIdPartners,
-        //@ts-ignore
-        matrixFilterUserId: window.UserData.id,
-        filter: { level: filter }
+      if (matrixType) {
+        API.filterOfActivatedMatrix({
+              matrixType,
+              matrixFilterPageId: state.pageIdPartners,
+              //@ts-ignore
+              matrixFilterUserId: window.UserData.id,
+              filter: { level: filter }
+            }
+        ).then(response => {
+          if (response.data?.totalCount === 0 && rootState.bigTabID === 1 && changeTab) {
+            commit('CHANGE_LITTLE_TAB', 1, { root: true })
+            commit('SET_ACTIVE_LITTLE_TAB', 1)
+          }
+
+          commit('SET_EXPOSED_PARTNERS', response.data)
+        })
       }
-    ).then(response => {
-        if (response.data?.totalCount === 0 && rootState.bigTabID === 1 && changeTab) {
-          commit('CHANGE_LITTLE_TAB', 1, { root: true })
-          commit('SET_ACTIVE_LITTLE_TAB', 1)
-        }
-
-        commit('SET_EXPOSED_PARTNERS', response.data)
-      })
     },
 
     // Партнеры в ожидании для блока с табами
@@ -63,25 +66,27 @@ export default {
       state.levelID = filter
       const type = rootState.newTypeMatrix ? rootState.newTypeMatrix : rootState.selectedType?.type
 
-      API.filterOfActivatedMatrix({
-            matrixType: type,
-            matrixFilterPageId: state.pageIdPartners,
-            //@ts-ignore
-            matrixFilterUserId: window.UserData.id,
-            filter: { pending: 1, level: filter }
+      if (type) {
+        API.filterOfActivatedMatrix({
+              matrixType: type,
+              matrixFilterPageId: state.pageIdPartners,
+              //@ts-ignore
+              matrixFilterUserId: window.UserData.id,
+              filter: { pending: 1, level: filter }
+            }
+        ).then(response => {
+          if (response.data?.totalCount === 0 && rootState.bigTabID === 1 && changeTab) {
+            commit('CHANGE_LITTLE_TAB', 2, { root: true })
+            commit('SET_ACTIVE_LITTLE_TAB', 2)
           }
-      ).then(response => {
-        if (response.data?.totalCount === 0 && rootState.bigTabID === 1 && changeTab) {
-          commit('CHANGE_LITTLE_TAB', 2, { root: true })
-          commit('SET_ACTIVE_LITTLE_TAB', 2)
-        }
 
-        if (state.pageIdPartners === 1 && filter === 1 && type === rootState.selectedType?.type) {
-          commit('SET_PENDING_PARTNERS', response.data)
-        }
+          if (state.pageIdPartners === 1 && filter === 1 && type === rootState.selectedType?.type) {
+            commit('SET_PENDING_PARTNERS', response.data)
+          }
 
-        commit('SET_NEW_PENDING_PARTNERS', response.data)
-      })
+          commit('SET_NEW_PENDING_PARTNERS', response.data)
+        })
+      }
     },
     getPendingPartners(
       { commit, rootState }: { commit: Commit; rootState: any; state: any },
