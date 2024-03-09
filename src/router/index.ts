@@ -12,7 +12,7 @@ const routes = [
         path: baseUrl,
         children: [
             {
-                path: ':type?',
+                path: ':id?',
                 component: Home,
             },
         ]

@@ -3,7 +3,11 @@
     <div class="header__buttons">
       <MyButton
           class="header-button"
-          :class="{ 'no-active': button?.price, 'active': !button?.price }"
+          :class="{
+            'no-active': button?.price,
+            'active': !button?.price,
+            'selected': button.id === +route.params.id,
+          }"
           v-for="button in props.buttons"
           :key="button.id"
           :name="button.name"
@@ -45,8 +49,8 @@ const navigate = (button: IMyButton) => {
 }
 
 onMounted(() => {
-  const type = route.params?.type
-  if (!type) router.push(baseUrl + '/' + props.buttons[0].id)
+  const id = route.params?.id
+  if (!id) router.push(baseUrl + '/' + props.buttons[0].id)
 })
 </script>
 

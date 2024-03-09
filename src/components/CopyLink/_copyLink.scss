@@ -1,0 +1,26 @@
+@import "@/assets/scss/variables";
+@import "@/assets/scss/mixins";
+
+.copy-link {
+  @include flex-center;
+  grid-area: down;
+  column-gap: 4px;
+  padding: 16px;
+  width: 100%;
+  border-radius: 0 0 16px 16px;
+  background: $bg-base;
+  cursor: pointer;
+
+  &__name {
+    @include get-font(12px, 500, 16px, $text-link);
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .copy-link {
+    padding: 12px;
+    border-radius: 0;
+  }
+}

@@ -2,6 +2,10 @@
 @import "@/assets/scss/mixins";
 
 .my-button {
+  transition: .25s all ease;
+  // Default Button
+  // ---
+  // Header Button
   &.header-button {
     @include flexbox(column, center, center);
     row-gap: 4px;
@@ -11,6 +15,14 @@
     border: 1px solid $border-base-contrast;
     @include get-font(20px !important, 700, 32px, $text-base-light);
 
+    &:hover:not(.selected, [disabled]) {
+      color: $text-base-secondary;
+    }
+
+    &:active:not(.selected, [disabled]) {
+      color: $text-base;
+    }
+
     & .my-button__subtitle {
       @include flexbox(row, center, center);
       column-gap: 4px;
@@ -18,15 +30,13 @@
       @include get-font(12px, 500, 16px, $text-link);
     }
 
-    &.active {
+    &.active:not(.selected, [disabled]) {
       border: 1px solid $border-base-deep;
     }
 
-    &.no-active {
-      & .my-button__subtitle {
-        & ::v-deep(path) {
-          fill: $text-link;
-        }
+    &.no-active:not(.selected) {
+      & ::v-deep(path) {
+        fill: $text-link;
       }
     }
 
@@ -46,7 +56,7 @@
       }
 
       & ::v-deep(path) {
-        fill: $text-base-on-color;
+        fill: $text-base-on-color !important;
       }
     }
   }

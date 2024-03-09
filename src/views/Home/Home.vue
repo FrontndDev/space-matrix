@@ -1,27 +1,45 @@
 <template>
   <div class="home">
     <div class="container">
-      <div class="home__content" :class="selectedTab.type">
-        <MyHeader :buttons="buttons"/>
+      <div class="home__body">
+        <div class="home__content" :class="selectedTab?.type">
+          <MyHeader :buttons="buttons"/>
 
-        <template v-if="selectedTab.type === TabsOfTypesEnum.default">
-          <div
-              class="home__cell"
-              v-for="cell in 3"
-              :key="cell"
-          >
-            <!--          <AddPartnerCell type="disable"/>-->
-            <PartnerCell/>
-          </div>
-        </template>
-        <template v-else-if="selectedTab.type === TabsOfTypesEnum.bonus">
-
-        </template>
-        <template v-else-if="selectedTab.type === TabsOfTypesEnum.auto">
-
-        </template>
-
-        <Indicator/>
+          <template v-if="selectedTab?.type === TabsOfTypesEnum.default">
+            <div
+                class="home__cell"
+                :class="selectedTab?.type"
+                v-for="cell in 3"
+                :key="cell"
+            >
+              <AddPartnerCell state="disable"/>
+              <!--            <PartnerCell/>-->
+              <SmallPartnerCells type="block"/>
+            </div>
+            <CopyLink/>
+          </template>
+          <template v-else-if="selectedTab?.type === TabsOfTypesEnum.bonus">
+            <div></div>
+          </template>
+          <template v-if="selectedTab?.type === TabsOfTypesEnum.auto">
+            <div
+                class="home__cell"
+                :class="selectedTab?.type"
+                v-for="cell in 3"
+                :key="cell"
+            >
+              <!--          <AddPartnerCell type="disable"/>-->
+              <PartnerCell/>
+            </div>
+            <Indicator/>
+          </template>
+        </div>
+        <div class="home__partners">
+          <InfoHeader
+              :infoHeader="isCells"
+          />
+          <PartnerCells/>
+        </div>
       </div>
     </div>
   </div>
@@ -35,16 +53,24 @@ import AutoIcon from '@/assets/svg/HeaderButton/auto.svg?component';
 import MyHeader from "@/components/Views/Home/MyHeader/MyHeader.vue";
 import Indicator from "@/components/Views/Home/Indicator/Indicator.vue";
 import PartnerCell from "@/components/PartnerCell/PartnerCell.vue";
+import AddPartnerCell from "@/components/AddPartnerCell/AddPartnerCell.vue";
 import { IMyButton } from "@/components/UI/MyButton/MyButton.interface.ts";
 import {
   computed,
   ComputedRef,
-  reactive
+  reactive,
+  ref
 } from "vue";
 import { useRoute } from "vue-router";
 import { TabsOfTypesEnum } from "@/enums/tabs-of-types.enum.ts";
+import SmallPartnerCells from "@/components/SmallPartnerCells/SmallPartnerCells.vue";
+import CopyLink from "@/components/CopyLink/CopyLink.vue";
+import InfoHeader from "@/components/InfoHeader/InfoHeader.vue";
+import PartnerCells from "@/components/PartnerCells/PartnerCells.vue";
 
 const route = useRoute();
+
+const isCells = ref(1)
 
 const buttons: IMyButton[] = reactive([
   {
@@ -65,7 +91,6 @@ const buttons: IMyButton[] = reactive([
     name: 'Line Bonus',
     type: TabsOfTypesEnum.bonus,
     icon: BonusIcon,
-    disabled: true,
   },
   {
     id: 4,
@@ -79,7 +104,6 @@ const buttons: IMyButton[] = reactive([
     name: 'Автобонус',
     type: TabsOfTypesEnum.auto,
     icon: AutoIcon,
-    disabled: true,
   }
 ]);
 

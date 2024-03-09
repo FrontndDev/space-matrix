@@ -13,17 +13,42 @@
     background: $bg-base;
   }
 
+  &__body {
+    @include flexbox(column);
+    row-gap: 24px;
+  }
+
   &__content {
     display: grid;
-    grid-template-areas: "header header header" "cell1 cell2 cell3" "indicator indicator indicator";
+    grid-template-areas: "header header header" "cell1 cell2 cell3" "down down down";
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 116px 300px 52px;
     width: 100%;
     gap: 4px;
+
+    &.default {
+      grid-template-rows: 116px 440px 52px;
+    }
+
+    &.bonus {
+      grid-template-areas: "header" "table";
+      grid-template-columns: 1fr;
+      grid-template-rows: 116px 368px;
+    }
+
+    &.auto {
+      grid-template-rows: 116px 300px 52px;
+    }
+  }
+
+  &__partners {
+    @include flexbox(column);
+    width: 100%;
   }
 
   &__cell {
-    @include flex-center;
+    @include flexbox(column, flex-start, center);
+    row-gap: 24px;
+    padding: 24px;
     background: $bg-base;
 
     &:nth-child(1) {

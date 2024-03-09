@@ -4,7 +4,7 @@
 .indicator {
   @include flex-center;
   column-gap: 7px;
-  grid-area: indicator;
+  grid-area: down;
   width: 100%;
   background: $bg-base;
   @include get-font(18px, 700, 28px, $text-base-light);
