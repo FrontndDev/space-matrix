@@ -1,0 +1,53 @@
+@import "@/assets/scss/variables";
+@import "@/assets/scss/mixins";
+
+.my-button {
+  &.header-button {
+    @include flexbox(column, center, center);
+    row-gap: 4px;
+    width: 160px;
+    height: 68px;
+    border-radius: 16px;
+    border: 1px solid $border-base-contrast;
+    @include get-font(20px !important, 700, 32px, $text-base-light);
+
+    & .my-button__subtitle {
+      @include flexbox(row, center, center);
+      column-gap: 4px;
+
+      @include get-font(12px, 500, 16px, $text-link);
+    }
+
+    &.active {
+      border: 1px solid $border-base-deep;
+    }
+
+    &.no-active {
+      & .my-button__subtitle {
+        & ::v-deep(path) {
+          fill: $text-link;
+        }
+      }
+    }
+
+    &[disabled] {
+      border: none;
+      background: $bg-base-secondary;
+      color: $text-base-disable;
+    }
+
+    &.selected {
+      border: none;
+      background: $bg-blue-dark;
+      color: $text-base-on-color;
+
+      & .my-button__subtitle {
+        color: $text-base-on-color;
+      }
+
+      & ::v-deep(path) {
+        fill: $text-base-on-color;
+      }
+    }
+  }
+}

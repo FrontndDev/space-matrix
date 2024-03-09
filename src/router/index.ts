@@ -2,11 +2,10 @@ import {
     createRouter,
     createWebHistory
 } from "vue-router";
-// @ts-ignore
 import Home from "@/views/Home/Home.vue";
 
 
-const baseUrl: string = '/app/matrix/v'
+const baseUrl: string = '/app/big-money-club'
 
 const routes = [
     {
