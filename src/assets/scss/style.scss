@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 @import "variables";
-@import "mixins";
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -10,7 +9,7 @@
   padding: 0;
 }
 
-#big-money {
+#matrix-app {
   min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
@@ -54,7 +53,7 @@ input,
 button,
 textarea,
 select {
-  font-family: 'Montserrat', sans-serif !important;
+  font: inherit;
   outline: none;
   border: none;
 }
@@ -62,10 +61,6 @@ select {
 button {
   background: transparent;
   cursor: pointer;
-}
-
-h2 {
-  @include get-font(18px, 700, 28px, $text-base);
 }
 
 @media (prefers-reduced-motion: reduce) {

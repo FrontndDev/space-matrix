@@ -1,48 +1,122 @@
 <template>
-  <div class="add-partner-cell" :class="[props.state, props.type, props.size]">
-    <div class="add-partner-cell__plus" :class="[props.state, props.type]" @click="">
-      <!--      <svg v-if="props.type === 'loading'" class="add-partner-cell__plus__loader" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">-->
-      <!--        <path fill-rule="evenodd" clip-rule="evenodd" d="M31.9999 9.33325C27.5169 9.33325 23.1345 10.6626 19.407 13.1533C15.6795 15.6439 12.7742 19.184 11.0587 23.3258C9.34307 27.4675 8.8942 32.0251 9.7688 36.422C10.6434 40.8189 12.8022 44.8577 15.9722 48.0277C19.1422 51.1976 23.181 53.3564 27.5779 54.231C31.9748 55.1056 36.5323 54.6568 40.6741 52.9412C44.8159 51.2256 48.3559 48.3203 50.8466 44.5928C53.3372 40.8653 54.6666 36.483 54.6666 31.9999C54.6666 30.8953 55.562 29.9999 56.6666 29.9999C57.7711 29.9999 58.6666 30.8953 58.6666 31.9999C58.6666 37.2741 57.1026 42.4298 54.1724 46.8151C51.2423 51.2004 47.0775 54.6184 42.2048 56.6367C37.3321 58.655 31.9703 59.1831 26.7975 58.1542C21.6247 57.1252 16.8731 54.5855 13.1437 50.8561C9.41435 47.1267 6.8746 42.3751 5.84566 37.2023C4.81672 32.0295 5.34481 26.6677 7.36314 21.795C9.38148 16.9223 12.7994 12.7576 17.1847 9.82739C21.57 6.89722 26.7258 5.33325 31.9999 5.33325C33.1045 5.33325 33.9999 6.22868 33.9999 7.33325C33.9999 8.43782 33.1045 9.33325 31.9999 9.33325Z" fill="#7B879D"/>-->
-      <!--        <path fill-rule="evenodd" clip-rule="evenodd" d="M31.9999 9.33325C27.5169 9.33325 23.1345 10.6626 19.407 13.1533C15.6795 15.6439 12.7742 19.184 11.0587 23.3258C9.34307 27.4675 8.8942 32.0251 9.7688 36.422C10.6434 40.8189 12.8022 44.8577 15.9722 48.0277C19.1422 51.1976 23.181 53.3564 27.5779 54.231C31.9748 55.1056 36.5323 54.6568 40.6741 52.9412C44.8159 51.2256 48.3559 48.3203 50.8466 44.5928C53.3372 40.8653 54.6666 36.483 54.6666 31.9999C54.6666 30.8953 55.562 29.9999 56.6666 29.9999C57.7711 29.9999 58.6666 30.8953 58.6666 31.9999C58.6666 37.2741 57.1026 42.4298 54.1724 46.8151C51.2423 51.2004 47.0775 54.6184 42.2048 56.6367C37.3321 58.655 31.9703 59.1831 26.7975 58.1542C21.6247 57.1252 16.8731 54.5855 13.1437 50.8561C9.41435 47.1267 6.8746 42.3751 5.84566 37.2023C4.81672 32.0295 5.34481 26.6677 7.36314 21.795C9.38148 16.9223 12.7994 12.7576 17.1847 9.82739C21.57 6.89722 26.7258 5.33325 31.9999 5.33325C33.1045 5.33325 33.9999 6.22868 33.9999 7.33325C33.9999 8.43782 33.1045 9.33325 31.9999 9.33325Z" fill="#7B879D"/>-->
-      <!--      </svg>-->
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" v-if="props.type === 'block'">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.2788 5.639C9.33376 6.81218 9.00002 8.51984 9.00002 10.6667V13.3334C9.00002 13.8856 8.55231 14.3334 8.00002 14.3334C7.44774 14.3334 7.00002 13.8856 7.00002 13.3334V10.6667C7.00002 8.4002 7.33295 6.10786 8.72125 4.38437C10.1472 2.61417 12.4955 1.66669 16 1.66669C19.5045 1.66669 21.8529 2.61417 23.2788 4.38437C24.6671 6.10786 25 8.4002 25 10.6667V13.3334C25 13.8856 24.5523 14.3334 24 14.3334C23.4477 14.3334 23 13.8856 23 13.3334V10.6667C23 8.51984 22.6663 6.81218 21.7213 5.639C20.8139 4.51253 19.1622 3.66669 16 3.66669C12.8378 3.66669 11.1862 4.51253 10.2788 5.639Z" fill="#C4CAD4"/>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 19C14.7114 19 13.6667 20.0447 13.6667 21.3334C13.6667 22.622 14.7114 23.6667 16 23.6667C17.2887 23.6667 18.3334 22.622 18.3334 21.3334C18.3334 20.0447 17.2887 19 16 19ZM11.6667 21.3334C11.6667 18.9401 13.6068 17 16 17C18.3933 17 20.3334 18.9401 20.3334 21.3334C20.3334 23.7266 18.3933 25.6667 16 25.6667C13.6068 25.6667 11.6667 23.7266 11.6667 21.3334Z" fill="#C4CAD4"/>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.70713 15.3738C4.02514 16.0558 3.66669 17.3262 3.66669 20V22.6667C3.66669 25.3405 4.02514 26.6109 4.70713 27.2929C5.38912 27.9749 6.65954 28.3334 9.33335 28.3334H22.6667C25.3405 28.3334 26.6109 27.9749 27.2929 27.2929C27.9749 26.6109 28.3334 25.3405 28.3334 22.6667V20C28.3334 17.3262 27.9749 16.0558 27.2929 15.3738C26.6109 14.6918 25.3405 14.3334 22.6667 14.3334H9.33335C6.65954 14.3334 5.38912 14.6918 4.70713 15.3738ZM3.29291 13.9596C4.61092 12.6416 6.67383 12.3334 9.33335 12.3334H22.6667C25.3262 12.3334 27.3891 12.6416 28.7071 13.9596C30.0251 15.2776 30.3334 17.3405 30.3334 20V22.6667C30.3334 25.3262 30.0251 27.3891 28.7071 28.7071C27.3891 30.0251 25.3262 30.3334 22.6667 30.3334H9.33335C6.67383 30.3334 4.61092 30.0251 3.29291 28.7071C1.97491 27.3891 1.66669 25.3262 1.66669 22.6667V20C1.66669 17.3405 1.97491 15.2776 3.29291 13.9596Z" fill="#C4CAD4"/>
+  <div class="add-partner-cell" :class="[props.type, props.size]">
+    <div class="add-partner-cell__plus" :class="[props.type, automaticPlacement ? props.cellType : '' ]" @click="openMAddPartner">
+      <svg v-if="props.type === 'loading'" class="add-partner-cell__plus__loader" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M31.9999 9.33325C27.5169 9.33325 23.1345 10.6626 19.407 13.1533C15.6795 15.6439 12.7742 19.184 11.0587 23.3258C9.34307 27.4675 8.8942 32.0251 9.7688 36.422C10.6434 40.8189 12.8022 44.8577 15.9722 48.0277C19.1422 51.1976 23.181 53.3564 27.5779 54.231C31.9748 55.1056 36.5323 54.6568 40.6741 52.9412C44.8159 51.2256 48.3559 48.3203 50.8466 44.5928C53.3372 40.8653 54.6666 36.483 54.6666 31.9999C54.6666 30.8953 55.562 29.9999 56.6666 29.9999C57.7711 29.9999 58.6666 30.8953 58.6666 31.9999C58.6666 37.2741 57.1026 42.4298 54.1724 46.8151C51.2423 51.2004 47.0775 54.6184 42.2048 56.6367C37.3321 58.655 31.9703 59.1831 26.7975 58.1542C21.6247 57.1252 16.8731 54.5855 13.1437 50.8561C9.41435 47.1267 6.8746 42.3751 5.84566 37.2023C4.81672 32.0295 5.34481 26.6677 7.36314 21.795C9.38148 16.9223 12.7994 12.7576 17.1847 9.82739C21.57 6.89722 26.7258 5.33325 31.9999 5.33325C33.1045 5.33325 33.9999 6.22868 33.9999 7.33325C33.9999 8.43782 33.1045 9.33325 31.9999 9.33325Z" fill="#7B879D"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M31.9999 9.33325C27.5169 9.33325 23.1345 10.6626 19.407 13.1533C15.6795 15.6439 12.7742 19.184 11.0587 23.3258C9.34307 27.4675 8.8942 32.0251 9.7688 36.422C10.6434 40.8189 12.8022 44.8577 15.9722 48.0277C19.1422 51.1976 23.181 53.3564 27.5779 54.231C31.9748 55.1056 36.5323 54.6568 40.6741 52.9412C44.8159 51.2256 48.3559 48.3203 50.8466 44.5928C53.3372 40.8653 54.6666 36.483 54.6666 31.9999C54.6666 30.8953 55.562 29.9999 56.6666 29.9999C57.7711 29.9999 58.6666 30.8953 58.6666 31.9999C58.6666 37.2741 57.1026 42.4298 54.1724 46.8151C51.2423 51.2004 47.0775 54.6184 42.2048 56.6367C37.3321 58.655 31.9703 59.1831 26.7975 58.1542C21.6247 57.1252 16.8731 54.5855 13.1437 50.8561C9.41435 47.1267 6.8746 42.3751 5.84566 37.2023C4.81672 32.0295 5.34481 26.6677 7.36314 21.795C9.38148 16.9223 12.7994 12.7576 17.1847 9.82739C21.57 6.89722 26.7258 5.33325 31.9999 5.33325C33.1045 5.33325 33.9999 6.22868 33.9999 7.33325C33.9999 8.43782 33.1045 9.33325 31.9999 9.33325Z" fill="#7B879D"/>
       </svg>
-
       <svg xmlns="http://www.w3.org/2000/svg" width="65" height="64" viewBox="0 0 65 64" fill="none" v-else>
         <path fill-rule="evenodd" clip-rule="evenodd" d="M32.5 6C33.6046 6 34.5 6.89543 34.5 8V56C34.5 57.1046 33.6046 58 32.5 58C31.3954 58 30.5 57.1046 30.5 56V8C30.5 6.89543 31.3954 6 32.5 6Z"/>
         <path fill-rule="evenodd" clip-rule="evenodd" d="M58.5 32C58.5 33.1046 57.6046 34 56.5 34L8.5 34C7.39543 34 6.5 33.1046 6.5 32C6.5 30.8954 7.39543 30 8.5 30L56.5 30C57.6046 30 58.5 30.8954 58.5 32Z"/>
       </svg>
+<!--      <Reward includeCar="include-car" />-->
+      <Reward
+          :freeze="fillReward.freeze"
+          :custom="fillReward.custom"
+          v-if="!['disable2', 'disable3', 'infinity', 'loading'].includes(props.type) && props.cellType !== 'infinity'"
+      />
     </div>
 
-    <template v-if="!props.size">
-      <div
-          class="add-partner-cell__title add-partner-cell__title_mt-8"
-          @click=""
-      >Выставить партнера</div>
+    <div v-if="props.automaticPlacement" class="add-partner-cell__title add-partner-cell__title_mt-8">Автоматическая расстановка</div>
+    <div v-else-if="props.type === 'disable3'" class="add-partner-cell__title add-partner-cell__title_mt-8">Недоступно</div>
+    <div v-else-if="props.type === 'loading'" class="add-partner-cell__title add-partner-cell__title_mt-8">Недоступно</div>
+    <div v-else-if="props.type === 'disable' && props.disabledTitle" class="add-partner-cell__title add-partner-cell__title_mt-8">
+      {{ disabledTitle }}
+    </div>
+    <div
+        class="add-partner-cell__title add-partner-cell__title_mt-8"
+        v-html="props.title"
+        v-else
+        @click="openMAddPartner"
+    />
 
-      <div class="add-partner-cell__subtitle" @click="">Доступно (0)</div>
-    </template>
+
+    <div class="add-partner-cell__subtitle" @click="openMAddPartner">
+      <div v-if="props.type === 'disable3'">На этой матрице нет накопительных ячеек</div>
+      <div v-else-if="props.type === 'loading'">{{ props.loadingSubtitle }}</div>
+      <div v-else-if="props.type === 'disable'">{{ props.disabledSubtitle }}</div>
+      <div v-else-if="!props.automaticPlacement">{{ props.subtitle ? props.subtitle : `Доступно (${props.partnersCount ?? '-'})` }}</div>
+      <slot name="subtitleIcon"/>
+    </div>
+
+    <CellType
+        :size="props.size"
+        :cell-type="props.cellType"
+        :type="props.cellType"
+        v-if="!['disable2', 'disable3'].includes(props.type) && props.cellType"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue";
+import Reward from "@/components/UI/Reward/Reward.vue";
+import CellType from "@/components/UI/CellType/CellType.vue";
+import {
+  computed,
+  PropType
+} from "vue";
+import { Ceil } from "@/interfaces/store.interface.ts";
 
 const props = defineProps({
-  state: {
-    type: String as PropType<'' | 'freeze' | 'profit' | 'disable'>,
-    default: ''
+  ceil: {
+    type: Object as PropType<Ceil>,
+    required: true,
+  },
+  partnersCount: {
+    type: Number,
+    required: true,
   },
   type: {
-    type: String as PropType<'' | 'block'>,
-    default: '',
+    type: String,
+    default: 'freeze',
+    //freeze, profit, boost, infinity ,disable, disable2, loading
+  },
+  automaticPlacement: {
+    type: Boolean,
+    default: false,
+  },
+  cellType: {
+    type: String,
+    default: ''
   },
   size: {
-    type: String as PropType<'' | 'small'>,
-    default: ''
+    type: String,
+    default: '',
+  },
+  title: {
+    type: String,
+    default: 'Выставить партнера',
+  },
+  disabledSubtitle: {
+    type: String,
+    default: 'Доходная ячейка'
+  },
+  disabledTitle: {
+    type: String,
+    default: 'Недоступно'
+  },
+  loadingSubtitle: {
+    type: String,
+    default: 'Идет активация'
+  },
+  subtitle: {
+    type: String,
+  }
+});
+
+const emit = defineEmits(['open-m-add-partner'])
+
+const openMAddPartner = () => {
+  if (props.type === 'disable') return
+  emit('open-m-add-partner')
+}
+
+const fillReward = computed(() => {
+  const getFilteredRewards = (event: string) => props.ceil?.fillRevard.find(reward => reward.event === event)
+
+  return {
+    'custom': getFilteredRewards('custom')?.value.title,
+    'freeze': getFilteredRewards('freeze')?.value.amount ?? getFilteredRewards('cashout')?.value.amount
   }
 })
 </script>

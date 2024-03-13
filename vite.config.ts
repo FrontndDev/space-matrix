@@ -23,5 +23,5 @@ export default defineConfig({
     build: {
         manifest: true,
     },
-    base: '/app/big-money-club'
+    base: '/app/matrix/v'
 })

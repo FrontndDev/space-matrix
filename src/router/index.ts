@@ -2,17 +2,18 @@ import {
     createRouter,
     createWebHistory
 } from "vue-router";
+// @ts-ignore
 import Home from "@/views/Home/Home.vue";
 
 
-const baseUrl: string = '/app/big-money-club'
+const baseUrl: string = '/app/matrix/v'
 
 const routes = [
     {
         path: baseUrl,
         children: [
             {
-                path: ':id?',
+                path: ':type?',
                 component: Home,
             },
         ]

@@ -9,4 +9,4 @@ const app = createApp(App)
 app
     .use(router)
     .use(store)
-    .mount('#big-money')
+    .mount('#matrix-app')
