@@ -20,7 +20,6 @@ import chains from "./modules/chains";
 import { useMyOverlay } from "@/composables/useMyOverlay";
 import { useShowMessage } from "@/composables/useShowMessage";
 import axios from "axios";
-import { placementClone } from "@/api/index";
 
 let requestMatrixByType: any = null;
 let requestMatrixByUUID: any = null;

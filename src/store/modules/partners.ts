@@ -11,7 +11,6 @@ import {
 } from "vuex";
 import { Matrix } from "@/interfaces/store.interface";
 import { useShowMessage } from "@/composables/useShowMessage";
-import { placementExistingMatrix } from "@/api/index";
 
 export default {
   namespaced: true,
