@@ -11,6 +11,7 @@ import {
 } from "vuex";
 import { Matrix } from "@/interfaces/store.interface";
 import { useShowMessage } from "@/composables/useShowMessage";
+import { placementExistingMatrix } from "@/api/index";
 
 export default {
   namespaced: true,
@@ -130,7 +131,7 @@ export default {
     async exposePartner(ctx: ActionContext<any, any>, data: IExposePartnerParams) {
       const notificationText = data?.notificationText
       delete data.notificationText
-      const response = await API.placementExistMatrix(data)
+      const response = await API.placementExistingMatrix(data)
       console.log('exposePartner', response)
       if (response?.error_code === undefined) {
         useShowMessage('green', notificationText ?? 'Партнёр успешно отправлен на расстановку')

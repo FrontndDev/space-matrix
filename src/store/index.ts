@@ -20,6 +20,7 @@ import chains from "./modules/chains";
 import { useMyOverlay } from "@/composables/useMyOverlay";
 import { useShowMessage } from "@/composables/useShowMessage";
 import axios from "axios";
+import { placementClone } from "@/api/index";
 
 let requestMatrixByType: any = null;
 let requestMatrixByUUID: any = null;
@@ -98,7 +99,7 @@ export default createStore({
         async buyBooster(_: ActionContext<any, any>, data: IBuyBoosterParams) {
             const notificationText = data?.notificationText
             delete data.notificationText
-            const response = await API.buyClone(data)
+            const response = await API.placementClone(data)
             if (response?.error_code === undefined) {
                 useShowMessage('green', notificationText ?? 'Буст успешно отправлен на активацию')
             }

@@ -71,8 +71,8 @@ export async function filterOfActivatedMatrix({
   );
 }
 
-export async function buyClone(data: IBuyBoosterParams) {
-  return postAsync("/api/matrix/placement/buyClone", data);
+export async function placementClone(data: IBuyBoosterParams) {
+  return postAsync("/api/matrix/placement-clone", data);
 }
 
 export async function activatePartnerTeleport(data: ITeleportPartnerParams) {
@@ -85,6 +85,6 @@ export async function switchTeleport(enable: boolean) {
 
 // PUT
 
-export async function placementExistMatrix(data: IExposePartnerParams) {
-  return putAsync("/api/matrix/placement/exist", data);
+export async function placementExistingMatrix(data: IExposePartnerParams) {
+  return putAsync("/api/matrix/placement-existing-matrix", data);
 }
