@@ -23,6 +23,7 @@ import axios from "axios";
 
 let requestMatrixByType: any = null;
 let requestMatrixByUUID: any = null;
+let requestMatrixByID: any = null;
 
 export default createStore({
     modules: {
@@ -67,6 +68,23 @@ export default createStore({
                         return response
                     }
                 })
+            }
+        },
+        async getMatrixByID(ctx: ActionContext<any, any>, matrixID: string) {
+            if (requestMatrixByID) {
+                requestMatrixByID.cancel();
+            }
+            requestMatrixByID = axios.CancelToken.source()
+
+            if (matrixID) {
+                const response = await API.getMatrix(matrixID, { cancelTokenSource: requestMatrixByUUID })
+
+                if (response.data) {
+                    delete response.data.tabs
+                    ctx.commit('SET_MATRIX_BY_ID', response.data)
+
+                    return response
+                }
             }
         },
         async getMatrixByUUID(ctx: ActionContext<any, any>, matrixUUID: string) {

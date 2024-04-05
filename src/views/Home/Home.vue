@@ -321,9 +321,20 @@ const loadMMatrixPartnerModal = async () => {
   selectedPartner.value = null
 
   const query = route.query
-  if (query.uuid) {
+  console.log('query', query)
+  const matrixId = query.uuid ?? query.id
+  if (matrixId) {
     store.commit('SET_MATRIX_BY_ID', {})
-    const response = await store.dispatch('getMatrixByUUID', route.query.uuid)
+
+    let response = null;
+
+    switch (true) {
+      case !!query.uuid:
+        response = await store.dispatch('getMatrixByUUID', matrixId)
+        break;
+      case !!query.id:
+        response = await store.dispatch('getMatrixByID', matrixId)
+    }
 
     if (response?.error_code !== undefined) {
       closeModal()
@@ -331,19 +342,19 @@ const loadMMatrixPartnerModal = async () => {
 
     // Получаем партнеров в ожидании "Матрицы партнёра"
     store.commit('partners/SET_PENDING_PARTNERS_SECOND', {})
-    store.dispatch('partners/getPendingPartners', {
+    await store.dispatch('partners/getPendingPartners', {
       isPartnerMatrix: true,
-      matrixUUID: query.uuid,
-      ownerID: response.data.matrix.owner.id,
+      matrixUUID: response?.data?.matrix?.uuid,
+      ownerID: response?.data.matrix.owner.id,
     })
 
-    store.dispatch('partners/getPendingPartners', {
-      matrixUUID: query.uuid,
+    await store.dispatch('partners/getPendingPartners', {
+      matrixUUID: response?.data?.matrix?.uuid,
     })
 
-    if (response.data?.matrix && !response.data.matrix.is_booster) {
+    if (response?.data?.matrix && !response?.data.matrix.is_booster) {
       console.log('response.data', response)
-      selectedPartner.value = convertMatrixToCell(response.data.matrix)
+      selectedPartner.value = convertMatrixToCell(response?.data.matrix)
       selectedType.value = 'id'
 
       openModalPartner(2)
