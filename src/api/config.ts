@@ -1,7 +1,13 @@
-import axios, { AxiosError } from 'axios'
+import axios, {
+    AxiosError,
+    AxiosRequestConfig
+} from 'axios'
 import { useShowMessage } from "@/composables/useShowMessage";
 
-const BASE_URL = 'https://dev.halk.ai'
+const __IS_DEV__ = import.meta.env.VITE_IS_DEV === 'true'
+
+const devUrl = import.meta.env.VITE_DEV_URL ?? 'https://dev.halk.ai' // 'https://stage2.halk.ai' 'https://dev.halk.ai'
+const BASE_URL = __IS_DEV__ ? devUrl : window.location.origin;
 
 const checkUserIsModer = (error: AxiosError) => {
     //@ts-ignore
@@ -24,14 +30,15 @@ function setGlobalConfig(token: string | null) {
     }
 
 
-    const defaultSettings = {
+    const defaultSettings: AxiosRequestConfig["headers"] = {
         "Content-Type": "application/json",
-        "Accept": "application/json",
         "x-auth": getCookie('dasdasdaddjdj'),
-        // @ts-ignore
-        "X-SPACE-ID": `${window.SpaceId}:${window.SpaceIdHash}`,
-        // "VerificationToken": import.meta.env.VUE_APP_VEREFICATION_TOKEN
     };
+
+    if (__IS_DEV__) {
+        defaultSettings["x-auth"] = import.meta.env.VITE_X_AUTH
+        defaultSettings["X-SPACE-ID"] = import.meta.env.VITE_X_SPACE_ID
+    }
 
     return token ? { ...defaultSettings, "Authorization": 'Bearer ' + token } : defaultSettings
 }
