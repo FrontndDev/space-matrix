@@ -22,6 +22,13 @@ export default defineConfig({
     },
     build: {
         manifest: true,
+        rollupOptions: {
+            output: {
+                entryFileNames: '[name].js', // Настройка имени выходного файла js
+                chunkFileNames: '[name].js', // Настройка имени выходного файла для чанков js
+                assetFileNames: '[name].[ext]' // Настройка имени выходного файла для ресурсов (css, изображения и т.д.)
+            }
+        }
     },
     base: '/app/matrix/v'
 })
