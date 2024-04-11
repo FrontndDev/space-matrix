@@ -58,8 +58,11 @@ export async function putAsync(url: string, data: unknown, checkError = true): P
             }
 
             if (response.status === 200 || response.status === 202) {
+                iteration = 0
+                retryInterval = 0
                 return response?.data
             }
+
             if (response.status === 204 || response.status === 201) {
                 return true
             }
@@ -94,7 +97,7 @@ export async function putAsync(url: string, data: unknown, checkError = true): P
     }
 
     // Запускаем fetchAsync
-    await fetchAsync();
+    return fetchAsync();
 }
 
 export async function postAsync(url: string, data = {}, checkError = true): Promise<any> {
@@ -112,8 +115,11 @@ export async function postAsync(url: string, data = {}, checkError = true): Prom
             }
 
             if (response.status === 200) {
+                iteration = 0
+                retryInterval = 0
                 return response?.data
             }
+
             if (response.status === 204 || response.status === 201) {
                 return true
             }
@@ -149,7 +155,7 @@ export async function postAsync(url: string, data = {}, checkError = true): Prom
     }
 
     // Запускаем fetchAsync
-    await fetchAsync();
+    return fetchAsync();
 }
 
 export async function getAsync(url: string, options?: any): Promise<any> {
