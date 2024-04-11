@@ -11,11 +11,13 @@ const devUrl = import.meta.env.VITE_DEV_URL ?? 'https://dev.halk.ai' // 'https:/
 const BASE_URL = __IS_DEV__ ? devUrl : window.location.origin;
 
 const checkUserIsModer = (error: AxiosError) => {
+    const errorResponse = error.response as AxiosResponse
+
     //@ts-ignore
     if (window.UserData.moder) {
-        useShowMessage('red', error.message, 'Ошибка:')
+        useShowMessage('red', errorResponse.data.error_message, 'Ошибка:')
     } else if (error?.response?.status !== 500) {
-        useShowMessage('red', error.message, 'Ошибка:')
+        useShowMessage('red', errorResponse.data.error_message, 'Ошибка:')
     }
 
     console.error(error)
