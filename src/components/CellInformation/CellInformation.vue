@@ -52,7 +52,9 @@ import BonusIcon from '@/assets/svg/cellInformation/bonus.svg?component' // @ts-
 // Тип партнера
 import OwnerIcon from '@/assets/svg/cellInformation/owner.svg?component' // @ts-ignore
 import OverflowIcon from '@/assets/svg/cellInformation/overflow.svg?component' // @ts-ignore
-import CompressionIcon from '@/assets/svg/cellInformation/compression.svg?component'
+import CompressionIcon from '@/assets/svg/cellInformation/compression.svg?component' // @ts-ignore
+//
+import CalendarIcon from '@/assets/svg/cellInformation/calendar.svg?component'
 //
 import { useGetLevel } from "@/composables/useGetLevel.ts";
 import ModalCellInformation from "@/components/Modals/ModalCellInformation/ModalCellInformation.vue";
@@ -161,6 +163,11 @@ const types: ComputedRef<ICellInformation> = computed(() => {
         value: getIconAndValueForActivationMethod.value?.[1],
         // Покупка, Бонусный, Телепорт новичка, Закрытие цепочки
       },
+      createDate: {
+        icon: CalendarIcon,
+        title: 'Дата активации',
+        value: props.ceil.create_date
+      },
     } as ICellInformation
   } else {
     // Информер для партнера
@@ -176,6 +183,11 @@ const types: ComputedRef<ICellInformation> = computed(() => {
         title: 'Способ активации',
         value: getIconAndValueForActivationMethod.value?.[1],
         // Апгрейд, Покупка, Бустер
+      },
+      createDate: {
+        icon: CalendarIcon,
+        title: 'Дата активации',
+        value: (props.ceil as Matrix).create_date
       },
       partnerType: {
         icon: getIconAndValueForPartnerType.value?.[0],

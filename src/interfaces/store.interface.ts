@@ -51,6 +51,7 @@ export interface Matrix {
     parent_matrix_uuid: string | null;
     filled: boolean;
     prev_type_matrix_id: number | null;
+    create_date: string;
     time_to_activate?: {
         years: number;
         months: number;

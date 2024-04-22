@@ -14,12 +14,6 @@
       &__value {
         color: $text-base-on-color;
       }
-
-      &__icon {
-        & ::v-deep(path) {
-          fill: $text-base-on-color-secondary;
-        }
-      }
     }
   }
 
@@ -31,12 +25,6 @@
     & .cell-information-item {
       &__value {
         color: $text-base;
-      }
-
-      &__icon {
-        & ::v-deep(path) {
-          fill: $text-base-secondary;
-        }
       }
     }
   }
