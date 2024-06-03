@@ -87,6 +87,10 @@
   &:hover {
     background: $bg-base-secondary;
   }
+
+  &.skeleton-loader {
+
+  }
 }
 
 @media (max-width: 992px) {
